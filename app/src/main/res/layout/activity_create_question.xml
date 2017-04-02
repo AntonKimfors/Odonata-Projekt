@@ -28,8 +28,8 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Correct Answer"
         android:inputType="textPersonName"
-        android:text="Correct Answer"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="262dp" />
 
@@ -38,8 +38,8 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Incorrect Anwer"
         android:inputType="textPersonName"
-        android:text="Incorrect Anwer"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="310dp" />
 
@@ -48,8 +48,8 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Incorrect Anwer"
         android:inputType="textPersonName"
-        android:text="Incorrect Anwer"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="360dp" />
 
@@ -58,8 +58,8 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Incorrect Anwer"
         android:inputType="textPersonName"
-        android:text="Incorrect Anwer"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="410dp" />
 

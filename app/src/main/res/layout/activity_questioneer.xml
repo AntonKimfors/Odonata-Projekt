@@ -103,7 +103,7 @@
         android:layout_height="25dp"
         android:layout_marginBottom="8dp"
         android:text="Fråga nr x"
-        android:textColor="020202"
+        android:textColor="#020202"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/questLabel"
         android:layout_marginLeft="32dp"
@@ -116,7 +116,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
         android:text="Quiznamn"
-        android:textColor="020202"
+        android:textColor="#020202"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBar" />
@@ -128,7 +128,7 @@
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="32dp"
         android:text="Frågan är xxx?"
-        android:textColor="020202"
+        android:textColor="#020202"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintLeft_toLeftOf="parent" />
