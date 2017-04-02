@@ -6,4 +6,85 @@
     android:layout_height="match_parent"
     tools:context="com.example.murk.kwizgeeq.CreateQuestion">
 
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add MEdia"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="177dp" />
+
+    <EditText
+        android:id="@+id/CorrectInput"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Correct Answer"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="262dp" />
+
+    <EditText
+        android:id="@+id/IncorrectInput1"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Incorrect Anwer"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="310dp" />
+
+    <EditText
+        android:id="@+id/IncorrectInput2"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Incorrect Anwer"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="360dp" />
+
+    <EditText
+        android:id="@+id/IncorrectInput3"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Incorrect Anwer"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="410dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="486dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next Question"
+        tools:layout_editor_absoluteX="236dp"
+        tools:layout_editor_absoluteY="486dp" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PictureMode"
+        tools:layout_editor_absoluteX="248dp"
+        tools:layout_editor_absoluteY="225dp" />
+
 </android.support.constraint.ConstraintLayout>
