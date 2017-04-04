@@ -41,4 +41,8 @@ public class Quiz {
     public void addQuestion(Question question) {
         questions.add(question);
     }
+
+    public void removeQuestion(Question question){
+        questions.remove(question);
+    }
 }
