@@ -2,13 +2,14 @@ package com.example.murk.kwizgeeq.model;
 
 import android.graphics.Color;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * Created by Henrik on 04/04/2017.
  */
 
-public class Quiz {
+public class Quiz implements Iterable{
     private List<Question> questions;
     private Color listColor;
     private String name;
@@ -45,5 +46,10 @@ public class Quiz {
 
     public void removeQuestion(Question question){
         questions.remove(question);
+    }
+
+    @Override
+    public Iterator iterator() {
+        return questions.iterator();
     }
 }
