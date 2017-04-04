@@ -38,8 +38,9 @@ public class Quiz {
         return questions;
     }
 
-    public void addQuestion(Question question) {
-        questions.add(question);
+    public void addQuestion(String questionStr) {
+        QuestionFactory factory = QuestionFactory.getInstance();
+        questions.add(factory.createUserQuestion(questionStr,null,null));
     }
 
     public void removeQuestion(Question question){

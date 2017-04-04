@@ -12,8 +12,11 @@ import java.util.List;
 public abstract class Question {
     private List<Answer> answers;
 
+    int numberOfAnswers;
+
     public Question() {
         answers = new ArrayList<>();
+        numberOfAnswers = 0;
     }
 
     public Iterator<Answer> answerIterator() {
@@ -26,7 +29,10 @@ public abstract class Question {
     }
 
     public void addAnswer(Answer answer) {
-        answers.add(answer);
+        if(numberOfAnswers<5){
+            answers.add(answer);
+            numberOfAnswers++;
+        }
     }
 
     public void removeAnswer(Answer answer){

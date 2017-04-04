@@ -11,14 +11,14 @@ import android.media.Image;
 public class QuestionFactory {
     private static QuestionFactory INSTANCE = new QuestionFactory();
 
-    private  QuestionFactory(){}
+    private QuestionFactory(){}
 
-    public QuestionFactory getInstance(){
+    public static QuestionFactory getInstance(){
         return INSTANCE;
     }
 
     public Question createUserQuestion(String questionStr, Image questionImg, PointF point){
-        return new UserQuestion();
+        return new UserQuestion(questionStr, questionImg, point);
     }
 
     public Question createSpotifyQuestion(){
