@@ -9,21 +9,11 @@ import java.util.List;
  * Created by Henrik on 04/04/2017.
  */
 
-class Question {
+public abstract class Question {
     private List<Answer> answers;
-    private String question;
 
-    public Question(String question) {
+    public Question() {
         answers = new ArrayList<>();
-        this.question = question;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
     }
 
     public Iterator<Answer> answerIterator() {
@@ -54,7 +44,7 @@ class Question {
         }
         if(obj instanceof Question){
             Question o = (Question) obj;
-            if(answers.equals(o.getAnswers()) && question.equals(o.getQuestion())){
+            if(answers.equals(o.getAnswers())){
                 return true;
             }
         }
