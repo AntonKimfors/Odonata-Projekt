@@ -12,6 +12,11 @@ public class Answer<T>  {
         return answer;
     }
 
+    public Answer(boolean isCorrect, T answer) {
+        this.isCorrect = isCorrect;
+        this.answer = answer;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if(obj == null){
