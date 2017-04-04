@@ -49,6 +49,9 @@ class Question {
 
     @Override
     public boolean equals(Object obj) {
+        if(obj == null){
+            throw new NullPointerException();
+        }
         if(obj instanceof Question){
             Question o = (Question) obj;
             if(answers.equals(o.getAnswers()) && question.equals(o.getQuestion())){
