@@ -18,11 +18,6 @@ class Question {
         this.question = question;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
     public String getQuestion() {
         return question;
     }
@@ -36,6 +31,10 @@ class Question {
         return answers.iterator();
     }
 
+    public List<Answer> getAnswers(){
+        return answers;
+    }
+
     public void addAnswer(Answer answer) {
         answers.add(answer);
     }
@@ -46,5 +45,16 @@ class Question {
 
     private void shuffleAnswers(){
         Collections.shuffle(answers);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Question){
+            Question o = (Question) obj;
+            if(answers.equals(o.getAnswers()) && question.equals(o.getQuestion())){
+                return true;
+            }
+        }
+        return false;
     }
 }
