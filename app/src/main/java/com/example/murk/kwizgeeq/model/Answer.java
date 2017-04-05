@@ -23,11 +23,14 @@ public class Answer<T>  {
             throw new NullPointerException();
         }
         if(obj instanceof Answer){
-            Answer o = (Answer) obj;
-            if(isCorrect == o.isCorrect && answer.equals(o.getAnswer())){
-                return true;
-            }
+            Answer<T> o = (Answer<T>) obj;
+            return answer.equals(o.getAnswer()) ? true : false;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return answer.hashCode();
     }
 }

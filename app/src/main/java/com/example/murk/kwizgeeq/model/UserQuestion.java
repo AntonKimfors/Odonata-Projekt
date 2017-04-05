@@ -52,4 +52,9 @@ public class UserQuestion extends Question {
     public void setPoint(PointF point) {
         this.point = point;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }

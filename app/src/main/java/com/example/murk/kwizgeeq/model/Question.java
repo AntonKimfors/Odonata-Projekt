@@ -11,33 +11,30 @@ import java.util.Set;
  * Created by Henrik on 04/04/2017.
  */
 
-public abstract class Question {
+public abstract class Question<T> {
 
-    //the list of answers to question, size should always be 4
-    private final List<Answer> answers;
-
-    //keeps track of number of inserted answers
-    private int numberOfAnswers;
+    //set of all answers
+    private final Set<Answer<T>> answers;
 
     public Question() {
-        answers = new ArrayList<>(4);
-        numberOfAnswers = 0;
+        answers = new HashSet<>(4);
     }
 
     /**
      * Shuffles the order of answers and returns iterator
      * @return iterator over answers if question is valid, if not return null
      */
-    public Iterator<Answer> answerIterator() {
+    public Iterator<Answer<T>> answerIterator() {
         if(isValid()){
             //shuffle order of answers
-            Collections.shuffle(answers);
-            return answers.iterator();
+            List<Answer<T>> answerList = new ArrayList<>(answers);
+            Collections.shuffle(answerList);
+            return answerList.iterator();
         }
         return null;
     }
 
-    public List<Answer> getAnswers(){
+    public Set<Answer<T>> getAnswers(){
         return answers;
     }
 
@@ -46,19 +43,9 @@ public abstract class Question {
      * @param answer
      * @return true if insert successful
      */
-    public boolean addAnswer(Answer answer) {
-        //check if element already exists
-        if(answers.contains(answer)){
-            return false;
-        }
-
-        //add answer last in list
-        if(numberOfAnswers<4){
-            answers.set(numberOfAnswers,answer);
-            numberOfAnswers++;
-            return true;
-        }
-
+    public boolean addAnswer(Answer<T> answer) {
+        if(answers.size()<4)
+            return answers.add(answer);
         return false;
     }
 
@@ -67,35 +54,19 @@ public abstract class Question {
      * @param answer
      */
     public boolean removeAnswer(Answer answer){
-        if(!answers.contains(answer))
-            return false;
-        int index = answers.indexOf(answer);
-        //size should always be 4
-        int size = answers.size();
-
-        //move all answer elements after the answer to remove one position forward
-        for(int i=index;i<answers.size()-2;i++){
-            answers.set(i,answers.get(i+1));
-        }
-
-        //add null to last position
-        answers.set(size-1,null);
-
-        numberOfAnswers--;
-
-        return true;
+        return answers.remove(answer);
     }
 
     /**
-     *
-     * @return true if numberOfAnswers is 4
+     * Determines whether the Queation can be used or not
+     * @return true if number of answers is 4
      */
     public boolean isValid(){
-        return (numberOfAnswers==4) ? true : false;
+        return (answers.size()==4) ? true : false;
     }
 
     /**
-     * @param obj
+     * @param obj the object to compare with
      * @return true if lists of answers are equal, independent of order
      */
     @Override
@@ -106,10 +77,7 @@ public abstract class Question {
         if(obj instanceof Question){
             Question o = (Question) obj;
 
-            Set<Answer> s1 = new HashSet<>(answers);
-            Set<Answer> s2 = new HashSet<>(o.getAnswers());
-
-            return s1.equals(s2);
+            return answers.equals(o.getAnswers());
         }
         return false;
     }
