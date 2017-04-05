@@ -70,14 +70,6 @@ public abstract class Question<T> {
     }
 
     /**
-     * Return the set of wrong answers, even if Question is not valid
-     * @return
-     */
-    public Set<Answer<T>> getWrongAnswers() {
-        return wrongAnswers;
-    }
-
-    /**
      * Add a new unique wrong answer
      * @param data the wrong answer data to add (e.g. a string)
      * @return true if insert successful
@@ -121,7 +113,7 @@ public abstract class Question<T> {
         if(obj instanceof Question){
             Question o = (Question) obj;
 
-            return wrongAnswers.equals(o.getWrongAnswers()) && correctAnswer.equals(o.getCorrectAnswer());
+            return wrongAnswers.equals(o.wrongAnswers) && correctAnswer.equals(o.getCorrectAnswer());
         }
         return false;
     }
