@@ -46,4 +46,10 @@ public abstract class Quiz implements Iterable{
     public Iterator iterator() {
         return questions.iterator();
     }
+    
+    public Quiz copy(){
+    	Quiz clonedQuiz = this;//new UserQuiz(this.name,this.listColor);
+		return clonedQuiz;
+    	
+    }
 }

@@ -10,7 +10,6 @@ public class UserQuiz extends Quiz {
 	
 	public UserQuiz(String name, Color listColor) {
 		super(name, listColor);
-		// TODO Auto-generated constructor stub
 	}
 
     public void addQuestion(Question question) {
