@@ -4,7 +4,6 @@ import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Iterator;
@@ -21,19 +20,19 @@ public class QuestionTest {
     public QuestionTest(){
         q1 = new UserQuestion("What is the capital of Sweden?",null,null);
         q1.setCorrectAnswer("Stockholm");
-        q1.addIncorrectAnswer("Helsinki");
-        q1.addIncorrectAnswer("Copenhagen");
-        q1.addIncorrectAnswer("Oslo");
+        q1.addWrongAnswer("Helsinki");
+        q1.addWrongAnswer("Copenhagen");
+        q1.addWrongAnswer("Oslo");
     }
 
 
     public void testAdd() {
         assertTrue(q1.setCorrectAnswer("Stockholm"));
-        assertTrue(q1.addIncorrectAnswer("Copenhagen"));
-        assertTrue(!q1.addIncorrectAnswer("Copenhagen"));
-        assertTrue(q1.addIncorrectAnswer("Helsinki"));
-        assertTrue(q1.addIncorrectAnswer("Oslo"));
-        assertTrue(!q1.addIncorrectAnswer("Berlin"));
+        assertTrue(q1.addWrongAnswer("Copenhagen"));
+        assertTrue(!q1.addWrongAnswer("Copenhagen"));
+        assertTrue(q1.addWrongAnswer("Helsinki"));
+        assertTrue(q1.addWrongAnswer("Oslo"));
+        assertTrue(!q1.addWrongAnswer("Berlin"));
         assertTrue(q1.setCorrectAnswer("Schtockholm"));
     }
 
@@ -43,12 +42,12 @@ public class QuestionTest {
         assertTrue(iterator!=null);
 
         Answer<String> answer = iterator.next();
-        assertTrue(q1.removeIncorrectAnswer(answer));
+        assertTrue(q1.removeWrongAnswer(answer));
 
         iterator = q1.answerIterator();
         assertTrue(iterator==null);
 
-        iterator = q1.incorrectAnswerIterator();
+        iterator = q1.wrongAnswerIterator();
         assertTrue(iterator!=null);
     }
 
@@ -56,9 +55,9 @@ public class QuestionTest {
     public void testEquals(){
         Question<String> q2 = new UserQuestion("What is the capital of Sweden?",null,null);
         q2.setCorrectAnswer("Stockholm");
-        q2.addIncorrectAnswer("Helsinki");
-        q2.addIncorrectAnswer("Copenhagen");
-        q2.addIncorrectAnswer("Oslo");
+        q2.addWrongAnswer("Helsinki");
+        q2.addWrongAnswer("Copenhagen");
+        q2.addWrongAnswer("Oslo");
 
         assertEquals(q1,q2);
     }
