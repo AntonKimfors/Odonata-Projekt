@@ -9,10 +9,12 @@ import java.util.List;
  * Created by Henrik on 04/04/2017.
  */
 
-public class Quiz implements Iterable{
+public abstract class Quiz implements Iterable{
     private List<Question> questions;
     private Color listColor;
     private String name;
+
+
 
     public Quiz(String name,Color listColor) {
         this.name = name;
@@ -39,14 +41,6 @@ public class Quiz implements Iterable{
         return questions;
     }
 
-    public void addQuestion(String questionStr) {
-        QuestionFactory factory = QuestionFactory.getInstance();
-        questions.add(factory.createUserQuestion(questionStr,null,null));
-    }
-
-    public void removeQuestion(Question question){
-        questions.remove(question);
-    }
 
     @Override
     public Iterator iterator() {
