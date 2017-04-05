@@ -6,17 +6,26 @@ package com.example.murk.kwizgeeq.model;
 
 public class Answer<T>  {
     private final boolean isCorrect;
-    private final T answer;
+    private final T data;
 
-    public T getAnswer(){
-        return answer;
+    public T getData() {
+        return data;
     }
 
-    public Answer(boolean isCorrect, T answer) {
+    public boolean isCorrect() {
+        return isCorrect;
+    }
+
+    public Answer(boolean isCorrect, T data) {
         this.isCorrect = isCorrect;
-        this.answer = answer;
+        this.data = data;
     }
 
+    /**
+     * Objects are equal if the data data is equal
+     * @param obj
+     * @return true is data
+     */
     @Override
     public boolean equals(Object obj) {
         if(obj == null){
@@ -24,13 +33,13 @@ public class Answer<T>  {
         }
         if(obj instanceof Answer){
             Answer<T> o = (Answer<T>) obj;
-            return answer.equals(o.getAnswer()) ? true : false;
+            return data.equals(o.getData()) ? true : false;
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return answer.hashCode();
+        return data.hashCode();
     }
 }

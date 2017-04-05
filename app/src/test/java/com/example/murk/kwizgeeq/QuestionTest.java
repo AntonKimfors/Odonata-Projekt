@@ -14,18 +14,15 @@ import static org.junit.Assert.*;
  */
 
 public class QuestionTest {
-    @BeforeClass
-    public void setUp(){
-        Question q = new UserQuestion("What is the capital of Sweden",null,null);
-    }
 
+    @Test
     public void testAdd(){
         Question<String> q1 = new UserQuestion("What is the capital of Sweden",null,null);
-        assertTrue(q1.addAnswer(new Answer(true,"Stockholm")));
-        assertTrue(q1.addAnswer(new Answer(false,"Copenhagen")));
-        assertTrue(!q1.addAnswer(new Answer(false,"Copenhagen")));
-        assertTrue(q1.addAnswer(new Answer(false,"Helsinki")));
-        assertTrue(q1.addAnswer(new Answer(false,"Oslo")));
-        assertTrue(!q1.addAnswer(new Answer(false,"Berlin")));
+        assertTrue(q1.setCorrectAnswer("Stockholm"));
+        assertTrue(q1.addIncorrectAnswer("Copenhagen"));
+        assertTrue(!q1.addIncorrectAnswer("Copenhagen"));
+        assertTrue(q1.addIncorrectAnswer("Helsinki"));
+        assertTrue(q1.addIncorrectAnswer("Oslo"));
+        assertTrue(!q1.addIncorrectAnswer("Berlin"));
     }
 }

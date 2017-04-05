@@ -13,48 +13,78 @@ import java.util.Set;
 
 public abstract class Question<T> {
 
-    //set of all answers
-    private final Set<Answer<T>> answers;
+    //the correct answer
+    private Answer<T> correctAnswer;
+
+    //set of incorrect answers
+    private final Set<Answer<T>> incorrectAnswers;
+
+    //contastant for number of answers
+    private static final int NumberOfAnswers = 4;
 
     public Question() {
-        answers = new HashSet<>(4);
+        correctAnswer = null;
+        incorrectAnswers = new HashSet<>(3);
     }
 
     /**
-     * Shuffles the order of answers and returns iterator
+     * Creates an iterator that iterates all the answers in a random order
      * @return iterator over answers if question is valid, if not return null
      */
     public Iterator<Answer<T>> answerIterator() {
         if(isValid()){
-            //shuffle order of answers
-            List<Answer<T>> answerList = new ArrayList<>(answers);
+            //create lsit of all answers
+            List<Answer<T>> answerList = new ArrayList<>(incorrectAnswers);
+            answerList.add(correctAnswer);
+            //shuffle order
             Collections.shuffle(answerList);
             return answerList.iterator();
         }
         return null;
     }
 
-    public Set<Answer<T>> getAnswers(){
-        return answers;
+    /**
+     * Iterates all incorrect answers, independent whether the Question is valid or not
+     * @return
+     */
+    public Iterator<Answer<T>> incorrectAnswerIterator(){
+        List<Answer<T>> incorrectAnswerList = new ArrayList<>(incorrectAnswers);
+        return incorrectAnswerList.iterator();
+    }
+
+    public Answer<T> getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public boolean setCorrectAnswer(T answer){
+        if(answer == null)
+            return false;
+
+        correctAnswer = new Answer<T>(true,answer);
+        return true;
+    }
+
+    public Set<Answer<T>> getIncorrectAnswers() {
+        return incorrectAnswers;
     }
 
     /**
-     * Add a new unique answer to the answer list
-     * @param answer
+     * Add a new unique incorrect answer
+     * @param answer the incorrect answer to add
      * @return true if insert successful
      */
-    public boolean addAnswer(Answer<T> answer) {
-        if(answers.size()<4)
-            return answers.add(answer);
+    public boolean addIncorrectAnswer(T answer) {
+        if(incorrectAnswers.size()<NumberOfAnswers-1)
+            return incorrectAnswers.add(new Answer(false,answer));
         return false;
     }
 
     /**
-     * Removes an answer and adds a null object in end of list
-     * @param answer
+     * Removes an incorrect answer
+     * @param answer true if removal successful
      */
-    public boolean removeAnswer(Answer answer){
-        return answers.remove(answer);
+    public boolean removeIncorrectAnswer(Answer answer){
+        return incorrectAnswers.remove(answer);
     }
 
     /**
@@ -62,7 +92,7 @@ public abstract class Question<T> {
      * @return true if number of answers is 4
      */
     public boolean isValid(){
-        return (answers.size()==4) ? true : false;
+        return (incorrectAnswers.size() == 3 && correctAnswer != null) ? true : false;
     }
 
     /**
@@ -77,13 +107,13 @@ public abstract class Question<T> {
         if(obj instanceof Question){
             Question o = (Question) obj;
 
-            return answers.equals(o.getAnswers());
+            return incorrectAnswers.equals(o.getIncorrectAnswers()) && correctAnswer.equals(o.getCorrectAnswer());
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return answers.hashCode();
+        return incorrectAnswers.hashCode() + correctAnswer.hashCode();
     }
 }
