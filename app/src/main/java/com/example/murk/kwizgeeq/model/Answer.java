@@ -5,8 +5,8 @@ package com.example.murk.kwizgeeq.model;
  */
 
 public class Answer<T>  {
-    boolean isCorrect;
-    private T answer;
+    private final boolean isCorrect;
+    private final T answer;
 
     public T getAnswer(){
         return answer;

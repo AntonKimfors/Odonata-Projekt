@@ -81,4 +81,9 @@ public abstract class Question<T> {
         }
         return false;
     }
+
+    @Override
+    public int hashCode() {
+        return answers.hashCode();
+    }
 }

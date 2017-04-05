@@ -4,6 +4,7 @@ import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -13,7 +14,11 @@ import static org.junit.Assert.*;
  */
 
 public class QuestionTest {
-    @Test
+    @BeforeClass
+    public void setUp(){
+        Question q = new UserQuestion("What is the capital of Sweden",null,null);
+    }
+
     public void testAdd(){
         Question<String> q1 = new UserQuestion("What is the capital of Sweden",null,null);
         assertTrue(q1.addAnswer(new Answer(true,"Stockholm")));
