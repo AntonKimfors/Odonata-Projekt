@@ -1,11 +1,6 @@
 package com.example.murk.kwizgeeq.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Henrik on 04/04/2017.
@@ -44,7 +39,7 @@ public abstract class Question<T> {
     }
 
     /**
-     * Create an iterator over all incorrect answers,
+     * Create an iterator over all wrong answers,
      * not dependent whether the Question is valid or not
      * @return Iterator over wrong answers, order is unspecified
      */
@@ -83,8 +78,8 @@ public abstract class Question<T> {
     }
 
     /**
-     * Add a new unique incorrect answer
-     * @param data the incorrect answer data to add (e.g. a string)
+     * Add a new unique wrong answer
+     * @param data the wrong answer data to add (e.g. a string)
      * @return true if insert successful
      */
     public boolean addWrongAnswer(T data) {
@@ -96,14 +91,14 @@ public abstract class Question<T> {
     }
 
     /**
-     * Removes an incorrect answer
-     * @param answer true if removal successful
+     * Removes an wrong answer
+     * @param data true if removal successful
      */
-    public boolean removeWrongAnswer(Answer<T> answer){
-        if(answer == null)
+    public boolean removeWrongAnswer(T data){
+        if(data == null)
             throw new NullPointerException();
 
-        return wrongAnswers.remove(answer);
+        return wrongAnswers.remove(new Answer<T>(false,data));
     }
 
     /**

@@ -42,7 +42,7 @@ public class QuestionTest {
         assertTrue(iterator!=null);
 
         Answer<String> answer = iterator.next();
-        assertTrue(q1.removeWrongAnswer(answer));
+        assertTrue(q1.removeWrongAnswer(answer.getData()));
 
         iterator = q1.answerIterator();
         assertTrue(iterator==null);
