@@ -17,14 +17,14 @@ public abstract class Question<T> {
     private Answer<T> correctAnswer;
 
     //set of incorrect answers
-    private final Set<Answer<T>> incorrectAnswers;
+    private final Set<Answer<T>> wrongAnswers;
 
     //contastant for number of answers
     private static final int NumberOfAnswers = 4;
 
     public Question() {
         correctAnswer = null;
-        incorrectAnswers = new HashSet<>(3);
+        wrongAnswers = new HashSet<>(3);
     }
 
     /**
@@ -34,7 +34,7 @@ public abstract class Question<T> {
     public Iterator<Answer<T>> answerIterator() {
         if(isValid()){
             //create lsit of all answers
-            List<Answer<T>> answerList = new ArrayList<>(incorrectAnswers);
+            List<Answer<T>> answerList = new ArrayList<>(wrongAnswers);
             answerList.add(correctAnswer);
             //shuffle order
             Collections.shuffle(answerList);
@@ -48,7 +48,7 @@ public abstract class Question<T> {
      * @return
      */
     public Iterator<Answer<T>> incorrectAnswerIterator(){
-        List<Answer<T>> incorrectAnswerList = new ArrayList<>(incorrectAnswers);
+        List<Answer<T>> incorrectAnswerList = new ArrayList<>(wrongAnswers);
         return incorrectAnswerList.iterator();
     }
 
@@ -64,8 +64,8 @@ public abstract class Question<T> {
         return true;
     }
 
-    public Set<Answer<T>> getIncorrectAnswers() {
-        return incorrectAnswers;
+    public Set<Answer<T>> getWrongAnswers() {
+        return wrongAnswers;
     }
 
     /**
@@ -74,8 +74,8 @@ public abstract class Question<T> {
      * @return true if insert successful
      */
     public boolean addIncorrectAnswer(T answer) {
-        if(incorrectAnswers.size()<NumberOfAnswers-1)
-            return incorrectAnswers.add(new Answer(false,answer));
+        if(wrongAnswers.size()<NumberOfAnswers-1)
+            return wrongAnswers.add(new Answer(false,answer));
         return false;
     }
 
@@ -84,7 +84,7 @@ public abstract class Question<T> {
      * @param answer true if removal successful
      */
     public boolean removeIncorrectAnswer(Answer answer){
-        return incorrectAnswers.remove(answer);
+        return wrongAnswers.remove(answer);
     }
 
     /**
@@ -92,7 +92,7 @@ public abstract class Question<T> {
      * @return true if number of answers is 4
      */
     public boolean isValid(){
-        return (incorrectAnswers.size() == (NumberOfAnswers - 1) && correctAnswer != null);
+        return (wrongAnswers.size() == (NumberOfAnswers - 1) && correctAnswer != null);
     }
 
     /**
@@ -107,14 +107,14 @@ public abstract class Question<T> {
         if(obj instanceof Question){
             Question o = (Question) obj;
 
-            return incorrectAnswers.equals(o.getIncorrectAnswers()) && correctAnswer.equals(o.getCorrectAnswer());
+            return wrongAnswers.equals(o.getWrongAnswers()) && correctAnswer.equals(o.getCorrectAnswer());
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return incorrectAnswers.hashCode() + correctAnswer.hashCode();
+        return wrongAnswers.hashCode() + correctAnswer.hashCode();
     }
 
 }
