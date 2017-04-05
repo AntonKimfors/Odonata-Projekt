@@ -4,6 +4,7 @@ import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Iterator;
@@ -17,7 +18,8 @@ import static org.junit.Assert.*;
 public class QuestionTest {
     Question<String> q1;
 
-    public QuestionTest(){
+    @Before
+    public void setUp(){
         q1 = new UserQuestion("What is the capital of Sweden?",null,null);
         q1.setCorrectAnswer("Stockholm");
         q1.addWrongAnswer("Helsinki");
@@ -25,15 +27,16 @@ public class QuestionTest {
         q1.addWrongAnswer("Oslo");
     }
 
-
+    @Test
     public void testAdd() {
-        assertTrue(q1.setCorrectAnswer("Stockholm"));
-        assertTrue(q1.addWrongAnswer("Copenhagen"));
-        assertTrue(!q1.addWrongAnswer("Copenhagen"));
-        assertTrue(q1.addWrongAnswer("Helsinki"));
-        assertTrue(q1.addWrongAnswer("Oslo"));
-        assertTrue(!q1.addWrongAnswer("Berlin"));
-        assertTrue(q1.setCorrectAnswer("Schtockholm"));
+        Question<String> q = new UserQuestion("What is the capital of Sweden?",null,null);
+        assertTrue(q.setCorrectAnswer("Stockholm"));
+        assertTrue(q.addWrongAnswer("Copenhagen"));
+        assertTrue(!q.addWrongAnswer("Copenhagen"));
+        assertTrue(q.addWrongAnswer("Helsinki"));
+        assertTrue(q.addWrongAnswer("Oslo"));
+        assertTrue(!q.addWrongAnswer("Berlin"));
+        assertTrue(q.setCorrectAnswer("Schtockholm"));
     }
 
     @Test
