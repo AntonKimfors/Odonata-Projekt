@@ -116,4 +116,5 @@ public abstract class Question<T> {
     public int hashCode() {
         return incorrectAnswers.hashCode() + correctAnswer.hashCode();
     }
+
 }
