@@ -49,11 +49,11 @@ public abstract class Question<T> {
     }
 
     /**
-     *
+     * Get the data for the correct answer
      * @return The correct that is set to correct.
      */
-    public Answer<T> getCorrectAnswer() {
-        return correctAnswer;
+    public T getCorrectAnswer() {
+        return correctAnswer.getData();
     }
 
     /**
