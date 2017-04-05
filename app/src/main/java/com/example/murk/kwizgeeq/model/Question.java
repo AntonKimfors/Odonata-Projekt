@@ -92,7 +92,7 @@ public abstract class Question<T> {
      * @return true if number of answers is 4
      */
     public boolean isValid(){
-        return (incorrectAnswers.size() == 3 && correctAnswer != null) ? true : false;
+        return (incorrectAnswers.size() == (NumberOfAnswers - 1) && correctAnswer != null);
     }
 
     /**

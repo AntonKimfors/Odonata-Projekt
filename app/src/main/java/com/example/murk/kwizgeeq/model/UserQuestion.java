@@ -55,6 +55,42 @@ public class UserQuestion extends Question {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if(obj instanceof UserQuestion && super.equals(obj)){
+            UserQuestion o = (UserQuestion) obj;
+
+            //check if Question string are equal
+            if(questionStr!=null){
+                if(o.getQuestionStr()!=null){
+                    if(!questionStr.equals(o.getQuestionStr()))
+                        return false;
+                } else {
+                    return false;
+                }
+            }
+
+            //check if Question images are equal
+            if(questionImg!=null){
+                if(o.getQuestionImg()!=null){
+                    if(!questionImg.equals(o.getQuestionImg()))
+                        return false;
+                } else {
+                    return false;
+                }
+            }
+
+            //check if Question points are equal
+            if(point!=null){
+                if(o.getPoint()!=null){
+                    if(!point.equals(o.getPoint()))
+                        return false;
+                } else {
+                    return false;
+                }
+            }
+
+            //all variables are equal
+            return true;
+        }
+        return false;
     }
 }
