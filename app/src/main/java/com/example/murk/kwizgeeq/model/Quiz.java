@@ -2,6 +2,7 @@ package com.example.murk.kwizgeeq.model;
 
 import android.graphics.Color;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public abstract class Quiz implements Iterable{
 
 
     public Quiz(String name,Color listColor) {
+        questions = new ArrayList<>();
         this.name = name;
         this.listColor = listColor;
     }
@@ -47,9 +49,5 @@ public abstract class Quiz implements Iterable{
         return questions.iterator();
     }
     
-    public Quiz copy(){
-    	Quiz clonedQuiz = this;//new UserQuiz(this.name,this.listColor);
-		return clonedQuiz;
-    	
-    }
+
 }
