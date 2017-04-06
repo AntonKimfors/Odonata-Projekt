@@ -26,7 +26,7 @@ public abstract class Question<T> {
      * Creates an iterator over all the answers in a randomized order
      * @return iterator over answers if question is valid, if not return null
      */
-    public Iterator<Answer<T>> answerIterator() {
+    public Iterator<Answer<T>> shuffledAnswerIterator() {
         if(isValid()){
             //create list of all answers
             List<Answer<T>> answerList = new ArrayList<>(wrongAnswers);
@@ -36,24 +36,6 @@ public abstract class Question<T> {
             return answerList.iterator();
         }
         return null;
-    }
-
-    /**
-     * Create an iterator over all wrong answers,
-     * not dependent whether the Question is valid or not
-     * @return Iterator over wrong answers, order is unspecified
-     */
-    public Iterator<Answer<T>> wrongAnswerIterator(){
-        List<Answer<T>> wrongAnswerList = new ArrayList<>(wrongAnswers);
-        return wrongAnswerList.iterator();
-    }
-
-    /**
-     * Get the data for the correct answer
-     * @return The correct that is set to correct.
-     */
-    public T getCorrectAnswer() {
-        return correctAnswer.getData();
     }
 
     /**
@@ -113,7 +95,7 @@ public abstract class Question<T> {
         if(obj instanceof Question){
             Question o = (Question) obj;
 
-            return wrongAnswers.equals(o.wrongAnswers) && correctAnswer.equals(o.getCorrectAnswer());
+            return wrongAnswers.equals(o.wrongAnswers) && correctAnswer.equals(o.correctAnswer);
         }
         return false;
     }
