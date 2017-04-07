@@ -21,7 +21,7 @@ public class TestQuizCreation {
     Answer wrongAnswer = new Answer(false,"inte fest");
 
 
-
+    /*
     @Test
     public void testQuizCreation() {
         testQuiz.addQuestion(testQuestion);
@@ -57,6 +57,6 @@ public class TestQuizCreation {
 
 
 
-    }
+    }*/
 
 }

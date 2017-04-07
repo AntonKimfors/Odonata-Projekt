@@ -33,7 +33,7 @@ public class Answer<T>  {
         }
         if(obj instanceof Answer){
             Answer<T> o = (Answer<T>) obj;
-            return data.equals(o.getData()) ? true : false;
+            return data.equals(o.data);
         }
         return false;
     }

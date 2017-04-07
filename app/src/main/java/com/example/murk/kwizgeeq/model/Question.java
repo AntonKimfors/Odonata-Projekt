@@ -8,18 +8,18 @@ import java.util.*;
 
 public abstract class Question<T> {
 
-    //the correct answer
-    private Answer<T> correctAnswer;
+    private final List<Answer<T>> answers;
 
-    //set of incorrect answers
-    private final Set<Answer<T>> wrongAnswers;
+    private int wrongAnswerCount;
 
-    //constant for number of answers
-    private static final int NumberOfAnswers = 4;
+    private int correctAnswerCount;
 
     public Question() {
-        correctAnswer = null;
-        wrongAnswers = new HashSet<>(3);
+        answers = new ArrayList<>();
+
+        wrongAnswerCount = 0;
+
+        correctAnswerCount = 0;
     }
 
     /**
@@ -27,82 +27,78 @@ public abstract class Question<T> {
      * @return iterator over answers if question is valid, if not return null
      */
     public Iterator<Answer<T>> shuffledAnswerIterator() {
-        if(isValid()){
-            //create list of all answers
-            List<Answer<T>> answerList = new ArrayList<>(wrongAnswers);
-            answerList.add(correctAnswer);
-            //shuffle order
-            Collections.shuffle(answerList);
-            return answerList.iterator();
-        }
-        return null;
+        List<Answer<T>> shuffleList = new ArrayList<>(answers);
+        Collections.shuffle(shuffleList);
+
+        return shuffleList.iterator();
     }
 
-    /**
-     * Creates a new correct answer and sets it to correct
-     * @param data the data held by the new answer
-     * @return true if data is not null
-     */
-    public boolean setCorrectAnswer(T data){
+    public boolean addCorrectAnswer(T data){
         if(data == null)
-            return false;
+            throw new NullPointerException();
 
-        correctAnswer = new Answer<T>(true,data);
-        return true;
+        if(answers.add(new Answer<T>(false, data))){
+            correctAnswerCount++;
+            return true;
+        }
+        return false;
+        //throw new IllegalArgumentException();
     }
 
-    /**
-     * Add a new unique wrong answer
-     * @param data the wrong answer data to add (e.g. a string)
-     * @return true if insert successful
-     */
     public boolean addWrongAnswer(T data) {
         if(data == null)
             throw new NullPointerException();
-        if(wrongAnswers.size()<NumberOfAnswers-1)
-            return wrongAnswers.add(new Answer(false,data));
+
+        if(answers.add(new Answer<T>(true, data))){
+            wrongAnswerCount++;
+            return true;
+        }
         return false;
+        //throw new IllegalArgumentException();
     }
 
-    /**
-     * Removes an wrong answer
-     * @param data true if removal successful
-     */
-    public boolean removeWrongAnswer(T data){
-        if(data == null)
+    public boolean removeAnswer(Answer<T> answer){
+        if(answer == null)
             throw new NullPointerException();
 
-        return wrongAnswers.remove(new Answer<T>(false,data));
+        if(answers.remove(answer)){
+            if(answer.isCorrect())
+                correctAnswerCount--;
+            else
+                wrongAnswerCount--;
+
+            return true;
+        }
+
+        throw new IllegalArgumentException("Element not in list");
     }
 
-    /**
-     * Determines whether the Queation can be used or not
-     * @return true if number of answers is 4
-     */
-    public boolean isValid(){
-        return (wrongAnswers.size() == (NumberOfAnswers - 1) && correctAnswer != null);
+    public boolean checkNumberOfCorrect(int excepted){
+        return excepted == correctAnswerCount;
     }
 
-    /**
-     * @param obj the object to compare with
-     * @return true if lists of answers are equal, independent of order
-     */
+    public boolean checkNumberOfQuestions(int excepted){
+        return excepted == wrongAnswerCount + correctAnswerCount;
+    }
+
     @Override
     public boolean equals(Object obj) {
-        if(obj == null){
+        if(obj == null)
             throw new NullPointerException();
-        }
+
         if(obj instanceof Question){
             Question o = (Question) obj;
 
-            return wrongAnswers.equals(o.wrongAnswers) && correctAnswer.equals(o.correctAnswer);
+            return answers.equals(o.answers);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return wrongAnswers.hashCode() + 31*correctAnswer.hashCode();
+        return answers.hashCode();
     }
+
+
 
 }
