@@ -76,6 +76,10 @@ public abstract class Question<T> {
         return excepted == correctAnswerCount;
     }
 
+    public boolean checkNumberOfWrong(int expected){
+        return expected == wrongAnswerCount;
+    }
+
     public boolean checkNumberOfQuestions(int excepted){
         return excepted == wrongAnswerCount + correctAnswerCount;
     }
