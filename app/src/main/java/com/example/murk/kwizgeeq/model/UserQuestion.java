@@ -2,6 +2,9 @@ package com.example.murk.kwizgeeq.model;
 
 import android.graphics.PointF;
 import android.media.Image;
+import android.media.MediaPlayer;
+
+import java.io.IOException;
 
 /**
  * Created by Henrik on 04/04/2017.
@@ -11,8 +14,9 @@ public class UserQuestion extends Question {
     private String questionStr;
     private Image questionImg;
     private PointF point;
+    private String audioFile;
 
-    public UserQuestion(String questionStr, Image questionImg, PointF point) {
+    public UserQuestion(String questionStr, Image questionImg, PointF point, String audioFile) {
         if(questionStr == null)
             questionStr = null;
         else
@@ -27,6 +31,11 @@ public class UserQuestion extends Question {
             point = null;
         else
             this.point = point;
+
+        if(audioFile == null)
+            this.audioFile = null;
+        else
+            this.audioFile = audioFile;
     }
 
     public String getQuestionStr() {
@@ -53,12 +62,19 @@ public class UserQuestion extends Question {
         this.point = point;
     }
 
+    public String getAudioFile() {
+        return audioFile;
+    }
+
+    public void setAudioFile(String audioFile) {
+        this.audioFile = audioFile;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof UserQuestion && super.equals(obj)){
             UserQuestion o = (UserQuestion) obj;
 
-            //check if Question string are equal
             if(questionStr!=null){
                 if(o.getQuestionStr()!=null){
                     if(!questionStr.equals(o.getQuestionStr()))
@@ -68,7 +84,6 @@ public class UserQuestion extends Question {
                 }
             }
 
-            //check if Question images are equal
             if(questionImg!=null){
                 if(o.getQuestionImg()!=null){
                     if(!questionImg.equals(o.getQuestionImg()))
@@ -78,7 +93,6 @@ public class UserQuestion extends Question {
                 }
             }
 
-            //check if Question points are equal
             if(point!=null){
                 if(o.getPoint()!=null){
                     if(!point.equals(o.getPoint()))
