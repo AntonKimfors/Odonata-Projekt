@@ -33,26 +33,18 @@ public abstract class Question<T> {
         return shuffleList.iterator();
     }
 
-    public boolean addCorrectAnswer(T data){
-        if(data == null)
+    public boolean addAnswer(Answer<T> answer){
+        if(answer == null)
             throw new NullPointerException();
 
-        if(answers.add(new Answer<T>(false, data))){
-            correctAnswerCount++;
+        if(answers.add(answer)){
+            if(answer.isCorrect())
+                correctAnswerCount++;
+            else
+                wrongAnswerCount++;
             return true;
         }
 
-        throw new IllegalArgumentException();
-    }
-
-    public boolean addWrongAnswer(T data) {
-        if(data == null)
-            throw new NullPointerException();
-
-        if(answers.add(new Answer<T>(true, data))){
-            wrongAnswerCount++;
-            return true;
-        }
         throw new IllegalArgumentException();
     }
 
