@@ -2,9 +2,6 @@ package com.example.murk.kwizgeeq.model;
 
 import android.graphics.PointF;
 import android.media.Image;
-import android.media.MediaPlayer;
-
-import java.io.IOException;
 
 /**
  * Created by Henrik on 04/04/2017.
@@ -13,10 +10,10 @@ import java.io.IOException;
 public class UserQuestion extends Question {
     private String questionStr;
     private Image questionImg;
-    private PointF point;
+    private PointF position;
     private String audioFile;
 
-    public UserQuestion(String questionStr, Image questionImg, PointF point, String audioFile) {
+    public UserQuestion(String questionStr, Image questionImg, PointF position, String audioFile) {
         if(questionStr == null)
             questionStr = null;
         else
@@ -27,10 +24,10 @@ public class UserQuestion extends Question {
         else
             this.questionImg = questionImg;
 
-        if(point == null)
-            point = null;
+        if(position == null)
+            position = null;
         else
-            this.point = point;
+            this.position = position;
 
         if(audioFile == null)
             this.audioFile = null;
@@ -54,12 +51,12 @@ public class UserQuestion extends Question {
         this.questionImg = questionImg;
     }
 
-    public PointF getPoint() {
-        return point;
+    public PointF getPosition() {
+        return position;
     }
 
-    public void setPoint(PointF point) {
-        this.point = point;
+    public void setPosition(PointF position) {
+        this.position = position;
     }
 
     public String getAudioFile() {
@@ -93,9 +90,9 @@ public class UserQuestion extends Question {
                 }
             }
 
-            if(point!=null){
-                if(o.getPoint()!=null){
-                    if(!point.equals(o.getPoint()))
+            if(position !=null){
+                if(o.getPosition()!=null){
+                    if(!position.equals(o.getPosition()))
                         return false;
                 } else {
                     return false;
