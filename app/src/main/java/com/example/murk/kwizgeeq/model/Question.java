@@ -41,8 +41,8 @@ public abstract class Question<T> {
             correctAnswerCount++;
             return true;
         }
-        return false;
-        //throw new IllegalArgumentException();
+
+        throw new IllegalArgumentException();
     }
 
     public boolean addWrongAnswer(T data) {
@@ -53,8 +53,7 @@ public abstract class Question<T> {
             wrongAnswerCount++;
             return true;
         }
-        return false;
-        //throw new IllegalArgumentException();
+        throw new IllegalArgumentException();
     }
 
     public boolean removeAnswer(Answer<T> answer){
