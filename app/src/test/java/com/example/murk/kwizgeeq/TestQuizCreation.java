@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  */
 
 public class TestQuizCreation {
-    UserQuestion testQuestion = new UserQuestion("who dis!?",null,null);
+    UserQuestion testQuestion = new UserQuestion("who dis!?",null,null,null);
     UserQuiz testQuiz = new UserQuiz("TestQuiznumerouno",null);
     Answer corrAnswer = new Answer(true,"Fest");
     Answer wrongAnswer = new Answer(false,"inte fest");

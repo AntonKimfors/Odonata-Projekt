@@ -15,83 +15,56 @@ import static org.junit.Assert.*;
  */
 
 public class QuestionTest {
-    Question<String> q1;
+    Question<String> q;
 
-    public static String generateString(Random rng, String characters, int length){
-        char[] text = new char[length];
-        for (int i = 0; i < length; i++)
-        {
-            text[i] = characters.charAt(rng.nextInt(characters.length()));
-        }
-        return new String(text);
-    }
-
-    @Test
-    public void test1(){
-        q1 = new UserQuestion("What is the capital of Sweden?",null,null);
-        Random rand = new Random();
-        long time1 = System.currentTimeMillis();
-
-        for(int i=0;i<10000000;i++){
-            q1.addWrongAnswer(generateString(rand,"abcdefghijklmnopqrs",5));
-        }
-        for(int i=0;i<10000000;i++){
-            q1.addCorrectAnswer(generateString(rand,"tuvxyzåäö1234567890",5));
-        }
-
-        Iterator<Answer<String>> it = q1.shuffledAnswerIterator();
-        int correct = 0;
-        int wrong = 0;
-
-        while(it.hasNext()){
-            Answer<String> answer = it.next();
-            if(answer.isCorrect()){
-                correct++;
-            } else{
-                wrong++;
-            }
-
-            q1.removeAnswer(answer);
-
-        }
-
-        long time2 = System.currentTimeMillis();
-
-        System.out.println("Correct: " + correct);
-        System.out.println("Wrong: " + wrong);
-        System.out.println("Time: " + (time2-time1));
-        assertTrue(true);
-    }
-
-    /*
     @Test
     public void testAdd() {
-        Question<String> q = new UserQuestion("What is the capital of Sweden?",null,null);
-        assertTrue(q.addCorrectAnswer("Stockholm"));
-        assertTrue(q.addWrongAnswer("Copenhagen"));
-        assertTrue(!q.addWrongAnswer("Copenhagen"));
-        assertTrue(q.addWrongAnswer("Helsinki"));
-        assertTrue(q.addWrongAnswer("Oslo"));
-        assertTrue(!q.addWrongAnswer("Berlin"));
-        assertTrue(q.addCorrectAnswer("Schtockholm"));
+        q = new UserQuestion("What is the capital of Sweden?",null,null,null);
+        assertTrue(q.addAnswer(new Answer<String>(true,"Stockholm")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Copenhagen")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Copenhagen")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Helsinki")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Oslo")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Berlin")));
+        assertTrue(q.addAnswer(new Answer<String>(true,"Sschtockholm")));
     }
 
     @Test
     public void testRemove(){
-        Iterator<String> iterator = q1.shuffledAnswerIterator();
+        q = new UserQuestion("What is the capital of Sweden?",null,null,null);
+        assertTrue(q.addAnswer(new Answer<String>(true,"Stockholm")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Copenhagen")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Copenhagen")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Helsinki")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Oslo")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Berlin")));
+        assertTrue(q.addAnswer(new Answer<String>(true,"Sschtockholm")));
+        Iterator<Answer<String>> iterator = q.shuffledAnswerIterator();
         assertTrue(iterator!=null);
 
     }
 
     @Test
     public void testEquals(){
-        Question<String> q2 = new UserQuestion("What is the capital of Sweden?",null,null);
-        q2.addCorrectAnswer("Stockholm");
-        q2.addWrongAnswer("Helsinki");
-        q2.addWrongAnswer("Copenhagen");
-        q2.addWrongAnswer("Oslo");
+        q = new UserQuestion("What is the capital of Sweden?",null,null,null);
+        assertTrue(q.addAnswer(new Answer<String>(true,"Stockholm")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Copenhagen")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Copenhagen")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Helsinki")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Oslo")));
+        assertTrue(q.addAnswer(new Answer<String>(false,"Berlin")));
+        assertTrue(q.addAnswer(new Answer<String>(true,"Sschtockholm")));
+        
+        Question<String> q2 = new UserQuestion("What is the capital of Sweden?",null,null,null);
+        assertTrue(q2.addAnswer(new Answer<String>(true,"Stockholm")));
+        assertTrue(q2.addAnswer(new Answer<String>(false,"Copenhagen")));
+        assertTrue(q2.addAnswer(new Answer<String>(false,"Copenhagen")));
+        assertTrue(q2.addAnswer(new Answer<String>(false,"Helsinki")));
+        assertTrue(q2.addAnswer(new Answer<String>(false,"Oslo")));
+        assertTrue(q2.addAnswer(new Answer<String>(false,"Berlin")));
+        assertTrue(q2.addAnswer(new Answer<String>(true,"Sschtockholm")));
 
-        assertEquals(q1,q2);
+        assertEquals(q,q2);
     }
-    */
+
 }
