@@ -39,7 +39,7 @@ public class QuestionTest {
         assertTrue(q.addAnswer(new Answer<String>(false,"Oslo")));
         assertTrue(q.addAnswer(new Answer<String>(false,"Berlin")));
         assertTrue(q.addAnswer(new Answer<String>(true,"Sschtockholm")));
-        Iterator<Answer<String>> iterator = q.shuffledAnswerIterator();
+        Iterator<Answer<String>> iterator = q.answerIterator(true);
         assertTrue(iterator!=null);
 
     }
