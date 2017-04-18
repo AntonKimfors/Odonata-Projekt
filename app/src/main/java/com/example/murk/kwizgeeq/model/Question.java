@@ -22,10 +22,6 @@ public abstract class Question<T> {
         correctAnswerCount = 0;
     }
 
-    /**
-     * Creates an iterator over all the answers in a randomized order
-     * @return iterator over answers if question is valid, if not return null
-     */
     public Iterator<Answer<T>> answerIterator(boolean shuffled) {
         List<Answer<T>> answerList = new ArrayList<>(answers);
         if(shuffled){

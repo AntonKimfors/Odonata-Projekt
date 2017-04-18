@@ -14,25 +14,13 @@ public class UserQuestion extends Question {
     private String audioFile;
 
     public UserQuestion(String questionStr, Image questionImg, PointF position, String audioFile) {
-        if(questionStr == null)
-            questionStr = null;
-        else
-            this.questionStr = questionStr;
+        this.questionStr = questionStr;
 
-        if(questionImg == null)
-            questionImg = null;
-        else
-            this.questionImg = questionImg;
+        this.questionImg = questionImg;
 
-        if(position == null)
-            position = null;
-        else
-            this.position = position;
+        this.position = position;
 
-        if(audioFile == null)
-            this.audioFile = null;
-        else
-            this.audioFile = audioFile;
+        this.audioFile = audioFile;
     }
 
     public String getQuestionStr() {
