@@ -26,11 +26,13 @@ public abstract class Question<T> {
      * Creates an iterator over all the answers in a randomized order
      * @return iterator over answers if question is valid, if not return null
      */
-    public Iterator<Answer<T>> shuffledAnswerIterator() {
-        List<Answer<T>> shuffleList = new ArrayList<>(answers);
-        Collections.shuffle(shuffleList);
+    public Iterator<Answer<T>> answerIterator(boolean shuffled) {
+        List<Answer<T>> answerList = new ArrayList<>(answers);
+        if(shuffled){
+            Collections.shuffle(answerList);
+        }
 
-        return shuffleList.iterator();
+        return answerList.iterator();
     }
 
     public boolean addAnswer(Answer<T> answer){
