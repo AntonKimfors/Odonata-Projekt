@@ -41,7 +41,6 @@ public class QuestionTest {
         assertTrue(q.addAnswer(new Answer<String>(true,"Sschtockholm")));
         Iterator<Answer<String>> iterator = q.answerIterator(true);
         assertTrue(iterator!=null);
-
     }
 
     @Test
