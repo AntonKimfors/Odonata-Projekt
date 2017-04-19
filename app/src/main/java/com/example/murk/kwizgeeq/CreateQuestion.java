@@ -35,15 +35,36 @@ public class CreateQuestion extends AppCompatActivity {
         nextQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText questionText = (EditText) findViewById(R.id.questionInput);
+                EditText questionText = (EditText) findViewById(R.id.questionText);
                 String questionString = questionText.getText().toString();
                 Question<String> question = new UserQuestion(questionString,null,null,null);
 
+
                 EditText correctText = (EditText) findViewById(R.id.correctText);
-                String questionString = questionText.getText().toString();
-                Answer<String> correct = new Answer<String>(true,)
+                addStringAnswer(question,correctText,true);
+
+                EditText wrongText1 = (EditText) findViewById(R.id.wrongText1);
+                addStringAnswer(question,wrongText1,false);
+
+                EditText wrongText2 = (EditText) findViewById(R.id.wrongText2);
+                addStringAnswer(question,wrongText2,false);
+
+                EditText wrongText3 = (EditText) findViewById(R.id.WrongText3);
+                addStringAnswer(question,wrongText3,false);
+
+                
             }
         }
 
+
+
+    }
+
+    private void addStringAnswer(Question<String> question, EditText text, boolean isCorrect){
+        String textString = text.getText().toString();
+        if(!textString.equals("")){
+            Answer<String> answer = new Answer<String>(isCorrect,textString);
+            question.addAnswer(answer);
+        }
     }
 }
