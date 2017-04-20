@@ -8,9 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.murk.kwizgeeq.model.Answer;
-import com.example.murk.kwizgeeq.model.Question;
-import com.example.murk.kwizgeeq.model.UserQuestion;
+import com.example.murk.kwizgeeq.model.*;
 
 public class CreateQuestion extends AppCompatActivity {
 
@@ -31,14 +29,19 @@ public class CreateQuestion extends AppCompatActivity {
             }
         });
 
+        //TODO: get active quiz from KwizGeeQ
+        final UserQuiz activeQuiz;
+
         Button nextQuestionButton = (Button) findViewById(R.id.nextQuestionButton);
+
+        Button doneButton = (Button) findViewById(R.id.doneButton);
+
         nextQuestionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText questionText = (EditText) findViewById(R.id.questionText);
                 String questionString = questionText.getText().toString();
                 Question<String> question = new UserQuestion(questionString,null,null,null);
-
 
                 EditText correctText = (EditText) findViewById(R.id.correctText);
                 addStringAnswer(question,correctText,true);
@@ -52,11 +55,18 @@ public class CreateQuestion extends AppCompatActivity {
                 EditText wrongText3 = (EditText) findViewById(R.id.WrongText3);
                 addStringAnswer(question,wrongText3,false);
 
-                
+                //TODO: add question to active quiz
+
+                setContentView(R.layout.activity_create_question);
             }
-        }
+        });
 
-
+        doneButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.activity_quiz_list);
+            }
+        });
 
     }
 
