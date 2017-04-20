@@ -1,5 +1,6 @@
 package com.example.murk.kwizgeeq;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,7 +58,8 @@ public class CreateQuestion extends AppCompatActivity {
 
                 //TODO: add question to active quiz
 
-                setContentView(R.layout.activity_create_question);
+                Intent intent = new Intent(CreateQuestion.this,CreateQuestion.class);
+                CreateQuestion.this.startActivity(intent);
             }
         });
 
@@ -69,6 +71,8 @@ public class CreateQuestion extends AppCompatActivity {
         });
 
     }
+
+
 
     private void addStringAnswer(Question<String> question, EditText text, boolean isCorrect){
         String textString = text.getText().toString();
