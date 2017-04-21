@@ -21,11 +21,31 @@ public class Questioneer extends AppCompatActivity {
     private int curQuest;
     private int totQuest;
 
+    TextView quizLabel;
+    TextView questNumLabel;
+    TextView questLabel;
+    TextView progressNumbers;
+    ProgressBar progressBar;
+    Button answer1;
+    Button answer2;
+    Button answer3;
+    Button answer4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar); // (for Custom theme)
         setContentView(R.layout.activity_questioneer);
+
+        quizLabel = (TextView) findViewById(R.id.quizLabel);
+        questNumLabel = (TextView) findViewById(R.id.questNumLabel);
+        questLabel = (TextView) findViewById(R.id.questLabel);
+        progressNumbers = (TextView) findViewById(R.id.progressNumbers);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        answer1 = (Button) findViewById(R.id.answerButton1);
+        answer2 = (Button) findViewById(R.id.answerButton2);
+        answer3 = (Button) findViewById(R.id.answerButton3);
+        answer4 = (Button) findViewById(R.id.answerButton4);
 
         UserQuiz testQuiz = new UserQuiz("Test Quiz",null);
         UserQuestion testQuestion1 = new UserQuestion("Question1?",null,null,null);
@@ -61,17 +81,7 @@ public class Questioneer extends AppCompatActivity {
 
     public void updateQuestioneer(Quiz quiz){
         curQuest++;
-        Iterator answerIterator = ((UserQuestion)quiz.getQuestions().get(curQuest)).answerIterator(true);
-
-        TextView quizLabel = (TextView) findViewById(R.id.quizLabel);
-        TextView questNumLabel = (TextView) findViewById(R.id.questNumLabel);
-        TextView questLabel = (TextView) findViewById(R.id.questLabel);
-        TextView progressNumbers = (TextView) findViewById(R.id.progressNumbers);
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        Button answer1 = (Button) findViewById(R.id.answerButton1);
-        Button answer2 = (Button) findViewById(R.id.answerButton2);
-        Button answer3 = (Button) findViewById(R.id.answerButton3);
-        Button answer4 = (Button) findViewById(R.id.answerButton4);
+        Iterator answerIterator = quiz.getQuestions().get(curQuest).answerIterator(true);
 
         quizLabel.setText(quiz.getName());
         questNumLabel.setText("Question " + curQuest);
