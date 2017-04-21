@@ -1,10 +1,15 @@
 package com.example.murk.kwizgeeq;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -15,6 +20,7 @@ import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import java.util.Iterator;
+import java.util.Timer;
 
 public class Questioneer extends AppCompatActivity {
 
@@ -23,14 +29,18 @@ public class Questioneer extends AppCompatActivity {
     private TextView questLabel;
     private TextView progressNumbers;
     private ProgressBar progressBar;
-    private Button answer1;
-    private Button answer2;
-    private Button answer3;
-    private Button answer4;
+    private Button answerButton1;
+    private Button answerButton2;
+    private Button answerButton3;
+    private Button answerButton4;
 
     //Temporary variables
     private int curQuest;
     private int totQuest;
+    private Answer answer1;
+    private Answer answer2;
+    private Answer answer3;
+    private Answer answer4;
     private UserQuiz testQuiz;
 
 
@@ -45,10 +55,10 @@ public class Questioneer extends AppCompatActivity {
         questLabel = (TextView) findViewById(R.id.questLabel);
         progressNumbers = (TextView) findViewById(R.id.progressNumbers);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        answer1 = (Button) findViewById(R.id.answerButton1);
-        answer2 = (Button) findViewById(R.id.answerButton2);
-        answer3 = (Button) findViewById(R.id.answerButton3);
-        answer4 = (Button) findViewById(R.id.answerButton4);
+        answerButton1 = (Button) findViewById(R.id.answerButton1);
+        answerButton2 = (Button) findViewById(R.id.answerButton2);
+        answerButton3 = (Button) findViewById(R.id.answerButton3);
+        answerButton4 = (Button) findViewById(R.id.answerButton4);
 
         //Temporary variables
         testQuiz = new UserQuiz("Test Quiz",null);
@@ -82,12 +92,43 @@ public class Questioneer extends AppCompatActivity {
 
     public void answerSelected(View view){
         Button selectedButton = (Button)view;
+        flashAnswer(selectedButton, Color.GREEN); // TODO insert answer check and select green or red
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        new CountDownTimer(2250, 2250){
+            public void onTick(long l){
+
+            }
+            public void onFinish(){
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                endQuestion();
+            }
+        }.start();
+
+    }
+
+    private void endQuestion(){
         if(curQuest == totQuest) {
             finishQuiz();
         }
         else {
             updateQuestioneer();
         }
+    }
+
+    private void flashAnswer(Button button, int color) {
+        ColorDrawable f1 = new ColorDrawable(color);
+        ColorDrawable f2 = new ColorDrawable(Color.parseColor("#ffd6d7d7"));
+        AnimationDrawable a = new AnimationDrawable();
+        a.addFrame(f2, 250);
+        a.addFrame(f1, 250);
+        a.addFrame(f2, 250);
+        a.addFrame(f1, 250);
+        a.addFrame(f2, 250);
+        a.addFrame(f1, 1000);
+        a.addFrame(f2, 0);
+        a.setOneShot(true);
+        button.setBackground(a);
+        a.start();
     }
 
     private void updateQuestioneer(){
@@ -98,13 +139,20 @@ public class Questioneer extends AppCompatActivity {
         questLabel.setText(((UserQuestion)testQuiz.getQuestions().get(curQuest-1)).getQuestionStr());
         progressNumbers.setText(curQuest + " / " + totQuest);
         progressBar.setProgress(curQuest);
-        answer1.setText((String)((Answer)answerIterator.next()).getData());
-        answer2.setText((String)((Answer)answerIterator.next()).getData());
-        answer3.setText((String)((Answer)answerIterator.next()).getData());
-        answer4.setText((String)((Answer)answerIterator.next()).getData());
+        answer1 = (Answer)answerIterator.next();
+        answer2 = (Answer)answerIterator.next();
+        answer3 = (Answer)answerIterator.next();
+        answer4 = (Answer)answerIterator.next();
+        answerButton1.setText((String)answer1.getData());
+        answerButton2.setText((String)answer2.getData());
+        answerButton3.setText((String)answer3.getData());
+        answerButton4.setText((String)answer4.getData());
     }
 
     private void finishQuiz(){
-        //TODO
+        Intent intent = new Intent(this, QuizList.class);
+        startActivity(intent);
+
+        //TODO Add statistics and change to that view instead
     }
 }
