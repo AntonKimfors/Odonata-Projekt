@@ -22,19 +22,19 @@
         android:id="@+id/progressNumbers"
         android:layout_width="40dp"
         android:layout_height="17dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
         android:background="@android:color/transparent"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="10/17"
+        android:text="x/y"
         android:textSize="14sp"
         app:layout_constraintLeft_toRightOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@+id/progressBar"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="32dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="0dp" />
+        app:layout_constraintTop_toTopOf="@+id/progressBar" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -56,57 +56,61 @@
         android:id="@+id/answerButton1"
         android:layout_width="0dp"
         android:layout_height="61dp"
-        android:text="Answer"
-        app:layout_constraintRight_toLeftOf="@+id/guideline"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="32dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="32dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="32dp"
+        android:onClick="answerSelected"
+        android:text="Answer"
         app:layout_constraintBottom_toBottomOf="@+id/answerButton2"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline" />
 
     <Button
         android:id="@+id/answerButton2"
         android:layout_width="0dp"
         android:layout_height="61dp"
-        android:text="Answer"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/answerButton4"
-        android:layout_marginRight="32dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:onClick="answerSelected"
+        android:text="Answer"
+        app:layout_constraintBottom_toTopOf="@+id/answerButton4"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <Button
         android:id="@+id/answerButton3"
         android:layout_width="0dp"
         android:layout_height="61dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:onClick="answerSelected"
         android:text="Answer"
         app:layout_constraintBottom_toBottomOf="@+id/answerButton4"
-        app:layout_constraintRight_toRightOf="@+id/answerButton1"
-        android:layout_marginLeft="32dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        android:layout_marginStart="32dp" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/answerButton1" />
 
     <Button
         android:id="@+id/answerButton4"
         android:layout_width="0dp"
         android:layout_height="61dp"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:onClick="answerSelected"
         android:text="Answer"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintLeft_toLeftOf="@+id/answerButton2"
-        android:layout_marginRight="32dp"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        android:layout_marginEnd="32dp" />
+        app:layout_constraintLeft_toLeftOf="@+id/answerButton2"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/questNumLabel"
