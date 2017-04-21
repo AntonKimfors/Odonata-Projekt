@@ -18,18 +18,21 @@ import java.util.Iterator;
 
 public class Questioneer extends AppCompatActivity {
 
+    private TextView quizLabel;
+    private TextView questNumLabel;
+    private TextView questLabel;
+    private TextView progressNumbers;
+    private ProgressBar progressBar;
+    private Button answer1;
+    private Button answer2;
+    private Button answer3;
+    private Button answer4;
+
+    //Temporary variables
     private int curQuest;
     private int totQuest;
+    private UserQuiz testQuiz;
 
-    TextView quizLabel;
-    TextView questNumLabel;
-    TextView questLabel;
-    TextView progressNumbers;
-    ProgressBar progressBar;
-    Button answer1;
-    Button answer2;
-    Button answer3;
-    Button answer4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,8 @@ public class Questioneer extends AppCompatActivity {
         answer3 = (Button) findViewById(R.id.answerButton3);
         answer4 = (Button) findViewById(R.id.answerButton4);
 
-        UserQuiz testQuiz = new UserQuiz("Test Quiz",null);
+        //Temporary variables
+        testQuiz = new UserQuiz("Test Quiz",null);
         UserQuestion testQuestion1 = new UserQuestion("Question1?",null,null,null);
         UserQuestion testQuestion2 = new UserQuestion("Question2?",null,null,null);
         UserQuestion testQuestion3 = new UserQuestion("Question3?",null,null,null);
@@ -68,30 +72,39 @@ public class Questioneer extends AppCompatActivity {
         testQuestion3.addAnswer(testWrongAnswer);
         testQuestion3.addAnswer(testWrongAnswer);
         testQuestion3.addAnswer(testWrongAnswer);
-
         curQuest = 0;
         totQuest = testQuiz.getQuestions().size();
-        updateQuestioneer(testQuiz);
+        progressBar.setMax(totQuest);
+        quizLabel.setText(testQuiz.getName());
+
+        updateQuestioneer();
     }
 
     public void answerSelected(View view){
-        Button answerButton = (Button) findViewById(view.getId());
-        answerButton.setText("Pressed");
+        Button selectedButton = (Button)view;
+        if(curQuest == totQuest) {
+            finishQuiz();
+        }
+        else {
+            updateQuestioneer();
+        }
     }
 
-    public void updateQuestioneer(Quiz quiz){
+    private void updateQuestioneer(){
+        //Method will use activeQuiz from KwizGeeQ when it is finished instead of testQuiz
         curQuest++;
-        Iterator answerIterator = quiz.getQuestions().get(curQuest).answerIterator(true);
-
-        quizLabel.setText(quiz.getName());
+        Iterator answerIterator = testQuiz.getQuestions().get(curQuest-1).answerIterator(true);
         questNumLabel.setText("Question " + curQuest);
-        questLabel.setText(((UserQuestion)quiz.getQuestions().get(curQuest)).getQuestionStr());
+        questLabel.setText(((UserQuestion)testQuiz.getQuestions().get(curQuest-1)).getQuestionStr());
         progressNumbers.setText(curQuest + " / " + totQuest);
-        progressBar.setMax(totQuest);
         progressBar.setProgress(curQuest);
         answer1.setText((String)((Answer)answerIterator.next()).getData());
         answer2.setText((String)((Answer)answerIterator.next()).getData());
         answer3.setText((String)((Answer)answerIterator.next()).getData());
         answer4.setText((String)((Answer)answerIterator.next()).getData());
+    }
+
+    private void finishQuiz(){
+        //TODO
     }
 }
