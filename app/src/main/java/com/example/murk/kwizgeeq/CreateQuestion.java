@@ -66,7 +66,8 @@ public class CreateQuestion extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.activity_quiz_list);
+                Intent intent = new Intent(CreateQuestion.this,QuizList.class);
+                CreateQuestion.this.startActivity(intent);
             }
         });
 
