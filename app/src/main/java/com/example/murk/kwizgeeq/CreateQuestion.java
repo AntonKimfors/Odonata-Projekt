@@ -37,40 +37,48 @@ public class CreateQuestion extends AppCompatActivity {
 
         Button doneButton = (Button) findViewById(R.id.doneButton);
 
-        nextQuestionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EditText questionText = (EditText) findViewById(R.id.questionText);
-                String questionString = questionText.getText().toString();
-                Question<String> question = new UserQuestion(questionString,null,null,null);
+    }
 
-                EditText correctText = (EditText) findViewById(R.id.correctText);
-                addStringAnswer(question,correctText,true);
+    public void nextButtonAction(View view){
+        saveQuestion();
+        addMoreQuestions();
+    }
 
-                EditText wrongText1 = (EditText) findViewById(R.id.wrongText1);
-                addStringAnswer(question,wrongText1,false);
+    public void doneButtonAction(View view){
+        saveQuestion();
+        toCreateQuiz();
+    }
 
-                EditText wrongText2 = (EditText) findViewById(R.id.wrongText2);
-                addStringAnswer(question,wrongText2,false);
+    public void saveQuestion() {
+        EditText questionText = (EditText) findViewById(R.id.questionText);
+        String questionString = questionText.getText().toString();
+        Question<String> question = new UserQuestion(questionString,null,null,null);
 
-                EditText wrongText3 = (EditText) findViewById(R.id.WrongText3);
-                addStringAnswer(question,wrongText3,false);
+        EditText correctText = (EditText) findViewById(R.id.correctText);
+        addStringAnswer(question,correctText,true);
 
-                //TODO: add question to active quiz
+        EditText wrongText1 = (EditText) findViewById(R.id.wrongText1);
+        addStringAnswer(question,wrongText1,false);
 
-                Intent intent = new Intent(CreateQuestion.this,CreateQuestion.class);
-                CreateQuestion.this.startActivity(intent);
-            }
-        });
+        EditText wrongText2 = (EditText) findViewById(R.id.wrongText2);
+        addStringAnswer(question,wrongText2,false);
 
-        doneButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CreateQuestion.this,QuizList.class);
-                CreateQuestion.this.startActivity(intent);
-            }
-        });
+        EditText wrongText3 = (EditText) findViewById(R.id.WrongText3);
+        addStringAnswer(question,wrongText3,false);
 
+        //TODO: add question to active quiz
+
+
+    }
+
+    public void addMoreQuestions(){
+        Intent intent = new Intent(CreateQuestion.this,CreateQuestion.class);
+        CreateQuestion.this.startActivity(intent);
+    }
+
+    public void toCreateQuiz(){
+        Intent intent = new Intent(CreateQuestion.this,CreateQuiz.class);
+        CreateQuestion.this.startActivity(intent);
     }
 
 
