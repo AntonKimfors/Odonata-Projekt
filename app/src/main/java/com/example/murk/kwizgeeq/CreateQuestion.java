@@ -80,9 +80,7 @@ public class CreateQuestion extends AppCompatActivity {
         Intent intent = new Intent(CreateQuestion.this,CreateQuiz.class);
         CreateQuestion.this.startActivity(intent);
     }
-
-
-
+    
     private void addStringAnswer(Question<String> question, EditText text, boolean isCorrect){
         String textString = text.getText().toString();
         if(!textString.equals("")){
