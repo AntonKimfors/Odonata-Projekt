@@ -12,11 +12,29 @@ public class KwizGeeQ {
 
     public List<Quiz> quizzList;
     public Quiz activeQuiz;
+    private static KwizGeeQ singletonInstance;
 
 
-    public void addNewQuiz(Color color){};
+    public static KwizGeeQ getInstance(){
+        if (singletonInstance == null){
+            singletonInstance = new KwizGeeQ();
+        }
 
-    public void firePlayQuiz(Quiz quiz){};
+        return singletonInstance;
+    }
 
-    public void fireEditQuiz(Quiz quiz){};
+    public void addNewQuiz(String name, Color color){
+        quizzList.add(new UserQuiz(name, color));
+    };
+
+    public void firePlayQuiz(Quiz quiz){
+        activeQuiz = quiz;
+
+    };
+
+    public void fireEditQuiz(Quiz quiz){
+        activeQuiz = quiz;
+    };
+
+
 }
