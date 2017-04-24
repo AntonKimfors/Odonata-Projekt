@@ -28,4 +28,5 @@ public class UserQuiz extends Quiz {
         return clonedQuiz;
     }
 
+
 }

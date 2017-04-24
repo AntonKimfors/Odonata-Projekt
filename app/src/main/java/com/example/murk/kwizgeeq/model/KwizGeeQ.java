@@ -2,6 +2,7 @@ package com.example.murk.kwizgeeq.model;
 
 import android.graphics.Color;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,14 +11,15 @@ import java.util.List;
 
 public class KwizGeeQ {
 
-    public List<Quiz> quizzList;
-    public Quiz activeQuiz;
-    private static KwizGeeQ singletonInstance;
+    public static ArrayList<Quiz> quizzList;
+    public static Quiz activeQuiz;
+    public static KwizGeeQ singletonInstance;
 
 
     public static KwizGeeQ getInstance(){
         if (singletonInstance == null){
             singletonInstance = new KwizGeeQ();
+            quizzList = new ArrayList<Quiz>();
         }
 
         return singletonInstance;

@@ -48,6 +48,9 @@ public abstract class Quiz implements Iterable{
     public Iterator iterator() {
         return questions.iterator();
     }
-    
 
+    @Override
+    public String toString(){
+        return name;
+    }
 }
