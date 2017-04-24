@@ -39,10 +39,6 @@ public class Questioneer extends AppCompatActivity {
     //Temporary variables
     private int curQuest;
     private int totQuest;
-    private Answer answer1;
-    private Answer answer2;
-    private Answer answer3;
-    private Answer answer4;
     private UserQuiz testQuiz;
 
 
@@ -93,8 +89,11 @@ public class Questioneer extends AppCompatActivity {
     }
 
     public void answerSelected(View view){
-        Button selectedButton = (Button)view;
-        flashAnswer(selectedButton, Color.GREEN); // TODO insert answer check and select green or red
+        if(((Answer)(view.getTag())).isCorrect()){
+            flashAnswer(view, Color.GREEN);
+        } else{
+            flashAnswer(view, Color.RED);
+        }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         new CountDownTimer(2250, 2250){
             public void onTick(long l){
@@ -105,7 +104,6 @@ public class Questioneer extends AppCompatActivity {
                 endQuestion();
             }
         }.start();
-
     }
 
     private void endQuestion(){
@@ -117,7 +115,7 @@ public class Questioneer extends AppCompatActivity {
         }
     }
 
-    private void flashAnswer(Button button, int color) {
+    private void flashAnswer(View view, int color) {
         ColorDrawable f1 = new ColorDrawable(color);
         ColorDrawable f2 = new ColorDrawable(Color.parseColor("#ffd6d7d7"));
         AnimationDrawable a = new AnimationDrawable();
@@ -129,26 +127,26 @@ public class Questioneer extends AppCompatActivity {
         a.addFrame(f1, 1000);
         a.addFrame(f2, 0);
         a.setOneShot(true);
-        button.setBackground(a);
+        view.setBackground(a);
         a.start();
     }
 
     private void updateQuestioneer(){
-        //Method will use activeQuiz from KwizGeeQ when it is finished instead of testQuiz
+        // TODO Method will use activeQuiz from KwizGeeQ when it is finished instead of testQuiz
         curQuest++;
         Iterator answerIterator = testQuiz.getQuestions().get(curQuest-1).answerIterator(true);
         questNumLabel.setText("Question " + curQuest);
         questLabel.setText(((UserQuestion)testQuiz.getQuestions().get(curQuest-1)).getQuestionStr());
         progressNumbers.setText(curQuest + " / " + totQuest);
         progressBar.setProgress(curQuest);
-        answer1 = (Answer)answerIterator.next();
-        answer2 = (Answer)answerIterator.next();
-        answer3 = (Answer)answerIterator.next();
-        answer4 = (Answer)answerIterator.next();
-        answerButton1.setText((String)answer1.getData());
-        answerButton2.setText((String)answer2.getData());
-        answerButton3.setText((String)answer3.getData());
-        answerButton4.setText((String)answer4.getData());
+        answerButton1.setTag(answerIterator.next());
+        answerButton2.setTag(answerIterator.next());
+        answerButton3.setTag(answerIterator.next());
+        answerButton4.setTag(answerIterator.next());
+        answerButton1.setText((String)((Answer)answerButton1.getTag()).getData());
+        answerButton2.setText((String)((Answer)answerButton2.getTag()).getData());
+        answerButton3.setText((String)((Answer)answerButton3.getTag()).getData());
+        answerButton4.setText((String)((Answer)answerButton4.getTag()).getData());
     }
 
     private void finishQuiz(){
