@@ -13,6 +13,8 @@ import com.example.murk.kwizgeeq.model.*;
 
 public class CreateQuestion extends AppCompatActivity {
 
+    final UserQuiz activeQuiz;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,8 @@ public class CreateQuestion extends AppCompatActivity {
         });
 
         //TODO: get active quiz from KwizGeeQ
-        final UserQuiz activeQuiz;
+
+        
 
         Button nextQuestionButton = (Button) findViewById(R.id.nextQuestionButton);
 
@@ -40,19 +43,19 @@ public class CreateQuestion extends AppCompatActivity {
     }
 
     public void nextButtonAction(View view){
-        saveQuestion();
+        activeQuiz.
         addMoreQuestions();
     }
 
     public void doneButtonAction(View view){
-        saveQuestion();
+        UserQuestion question = getQuestion();
         toCreateQuiz();
     }
 
-    public void saveQuestion() {
+    private UserQuestion getQuestion() {
         EditText questionText = (EditText) findViewById(R.id.questionText);
         String questionString = questionText.getText().toString();
-        Question<String> question = new UserQuestion(questionString,null,null,null);
+        UserQuestion question = new UserQuestion(questionString,null,null,null);
 
         EditText correctText = (EditText) findViewById(R.id.correctText);
         addStringAnswer(question,correctText,true);
@@ -66,26 +69,24 @@ public class CreateQuestion extends AppCompatActivity {
         EditText wrongText3 = (EditText) findViewById(R.id.WrongText3);
         addStringAnswer(question,wrongText3,false);
 
-        //TODO: add question to active quiz
-
-
+        return question;
     }
 
-    public void addMoreQuestions(){
-        Intent intent = new Intent(CreateQuestion.this,CreateQuestion.class);
-        CreateQuestion.this.startActivity(intent);
-    }
-
-    public void toCreateQuiz(){
-        Intent intent = new Intent(CreateQuestion.this,CreateQuiz.class);
-        CreateQuestion.this.startActivity(intent);
-    }
-    
     private void addStringAnswer(Question<String> question, EditText text, boolean isCorrect){
         String textString = text.getText().toString();
         if(!textString.equals("")){
-            Answer<String> answer = new Answer<String>(isCorrect,textString);
+            Answer<String> answer = new Answer(isCorrect,textString);
             question.addAnswer(answer);
         }
+    }
+
+    private void addMoreQuestions(){
+        Intent intent = new Intent(CreateQuestion.this,CreateQuestion.class);
+        startActivity(intent);
+    }
+
+    private void toCreateQuiz(){
+        Intent intent = new Intent(CreateQuestion.this,CreateQuiz.class);
+        startActivity(intent);
     }
 }
