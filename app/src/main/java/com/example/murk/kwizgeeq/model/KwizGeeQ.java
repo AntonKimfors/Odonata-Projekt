@@ -13,11 +13,13 @@ public class KwizGeeQ {
 
     public static ArrayList<Quiz> quizzList;
     public static Quiz activeQuiz;
+    public static int activeQuestionIndex;
     public static KwizGeeQ singletonInstance;
 
 
     public static KwizGeeQ getInstance(){
         if (singletonInstance == null){
+            activeQuestionIndex = 1;
             singletonInstance = new KwizGeeQ();
             quizzList = new ArrayList<Quiz>();
         }

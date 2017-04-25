@@ -1,19 +1,20 @@
 package com.example.murk.kwizgeeq;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.murk.kwizgeeq.model.*;
 
 public class CreateQuestion extends AppCompatActivity {
 
-    final UserQuiz activeQuiz;
+    private KwizGeeQ kwizGeeQ;
+    private UserQuiz activeQuiz;
+    private int activeQuestionIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,37 +23,30 @@ public class CreateQuestion extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setContentView(R.layout.activity_create_question);
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
-            }
-        });
-
-        //TODO: get active quiz from KwizGeeQ
-
-        
-
-        Button nextQuestionButton = (Button) findViewById(R.id.nextQuestionButton);
-
-        Button doneButton = (Button) findViewById(R.id.doneButton);
-
+        kwizGeeQ = KwizGeeQ.getInstance();
+        activeQuiz = (UserQuiz)kwizGeeQ.activeQuiz;
+        activeQuestionIndex = kwizGeeQ.activeQuestionIndex;
     }
 
     public void nextButtonAction(View view){
-        activeQuiz.
+        Question question = getQuestionFromInput();
+
+        if(activeQuestionIndex > activeQuiz.getQuestions().size()){
+            activeQuiz.addQuestion(question);
+            kwizGeeQ.activeQuestionIndex++;
+        }
+
+        activeQuiz.addQuestion(question);
+
         addMoreQuestions();
     }
 
     public void doneButtonAction(View view){
-        UserQuestion question = getQuestion();
+        activeQuiz.addQuestion(getQuestionFromInput());
         toCreateQuiz();
     }
 
-    private UserQuestion getQuestion() {
+    private UserQuestion getQuestionFromInput() {
         EditText questionText = (EditText) findViewById(R.id.questionText);
         String questionString = questionText.getText().toString();
         UserQuestion question = new UserQuestion(questionString,null,null,null);
