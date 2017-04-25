@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.UserQuestion;
-import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import java.util.Iterator;
 

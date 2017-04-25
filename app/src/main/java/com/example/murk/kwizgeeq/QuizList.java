@@ -91,7 +91,7 @@ public class QuizList extends ListActivity {
     }
 
     public void fabPressed(View view){
-        Intent intent = new Intent(this, Questioneer.class);
+        Intent intent = new Intent(this, CreateQuiz.class);
         startActivity(intent);
     }
 
