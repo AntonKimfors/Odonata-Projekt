@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
+import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 
 import java.util.Iterator;
@@ -102,11 +103,11 @@ public class Questioneer extends AppCompatActivity {
         a.start();
     }
 
-    private void updateQuestioneer(){
+    private void updateQuestioneer(Quiz quiz){
         curQuest++;
-        Iterator answerIterator = KwizGeeQ.activeQuiz.getQuestions().get(curQuest-1).answerIterator(true);
+        Iterator answerIterator = quiz.getQuestions().get(curQuest-1).answerIterator(true);
         questNumLabel.setText("Question " + curQuest);
-        questLabel.setText(((UserQuestion)KwizGeeQ.activeQuiz.getQuestions().get(curQuest-1)).getQuestionStr());
+        questLabel.setText(((UserQuestion)quiz.getQuestions().get(curQuest-1)).getQuestionStr());
         progressNumbers.setText(curQuest + " / " + totQuest);
         progressBar.setProgress(curQuest);
         answerButton1.setTag(answerIterator.next());

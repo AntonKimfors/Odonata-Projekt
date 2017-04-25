@@ -36,16 +36,6 @@ public class QuizList extends ListActivity {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setContentView(R.layout.activity_questioneer);
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
-            }
-        });
-
         KwizGeeQ.getInstance().quizzList.add(new UserQuiz("Spsh", new Color())); //Just adding a quiz to test out the methods.
 
         //Get listView from the layout. Same as by using findById()
@@ -53,7 +43,6 @@ public class QuizList extends ListActivity {
 
         listAdapter = new ArrayAdapter<Quiz>(this, android.R.layout.simple_list_item_1, KwizGeeQ.getInstance().quizzList);
         listView.setAdapter(listAdapter);
-
 
         //Play quiz
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
