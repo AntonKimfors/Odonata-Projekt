@@ -3,6 +3,7 @@ package com.example.murk.kwizgeeq;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
@@ -65,13 +66,7 @@ public class QuizList extends ListActivity {
                 startActivity(intent);
             }
         });
-
     } //end of "OnCreate" method.
-
-
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,6 +88,11 @@ public class QuizList extends ListActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void fabPressed(View view){
+        Intent intent = new Intent(this, Questioneer.class);
+        startActivity(intent);
     }
 
 
