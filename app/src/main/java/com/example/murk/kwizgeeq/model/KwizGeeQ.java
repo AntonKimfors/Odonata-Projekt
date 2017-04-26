@@ -14,7 +14,7 @@ public class KwizGeeQ {
     public ArrayList<Quiz> quizzList;
     public Quiz activeQuiz;
     public int activeQuestionIndex;
-    public static KwizGeeQ singletonInstance = null;
+    private static KwizGeeQ singletonInstance = null;
 
 
     public static KwizGeeQ getInstance(){
@@ -25,7 +25,7 @@ public class KwizGeeQ {
         return singletonInstance;
     }
 
-    public KwizGeeQ(){
+    private KwizGeeQ(){
         quizzList = new ArrayList<Quiz>();
         activeQuestionIndex = 1;
     }

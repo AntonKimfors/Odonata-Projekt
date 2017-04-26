@@ -51,7 +51,7 @@ public class QuizList extends ListActivity {
 
                 KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizzList.get(position); //Make the clicked quiz active quiz.
 
-                Intent intent = new Intent(QuizList.this, Questioneer.class);
+                Intent intent = new Intent( QuizList.this, Questioneer.class);
                 startActivity(intent);
             }
         });
