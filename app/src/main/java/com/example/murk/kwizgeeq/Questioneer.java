@@ -54,12 +54,12 @@ public class Questioneer extends AppCompatActivity {
         answerButton3 = (Button) findViewById(R.id.answerButton3);
         answerButton4 = (Button) findViewById(R.id.answerButton4);
 
-        totQuest = KwizGeeQ.activeQuiz.getQuestions().size();
+        totQuest = KwizGeeQ.getInstance().activeQuiz.getQuestions().size();
         curQuest = 0;
 
         progressBar.setMax(totQuest);
-        quizLabel.setText(KwizGeeQ.activeQuiz.getName());
-        updateQuestioneer(KwizGeeQ.activeQuiz);
+        quizLabel.setText(KwizGeeQ.getInstance().activeQuiz.getName());
+        updateQuestioneer(KwizGeeQ.getInstance().activeQuiz);
     }
 
     public void answerSelected(View view){
@@ -85,7 +85,7 @@ public class Questioneer extends AppCompatActivity {
             finishQuiz();
         }
         else {
-            updateQuestioneer(KwizGeeQ.activeQuiz);
+            updateQuestioneer(KwizGeeQ.getInstance().activeQuiz);
         }
     }
 
@@ -132,7 +132,7 @@ public class Questioneer extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Closing Quiz")
-                .setMessage("Are you sure you want to quit " + KwizGeeQ.activeQuiz.getName() + "?")
+                .setMessage("Are you sure you want to quit " + KwizGeeQ.getInstance().activeQuiz.getName() + "?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

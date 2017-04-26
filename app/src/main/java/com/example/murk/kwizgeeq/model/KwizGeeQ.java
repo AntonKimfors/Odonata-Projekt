@@ -11,20 +11,23 @@ import java.util.List;
 
 public class KwizGeeQ {
 
-    public static ArrayList<Quiz> quizzList;
-    public static Quiz activeQuiz;
-    public static int activeQuestionIndex;
-    public static KwizGeeQ singletonInstance;
+    public ArrayList<Quiz> quizzList;
+    public Quiz activeQuiz;
+    public int activeQuestionIndex;
+    public static KwizGeeQ singletonInstance = null;
 
 
     public static KwizGeeQ getInstance(){
         if (singletonInstance == null){
-            activeQuestionIndex = 1;
             singletonInstance = new KwizGeeQ();
-            quizzList = new ArrayList<Quiz>();
         }
 
         return singletonInstance;
+    }
+
+    public KwizGeeQ(){
+        quizzList = new ArrayList<Quiz>();
+        activeQuestionIndex = 1;
     }
 
     public void addNewQuiz(String name, Color color){
