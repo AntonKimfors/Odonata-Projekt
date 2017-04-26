@@ -12,6 +12,10 @@ public class UserQuiz extends Quiz {
 		super(name, listColor);
 	}
 
+	public void setQuestion(int index, Question question){
+        getQuestions().set(index,question);
+    }
+
     public void addQuestion(Question question) {
     	getQuestions().add(question);
     }

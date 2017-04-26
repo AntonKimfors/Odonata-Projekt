@@ -2,6 +2,7 @@ package com.example.murk.kwizgeeq;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -24,26 +25,46 @@ public class CreateQuestion extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         kwizGeeQ = KwizGeeQ.getInstance();
+
         activeQuiz = (UserQuiz)kwizGeeQ.activeQuiz;
         activeQuestionIndex = kwizGeeQ.activeQuestionIndex;
     }
 
-    public void nextButtonAction(View view){
-        Question question = getQuestionFromInput();
-
-        if(activeQuestionIndex > activeQuiz.getQuestions().size()){
-            activeQuiz.addQuestion(question);
-            kwizGeeQ.activeQuestionIndex++;
+    @Override
+    public void onBackPressed(){
+        if(activeQuestionIndex>1){
+            kwizGeeQ.activeQuestionIndex--;
         }
+    }
 
-        activeQuiz.addQuestion(question);
+    public void nextButtonAction(View view){
+        saveQuestion();
+
+        kwizGeeQ.activeQuestionIndex++;
 
         addMoreQuestions();
     }
 
     public void doneButtonAction(View view){
-        activeQuiz.addQuestion(getQuestionFromInput());
-        toCreateQuiz();
+        saveQuestion();
+
+        endEditOfQuiz();
+    }
+
+    public void saveQuestion(){
+        Question question = getQuestionFromInput();
+
+        if(activeQuestionIndex >= activeQuiz.getQuestions().size()){
+            activeQuiz.addQuestion(question);
+
+
+        } else {
+            if(!activeQuiz.getQuestions().contains(question)){
+                activeQuiz.setQuestion(activeQuestionIndex,question);
+            }
+        }
+
+        activeQuiz.addQuestion(question);
     }
 
     private UserQuestion getQuestionFromInput() {
@@ -79,7 +100,7 @@ public class CreateQuestion extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void toCreateQuiz(){
+    private void endEditOfQuiz(){
         Intent intent = new Intent(CreateQuestion.this,CreateQuiz.class);
         startActivity(intent);
     }
