@@ -92,4 +92,8 @@ public class UserQuestion extends Question {
         }
         return false;
     }
+    @Override
+    public String toString(){
+        return questionStr;
+    }
 }

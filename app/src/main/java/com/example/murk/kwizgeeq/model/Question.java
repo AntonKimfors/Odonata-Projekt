@@ -1,12 +1,13 @@
 package com.example.murk.kwizgeeq.model;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Created by Henrik on 04/04/2017.
  */
 
-public abstract class Question<T> {
+public abstract class Question<T> implements Serializable {
 
     private final List<Answer<T>> answers;
 
