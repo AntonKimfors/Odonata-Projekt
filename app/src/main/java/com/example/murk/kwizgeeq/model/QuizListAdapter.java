@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.murk.kwizgeeq.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by akimfors on 2017-04-26.
  */
@@ -17,21 +19,21 @@ public class QuizListAdapter extends BaseAdapter {
 
 
     private Context mContext;
-    private Quiz[] mQuiz;
+    private ArrayList<Quiz> mQuiz;
 
-    public QuizListAdapter(Context context, Quiz[] quizs){
+    public QuizListAdapter(Context context, ArrayList<Quiz> quizs){
         mContext = context;
         mQuiz = quizs;
     }
 
     @Override
     public int getCount() {
-        return mQuiz.length;
+        return mQuiz.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mQuiz[position];
+        return mQuiz.get(position);
     }
 
     @Override
@@ -49,14 +51,21 @@ public class QuizListAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.content_item_quiz_list, null);
             holder = new ViewHolder();
             holder.quizNameLabel = (TextView) convertView.findViewById(R.id.quizNameLabel);
-            holder.quizNameLabel = (TextView) convertView.findViewById(R.id.quizQuestionAmountLabel);
+            holder.quizQuestionAmountLabel = (TextView) convertView.findViewById(R.id.quizQuestionAmountLabel);
 
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
 
         }
-        return null;
+
+        Quiz quiz = mQuiz.get(position);
+        holder.quizNameLabel.setText(quiz.getName());
+        holder.quizQuestionAmountLabel.setText(quiz.getQuestions().size() + " Questions");
+
+
+
+        return convertView;
     }
 
     private static class ViewHolder {

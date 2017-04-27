@@ -19,6 +19,7 @@ import android.widget.ListView;
 
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Quiz;
+import com.example.murk.kwizgeeq.model.QuizListAdapter;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import java.util.ArrayList;
@@ -41,8 +42,13 @@ public class QuizList extends ListActivity {
         //Get listView from the layout. Same as by using findById()
         listView = getListView();
 
-        listAdapter = new ArrayAdapter<Quiz>(this, android.R.layout.simple_list_item_1, KwizGeeQ.getInstance().quizzList);
-        listView.setAdapter(listAdapter);
+        //listAdapter = new ArrayAdapter<Quiz>(this, android.R.layout.simple_list_item_1, KwizGeeQ.getInstance().quizzList);
+        //listView.setAdapter(listAdapter);
+
+        QuizListAdapter adapter = new QuizListAdapter(this, KwizGeeQ.getInstance().quizzList);
+        listView.setAdapter(adapter);
+
+
 
         //Play quiz
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
