@@ -27,25 +27,23 @@ import java.util.ArrayList;
 public class QuizList extends ListActivity {
 
     ListView listView;
-    ArrayAdapter<Quiz> listAdapter;
+    QuizListAdapter adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_list);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+
 
         KwizGeeQ.getInstance().quizzList.add(new UserQuiz("Spsh", new Color())); //Just adding a quiz to test out the methods.
 
         //Get listView from the layout. Same as by using findById()
         listView = getListView();
 
-        //listAdapter = new ArrayAdapter<Quiz>(this, android.R.layout.simple_list_item_1, KwizGeeQ.getInstance().quizzList);
-        //listView.setAdapter(listAdapter);
 
-        QuizListAdapter adapter = new QuizListAdapter(this, KwizGeeQ.getInstance().quizzList);
+        //Set adapter to customized adapter
+        adapter = new QuizListAdapter(this, KwizGeeQ.getInstance().quizzList);
         listView.setAdapter(adapter);
 
 
@@ -57,7 +55,7 @@ public class QuizList extends ListActivity {
 
                 KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizzList.get(position); //Make the clicked quiz active quiz.
 
-                Intent intent = new Intent( QuizList.this, Questioneer.class);
+                Intent intent = new Intent(QuizList.this, Questioneer.class);
                 startActivity(intent);
             }
         });
