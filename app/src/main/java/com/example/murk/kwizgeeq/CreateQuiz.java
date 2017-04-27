@@ -32,6 +32,8 @@ public class CreateQuiz extends ListActivity {
         //Flyttade bara upp dessa för att få det att funka. Test koden gör ju
         // så att test Question alltid finns där med när man skapar ett nytt quiz
         //vilket verkar funka nu
+        //
+        //Se QuizListAdapter för att få listan att se ut på annat sett
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_quiz);
 
