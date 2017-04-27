@@ -28,6 +28,13 @@ public class CreateQuiz extends ListActivity {
     ArrayAdapter<Question> listAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Flyttade bara upp dessa för att få det att funka. Test koden gör ju
+        // så att test Question alltid finns där med när man skapar ett nytt quiz
+        //vilket verkar funka nu
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_create_quiz);
+
         //teststuff
         Answer testAnswer1 = new Answer(true,"fest");
         Answer testAnswer2 = new Answer(false,"fel");
@@ -65,11 +72,7 @@ public class CreateQuiz extends ListActivity {
 
 
 
-        //end teststuff
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_quiz);
-
+        //end teststuff - and en onCreate
     }
     public void fabPressed(View view){
         Intent intent = new Intent(this, CreateQuestion.class);
