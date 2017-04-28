@@ -46,5 +46,42 @@ public class CreateQuizAdapter extends BaseAdapter {
     }
 
 
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+
+        if(convertView == null){
+            //new convertView
+
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.content_item_quiz_list, null);
+            holder = new ViewHolder();
+
+            holder.questionLabel = (TextView) convertView.findViewById(R.id.questionLabel);
+            holder.relativeLayout = (RelativeLayout) convertView.findViewById(R.id.relative_layout);
+
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder) convertView.getTag();
+
+        }
+
+        UserQuestion question = (UserQuestion) mQuestions.get(position);
+        holder.questionLabel.setText(question.getQuestionStr());
+        //int RGB = android.graphics.Color.rgb(quiz.getListColor().RED,quiz.getListColor().GREEN,quiz.getListColor().BLUE);
+        //holder.relativeLayout.setBackgroundColor(RGB);
+
+        holder.relativeLayout.setBackgroundColor(443344400); //Just for testing
+
+
+
+
+        return convertView;
+    }
+
+
+    private static class ViewHolder {
+        TextView questionLabel;
+        RelativeLayout relativeLayout;
+    }
 
 }
