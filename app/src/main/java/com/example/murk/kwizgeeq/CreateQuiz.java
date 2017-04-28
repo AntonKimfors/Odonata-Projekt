@@ -65,7 +65,7 @@ public class CreateQuiz extends ListActivity {
             public void onItemClick(AdapterView<?> parent, View view, int index, long id) {
 
                 Intent intent = new Intent(CreateQuiz.this, CreateQuestion.class);
-                intent.putExtra("selectedQuestion", KwizGeeQ.getInstance().activeQuiz.getQuestions().get(index));
+                //intent.putExtra("selectedQuestion", KwizGeeQ.getInstance().activeQuiz.getQuestions().get(index));
                 startActivity(intent);
             }
         });
@@ -81,11 +81,6 @@ public class CreateQuiz extends ListActivity {
 
         startActivity(intent);
 
-        Bundle applesData = getIntent().getExtras();
-        if(applesData==null){
-            return;
-        }
-        String dataRecieved = applesData.getString("stufftosend");
 
 
     }
