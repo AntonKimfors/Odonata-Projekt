@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public abstract class Quiz implements Iterable{
-    private List<Question> questions;
+    private ArrayList<Question> questions;
     private Color listColor;
     private String name;
 
@@ -39,7 +39,7 @@ public abstract class Quiz implements Iterable{
         this.listColor = listColor;
     }
 
-    public List<Question> getQuestions() {
+    public ArrayList<Question> getQuestions() {
         return questions;
     }
 
