@@ -53,7 +53,7 @@ public class CreateQuizAdapter extends BaseAdapter {
         if(convertView == null){
             //new convertView
 
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.content_item_quiz_list, null);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.content_item_create_question, null);
             holder = new ViewHolder();
 
             holder.questionLabel = (TextView) convertView.findViewById(R.id.questionLabel);
