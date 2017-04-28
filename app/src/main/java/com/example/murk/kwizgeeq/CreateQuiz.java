@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 
 import com.example.murk.kwizgeeq.model.Answer;
+import com.example.murk.kwizgeeq.model.CreateQuizAdapter;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.Quiz;
@@ -23,9 +24,9 @@ import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
 public class CreateQuiz extends ListActivity {
-    public EditText QuizLabel;
+    private EditText QuizLabel;
     ListView listView;
-    ArrayAdapter<Question> listAdapter;
+    CreateQuizAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -49,15 +50,19 @@ public class CreateQuiz extends ListActivity {
         testQuest.addAnswer(testAnswer4);
         Color testColor = new Color();
         UserQuiz testquiz = new UserQuiz("testname", testColor);
-        //KwizGeeQ.getInstance().quizzList.add(testquiz);
-        QuizLabel = (EditText) findViewById(R.id.QuizLabel);
         testquiz.addQuestion(testQuest);
-        listView = getListView();   //tha fuq?!
+        //KwizGeeQ.getInstance().quizzList.add(testquiz);
+        //end teststuff
+
+        QuizLabel = (EditText) findViewById(R.id.QuizLabel);
+
+
+        listView = getListView();
 
         KwizGeeQ.getInstance().activeQuiz = testquiz;
         System.out.println(KwizGeeQ.getInstance().activeQuiz.getName());
-        listAdapter = new ArrayAdapter<Question>(this, android.R.layout.simple_list_item_1, KwizGeeQ.getInstance().activeQuiz.getQuestions());
-        listView.setAdapter(listAdapter);
+        adapter = new CreateQuizAdapter(this, KwizGeeQ.getInstance().activeQuiz.getQuestions());
+        listView.setAdapter(adapter);
 
         //Play quiz
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -74,7 +79,7 @@ public class CreateQuiz extends ListActivity {
 
 
 
-        //end teststuff - and en onCreate
+        // end onCreate
     }
     public void fabPressed(View view){
         Intent intent = new Intent(this, CreateQuestion.class);
