@@ -51,6 +51,7 @@ public class CreateQuiz extends ListActivity {
         Color testColor = new Color();
         UserQuiz testquiz = new UserQuiz("testname", testColor);
         testquiz.addQuestion(testQuest);
+        KwizGeeQ.getInstance().activeQuiz = testquiz;
         //KwizGeeQ.getInstance().quizzList.add(testquiz);
         //end teststuff
 
@@ -59,18 +60,18 @@ public class CreateQuiz extends ListActivity {
 
         listView = getListView();
 
-        KwizGeeQ.getInstance().activeQuiz = testquiz;
-        System.out.println(KwizGeeQ.getInstance().activeQuiz.getName());
         adapter = new CreateQuizAdapter(this, KwizGeeQ.getInstance().activeQuiz.getQuestions());
         listView.setAdapter(adapter);
 
-        //Play quiz
+        //Edit Question
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long id) {
 
+                KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizzList.get(index); //Make the clicked quiz active quiz.
+
                 Intent intent = new Intent(CreateQuiz.this, CreateQuestion.class);
-                //intent.putExtra("selectedQuestion", KwizGeeQ.getInstance().activeQuiz.getQuestions().get(index));
+                intent.putExtra("selectedQuestion",KwizGeeQ.getInstance().activeQuiz.getQuestions().get(index));
                 startActivity(intent);
             }
         });
