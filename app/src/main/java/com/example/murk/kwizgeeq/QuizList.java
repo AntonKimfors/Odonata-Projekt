@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.content.Intent;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
@@ -17,9 +18,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.model.QuizListAdapter;
+import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import java.util.ArrayList;
@@ -35,8 +38,20 @@ public class QuizList extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_list);
 
+        /* test quiz*/
+        UserQuiz quiz1 = new UserQuiz("Spsh", new Color());
+        KwizGeeQ.getInstance().quizzList.add(quiz1);
+        UserQuestion question1 = new UserQuestion("quantos anos tienes?", null, new PointF(1,1), null);
+        question1.addAnswer(new Answer(true, "4"));
+        question1.addAnswer(new Answer(false, "42"));
+        question1.addAnswer(new Answer(false, "24"));
+        question1.addAnswer(new Answer(false, "2"));
+        quiz1.addQuestion(question1);
 
-        KwizGeeQ.getInstance().quizzList.add(new UserQuiz("Spsh", new Color())); //Just adding a quiz to test out the methods.
+        /*end - test quiz*/
+
+
+
 
         //Get listView from the layout. Same as by using findById()
         listView = getListView();
