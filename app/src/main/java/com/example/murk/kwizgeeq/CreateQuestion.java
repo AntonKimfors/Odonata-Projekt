@@ -26,8 +26,22 @@ public class CreateQuestion extends AppCompatActivity {
 
         kwizGeeQ = KwizGeeQ.getInstance();
 
+        Question q = (Question)getIntent().getSerializableExtra("selectedQuestion");
+
         activeQuiz = (UserQuiz)kwizGeeQ.activeQuiz;
         activeQuestionIndex = kwizGeeQ.activeQuestionIndex;
+
+        final EditText correct = (EditText) findViewById(R.id.correctText);
+        correct.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    correct.setBackgroundColor(Color.rgb(0,250,0));
+                } else{
+                    correct.setBackgroundColor(Color.rgb(250,250,250));
+                }
+            }
+        });
     }
 
     @Override
