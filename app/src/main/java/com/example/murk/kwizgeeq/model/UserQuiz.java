@@ -24,8 +24,8 @@ public class UserQuiz extends Quiz implements Serializable{
 
     public void removeQuestion(Question question){
         getQuestions().remove(question);
-        
     }
+
     public UserQuiz copyUserQuiz(){
         UserQuiz clonedQuiz = new UserQuiz(this.getName(),this.getListColor());
         for(Question question :getQuestions()){

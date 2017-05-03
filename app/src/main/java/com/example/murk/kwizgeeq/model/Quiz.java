@@ -16,7 +16,6 @@ public abstract class Quiz implements Iterable{
     private String name;
 
 
-
     public Quiz(String name,Color listColor) {
         questions = new ArrayList<>();
         this.name = name;
@@ -51,6 +50,12 @@ public abstract class Quiz implements Iterable{
 
     @Override
     public String toString(){
-        return name;
+        StringBuilder sb = new StringBuilder();
+
+        for(Question q:questions){
+            sb.append(q.toString());
+        }
+
+        return sb.toString();
     }
 }

@@ -1,5 +1,7 @@
 package com.example.murk.kwizgeeq;
 
+import android.graphics.Color;
+
 import com.example.murk.kwizgeeq.model.*;
 
 /**

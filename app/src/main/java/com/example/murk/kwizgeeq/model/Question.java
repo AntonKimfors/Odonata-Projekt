@@ -93,6 +93,18 @@ public abstract class Question<T> implements Serializable {
         return answers.hashCode();
     }
 
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        int i=1;
+        for(Answer a: answers){
+            sb.append("Answer ").append(i).append(": ").append(a.toString()).append(System.lineSeparator());
+            i++;
+        }
+
+        return sb.toString();
+    }
+
 
 
 }

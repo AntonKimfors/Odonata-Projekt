@@ -42,4 +42,10 @@ public class Answer<T>  {
     public int hashCode() {
         return data.hashCode();
     }
+
+    @Override
+    public String toString(){
+        Boolean pointerBoolean = (Boolean)isCorrect;
+        return data.toString() + " - " + pointerBoolean.toString();
+    }
 }

@@ -2,6 +2,7 @@ package com.example.murk.kwizgeeq.model;
 
 import android.graphics.PointF;
 import android.media.Image;
+import android.util.StringBuilderPrinter;
 
 /**
  * Created by Henrik on 04/04/2017.
@@ -92,8 +93,12 @@ public class UserQuestion extends Question {
         }
         return false;
     }
+
     @Override
     public String toString(){
-        return questionStr;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Question: ").append(questionStr)
+                .append(System.lineSeparator()).append(super.toString());
+        return sb.toString();
     }
 }
