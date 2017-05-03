@@ -10,7 +10,9 @@ import com.example.murk.kwizgeeq.model.Quiz;
 
 public interface QuestioneerView {
 
-    void flashAnswer(View view, int color);
-    void updateQuestioneer(Quiz quiz);
+    void flashCorrectAnswer(View view);
+    void flashIncorrectAnswer(View view);
+    void updateQuestioneer(Quiz quiz, int currentQuestion, int totalQuestions);
+    void finishQuiz();
 
 }

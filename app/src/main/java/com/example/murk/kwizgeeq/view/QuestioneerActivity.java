@@ -1,7 +1,6 @@
 package com.example.murk.kwizgeeq.view;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -15,12 +14,11 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.murk.kwizgeeq.QuizList;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.Answer;
-import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.model.UserQuestion;
+import com.example.murk.kwizgeeq.presenter.QuestioneerPresenter;
 
 import java.util.Iterator;
 
@@ -36,14 +34,11 @@ public class QuestioneerActivity extends AppCompatActivity implements Questionee
     private Button answerButton3;
     private Button answerButton4;
 
-    private int curQuest;
-    private int totQuest;
+    private QuestioneerPresenter presenter; //TODO perhaps switch to observable instead?
 
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.AppTheme_NoActionBar); // (for Custom theme)
+        setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_questioneer);
 
         quizLabel = (TextView) findViewById(R.id.quizLabel);
@@ -56,42 +51,28 @@ public class QuestioneerActivity extends AppCompatActivity implements Questionee
         answerButton3 = (Button) findViewById(R.id.answerButton3);
         answerButton4 = (Button) findViewById(R.id.answerButton4);
 
-        totQuest = KwizGeeQ.getInstance().activeQuiz.getQuestions().size();
-        curQuest = 0;
+        presenter = new QuestioneerPresenter(this);
+        presenter.onCreate();
+    }
 
-        progressBar.setMax(totQuest);
-        quizLabel.setText(KwizGeeQ.getInstance().activeQuiz.getName());
-        updateQuestioneer(KwizGeeQ.getInstance().activeQuiz);
+    protected void onDestroy(){
+        super.onDestroy();
+        presenter.onDestroy();
     }
 
     public void answerSelected(View view){
-        if(((Answer)(view.getTag())).isCorrect()){
-            flashAnswer(view, Color.GREEN);
-        } else{
-            flashAnswer(view, Color.RED);
-        }
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-        new CountDownTimer(2250, 2250){
-            public void onTick(long l){
-
-            }
-            public void onFinish(){
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                endQuestion();
-            }
-        }.start();
+        presenter.answerSelected(view);
     }
 
-    private void endQuestion(){
-        if(curQuest == totQuest) {
-            finishQuiz();
-        }
-        else {
-            updateQuestioneer(KwizGeeQ.getInstance().activeQuiz);
-        }
+    public void flashCorrectAnswer(View view) {
+        flashAnswer(view, Color.GREEN);
     }
 
-    public void flashAnswer(View view, int color) {
+    public void flashIncorrectAnswer(View view) {
+        flashAnswer(view, Color.RED);
+    }
+
+    private void flashAnswer(View view, int color) {
         ColorDrawable f1 = new ColorDrawable(color);
         ColorDrawable f2 = new ColorDrawable(Color.parseColor("#ffd6d7d7"));
         AnimationDrawable a = new AnimationDrawable();
@@ -103,15 +84,34 @@ public class QuestioneerActivity extends AppCompatActivity implements Questionee
         a.setOneShot(true);
         view.setBackground(a);
         a.start();
+        setUntouchable(true);
+        new CountDownTimer(2250, 2250){
+            public void onTick(long l){
+
+            }
+            public void onFinish(){
+                setUntouchable(false);
+                presenter.finishQuestion();
+            }
+        }.start();
     }
 
-    public void updateQuestioneer(Quiz quiz){
-        curQuest++;
-        Iterator answerIterator = quiz.getQuestions().get(curQuest-1).answerIterator(true);
-        questNumLabel.setText("Question " + curQuest);
-        questLabel.setText(((UserQuestion)quiz.getQuestions().get(curQuest-1)).getQuestionStr());
-        progressNumbers.setText(curQuest + " / " + totQuest);
-        progressBar.setProgress(curQuest);
+    private void setUntouchable(boolean untouchable){
+        if(untouchable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        }else{
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        }
+    }
+
+    public void updateQuestioneer(Quiz quiz, int currentQuestion, int totalQuestions){
+        Iterator answerIterator = quiz.getQuestions().get(currentQuestion-1).answerIterator(true);
+        quizLabel.setText(quiz.getName());
+        questNumLabel.setText("Question " + currentQuestion);
+        questLabel.setText(((UserQuestion)quiz.getQuestions().get(currentQuestion-1)).getQuestionStr());
+        progressNumbers.setText(currentQuestion + " / " + totalQuestions);
+        progressBar.setMax(totalQuestions);
+        progressBar.setProgress(currentQuestion);
         answerButton1.setTag(answerIterator.next());
         answerButton2.setTag(answerIterator.next());
         answerButton3.setTag(answerIterator.next());
@@ -122,11 +122,8 @@ public class QuestioneerActivity extends AppCompatActivity implements Questionee
         answerButton4.setText((String)((Answer)answerButton4.getTag()).getData());
     }
 
-    private void finishQuiz(){
-        Intent intent = new Intent(this, QuizList.class);
-        startActivity(intent);
-
-        //TODO Add statistics and change to that view instead
+    public void finishQuiz(){
+        finish();
     }
 
     @Override
@@ -134,7 +131,7 @@ public class QuestioneerActivity extends AppCompatActivity implements Questionee
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Closing Quiz")
-                .setMessage("Are you sure you want to quit " + KwizGeeQ.getInstance().activeQuiz.getName() + "?")
+                .setMessage("Are you sure you want to quit?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -43,5 +43,13 @@ public class KwizGeeQ {
         activeQuiz = quiz;
     };
 
+    public boolean checkAnswerIsCorrect(Answer answer){
+        return answer.isCorrect();
+    }
+
+    public void incActiveQuestion(){
+        activeQuestionIndex++;
+    }
+
 
 }
