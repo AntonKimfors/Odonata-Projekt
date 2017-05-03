@@ -91,7 +91,7 @@ public class QuestioneerActivity extends AppCompatActivity implements Questionee
         }
     }
 
-    private void flashAnswer(View view, int color) {
+    public void flashAnswer(View view, int color) {
         ColorDrawable f1 = new ColorDrawable(color);
         ColorDrawable f2 = new ColorDrawable(Color.parseColor("#ffd6d7d7"));
         AnimationDrawable a = new AnimationDrawable();
@@ -105,7 +105,7 @@ public class QuestioneerActivity extends AppCompatActivity implements Questionee
         a.start();
     }
 
-    private void updateQuestioneer(Quiz quiz){
+    public void updateQuestioneer(Quiz quiz){
         curQuest++;
         Iterator answerIterator = quiz.getQuestions().get(curQuest-1).answerIterator(true);
         questNumLabel.setText("Question " + curQuest);
