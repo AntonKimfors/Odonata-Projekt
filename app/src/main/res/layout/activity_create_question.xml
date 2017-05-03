@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.murk.kwizgeeq.CreateQuestion">
+    tools:context="com.example.murk.kwizgeeq.CreateQuestionView">
 
     <EditText
         android:id="@+id/questionText"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_width="366dp"
+        android:layout_height="74dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
@@ -17,10 +17,12 @@
         android:gravity="top|left"
         android:hint="Write question"
         android:inputType="text"
-        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintHorizontal_bias="0.333" />
 
     <Button
         android:id="@+id/mediaButton"
@@ -30,7 +32,8 @@
         android:text="Add MEdia"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/questionText" />
+        app:layout_constraintTop_toBottomOf="@+id/questionText"
+        android:layout_marginStart="16dp" />
 
     <EditText
         android:id="@+id/correctText"
@@ -42,7 +45,8 @@
         android:layout_marginLeft="17dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="96dp"
-        app:layout_constraintTop_toBottomOf="@+id/questionText" />
+        app:layout_constraintTop_toBottomOf="@+id/questionText"
+        android:layout_marginStart="17dp" />
 
     <EditText
         android:id="@+id/wrongText1"
@@ -54,7 +58,8 @@
         android:layout_marginLeft="17dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/correctText" />
+        app:layout_constraintTop_toBottomOf="@+id/correctText"
+        android:layout_marginStart="17dp" />
 
     <EditText
         android:id="@+id/wrongText2"
@@ -66,7 +71,8 @@
         android:layout_marginLeft="17dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/wrongText1" />
+        app:layout_constraintTop_toBottomOf="@+id/wrongText1"
+        android:layout_marginStart="17dp" />
 
     <EditText
         android:id="@+id/WrongText3"
@@ -78,7 +84,8 @@
         android:hint="Incorrect Anwer"
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/wrongText2" />
+        app:layout_constraintTop_toTopOf="@+id/wrongText2"
+        android:layout_marginStart="17dp" />
 
     <Button
         android:id="@+id/doneButton"
@@ -89,7 +96,8 @@
         android:text="Done"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/WrongText3" />
+        app:layout_constraintTop_toBottomOf="@+id/WrongText3"
+        android:layout_marginStart="16dp" />
 
     <Button
         android:id="@+id/nextQuestionButton"
@@ -101,7 +109,8 @@
         android:onClick="nextButtonAction"
         android:text="Next Question"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/WrongText3" />
+        app:layout_constraintTop_toBottomOf="@+id/WrongText3"
+        android:layout_marginEnd="16dp" />
 
     <Switch
         android:id="@+id/switch1"
@@ -111,6 +120,7 @@
         android:text="PictureMode"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/correctText" />
+        app:layout_constraintBottom_toTopOf="@+id/correctText"
+        android:layout_marginEnd="15dp" />
 
 </android.support.constraint.ConstraintLayout>

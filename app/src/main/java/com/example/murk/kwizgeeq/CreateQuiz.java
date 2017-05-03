@@ -3,10 +3,6 @@ package com.example.murk.kwizgeeq;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.graphics.Color;
 import android.widget.AdapterView;
@@ -19,7 +15,6 @@ import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.CreateQuizAdapter;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Question;
-import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
@@ -68,22 +63,15 @@ public class CreateQuiz extends ListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long id) {
 
-                KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizzList.get(index); //Make the clicked quiz active quiz.
-
-                Intent intent = new Intent(CreateQuiz.this, CreateQuestion.class);
-                intent.putExtra("selectedQuestion",KwizGeeQ.getInstance().activeQuiz.getQuestions().get(index));
+                Intent intent = new Intent(CreateQuiz.this, CreateQuestionView.class);
+                intent.putExtra("selectedQuestion", KwizGeeQ.getInstance().activeQuiz.getQuestions().get(index));
                 startActivity(intent);
             }
         });
-
-
-
-
-
         // end onCreate
     }
     public void fabPressed(View view){
-        Intent intent = new Intent(this, CreateQuestion.class);
+        Intent intent = new Intent(this, CreateQuestionView.class);
 
         startActivity(intent);
 

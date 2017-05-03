@@ -2,11 +2,13 @@ package com.example.murk.kwizgeeq.model;
 
 import android.graphics.Color;
 
+import java.io.Serializable;
+
 /**
  * Created by Murk on 2017-04-05.
  */
 
-public class UserQuiz extends Quiz {
+public class UserQuiz extends Quiz implements Serializable{
 	
 	public UserQuiz(String name, Color listColor) {
 		super(name, listColor);
