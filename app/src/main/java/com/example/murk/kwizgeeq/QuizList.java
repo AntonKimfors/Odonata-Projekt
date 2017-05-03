@@ -3,29 +3,20 @@ package com.example.murk.kwizgeeq;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.content.Intent;
 import android.graphics.PointF;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
-import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.model.QuizListAdapter;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
-
-import java.util.ArrayList;
+import com.example.murk.kwizgeeq.view.QuestioneerActivity;
 
 public class QuizList extends ListActivity {
 
@@ -70,7 +61,7 @@ public class QuizList extends ListActivity {
 
                 KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizzList.get(position); //Make the clicked quiz active quiz.
 
-                Intent intent = new Intent(QuizList.this, Questioneer.class);
+                Intent intent = new Intent(QuizList.this, QuestioneerActivity.class);
                 startActivity(intent);
             }
         });

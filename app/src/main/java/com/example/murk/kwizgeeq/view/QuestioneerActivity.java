@@ -1,4 +1,4 @@
-package com.example.murk.kwizgeeq;
+package com.example.murk.kwizgeeq.view;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.murk.kwizgeeq.QuizList;
+import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Quiz;
@@ -22,7 +24,7 @@ import com.example.murk.kwizgeeq.model.UserQuestion;
 
 import java.util.Iterator;
 
-public class Questioneer extends AppCompatActivity {
+public class QuestioneerActivity extends AppCompatActivity implements QuestioneerView{
 
     private TextView quizLabel;
     private TextView questNumLabel;
