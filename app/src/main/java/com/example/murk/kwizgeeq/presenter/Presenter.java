@@ -6,6 +6,9 @@ package com.example.murk.kwizgeeq.presenter;
 
 public interface Presenter {
 
-
+    public void onCreate();
+    public void onPause();
+    public void onResume();
+    public void onDestroy();
 
 }
