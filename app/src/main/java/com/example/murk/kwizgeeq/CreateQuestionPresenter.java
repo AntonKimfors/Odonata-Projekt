@@ -10,12 +10,15 @@ public class CreateQuestionPresenter {
 
     private CreateQuestionView view;
     private UserQuiz quiz;
-    private Question previous;
 
     private Question current;
 
-    public void onCreate() {
+    public CreateQuestionPresenter(CreateQuestionView view){
+        this.view = view;
+    }
 
+    public void onCreate() {
+        quiz = view.getQuiz();
     }
 
     public void onPause() {
@@ -33,8 +36,18 @@ public class CreateQuestionPresenter {
     }
 
     public void createQuestion(String questionStr){
-        current = new UserQuestion(questionStr,null,null,null);
-        quiz.addQuestion(current);
+        if(quiz == null){
+            throw new NullPointerException();
+        }
+        if(current==null){
+            current = new UserQuestion(questionStr,null,null,null);
+            quiz.addQuestion(current);
+        } else {
+            //replace question
+            int currentIndex = quiz.getQuestions().indexOf(current);
+            current = new UserQuestion(questionStr,null,null,null);
+            quiz.setQuestion(currentIndex,current);
+        }
     }
 
     public void addStringAnswer(String answerStr, boolean isCorrect){

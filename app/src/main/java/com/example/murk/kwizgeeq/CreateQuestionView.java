@@ -1,6 +1,7 @@
 package com.example.murk.kwizgeeq;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +15,7 @@ public class CreateQuestionView extends AppCompatActivity {
     private CreateQuestionPresenter presenter;
 
     public CreateQuestionView(){
-        presenter = new CreateQuestionPresenter();
+        presenter = new CreateQuestionPresenter(this);
     }
 
     @Override
@@ -24,7 +25,6 @@ public class CreateQuestionView extends AppCompatActivity {
         setContentView(R.layout.activity_create_question);
 
         presenter.onCreate();
-
     }
 
     public void nextButtonAction(View view){
@@ -37,8 +37,20 @@ public class CreateQuestionView extends AppCompatActivity {
         endAddOfQuestions();
     }
 
+    /**
+     * Så här tänkte jag först att det skulle se ut om vi använder Serializable
+     * @return
+     */
     public UserQuiz getQuiz(){
         return (UserQuiz)getIntent().getSerializableExtra("selectedQuiz");
+    }
+
+    /**
+     * Så här skulle man göra om vi skickar runt index
+     * @return
+     */
+    public int getQuizIndex(){
+        return getIntent().getIntExtra("quizIndex",0);
     }
 
     private void saveQuestion() {
@@ -65,7 +77,6 @@ public class CreateQuestionView extends AppCompatActivity {
 
         if(presenter.getCurrent()!=null){
             intent.putExtra("selectedQuiz",getQuiz());
-            intent.putExtra("createdQuestion",presenter.getCurrent());
         }
 
         startActivity(intent);
@@ -76,7 +87,6 @@ public class CreateQuestionView extends AppCompatActivity {
 
         if(presenter.getCurrent()!=null){
             intent.putExtra("selectedQuiz",getQuiz());
-            intent.putExtra("createdQuestion",presenter.getCurrent());
         }
 
         startActivity(intent);
