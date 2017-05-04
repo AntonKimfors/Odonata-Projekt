@@ -30,6 +30,36 @@ public class CreateQuestionView extends AppCompatActivity {
         presenter.onCreate();
     }
 
+
+    public void setQuestionString(String s){
+        EditText questionText = (EditText) findViewById(R.id.questionText);
+        questionText.setText(s, TextView.BufferType.EDITABLE);
+    }
+
+    public void setCorrectStringAnswer(String correctString){
+        EditText correct = (EditText) findViewById(R.id.correctText);
+        correct.setText(correctString, TextView.BufferType.EDITABLE);
+    }
+
+    public void setWrongStringAnswer(String wrongString){
+        EditText wrong1 = (EditText) findViewById(R.id.wrongText1);
+        EditText wrong2 = (EditText) findViewById(R.id.wrongText2);
+        EditText wrong3 = (EditText) findViewById(R.id.wrongText2);
+
+        if(wrong1.getText().toString().equals("")){
+            wrong1.setText(wrongString, TextView.BufferType.EDITABLE);
+        } else if(wrong2.getText().toString().equals("")){
+            wrong2.setText(wrongString, TextView.BufferType.EDITABLE);
+        } else if(wrong3.getText().toString().equals("")){
+            wrong3.setText(wrongString, TextView.BufferType.EDITABLE);
+        }
+    }
+
+
+    public void mediaButtonAction(View view){
+
+    }
+
     public void nextButtonAction(View view){
         presenter.nextButtonAction();
     }
@@ -58,6 +88,7 @@ public class CreateQuestionView extends AppCompatActivity {
         return getIntent().getIntExtra("questionIndex",0);
     }
 
+
     public String getQuestionString(){
         EditText questionText = (EditText) findViewById(R.id.questionText);
         return questionText.getText().toString();
@@ -83,29 +114,6 @@ public class CreateQuestionView extends AppCompatActivity {
         return wrongText3.getText().toString();
     }
 
-    public void setQuestionString(String s){
-        EditText questionText = (EditText) findViewById(R.id.questionText);
-        questionText.setText(s, TextView.BufferType.EDITABLE);
-    }
-
-    public void setStringAnswer(Answer<String> a){
-        if(a.isCorrect()){
-            EditText correct = (EditText) findViewById(R.id.correctText);
-            correct.setText(a.getData(), TextView.BufferType.EDITABLE);
-        } else {
-            EditText wrong1 = (EditText) findViewById(R.id.wrongText1);
-            EditText wrong2 = (EditText) findViewById(R.id.wrongText2);
-            EditText wrong3 = (EditText) findViewById(R.id.wrongText2);
-
-            if(wrong1.getText().toString().equals("")){
-                wrong1.setText(a.getData(), TextView.BufferType.EDITABLE);
-            } else if(wrong2.getText().toString().equals("")){
-                wrong2.setText(a.getData(), TextView.BufferType.EDITABLE);
-            } else if(wrong3.getText().toString().equals("")){
-                wrong3.setText(a.getData(), TextView.BufferType.EDITABLE);
-            }
-        }
-    }
 
     public void addMoreQuestions(int quizIndex, int questionIndex){
         Intent intent = new Intent(CreateQuestionView.this,CreateQuestionView.class);

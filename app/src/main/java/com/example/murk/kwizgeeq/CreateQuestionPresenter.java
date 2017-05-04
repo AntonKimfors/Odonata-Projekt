@@ -67,7 +67,13 @@ public class CreateQuestionPresenter {
         Iterator<Answer> answerIterator = question.answerIterator(false);
 
         while(answerIterator.hasNext()){
-            view.setStringAnswer(answerIterator.next());
+            Answer<String> answer = answerIterator.next();
+
+            if(answer.isCorrect()){
+                view.setCorrectStringAnswer(answer.getData());
+            } else{
+                view.setWrongStringAnswer(answer.getData());
+            }
         }
     }
 
