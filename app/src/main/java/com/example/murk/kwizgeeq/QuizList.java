@@ -16,7 +16,7 @@ import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.QuizListAdapter;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
-import com.example.murk.kwizgeeq.view.QuestioneerActivity;
+import com.example.murk.kwizgeeq.activity.QuestioneerActivity;
 
 public class QuizList extends ListActivity {
 

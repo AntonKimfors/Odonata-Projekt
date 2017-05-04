@@ -26,7 +26,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CreateQuestionView" />
         <activity
-            android:name=".view.QuestioneerActivity"
+            android:name=".activity.QuestioneerActivity"
             android:parentActivityName=".QuizList"/>
         <activity android:name=".StatisticsView" />
     </application>
