@@ -5,10 +5,13 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.*;
 
 import com.example.murk.kwizgeeq.model.*;
 import com.wrapper.spotify.models.User;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class CreateQuestionView extends AppCompatActivity {
 
@@ -70,6 +73,41 @@ public class CreateQuestionView extends AppCompatActivity {
 
         EditText wrongText3 = (EditText) findViewById(R.id.WrongText3);
         presenter.addStringAnswer(wrongText3.getText().toString(),false);
+    }
+
+    public void setFields(UserQuestion question){
+        setQuestionString(question.getQuestionStr());
+
+        Iterator<Answer> answerIterator = question.answerIterator(false);
+
+        while(answerIterator.hasNext()){
+            setAnswer(answerIterator.next());
+        }
+
+    }
+
+    private void setQuestionString(String s){
+        EditText questionText = (EditText) findViewById(R.id.questionText);
+        questionText.setText(s, TextView.BufferType.EDITABLE);
+    }
+
+    private void setAnswer(Answer<String> a){
+        if(a.isCorrect()){
+            EditText correct = (EditText) findViewById(R.id.correctText);
+            correct.setText(a.getData(), TextView.BufferType.EDITABLE);
+        } else {
+            EditText wrong1 = (EditText) findViewById(R.id.wrongText1);
+            EditText wrong2 = (EditText) findViewById(R.id.wrongText2);
+            EditText wrong3 = (EditText) findViewById(R.id.wrongText2);
+
+            if(wrong1.getText().toString().equals("")){
+                wrong1.setText(a.getData(), TextView.BufferType.EDITABLE);
+            } else if(wrong2.getText().toString().equals("")){
+                wrong2.setText(a.getData(), TextView.BufferType.EDITABLE);
+            } else if(wrong3.getText().toString().equals("")){
+                wrong3.setText(a.getData(), TextView.BufferType.EDITABLE);
+            }
+        }
     }
 
     public void addMoreQuestions(){

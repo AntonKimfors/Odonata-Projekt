@@ -3,6 +3,7 @@ package com.example.murk.kwizgeeq;
 import android.graphics.Color;
 
 import com.example.murk.kwizgeeq.model.*;
+import com.wrapper.spotify.models.User;
 
 /**
  * Created by Henrik on 02/05/2017.
@@ -21,6 +22,7 @@ public class CreateQuestionPresenter {
 
     public void onCreate() {
         quiz = view.getQuiz();
+
     }
 
     public void onPause() {
@@ -31,6 +33,13 @@ public class CreateQuestionPresenter {
     }
     public void onDestroy() {
 
+    }
+
+    private void setTextfields(int index){
+        if(index < quiz.getQuestions().size()){
+            UserQuestion questionToEdit = (UserQuestion)quiz.getQuestions().get(index);
+            view.setFields(questionToEdit);
+        }
     }
 
     public Question getCurrent() {
