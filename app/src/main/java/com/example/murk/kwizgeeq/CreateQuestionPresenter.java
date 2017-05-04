@@ -1,9 +1,8 @@
 package com.example.murk.kwizgeeq;
 
-import android.graphics.Color;
-
 import com.example.murk.kwizgeeq.model.*;
-import com.wrapper.spotify.models.User;
+
+import java.util.Iterator;
 
 /**
  * Created by Henrik on 02/05/2017.
@@ -12,17 +11,22 @@ import com.wrapper.spotify.models.User;
 public class CreateQuestionPresenter {
 
     private CreateQuestionView view;
-    private UserQuiz quiz;
-
-    private Question current;
+    private int quizIndex;
+    private int questionIndex;
+    private KwizGeeQ model;
 
     public CreateQuestionPresenter(CreateQuestionView view){
         this.view = view;
+        model = KwizGeeQ.getInstance();
     }
 
     public void onCreate() {
-        quiz = view.getQuiz();
+        quizIndex = view.getQuizIndex();
+        questionIndex = view.getQuestionIndex();
 
+        if(questionIndex<model.getQuiz(quizIndex).getSize()){
+            setTextFields();
+        }
     }
 
     public void onPause() {
@@ -35,36 +39,49 @@ public class CreateQuestionPresenter {
 
     }
 
-    private void setTextfields(int index){
-        if(index < quiz.getQuestions().size()){
-            UserQuestion questionToEdit = (UserQuestion)quiz.getQuestions().get(index);
-            view.setFields(questionToEdit);
+    public void nextButtonAction(){
+        saveQuestion();
+        view.addMoreQuestions(quizIndex,questionIndex++);
+    }
+
+    public void doneButtonAction(){
+        saveQuestion();
+        view.endAddOfQuestions();
+    }
+
+    private void saveQuestion(){
+        createUserQuestion(view.getQuestionString(),null,0,0,null);
+
+        addStringAnswer(view.getCorrectString(),true);
+
+        addStringAnswer(view.getWrong1String(),false);
+        addStringAnswer(view.getWrong2String(),false);
+        addStringAnswer(view.getWrong3String(),false);
+    }
+
+    private void setTextFields(){
+        UserQuestion question = (UserQuestion)model.getQuiz(quizIndex).getQuestion(questionIndex);
+
+        view.setQuestionString(question.getQuestionStr());
+
+        Iterator<Answer> answerIterator = question.answerIterator(false);
+
+        while(answerIterator.hasNext()){
+            view.setStringAnswer(answerIterator.next());
         }
     }
 
-    public Question getCurrent() {
-        return current;
+    private void createUserQuestion(String questionStr, String questionImg,
+                                   double xPosition, double yPosition, String audioFile){
+
+        UserQuestion question = new UserQuestion(questionStr,questionImg,xPosition,yPosition,audioFile);
+        model.addQuestion(quizIndex,questionIndex,question);
     }
 
-    public void createQuestion(String questionStr){
-        if(quiz == null){
-            throw new NullPointerException();
-        }
-        if(current==null){
-            current = new UserQuestion(questionStr,null,null,null);
-            quiz.addQuestion(current);
-        } else {
-            //replace question
-            int currentIndex = quiz.getQuestions().indexOf(current);
-            current = new UserQuestion(questionStr,null,null,null);
-            quiz.setQuestion(currentIndex,current);
-        }
-    }
-
-    public void addStringAnswer(String answerStr, boolean isCorrect){
-        if(current!=null && !answerStr.equals("")){
+    private void addStringAnswer(String answerStr, boolean isCorrect){
+        if(!answerStr.equals("")){
             Answer<String> answer = new Answer(isCorrect,answerStr);
-            current.addAnswer(answer);
+            model.addAnswer(quizIndex,questionIndex,answer);
         }
     }
 }

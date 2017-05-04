@@ -31,13 +31,11 @@ public class CreateQuestionView extends AppCompatActivity {
     }
 
     public void nextButtonAction(View view){
-        saveQuestion();
-        addMoreQuestions();
+        presenter.nextButtonAction();
     }
 
     public void doneButtonAction(View view){
-        saveQuestion();
-        endAddOfQuestions();
+        presenter.doneButtonAction();
     }
 
     /**
@@ -56,42 +54,41 @@ public class CreateQuestionView extends AppCompatActivity {
         return getIntent().getIntExtra("quizIndex",0);
     }
 
-    private void saveQuestion() {
+    public int getQuestionIndex(){
+        return getIntent().getIntExtra("questionIndex",0);
+    }
+
+    public String getQuestionString(){
         EditText questionText = (EditText) findViewById(R.id.questionText);
-        String questionString = questionText.getText().toString();
+        return questionText.getText().toString();
+    }
 
-        presenter.createQuestion(questionString);
-
+    public String getCorrectString(){
         EditText correctText = (EditText) findViewById(R.id.correctText);
-        presenter.addStringAnswer(correctText.getText().toString(),true);
+        return correctText.getText().toString();
+    }
 
+    public String getWrong1String(){
         EditText wrongText1 = (EditText) findViewById(R.id.wrongText1);
-        presenter.addStringAnswer(wrongText1.getText().toString(),false);
+        return wrongText1.getText().toString();
+    }
 
+    public String getWrong2String(){
         EditText wrongText2 = (EditText) findViewById(R.id.wrongText2);
-        presenter.addStringAnswer(wrongText2.getText().toString(),false);
+        return wrongText2.getText().toString();
+    }
 
+    public String getWrong3String(){
         EditText wrongText3 = (EditText) findViewById(R.id.WrongText3);
-        presenter.addStringAnswer(wrongText3.getText().toString(),false);
+        return wrongText3.getText().toString();
     }
 
-    public void setFields(UserQuestion question){
-        setQuestionString(question.getQuestionStr());
-
-        Iterator<Answer> answerIterator = question.answerIterator(false);
-
-        while(answerIterator.hasNext()){
-            setAnswer(answerIterator.next());
-        }
-
-    }
-
-    private void setQuestionString(String s){
+    public void setQuestionString(String s){
         EditText questionText = (EditText) findViewById(R.id.questionText);
         questionText.setText(s, TextView.BufferType.EDITABLE);
     }
 
-    private void setAnswer(Answer<String> a){
+    public void setStringAnswer(Answer<String> a){
         if(a.isCorrect()){
             EditText correct = (EditText) findViewById(R.id.correctText);
             correct.setText(a.getData(), TextView.BufferType.EDITABLE);
@@ -110,23 +107,15 @@ public class CreateQuestionView extends AppCompatActivity {
         }
     }
 
-    public void addMoreQuestions(){
+    public void addMoreQuestions(int quizIndex, int questionIndex){
         Intent intent = new Intent(CreateQuestionView.this,CreateQuestionView.class);
-
-        if(presenter.getCurrent()!=null){
-            intent.putExtra("selectedQuiz",getQuiz());
-        }
-
+        intent.putExtra("quizIndex",quizIndex);
+        intent.putExtra("questionIndex",questionIndex);
         startActivity(intent);
     }
 
     public void endAddOfQuestions(){
-        Intent intent = new Intent(CreateQuestionView.this,CreateQuiz.class);
-
-        if(presenter.getCurrent()!=null){
-            intent.putExtra("selectedQuiz",getQuiz());
-        }
-
+        Intent intent = new Intent(CreateQuestionView.this,QuizList.class);
         startActivity(intent);
     }
 }

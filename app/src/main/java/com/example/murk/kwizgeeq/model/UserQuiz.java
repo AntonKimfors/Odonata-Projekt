@@ -14,17 +14,23 @@ public class UserQuiz extends Quiz implements Serializable{
 		super(name, listColor);
 	}
 
+	/*
 	public void setQuestion(int index, Question question){
         getQuestions().set(index,question);
     }
 
     public void addQuestion(Question question) {
-    	getQuestions().add(question);
+    	questions.add(question);
+    }
+
+    public void replaceQuestion(Question oldQuestion,Question newQuestion){
+        int index = questions.indexOf(oldQuestion);
+        setQuestion(index,newQuestion);
     }
 
     public void removeQuestion(Question question){
         getQuestions().remove(question);
-    }
+    }*/
 
     public UserQuiz copyUserQuiz(){
         UserQuiz clonedQuiz = new UserQuiz(this.getName(),this.getListColor());

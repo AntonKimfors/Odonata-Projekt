@@ -42,6 +42,42 @@ public abstract class Quiz implements Iterable{
         return questions;
     }
 
+    /**
+     * eventuellt behövs inte denna metod
+     */
+    public void addQuestion(Question question){
+        questions.add(question);
+    }
+
+    /**
+     * bättre att använda den här om varje presenter vet vilket index den är kopplad till
+     * @param index
+     * @param question
+     */
+    public void addQuestionOnIndex(int index, Question question){
+        if(index>=questions.size()){
+            questions.add(question);
+        } else {
+            questions.set(index,question);
+        }
+    }
+
+    public void addAnswer(int questionIndex, Answer answer){
+        questions.get(questionIndex).addAnswer(answer);
+    }
+
+    public void removeQuestion(Question question){
+        getQuestions().remove(question);
+    }
+
+    public int getSize(){
+        return questions.size();
+    }
+
+    public Question getQuestion(int index){
+        return questions.get(index);
+    }
+
 
     @Override
     public Iterator iterator() {

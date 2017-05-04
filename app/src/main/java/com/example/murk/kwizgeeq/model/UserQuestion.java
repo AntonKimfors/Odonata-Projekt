@@ -1,26 +1,21 @@
 package com.example.murk.kwizgeeq.model;
 
-import android.graphics.PointF;
-import android.media.Image;
-import android.util.StringBuilderPrinter;
-
 /**
  * Created by Henrik on 04/04/2017.
  */
 
 public class UserQuestion extends Question {
     private String questionStr;
-    private Image questionImg;
-    private PointF position;
+    private String questionImg;
+    private double xPosition;
+    private double yPosition;
     private String audioFile;
 
-    public UserQuestion(String questionStr, Image questionImg, PointF position, String audioFile) {
+    public UserQuestion(String questionStr, String questionImg, double xPosition, double yPosition, String audioFile) {
         this.questionStr = questionStr;
-
         this.questionImg = questionImg;
-
-        this.position = position;
-
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
         this.audioFile = audioFile;
     }
 
@@ -32,24 +27,32 @@ public class UserQuestion extends Question {
         this.questionStr = questionStr;
     }
 
-    public Image getQuestionImg() {
+    public String getQuestionImg() {
         return questionImg;
     }
 
-    public void setQuestionImg(Image questionImg) {
-        this.questionImg = questionImg;
+    public double getxPosition() {
+        return xPosition;
     }
 
-    public PointF getPosition() {
-        return position;
-    }
-
-    public void setPosition(PointF position) {
-        this.position = position;
+    public double getyPosition() {
+        return yPosition;
     }
 
     public String getAudioFile() {
         return audioFile;
+    }
+
+    public void setQuestionImg(String questionImg) {
+        this.questionImg = questionImg;
+    }
+
+    public void setxPosition(double xPosition) {
+        this.xPosition = xPosition;
+    }
+
+    public void setyPosition(double yPosition) {
+        this.yPosition = yPosition;
     }
 
     public void setAudioFile(String audioFile) {
@@ -79,13 +82,12 @@ public class UserQuestion extends Question {
                 }
             }
 
-            if(position !=null){
-                if(o.getPosition()!=null){
-                    if(!position.equals(o.getPosition()))
-                        return false;
-                } else {
-                    return false;
-                }
+            if(xPosition != o.xPosition){
+                return false;
+            }
+
+            if(yPosition != yPosition){
+                return false;
             }
 
             //all variables are equal
