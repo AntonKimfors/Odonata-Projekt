@@ -2,20 +2,26 @@ package com.example.murk.kwizgeeq;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
-import com.example.murk.kwizgeeq.model.*;
-import com.wrapper.spotify.models.User;
+import java.io.*;
 
-import java.util.Iterator;
-import java.util.List;
+import com.example.murk.kwizgeeq.model.*;
 
 public class CreateQuestionView extends AppCompatActivity {
 
     private CreateQuestionPresenter presenter;
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    static final int REQUEST_TAKE_PHOTO = 1;
 
     public CreateQuestionView(){
         presenter = new CreateQuestionPresenter(this);
@@ -57,7 +63,7 @@ public class CreateQuestionView extends AppCompatActivity {
 
 
     public void mediaButtonAction(View view){
-
+        dispatchTakePictureIntent();
     }
 
     public void nextButtonAction(View view){
@@ -66,6 +72,32 @@ public class CreateQuestionView extends AppCompatActivity {
 
     public void doneButtonAction(View view){
         presenter.doneButtonAction();
+    }
+
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        // Create the File where the photo should go
+        File photoFile = null;
+        try {
+            photoFile = presenter.createImageFile(storageDir);
+        } catch (IOException ex) {
+
+        }
+        // Continue only if the File was successfully created
+        if (photoFile != null) {
+            Uri photoURI = FileProvider.getUriForFile(this,
+                    "com.example.android.fileprovider",
+                    photoFile);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+        }
     }
 
     /**
@@ -88,6 +120,10 @@ public class CreateQuestionView extends AppCompatActivity {
         return getIntent().getIntExtra("questionIndex",0);
     }
 
+
+    public String getImageFilePath(){
+
+    }
 
     public String getQuestionString(){
         EditText questionText = (EditText) findViewById(R.id.questionText);

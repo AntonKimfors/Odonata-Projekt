@@ -34,6 +34,10 @@ public class KwizGeeQ {
         return quizzList.get(index);
     }
 
+    public Question getQuestion(int quizIndex, int questionIndex){
+        return quizzList.get(quizIndex).getQuestion(questionIndex);
+    }
+
     public void addQuestion(int quizIndex, int questionIndex, Question question){
         Quiz quiz = quizzList.get(quizIndex);
         quiz.addQuestionOnIndex(questionIndex,question);

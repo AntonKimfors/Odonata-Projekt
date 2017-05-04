@@ -2,7 +2,9 @@ package com.example.murk.kwizgeeq;
 
 import com.example.murk.kwizgeeq.model.*;
 
-import java.util.Iterator;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by Henrik on 02/05/2017.
@@ -13,6 +15,10 @@ public class CreateQuestionPresenter {
     private CreateQuestionView view;
     private int quizIndex;
     private int questionIndex;
+
+    //TODO: probably not needed as class variable
+    String mCurrentPhotoPath;
+
     private KwizGeeQ model;
 
     public CreateQuestionPresenter(CreateQuestionView view){
@@ -49,6 +55,21 @@ public class CreateQuestionPresenter {
         view.endAddOfQuestions();
     }
 
+    public File createImageFile(File storageDir) throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
     private void saveQuestion(){
         createUserQuestion(view.getQuestionString(),null,0,0,null);
 
@@ -60,7 +81,7 @@ public class CreateQuestionPresenter {
     }
 
     private void setTextFields(){
-        UserQuestion question = (UserQuestion)model.getQuiz(quizIndex).getQuestion(questionIndex);
+        UserQuestion question = (UserQuestion)model.getQuestion(quizIndex,questionIndex);
 
         view.setQuestionString(question.getQuestionStr());
 
