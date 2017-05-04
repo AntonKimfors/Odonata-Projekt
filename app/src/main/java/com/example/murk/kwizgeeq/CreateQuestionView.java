@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.*;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.example.murk.kwizgeeq.model.*;
 
@@ -22,6 +24,9 @@ public class CreateQuestionView extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
     static final int REQUEST_TAKE_PHOTO = 1;
+
+    //TODO: probably not needed as class variable
+    String mCurrentPhotoPath;
 
     public CreateQuestionView(){
         presenter = new CreateQuestionPresenter(this);
@@ -86,7 +91,7 @@ public class CreateQuestionView extends AppCompatActivity {
         // Create the File where the photo should go
         File photoFile = null;
         try {
-            photoFile = presenter.createImageFile(storageDir);
+            photoFile = createImageFile(storageDir);
         } catch (IOException ex) {
 
         }
@@ -98,6 +103,21 @@ public class CreateQuestionView extends AppCompatActivity {
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
         }
+    }
+
+    private File createImageFile(File storageDir) throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 
     /**
@@ -122,7 +142,7 @@ public class CreateQuestionView extends AppCompatActivity {
 
 
     public String getImageFilePath(){
-
+        return mCurrentPhotoPath;
     }
 
     public String getQuestionString(){

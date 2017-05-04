@@ -38,7 +38,7 @@ public class CreateQuiz extends ListActivity {
         Answer testAnswer2 = new Answer(false,"fel");
         Answer testAnswer3 = new Answer(false,"fel");
         Answer testAnswer4 = new Answer(false,"fel");
-        final Question testQuest = new UserQuestion("Meningen med livet jao?",null,null,null);
+        final Question testQuest = new UserQuestion("Meningen med livet jao?",null,0,0,null);
         testQuest.addAnswer(testAnswer1);
         testQuest.addAnswer(testAnswer2);
         testQuest.addAnswer(testAnswer3);

@@ -42,7 +42,7 @@ public class QuizList extends ListActivity {
         /* test quiz*/
         UserQuiz quiz1 = new UserQuiz("Spsh", new Color());
         KwizGeeQ.getInstance().quizzList.add(quiz1);
-        UserQuestion question1 = new UserQuestion("quantos anos tienes?", null, new PointF(1,1), null);
+        UserQuestion question1 = new UserQuestion("quantos anos tienes?", null, 0,0, null);
         question1.addAnswer(new Answer(true, "4"));
         question1.addAnswer(new Answer(false, "42"));
         question1.addAnswer(new Answer(false, "24"));

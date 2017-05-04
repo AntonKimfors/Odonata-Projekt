@@ -16,9 +16,6 @@ public class CreateQuestionPresenter {
     private int quizIndex;
     private int questionIndex;
 
-    //TODO: probably not needed as class variable
-    String mCurrentPhotoPath;
-
     private KwizGeeQ model;
 
     public CreateQuestionPresenter(CreateQuestionView view){
@@ -53,21 +50,6 @@ public class CreateQuestionPresenter {
     public void doneButtonAction(){
         saveQuestion();
         view.endAddOfQuestions();
-    }
-
-    public File createImageFile(File storageDir) throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
     }
 
     private void saveQuestion(){
