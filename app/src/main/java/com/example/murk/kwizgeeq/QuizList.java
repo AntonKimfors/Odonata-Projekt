@@ -74,6 +74,19 @@ public class QuizList extends ListActivity {
                 startActivity(intent);
             }
         });
+
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizzList.get(position);
+                Intent intent = new Intent(QuizList.this, CreateQuiz.class);
+                startActivity(intent);
+
+                return true;
+            }
+        });
     } //end of "OnCreate" method.
 
     @Override
