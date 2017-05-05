@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.graphics.Color;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -17,6 +16,7 @@ import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
+import com.example.murk.kwizgeeq.view.CreateQuestionView;
 
 public class CreateQuiz extends ListActivity {
     private EditText QuizLabel;

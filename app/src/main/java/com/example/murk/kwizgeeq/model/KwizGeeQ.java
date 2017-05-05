@@ -38,6 +38,12 @@ public class KwizGeeQ {
         return quizzList.get(quizIndex).getQuestion(questionIndex);
     }
 
+    /**
+     * Denna metod kanske inte behövs, se tex createUserQuestion
+     * @param quizIndex
+     * @param questionIndex
+     * @param question
+     */
     public void addQuestion(int quizIndex, int questionIndex, Question question){
         Quiz quiz = quizzList.get(quizIndex);
         quiz.addQuestionOnIndex(questionIndex,question);
@@ -46,6 +52,22 @@ public class KwizGeeQ {
     public void addAnswer(int quizIndex, int questionIndex, Answer answer){
         Quiz quiz = quizzList.get(quizIndex);
         quiz.addAnswer(questionIndex,answer);
+    }
+
+    public int getQuizSize(int quizIndex){
+        Quiz quiz = quizzList.get(quizIndex);
+        return quiz.getSize();
+    }
+
+    public void createUserQuestion(int quizIndex, int questionIndex, String questionStr,
+                                   String questionImg, double xPosition, double yPosition,
+                                   String audioFile){
+
+        UserQuestion question = new UserQuestion(questionStr,questionImg,xPosition,yPosition,
+                audioFile);
+
+        Quiz quiz = quizzList.get(quizIndex);
+        quiz.addQuestionOnIndex(questionIndex,question);
     }
 
     public void addNewQuiz(String name, Color color){
