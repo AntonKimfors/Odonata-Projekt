@@ -14,7 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
+
 
 import com.example.murk.kwizgeeq.activity.EditQuizActivity;
 import com.example.murk.kwizgeeq.model.Answer;
@@ -23,7 +23,7 @@ import com.example.murk.kwizgeeq.model.QuizListAdapter;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.activity.QuestioneerActivity;
-import com.google.common.escape.Escaper;
+
 
 import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
@@ -126,7 +126,7 @@ public class QuizList extends ListActivity {
         mBuilder.setView(mView);
         final AlertDialog dialog = mBuilder.create();
         dialog.show();
-
+        mPickColor.setBackgroundColor(getResources().getColor(R.color.flamingo));
         mPickColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,7 +163,7 @@ public class QuizList extends ListActivity {
         mCreateQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(QuizList.this, EditQuizActivity.class);
+                Intent intent = new Intent(QuizList.this, CreateQuiz.class);
                 startActivity(intent);
             }
         });
