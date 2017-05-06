@@ -23,6 +23,7 @@ import com.example.murk.kwizgeeq.model.QuizListAdapter;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.activity.QuestioneerActivity;
+import com.google.common.escape.Escaper;
 
 import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
@@ -112,9 +113,6 @@ public class QuizList extends ListActivity {
     }
 
     public void fabPressed(View view){
-
-
-
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(QuizList.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_create_quiz, null);
         final EditText mEmail = (EditText) mView.findViewById(R.id.etQuizName);
@@ -165,7 +163,7 @@ public class QuizList extends ListActivity {
         mCreateQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(QuizList.this, CreateQuiz.class);
+                Intent intent = new Intent(QuizList.this, EditQuizActivity.class);
                 startActivity(intent);
             }
         });
