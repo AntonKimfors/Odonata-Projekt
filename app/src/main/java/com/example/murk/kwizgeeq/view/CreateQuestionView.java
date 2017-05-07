@@ -2,6 +2,7 @@ package com.example.murk.kwizgeeq.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 import android.widget.*;
 
 import java.util.*;
@@ -22,6 +23,7 @@ public class CreateQuestionView extends Observable{
 
     public CreateQuestionView(EditText questionText, EditText correctText, EditText wrongText1,
                               EditText wrongText2, EditText wrongText3) {
+
         this.questionText = questionText;
         this.correctText = correctText;
         this.wrongText1 = wrongText1;
@@ -29,6 +31,9 @@ public class CreateQuestionView extends Observable{
         this.wrongText3 = wrongText3;
 
         model = KwizGeeQ.getInstance();
+
+
+
     }
 
     public void setTextFields(int quizIndex, int questionIndex){

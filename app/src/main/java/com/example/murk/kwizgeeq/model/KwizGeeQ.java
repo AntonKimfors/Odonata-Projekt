@@ -49,8 +49,10 @@ public class KwizGeeQ {
         quiz.addQuestionOnIndex(questionIndex,question);
     }
 
-    public void addAnswer(int quizIndex, int questionIndex, Answer answer){
+    public void addStringAnswer(int quizIndex, int questionIndex, String answerStr,
+                                boolean isCorrect){
         Quiz quiz = quizzList.get(quizIndex);
+        Answer<String> answer = new Answer(isCorrect,answerStr);
         quiz.addAnswer(questionIndex,answer);
     }
 

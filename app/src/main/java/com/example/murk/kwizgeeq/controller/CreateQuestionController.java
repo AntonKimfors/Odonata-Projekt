@@ -57,23 +57,15 @@ public class CreateQuestionController implements Controller, Observer{
     private void saveQuestion(int quizIndex, int questionIndex){
         model.createUserQuestion(quizIndex, questionIndex, view.getQuestionString(),null,0,0,null);
 
-        addStringAnswer(quizIndex,questionIndex,view.getCorrectString(),true);
+        model.addStringAnswer(quizIndex,questionIndex,view.getCorrectString(),true);
 
-        addStringAnswer(quizIndex,questionIndex,view.getWrong1String(),false);
-        addStringAnswer(quizIndex,questionIndex,view.getWrong2String(),false);
-        addStringAnswer(quizIndex,questionIndex,view.getWrong3String(),false);
-    }
-
-    private void addStringAnswer(int quizIndex, int questionIndex, String answerStr,
-                                 boolean isCorrect){
-        if(!answerStr.equals("")){
-            Answer<String> answer = new Answer(isCorrect,answerStr);
-            model.addAnswer(quizIndex,questionIndex,answer);
-        }
+        model.addStringAnswer(quizIndex,questionIndex,view.getWrong1String(),false);
+        model.addStringAnswer(quizIndex,questionIndex,view.getWrong2String(),false);
+        model.addStringAnswer(quizIndex,questionIndex,view.getWrong3String(),false);
     }
 
     @Override
     public void update(Observable o, Object arg) {
-
+        return;
     }
 }
