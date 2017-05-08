@@ -27,7 +27,7 @@
             android:name=".CreateQuiz"
             android:label="@string/title_activity_create_quiz"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.CreateQuestionView" />
+        <activity android:name=".activity.CreateQuestionActivity" />
         <activity
             android:name=".activity.QuestioneerActivity"
             android:parentActivityName=".QuizList"/>

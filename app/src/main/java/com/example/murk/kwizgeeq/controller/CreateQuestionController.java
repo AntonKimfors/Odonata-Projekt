@@ -45,7 +45,9 @@ public class CreateQuestionController implements Controller, Observer{
     public void nextButtonAction(int quizIndex, int questionIndex, NavigatableActivity oldActivity,
                                  Context context){
         saveQuestion(quizIndex,questionIndex);
-        view.addMoreQuestions(quizIndex,questionIndex++,oldActivity,context);
+
+        int nextQuestionIndex = questionIndex +1;
+        view.addMoreQuestions(quizIndex,nextQuestionIndex,oldActivity,context);
     }
 
     public void doneButtonAction(int quizIndex, int questionIndex, NavigatableActivity oldActivity,

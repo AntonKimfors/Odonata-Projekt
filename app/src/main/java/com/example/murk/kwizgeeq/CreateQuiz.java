@@ -11,13 +11,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 
-import com.example.murk.kwizgeeq.activity.CreateQuestionActivity;
-import com.example.murk.kwizgeeq.model.Answer;
-import com.example.murk.kwizgeeq.model.CreateQuizAdapter;
-import com.example.murk.kwizgeeq.model.KwizGeeQ;
-import com.example.murk.kwizgeeq.model.Question;
-import com.example.murk.kwizgeeq.model.UserQuestion;
-import com.example.murk.kwizgeeq.model.UserQuiz;
+import com.example.murk.kwizgeeq.activity.*;
+import com.example.murk.kwizgeeq.model.*;
 import com.example.murk.kwizgeeq.view.CreateQuestionView;
 
 public class CreateQuiz extends ListActivity {
@@ -49,8 +44,11 @@ public class CreateQuiz extends ListActivity {
         testQuest.addAnswer(testAnswer4);
         Color testColor = new Color();
         //quizIndex = 0;
+
+        //fixade några nya metoder i KwizGeeQ och det verkar fungera
         quizIndex = KwizGeeQ.getInstance().createUserQuiz("test",testColor);
         KwizGeeQ.getInstance().addQuestion(quizIndex,0,testQuest);
+
         //UserQuiz testquiz = new UserQuiz("testname", testColor);
         //testquiz.addQuestion(testQuest);
         //KwizGeeQ.getInstance().activeQuiz = testquiz;
@@ -78,8 +76,14 @@ public class CreateQuiz extends ListActivity {
         // end onCreate
     }
     public void fabPressed(View view){
-        Intent intent = new Intent(getApplicationContext(), CreateQuestionActivity.class);
-        //intent.putExtra("quizIndex",quizIndex);
+        //hämta quizIndex för nytt userQuiz genom att anropa denna metod
+        //kanske inte mest lämpligt att göra det just här, men jag gjorde det mest för att visa
+        int quizIndex = KwizGeeQ.getInstance().createUserQuiz(QuizLabel.getText().toString(),new Color());
+
+        Intent intent = new Intent(CreateQuiz.this, CreateQuestionActivity.class);
+
+        //skicka quizIndex med intenten så kommer createQuestion att lösa resten
+        intent.putExtra("quizIndex",quizIndex);
         startActivity(intent);
     }
 

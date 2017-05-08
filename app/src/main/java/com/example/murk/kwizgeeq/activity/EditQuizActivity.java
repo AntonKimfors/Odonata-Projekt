@@ -59,7 +59,7 @@ public class EditQuizActivity extends ListActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int index, long id) {
 
-                Intent intent = new Intent(EditQuizActivity.this, CreateQuestionView.class);
+                Intent intent = new Intent(EditQuizActivity.this, CreateQuestionActivity.class);
                 intent.putExtra("selectedQuestion", KwizGeeQ.getInstance().activeQuiz.getQuestions().get(index));
                 startActivity(intent);
             }
@@ -67,7 +67,7 @@ public class EditQuizActivity extends ListActivity {
         // end onCreate
     }
     public void fabPressed(View view){
-        Intent intent = new Intent(this, CreateQuestionView.class);
+        Intent intent = new Intent(EditQuizActivity.this, CreateQuestionActivity.class);
 
         startActivity(intent);
 

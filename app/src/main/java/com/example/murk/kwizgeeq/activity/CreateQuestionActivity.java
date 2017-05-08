@@ -16,7 +16,7 @@ import com.example.murk.kwizgeeq.view.*;
  * Created by Henrik on 05/05/2017.
  */
 
-public class CreateQuestionActivity extends AppCompatActivity implements NavigatableActivity {
+public class CreateQuestionActivity extends AppCompatActivity implements NavigatableActivity{
 
     private CreateQuestionView view;
     private CreateQuestionController controller;
@@ -25,11 +25,11 @@ public class CreateQuestionActivity extends AppCompatActivity implements Navigat
     private int questionIndex;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_create_question);
-
+        System.out.println("CreateQuestionActivity");
         quizIndex = getIntent().getIntExtra("quizIndex",0);
         questionIndex = getIntent().getIntExtra("questionIndex",0);
 
