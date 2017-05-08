@@ -1,6 +1,8 @@
 package com.example.murk.kwizgeeq.controller;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 
 import com.example.murk.kwizgeeq.activity.NavigatableActivity;
 import com.example.murk.kwizgeeq.view.CreateQuestionView;

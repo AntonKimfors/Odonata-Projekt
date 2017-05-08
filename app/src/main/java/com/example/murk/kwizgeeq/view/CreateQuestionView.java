@@ -2,14 +2,23 @@ package com.example.murk.kwizgeeq.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.example.murk.kwizgeeq.*;
 import com.example.murk.kwizgeeq.activity.*;
 import com.example.murk.kwizgeeq.model.*;
+import com.example.murk.kwizgeeq.utils.ImageFileHandler;
 
 public class CreateQuestionView extends Observable{
 
@@ -20,6 +29,8 @@ public class CreateQuestionView extends Observable{
     private EditText wrongText1;
     private EditText wrongText2;
     private EditText wrongText3;
+
+    private String photoPath;
 
     public CreateQuestionView(EditText questionText, EditText correctText, EditText wrongText1,
                               EditText wrongText2, EditText wrongText3) {
@@ -92,6 +103,20 @@ public class CreateQuestionView extends Observable{
         return wrongText3.getText().toString();
     }
 
+    public void mediaButtonAction(NavigatableActivity activity, File storageDir,
+                                  PackageManager packageManager, Context context, int requestCode){
+
+        ImageFileHandler handler = new ImageFileHandler();
+        Uri photoURI = handler.getImageURI(storageDir,context);
+
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (takePictureIntent.resolveActivity(packageManager) != null) {
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            activity.startActivityForResult(takePictureIntent, requestCode);
+        }
+
+    }
 
     public void addMoreQuestions(int quizIndex, int questionIndex, NavigatableActivity oldActivity,
                                  Context context){

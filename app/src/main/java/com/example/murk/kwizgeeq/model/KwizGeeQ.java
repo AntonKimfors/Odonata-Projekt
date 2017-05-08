@@ -82,7 +82,8 @@ public class KwizGeeQ {
     }
 
     /**
-     *
+     *  This method both returns value and has side effects
+     *  but I have not came up with a better solution so far
      * @param name
      * @param color
      * @return the index of the created quiz
