@@ -46,6 +46,11 @@ public class KwizGeeQ {
      */
     public void addQuestion(int quizIndex, int questionIndex, Question question){
         Quiz quiz = quizzList.get(quizIndex);
+
+        if(quiz== null){
+            throw new IndexOutOfBoundsException("Quiz doesn't exist");
+        }
+
         quiz.addQuestionOnIndex(questionIndex,question);
     }
 
@@ -72,8 +77,16 @@ public class KwizGeeQ {
         quiz.addQuestionOnIndex(questionIndex,question);
     }
 
-    public void addNewQuiz(String name, Color color){
-        quizzList.add(new UserQuiz(name, color));
+    /**
+     *
+     * @param name
+     * @param color
+     * @return the index of the created quiz
+     */
+    public int createUserQuiz(String name, Color color){
+        UserQuiz userQuiz = new UserQuiz(name, color);
+        quizzList.add(userQuiz);
+        return quizzList.indexOf(userQuiz);
     };
 
     public void firePlayQuiz(Quiz quiz){

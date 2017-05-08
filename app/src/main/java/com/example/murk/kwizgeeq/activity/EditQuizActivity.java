@@ -10,14 +10,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 
-import com.example.murk.kwizgeeq.CreateQuestionView;
+import com.example.murk.kwizgeeq.view.*;
 import com.example.murk.kwizgeeq.R;
-import com.example.murk.kwizgeeq.model.Answer;
-import com.example.murk.kwizgeeq.model.CreateQuizAdapter;
-import com.example.murk.kwizgeeq.model.KwizGeeQ;
-import com.example.murk.kwizgeeq.model.Question;
-import com.example.murk.kwizgeeq.model.UserQuestion;
-import com.example.murk.kwizgeeq.model.UserQuiz;
+import com.example.murk.kwizgeeq.model.*;
 
 public class EditQuizActivity extends ListActivity {
     private EditText QuizLabel;
@@ -39,7 +34,7 @@ public class EditQuizActivity extends ListActivity {
         Answer testAnswer2 = new Answer(false,"fel");
         Answer testAnswer3 = new Answer(false,"fel");
         Answer testAnswer4 = new Answer(false,"fel");
-        final Question testQuest = new UserQuestion("Meningen med livet jao?",null,null,null);
+        final Question testQuest = new UserQuestion("Meningen med livet jao?",null,0,0,null);
         testQuest.addAnswer(testAnswer1);
         testQuest.addAnswer(testAnswer2);
         testQuest.addAnswer(testAnswer3);

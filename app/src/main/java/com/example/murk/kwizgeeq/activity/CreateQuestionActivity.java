@@ -26,6 +26,7 @@ public class CreateQuestionActivity extends AppCompatActivity implements Navigat
 
     @Override
     public void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_question);
 
