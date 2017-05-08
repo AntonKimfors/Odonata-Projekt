@@ -69,11 +69,15 @@ public class KwizGeeQ {
     public void createUserQuestion(int quizIndex, int questionIndex, String questionStr,
                                    String questionImg, double xPosition, double yPosition,
                                    String audioFile){
+        Quiz quiz = quizzList.get(quizIndex);
+
+        if(quiz== null){
+            throw new IndexOutOfBoundsException("Quiz doesn't exist");
+        }
 
         UserQuestion question = new UserQuestion(questionStr,questionImg,xPosition,yPosition,
                 audioFile);
 
-        Quiz quiz = quizzList.get(quizIndex);
         quiz.addQuestionOnIndex(questionIndex,question);
     }
 

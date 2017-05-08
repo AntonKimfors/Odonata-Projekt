@@ -29,7 +29,7 @@ public class CreateQuestionActivity extends AppCompatActivity implements Navigat
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_create_question);
-        System.out.println("CreateQuestionActivity");
+
         quizIndex = getIntent().getIntExtra("quizIndex",0);
         questionIndex = getIntent().getIntExtra("questionIndex",0);
 
