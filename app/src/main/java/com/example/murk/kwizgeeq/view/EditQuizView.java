@@ -4,13 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.murk.kwizgeeq.activity.NavigatableActivity;
 import com.example.murk.kwizgeeq.activity.QuestioneerActivity;
-import com.example.murk.kwizgeeq.model.CreateQuizAdapter;
+import com.example.murk.kwizgeeq.model.EditQuizAdapter;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
-import com.example.murk.kwizgeeq.model.QuizListAdapter;
 
 import java.util.Observable;
 
@@ -22,17 +22,17 @@ public class EditQuizView extends Observable {
 
 
     public ListView listView;
-
+    private EditText editText;
     private KwizGeeQ model;
-    private CreateQuizAdapter adapter;
+    private EditQuizAdapter adapter;
 
-    public EditQuizView(int index,final ListView listView, final Context context,final NavigatableActivity oldActivity) {
+    public EditQuizView(int index, final ListView listView, final Context context, final NavigatableActivity oldActivity, EditText editText) {
         this.listView = listView;
         this.model = KwizGeeQ.getInstance();
+        this.editText = editText;
 
 
-
-        this.adapter = new CreateQuizAdapter(context, model.getQuiz(index).getQuestions());
+        this.adapter = new EditQuizAdapter(context, model.getQuiz(index).getQuestions());
         listView.setAdapter(adapter);
 
         //Play quiz
