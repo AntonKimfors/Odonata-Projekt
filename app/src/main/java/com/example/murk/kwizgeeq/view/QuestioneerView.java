@@ -29,6 +29,7 @@ import java.util.Observable;
 
 public class QuestioneerView extends Observable{
 
+    private Window window;
     private TextView quizLabel;
     private TextView questNumLabel;
     private TextView questLabel;
@@ -42,7 +43,8 @@ public class QuestioneerView extends Observable{
     private KwizGeeQ model;
 
 
-    public QuestioneerView(TextView quizLabel, TextView questNumLabel, TextView questLabel, TextView progressNumbers, ProgressBar progressBar, Button answerButton1, Button answerButton2, Button answerButton3, Button answerButton4) {
+    public QuestioneerView(Window window, TextView quizLabel, TextView questNumLabel, TextView questLabel, TextView progressNumbers, ProgressBar progressBar, Button answerButton1, Button answerButton2, Button answerButton3, Button answerButton4) {
+        this.window = window;
         this.quizLabel = quizLabel;
         this.questNumLabel = questNumLabel;
         this.questLabel = questLabel;
@@ -55,11 +57,11 @@ public class QuestioneerView extends Observable{
         this.model = KwizGeeQ.getInstance();
     }
 
-    public void flashCorrectAnswer(View view, Window window, NavigatableActivity activity) {
+    public void flashCorrectAnswer(View view, NavigatableActivity activity) {
         flashAnswer(view, window, activity, Color.GREEN);
     }
 
-    public void flashIncorrectAnswer(View view, Window window, NavigatableActivity activity) {
+    public void flashIncorrectAnswer(View view, NavigatableActivity activity) {
         flashAnswer(view, window, activity, Color.RED);
     }
 
@@ -75,20 +77,20 @@ public class QuestioneerView extends Observable{
         a.setOneShot(true);
         view.setBackground(a);
         a.start();
-        setUntouchable(window, true);
+        setWindowUntouchable(true);
         new CountDownTimer(2250, 2250){
             public void onTick(long l){
 
             }
             public void onFinish(){
-                setUntouchable(window, false);
+                setWindowUntouchable(false);
                 setChanged();
                 notifyObservers(activity);
             }
         }.start();
     }
 
-    private void setUntouchable(Window window, boolean untouchable){
+    private void setWindowUntouchable(boolean untouchable){
         if(untouchable){
             window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }else{

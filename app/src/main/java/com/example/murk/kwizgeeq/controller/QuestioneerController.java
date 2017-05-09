@@ -20,9 +20,12 @@ public class QuestioneerController implements Controller, Observer{
     private QuestioneerView view;
     private KwizGeeQ model;
 
-    public QuestioneerController(QuestioneerView view) {
+    private NavigatableActivity activity;
+
+    public QuestioneerController(QuestioneerView view, NavigatableActivity activity) {
         this.view = view;
         this.model = KwizGeeQ.getInstance();
+        this.activity = activity;
     }
 
     public void onCreate() {
@@ -42,12 +45,12 @@ public class QuestioneerController implements Controller, Observer{
         //TODO (Statistics) change to relevant activity and save relevant information if isFinished()
     }
 
-    public void answerSelected(View view, Window window, NavigatableActivity activity){
+    public void answerSelected(View view){
         if(model.checkAnswerIsCorrect((Answer)(view.getTag()))){
-            this.view.flashCorrectAnswer(view, window, activity);
+            this.view.flashCorrectAnswer(view, activity);
             //TODO (Statistics) save relevant information
         } else{
-            this.view.flashIncorrectAnswer(view, window, activity);
+            this.view.flashIncorrectAnswer(view, activity);
             //TODO (Statistics) save relevant information
         }
     }
