@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.health.PackageHealthStats;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -38,7 +39,7 @@ public class CreateQuestionActivity extends AppCompatActivity implements Navigat
         binding = DataBindingUtil.setContentView(this,R.layout.activity_create_question);
 
         Context applicationContext = getApplicationContext();
-        File imageStorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imageStorageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         PackageManager packageManager = getPackageManager();
 
         EditText questionText = (EditText)findViewById(R.id.questionText);
@@ -66,7 +67,9 @@ public class CreateQuestionActivity extends AppCompatActivity implements Navigat
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == captureImageRequestCode && resultCode == RESULT_OK) {
-            System.out.println("Photo success!");
+            Uri uri = data.getData();
+            String path = uri.getPath();
+            createQuestionController.imageCreated(path);
         }
     }
 }

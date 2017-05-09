@@ -16,6 +16,8 @@ public class CreateQuestionController implements Controller, Observer{
     private CreateQuestionView createQuestionView;
     private KwizGeeQ model;
 
+    private String imagePath;
+
     private int quizIndex;
     private int questionIndex;
 
@@ -57,8 +59,12 @@ public class CreateQuestionController implements Controller, Observer{
         createQuestionView.takePhoto();
     }
 
+    public void imageCreated(String imagePath){
+        this.imagePath = imagePath;
+    }
+
     private void saveQuestion(){
-        model.createUserQuestion(quizIndex, questionIndex, createQuestionView.getQuestionString(),null,0,0,null);
+        model.createUserQuestion(quizIndex, questionIndex, createQuestionView.getQuestionString(),imagePath,0,0,null);
 
         model.addStringAnswer(quizIndex,questionIndex, createQuestionView.getCorrectString(),true);
 
