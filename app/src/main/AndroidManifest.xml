@@ -33,6 +33,10 @@
         <activity
             android:name=".activity.QuestioneerActivity"
             android:parentActivityName=".activity.QuizListActivity"/>
+        <activity
+            android:name=".activity.EditQuizActivity"
+            android:parentActivityName=".activity.QuizListActivity"/>
+
         <activity android:name=".StatisticsView" />
     </application>
 
