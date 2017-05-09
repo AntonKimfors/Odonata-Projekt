@@ -1,9 +1,7 @@
 package com.example.murk.kwizgeeq.controller;
 
-import android.net.Uri;
 import android.view.View;
 
-import com.example.murk.kwizgeeq.activity.ImageHandlingActivity;
 import com.example.murk.kwizgeeq.view.CreateQuestionView;
 import com.example.murk.kwizgeeq.model.*;
 
