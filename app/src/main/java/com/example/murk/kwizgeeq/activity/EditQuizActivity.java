@@ -18,7 +18,7 @@ public class EditQuizActivity extends ListActivity implements NavigatableActivit
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar);
-        setContentView(R.layout.activity_quiz_list);
+        setContentView(R.layout.activity_edit_quiz);
         int index = getIntent().getIntExtra("quizindex", 0);
 
         view = new EditQuizView(index, getListView(), this, this, (EditText) findViewById(R.id.etQuizName));
