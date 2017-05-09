@@ -44,7 +44,7 @@
             android:name=".activity.EditQuizActivity"
             android:parentActivityName=".activity.QuizListActivity"/>
 
-        <activity android:name=".StatisticsView" />
+        <activity android:name=".activity.StatisticsActivity" />
     </application>
 
 </manifest>

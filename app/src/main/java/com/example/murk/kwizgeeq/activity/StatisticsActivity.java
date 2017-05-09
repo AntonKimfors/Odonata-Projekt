@@ -1,9 +1,11 @@
-package com.example.murk.kwizgeeq;
+package com.example.murk.kwizgeeq.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class StatisticsView extends AppCompatActivity {
+import com.example.murk.kwizgeeq.R;
+
+public class StatisticsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
