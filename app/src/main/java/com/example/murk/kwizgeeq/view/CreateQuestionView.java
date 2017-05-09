@@ -102,7 +102,7 @@ public class CreateQuestionView extends Observable{
     }
 
     public void endAddOfQuestions(NavigatableActivity oldActivity, Context context){
-        Intent intent = new Intent(context,QuizList.class);
+        Intent intent = new Intent(context,QuizListActivity.class);
         oldActivity.startActivity(intent);
     }
 }
