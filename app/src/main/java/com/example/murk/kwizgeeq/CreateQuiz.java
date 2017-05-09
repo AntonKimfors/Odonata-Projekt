@@ -3,7 +3,6 @@ package com.example.murk.kwizgeeq;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.graphics.Color;
 import android.widget.AdapterView;
@@ -13,12 +12,11 @@ import android.widget.ListView;
 
 import com.example.murk.kwizgeeq.activity.*;
 import com.example.murk.kwizgeeq.model.*;
-import com.example.murk.kwizgeeq.view.CreateQuestionView;
 
 public class CreateQuiz extends ListActivity {
     private EditText QuizLabel;
     ListView listView;
-    CreateQuizAdapter adapter;
+    EditQuizAdapter adapter;
     int quizIndex;
 
     @Override
@@ -30,7 +28,7 @@ public class CreateQuiz extends ListActivity {
         //
         //Se QuizListAdapter för att få listan att se ut på annat sätt
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_quiz);
+        setContentView(R.layout.activity_edit_quiz);
 
         //teststuff
         Answer testAnswer1 = new Answer(true,"fest");
@@ -59,7 +57,7 @@ public class CreateQuiz extends ListActivity {
 
         listView = getListView();
 
-        adapter = new CreateQuizAdapter(this, KwizGeeQ.getInstance().getQuiz(quizIndex).getQuestions());
+        adapter = new EditQuizAdapter(this, KwizGeeQ.getInstance().getQuiz(quizIndex).getQuestions());
         listView.setAdapter(adapter);
 
         //Edit Question

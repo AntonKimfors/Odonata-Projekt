@@ -19,13 +19,13 @@ import static com.example.murk.kwizgeeq.R.color.*;
  * Created by akimfors on 2017-04-26.
  */
 
-public class CreateQuizAdapter extends BaseAdapter {
+public class EditQuizAdapter extends BaseAdapter {
 
 
     private Context mContext;
     private ArrayList<Question> mQuestions;
 
-    public CreateQuizAdapter(Context context, ArrayList<Question> questions){
+    public EditQuizAdapter(Context context, ArrayList<Question> questions){
         mContext = context;
         mQuestions = questions;
     }
