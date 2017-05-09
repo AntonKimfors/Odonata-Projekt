@@ -26,7 +26,8 @@
         android:text="x / y"
         app:layout_constraintLeft_toRightOf="@+id/progressBar"
         app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp" />
 
     <ImageView
         android:id="@+id/imageView"
