@@ -1,10 +1,9 @@
 package com.example.murk.kwizgeeq.controller;
 
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.view.View;
 
-import com.example.murk.kwizgeeq.activity.NavigatableActivity;
+import com.example.murk.kwizgeeq.activity.ImageHandlingActivity;
 import com.example.murk.kwizgeeq.view.CreateQuestionView;
 import com.example.murk.kwizgeeq.model.*;
 
@@ -16,22 +15,23 @@ import java.util.*;
 
 public class CreateQuestionController implements Controller, Observer{
 
-    private CreateQuestionView view;
+    private CreateQuestionView createQuestionView;
     private KwizGeeQ model;
 
-    public CreateQuestionController(CreateQuestionView view){
-        this.view = view;
+    private int quizIndex;
+    private int questionIndex;
+
+    public CreateQuestionController(CreateQuestionView createQuestionView, int quizIndex, int questionIndex){
+        this.createQuestionView = createQuestionView;
+        this.quizIndex = quizIndex;
+        this.questionIndex = questionIndex;
         model = KwizGeeQ.getInstance();
     }
 
-    public void setTextFields(int quizIndex, int questionIndex) {
-        if(questionIndex < model.getQuizSize(quizIndex)){
-            view.setTextFields(quizIndex,questionIndex);
-        }
-    }
-
     public void onCreate(){
-
+        if(questionIndex < model.getQuizSize(quizIndex)){
+            createQuestionView.setTextFields(quizIndex,questionIndex);
+        }
     }
 
     public void onPause() {
@@ -44,28 +44,29 @@ public class CreateQuestionController implements Controller, Observer{
 
     }
 
-    public void nextButtonAction(int quizIndex, int questionIndex, NavigatableActivity oldActivity,
-                                 Context context){
-        saveQuestion(quizIndex,questionIndex);
-
+    public void nextButtonAction(View view){
+        saveQuestion();
         int nextQuestionIndex = questionIndex +1;
-        view.addMoreQuestions(quizIndex,nextQuestionIndex,oldActivity,context);
+        createQuestionView.addMoreQuestions(quizIndex,nextQuestionIndex);
     }
 
-    public void doneButtonAction(int quizIndex, int questionIndex, NavigatableActivity oldActivity,
-                                 Context context){
-        saveQuestion(quizIndex, questionIndex);
-        view.endAddOfQuestions(oldActivity,context);
+    public void doneButtonAction(View view){
+        saveQuestion();
+        createQuestionView.endAddOfQuestions();
     }
 
-    private void saveQuestion(int quizIndex, int questionIndex){
-        model.createUserQuestion(quizIndex, questionIndex, view.getQuestionString(),null,0,0,null);
+    public void mediaButtonAction(View view){
+        createQuestionView.takePhoto();
+    }
 
-        model.addStringAnswer(quizIndex,questionIndex,view.getCorrectString(),true);
+    private void saveQuestion(){
+        model.createUserQuestion(quizIndex, questionIndex, createQuestionView.getQuestionString(),null,0,0,null);
 
-        model.addStringAnswer(quizIndex,questionIndex,view.getWrong1String(),false);
-        model.addStringAnswer(quizIndex,questionIndex,view.getWrong2String(),false);
-        model.addStringAnswer(quizIndex,questionIndex,view.getWrong3String(),false);
+        model.addStringAnswer(quizIndex,questionIndex, createQuestionView.getCorrectString(),true);
+
+        model.addStringAnswer(quizIndex,questionIndex, createQuestionView.getWrong1String(),false);
+        model.addStringAnswer(quizIndex,questionIndex, createQuestionView.getWrong2String(),false);
+        model.addStringAnswer(quizIndex,questionIndex, createQuestionView.getWrong3String(),false);
     }
 
     @Override

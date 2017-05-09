@@ -17,7 +17,7 @@ import java.util.*;
  * Created by Henrik on 08/05/2017.
  */
 
-public class ImageFileHandler extends AppCompatActivity {
+public class ImageFileHandler {
 
     public static Uri getImageURI(File storageDir, Context context){
         File photoFile = null;
@@ -30,7 +30,7 @@ public class ImageFileHandler extends AppCompatActivity {
         }
         // Continue only if the File was successfully created
         if (photoFile != null) {
-            photoURI = FileProvider.getUriForFile(context,"com.example.android.fileprovider",
+            photoURI = FileProvider.getUriForFile(context,"com.example.murk.kwizgeeq",
                     photoFile);
 
         }

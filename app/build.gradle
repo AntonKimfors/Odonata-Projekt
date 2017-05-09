@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 
 android {
-
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
@@ -21,6 +20,9 @@ android {
             debuggable true
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -34,7 +36,6 @@ dependencies {
     compile 'org.xdty.preference:color-picker:0.0.5'
     compile('se.michaelthelin.spotify:spotify-web-api-java:1.5.0') {
         exclude group: "commons-beanutils", module: "commons-beanutils"
-
     }
     compile 'commons-beanutils:commons-beanutils:20030211.134440'
     testCompile 'junit:junit:4.12'
