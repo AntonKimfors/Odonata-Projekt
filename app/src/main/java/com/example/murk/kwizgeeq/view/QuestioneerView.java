@@ -57,15 +57,15 @@ public class QuestioneerView extends Observable{
         this.model = KwizGeeQ.getInstance();
     }
 
-    public void flashCorrectAnswer(View view, NavigatableActivity activity) {
-        flashAnswer(view, window, activity, Color.GREEN);
+    public void flashCorrectAnswer(View view) {
+        flashAnswer(view, window, Color.GREEN);
     }
 
-    public void flashIncorrectAnswer(View view, NavigatableActivity activity) {
-        flashAnswer(view, window, activity, Color.RED);
+    public void flashIncorrectAnswer(View view) {
+        flashAnswer(view, window, Color.RED);
     }
 
-    private void flashAnswer(View view, final Window window, final NavigatableActivity activity, int color) {
+    private void flashAnswer(View view, final Window window, int color) {
         ColorDrawable f1 = new ColorDrawable(color);
         ColorDrawable f2 = new ColorDrawable(Color.parseColor("#ffd6d7d7"));
         AnimationDrawable a = new AnimationDrawable();
@@ -85,7 +85,7 @@ public class QuestioneerView extends Observable{
             public void onFinish(){
                 setWindowUntouchable(false);
                 setChanged();
-                notifyObservers(activity);
+                notifyObservers("question done");
             }
         }.start();
     }

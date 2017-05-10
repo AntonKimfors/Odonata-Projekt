@@ -22,10 +22,12 @@ public class QuestioneerActivity extends AppCompatActivity implements Navigatabl
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_questioneer);
+
         view = new QuestioneerView(getWindow(), (TextView)findViewById(R.id.quizLabel), (TextView)findViewById(R.id.questNumLabel), (TextView)findViewById(R.id.questLabel), (TextView)findViewById(R.id.progressNumbers), (ProgressBar)findViewById(R.id.progressBar), (Button)findViewById(R.id.answerButton1), (Button)findViewById(R.id.answerButton2), (Button)findViewById(R.id.answerButton3), (Button)findViewById(R.id.answerButton4));
-        controller = new QuestioneerController(view, this);
-        view.addObserver(controller);
+        controller = new QuestioneerController(view, this, getIntent().getIntExtra("quizIndex", 0));
         controller.onCreate();
+
+        view.addObserver(controller);
         binding.setController(controller);
     }
 

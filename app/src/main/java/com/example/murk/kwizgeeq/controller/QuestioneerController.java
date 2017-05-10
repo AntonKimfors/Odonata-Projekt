@@ -22,14 +22,18 @@ public class QuestioneerController implements Controller, Observer{
 
     private NavigatableActivity activity;
 
-    public QuestioneerController(QuestioneerView view, NavigatableActivity activity) {
+    private int quizIndex;
+    private int questionIndex;
+
+    public QuestioneerController(QuestioneerView view, NavigatableActivity activity, int quizIndex) {
         this.view = view;
         this.model = KwizGeeQ.getInstance();
         this.activity = activity;
+        this.quizIndex = quizIndex;
+        this.questionIndex = 0;
     }
 
     public void onCreate() {
-        model.activeQuestionIndex = 0; //TODO remove when firePlayQuiz() is implemented correctly
         view.updateQuestioneer(model.activeQuiz, model.activeQuestionIndex + 1, model.activeQuiz.getQuestions().size());
     }
 
@@ -47,15 +51,15 @@ public class QuestioneerController implements Controller, Observer{
 
     public void answerSelected(View view){
         if(model.checkAnswerIsCorrect((Answer)(view.getTag()))){
-            this.view.flashCorrectAnswer(view, activity);
+            this.view.flashCorrectAnswer(view);
             //TODO (Statistics) save relevant information
         } else{
-            this.view.flashIncorrectAnswer(view, activity);
+            this.view.flashIncorrectAnswer(view);
             //TODO (Statistics) save relevant information
         }
     }
 
-    public void finishQuestion(NavigatableActivity activity){
+    public void finishQuestion(){
         if(model.activeQuestionIndex + 1 == model.activeQuiz.getQuestions().size()) {
             view.destroyActivity(activity);
         }
@@ -66,8 +70,8 @@ public class QuestioneerController implements Controller, Observer{
     }
 
     public void update(Observable o, Object arg) {
-        if(arg instanceof NavigatableActivity){
-            finishQuestion((NavigatableActivity) arg);
+        if(arg == "question done"){
+            finishQuestion();
         }
     }
 }

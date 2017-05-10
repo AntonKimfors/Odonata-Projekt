@@ -43,9 +43,10 @@ public class QuizListView extends Observable {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizzList.get(position); //Make the clicked quiz active quiz.
+                //KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizzList.get(position); //Make the clicked quiz active quiz.
 
                 Intent intent = new Intent(context, QuestioneerActivity.class);
+                intent.putExtra("quizIndex", position);
                 oldActivity.startActivity(intent);
             }
         });
