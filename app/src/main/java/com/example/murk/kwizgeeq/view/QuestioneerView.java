@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.murk.kwizgeeq.activity.NavigatableActivity;
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
+import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 
@@ -98,14 +99,19 @@ public class QuestioneerView extends Observable{
         }
     }
 
-    public void updateQuestioneer(Quiz quiz, int currentQuestion, int totalQuestions){
-        Iterator answerIterator = quiz.getQuestions().get(currentQuestion-1).answerIterator(true);
-        quizLabel.setText(quiz.getName());
-        questNumLabel.setText("Question " + currentQuestion);
-        questLabel.setText(((UserQuestion)quiz.getQuestions().get(currentQuestion-1)).getQuestionStr());
-        progressNumbers.setText(currentQuestion + " / " + totalQuestions);
-        progressBar.setMax(totalQuestions);
-        progressBar.setProgress(currentQuestion);
+    public void updateQuizRelatedItems(int quizIndex){
+        quizLabel.setText(model.getQuiz(quizIndex).getName());
+        progressBar.setMax(model.getAmountOfQuestions(quizIndex));
+    }
+
+    public void updateQuestioneer(int quizIndex, int questionIndex){
+        Question question = model.getQuestion(quizIndex, questionIndex);
+
+        Iterator answerIterator = question.answerIterator(true);
+        questNumLabel.setText("Question " + (questionIndex + 1));
+        questLabel.setText(question.toString());
+        progressNumbers.setText((questionIndex + 1) + " / " + model.getAmountOfQuestions(quizIndex));
+        progressBar.setProgress((questionIndex + 1));
         answerButton1.setTag(answerIterator.next());
         answerButton2.setTag(answerIterator.next());
         answerButton3.setTag(answerIterator.next());

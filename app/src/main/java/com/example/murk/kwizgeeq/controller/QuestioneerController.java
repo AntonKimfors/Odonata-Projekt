@@ -33,7 +33,8 @@ public class QuestioneerController implements Controller, Observer{
     }
 
     public void onCreate() {
-        view.updateQuestioneer(model.getQuiz(quizIndex), questionIndex + 1, model.getAmountOfQuestions(quizIndex));
+        view.updateQuizRelatedItems(quizIndex);
+        view.updateQuestioneer(quizIndex, questionIndex);
     }
 
     public void onPause() {
@@ -64,7 +65,7 @@ public class QuestioneerController implements Controller, Observer{
         }
         else {
             questionIndex++;
-            view.updateQuestioneer(model.getQuiz(quizIndex), questionIndex + 1, model.getAmountOfQuestions(quizIndex));
+            view.updateQuestioneer(quizIndex, questionIndex);
         }
     }
 
