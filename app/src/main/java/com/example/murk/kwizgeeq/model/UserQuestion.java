@@ -11,6 +11,8 @@ public class UserQuestion extends Question {
     private double yPosition;
     private String audioFile;
 
+    public UserQuestion(){}
+
     public UserQuestion(String questionStr, String questionImg, double xPosition, double yPosition, String audioFile) {
         this.questionStr = questionStr;
         this.questionImg = questionImg;

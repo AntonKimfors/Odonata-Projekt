@@ -86,6 +86,18 @@ public class KwizGeeQ {
         quiz.addQuestionOnIndex(questionIndex,question);
     }
 
+    public void setUserQuestionString (int quizIndex, int questionIndex,String questionString){
+        Quiz quiz = quizzList.get(quizIndex);
+
+        if(quiz== null){
+            throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" doesn't exist");
+        }
+
+        if(quiz.getSize()<=questionIndex){
+            quiz.addQuestion(new UserQuestion());
+        }
+    }
+
     /**
      *  This method both returns value and has side effects
      *  but I have not came up with a better solution so far

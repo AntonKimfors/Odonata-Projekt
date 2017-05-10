@@ -32,6 +32,8 @@ public class CreateQuestionController implements Controller, Observer{
         if(questionIndex < model.getQuizSize(quizIndex)){
             createQuestionView.setTextFields(quizIndex,questionIndex);
         }
+
+
     }
 
     public void onPause() {
@@ -61,6 +63,10 @@ public class CreateQuestionController implements Controller, Observer{
 
     public void imageCreated(String imagePath){
         this.imagePath = imagePath;
+    }
+
+    public void correctTextFocus(View view){
+        createQuestionView.hightlightCorrectField();
     }
 
     private void saveQuestion(){

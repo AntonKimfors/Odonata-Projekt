@@ -3,6 +3,7 @@ package com.example.murk.kwizgeeq.view;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.widget.*;
@@ -53,6 +54,11 @@ public class CreateQuestionView extends Observable{
         this.wrongText3 = wrongText3;
 
         model = KwizGeeQ.getInstance();
+    }
+
+    public void hightlightCorrectField(){
+        int greenColor = Color.argb(255,150, 255, 150);
+        correctText.setBackgroundColor(greenColor);
     }
 
     public void setTextFields(int quizIndex, int questionIndex){
