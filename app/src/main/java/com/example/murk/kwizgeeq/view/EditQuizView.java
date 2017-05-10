@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.murk.kwizgeeq.activity.CreateQuestionActivity;
 import com.example.murk.kwizgeeq.activity.NavigatableActivity;
 import com.example.murk.kwizgeeq.activity.QuestioneerActivity;
 import com.example.murk.kwizgeeq.model.EditQuizAdapter;
@@ -26,12 +27,12 @@ public class EditQuizView extends Observable {
     private KwizGeeQ model;
     private EditQuizAdapter adapter;
 
-    public EditQuizView(int index, final ListView listView, final Context context, final NavigatableActivity oldActivity, EditText editText) {
+    public EditQuizView(final int index, final ListView listView, final Context context, final NavigatableActivity oldActivity, EditText editText) {
         this.listView = listView;
         this.model = KwizGeeQ.getInstance();
         this.editText = editText;
 
-
+        //this.editText.setText(model.getQuiz(index).getName().toString());  //Checkwhayy
         this.adapter = new EditQuizAdapter(context, model.getQuiz(index).getQuestions());
         listView.setAdapter(adapter);
 
@@ -40,11 +41,13 @@ public class EditQuizView extends Observable {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizzList.get(position); //Make the clicked quiz active quiz.
+
                 //TODO make the above possible with sent intents.
 
+                Intent intent = new Intent(context, CreateQuestionActivity.class);
+                intent.putExtra("questionindex",position);
+                intent.putExtra("quizindex",index);
 
-                Intent intent = new Intent(context, QuestioneerActivity.class);
                 oldActivity.startActivity(intent);
             }
         });
