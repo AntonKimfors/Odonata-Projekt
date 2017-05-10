@@ -25,14 +25,26 @@ public class QuizListController implements Controller, Observer{
         this.view = view;
         model = KwizGeeQ.getInstance();
 
-        UserQuiz quiz1 = new UserQuiz("Spsh", new Color());
+        UserQuiz quiz1 = new UserQuiz("Testquiz 1", new Color());
         KwizGeeQ.getInstance().quizzList.add(quiz1);
-        UserQuestion question1 = new UserQuestion("quantos anos tienes?", null, 4, 5.0, null);
-        question1.addAnswer(new Answer(true, "4"));
-        question1.addAnswer(new Answer(false, "42"));
-        question1.addAnswer(new Answer(false, "24"));
-        question1.addAnswer(new Answer(false, "2"));
+        UserQuestion question1 = new UserQuestion("Vad är svaret på fråga nummer 1?", null, 0, 0, null);
+        question1.addAnswer(new Answer(true, "Sant"));
+        question1.addAnswer(new Answer(false, "Falskt"));
+        question1.addAnswer(new Answer(false, "Falskt"));
+        question1.addAnswer(new Answer(false, "Falskt"));
+        UserQuestion question2 = new UserQuestion("Vad är svaret på fråga nummer 2?", null, 0, 0, null);
+        question2.addAnswer(new Answer(true, "Sant"));
+        question2.addAnswer(new Answer(false, "Falskt"));
+        question2.addAnswer(new Answer(false, "Falskt"));
+        question2.addAnswer(new Answer(false, "Falskt"));
+        UserQuestion question3 = new UserQuestion("Vad är svaret på fråga nummer 3?", null, 0, 0, null);
+        question3.addAnswer(new Answer(true, "Sant"));
+        question3.addAnswer(new Answer(false, "Falskt"));
+        question3.addAnswer(new Answer(false, "Falskt"));
+        question3.addAnswer(new Answer(false, "Falskt"));
         quiz1.addQuestion(question1);
+        quiz1.addQuestion(question2);
+        quiz1.addQuestion(question3);
 
     }
 
