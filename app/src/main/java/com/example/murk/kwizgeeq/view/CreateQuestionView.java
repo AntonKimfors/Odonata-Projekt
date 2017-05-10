@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.*;
 
 import java.io.File;
@@ -31,8 +32,6 @@ public class CreateQuestionView extends Observable{
     private EditText wrongText2;
     private EditText wrongText3;
 
-    private String photoPath;
-
     public CreateQuestionView(NavigatableActivity currentActivity, Context currentContext,
                               File imageStorageDir, PackageManager packageManager,
                               int captureImageRequestCode, EditText questionText,
@@ -55,9 +54,30 @@ public class CreateQuestionView extends Observable{
         model = KwizGeeQ.getInstance();
     }
 
-    public void hightlightCorrectField(){
-        int greenColor = Color.argb(255,150, 255, 150);
-        correctText.setBackgroundColor(greenColor);
+    public void addOnFocusChangeListener(View.OnFocusChangeListener listener){
+        correctText.setOnFocusChangeListener(listener);
+        wrongText1.setOnFocusChangeListener(listener);
+        wrongText2.setOnFocusChangeListener(listener);
+        wrongText3.setOnFocusChangeListener(listener);
+    }
+
+    public void highlightField(View view){
+        EditText textField = (EditText) view;
+
+        if(textField == correctText){
+            int greenColor = Color.argb(255,150, 255, 150);
+            correctText.setBackgroundColor(greenColor);
+        } else{
+            int redColor = Color.argb(255, 255, 129, 109);
+            correctText.setBackgroundColor(redColor);
+        }
+
+    }
+
+    public void normalizeField(View view){
+        int whiteColor = Color.argb(255,255,255,255);
+        EditText textField = (EditText) view;
+        textField.setBackgroundColor(whiteColor);
     }
 
     public void setTextFields(int quizIndex, int questionIndex){

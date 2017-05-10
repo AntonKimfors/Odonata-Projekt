@@ -1,6 +1,5 @@
 package com.example.murk.kwizgeeq.model;
 
-import android.graphics.Color;
 
 public class SpotifyQuiz extends Quiz {
 

@@ -1,12 +1,8 @@
 package com.example.murk.kwizgeeq.model;
 
-import android.graphics.Color;
 
-import com.wrapper.spotify.models.User;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by akimfors on 2017-04-05.

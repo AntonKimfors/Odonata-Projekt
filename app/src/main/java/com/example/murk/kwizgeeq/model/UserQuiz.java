@@ -1,7 +1,5 @@
 package com.example.murk.kwizgeeq.model;
 
-import java.io.Serializable;
-
 /**
  * Created by Murk on 2017-04-05.
  */

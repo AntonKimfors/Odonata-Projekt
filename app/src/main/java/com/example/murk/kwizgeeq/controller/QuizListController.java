@@ -24,8 +24,6 @@ public class QuizListController implements Controller, Observer{
     public QuizListController(QuizListView view){
         this.view = view;
         model = KwizGeeQ.getInstance();
-
-
         int quiz = model.createUserQuiz("Testquiz",Color.argb(255,100,100,100));
         model.setUserQuestionText(quiz,0,"Vad är svaret på fråga nummer 1?");
         model.addTextAnswer(quiz,0,"sant",true);

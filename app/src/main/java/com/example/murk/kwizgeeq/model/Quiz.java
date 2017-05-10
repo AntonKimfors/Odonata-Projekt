@@ -1,10 +1,6 @@
 package com.example.murk.kwizgeeq.model;
 
-import android.graphics.Color;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Henrik on 04/04/2017.
