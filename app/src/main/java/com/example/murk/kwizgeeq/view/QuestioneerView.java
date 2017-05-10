@@ -58,16 +58,16 @@ public class QuestioneerView extends Observable{
     }
 
     public void flashCorrectAnswer(View view) {
-        flashAnswer(view, window, Color.GREEN);
+        flashAnswer(view, Color.GREEN);
     }
 
     public void flashIncorrectAnswer(View view) {
-        flashAnswer(view, window, Color.RED);
+        flashAnswer(view, Color.RED);
     }
 
-    private void flashAnswer(View view, final Window window, int color) {
+    private void flashAnswer(View view, int color) {
         ColorDrawable f1 = new ColorDrawable(color);
-        ColorDrawable f2 = new ColorDrawable(Color.parseColor("#ffd6d7d7"));
+        ColorDrawable f2 = new ColorDrawable(Color.parseColor("#ffd6d7d7")); //TODO change to use background colour
         AnimationDrawable a = new AnimationDrawable();
         a.addFrame(f2, 250);
         a.addFrame(f1, 250);

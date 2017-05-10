@@ -111,5 +111,9 @@ public class KwizGeeQ {
         activeQuestionIndex++;
     }
 
+    public int getAmountOfQuestions(int quizIndex){
+        return getQuiz(quizIndex).getQuestions().size();
+    }
+
 
 }

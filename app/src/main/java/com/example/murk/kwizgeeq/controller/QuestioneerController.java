@@ -1,7 +1,6 @@
 package com.example.murk.kwizgeeq.controller;
 
 import android.view.View;
-import android.view.Window;
 
 import com.example.murk.kwizgeeq.activity.NavigatableActivity;
 import com.example.murk.kwizgeeq.model.Answer;
@@ -34,7 +33,7 @@ public class QuestioneerController implements Controller, Observer{
     }
 
     public void onCreate() {
-        view.updateQuestioneer(model.activeQuiz, model.activeQuestionIndex + 1, model.activeQuiz.getQuestions().size());
+        view.updateQuestioneer(model.getQuiz(quizIndex), questionIndex + 1, model.getAmountOfQuestions(quizIndex));
     }
 
     public void onPause() {
@@ -60,12 +59,12 @@ public class QuestioneerController implements Controller, Observer{
     }
 
     public void finishQuestion(){
-        if(model.activeQuestionIndex + 1 == model.activeQuiz.getQuestions().size()) {
+        if(questionIndex + 1 == model.getAmountOfQuestions(quizIndex)) {
             view.destroyActivity(activity);
         }
         else {
-            model.incActiveQuestion();
-            view.updateQuestioneer(KwizGeeQ.getInstance().activeQuiz, model.activeQuestionIndex + 1, model.activeQuiz.getQuestions().size());
+            questionIndex++;
+            view.updateQuestioneer(model.getQuiz(quizIndex), questionIndex + 1, model.getAmountOfQuestions(quizIndex));
         }
     }
 
