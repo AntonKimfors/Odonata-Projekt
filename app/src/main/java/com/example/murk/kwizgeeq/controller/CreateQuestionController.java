@@ -57,14 +57,22 @@ public class CreateQuestionController implements Controller, Observer{
     }
 
     public void nextButtonAction(View view){
-        saveQuestion();
-        int nextQuestionIndex = questionIndex +1;
-        createQuestionView.addMoreQuestions(quizIndex,nextQuestionIndex);
+        if(!checkRequiredFields()){
+            createQuestionView.flashEmpty();
+        } else{
+            saveQuestion();
+            int nextQuestionIndex = questionIndex +1;
+            createQuestionView.addMoreQuestions(quizIndex,nextQuestionIndex);
+        }
     }
 
     public void doneButtonAction(View view){
-        saveQuestion();
-        createQuestionView.endAddOfQuestions();
+        if(!checkRequiredFields()){
+            createQuestionView.flashEmpty();
+        } else{
+            saveQuestion();
+            createQuestionView.endAddOfQuestions();
+        }
     }
 
     public void mediaButtonAction(View view){
@@ -75,7 +83,7 @@ public class CreateQuestionController implements Controller, Observer{
         model.setUserQuestionImagePath(quizIndex,questionIndex,imagePath);
     }
 
-    private void saveQuestion(){
+    private boolean checkRequiredFields(){
         String questionText = createQuestionView.getQuestionString();
         String correctText = createQuestionView.getCorrectString();
         String wrong1text = createQuestionView.getWrong1String();
@@ -84,14 +92,18 @@ public class CreateQuestionController implements Controller, Observer{
 
         if(questionText.isEmpty() || correctText.isEmpty() || wrong1text.isEmpty() ||
                 wrong2text.isEmpty() || wrong3text.isEmpty()){
-
+            return false;
         }
 
-        model.setUserQuestionText(quizIndex, questionIndex, questionText);
+        return true;
+    }
+
+    private void saveQuestion(){
+        model.setUserQuestionText(quizIndex, questionIndex, createQuestionView.getQuestionString());
 
         model.addTextAnswer(quizIndex,questionIndex, createQuestionView.getCorrectString(),true);
 
-        model.addTextAnswer(quizIndex,questionIndex, wrong1text,false);
+        model.addTextAnswer(quizIndex,questionIndex, createQuestionView.getWrong1String(),false);
         model.addTextAnswer(quizIndex,questionIndex, createQuestionView.getWrong2String(),false);
         model.addTextAnswer(quizIndex,questionIndex, createQuestionView.getWrong3String(),false);
     }

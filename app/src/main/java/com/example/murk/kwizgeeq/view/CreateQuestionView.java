@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
@@ -59,6 +61,24 @@ public class CreateQuestionView extends Observable{
         wrongText1.setOnFocusChangeListener(listener);
         wrongText2.setOnFocusChangeListener(listener);
         wrongText3.setOnFocusChangeListener(listener);
+    }
+
+    public void flashEmpty(){
+        flash(questionText);
+        flash(correctText);
+        flash(wrongText1);
+        flash(wrongText2);
+        flash(wrongText3);
+    }
+
+    private void flash(EditText editText){
+        if(editText.getText().toString().isEmpty()){
+            ColorDrawable f1 = new ColorDrawable(Color.argb(255,100,100,100));
+            ColorDrawable f2 = new ColorDrawable(Color.argb(255,255,255,255));
+            AnimationDrawable a = new AnimationDrawable();
+            a.addFrame(f1,100);
+            a.addFrame(f2,0);
+        }
     }
 
     public void highlightField(View view){
@@ -153,6 +173,7 @@ public class CreateQuestionView extends Observable{
         intent.putExtra("questionIndex",questionIndex);
         currentActivity.startActivity(intent);
     }
+
     public void endAddOfQuestions(){
         Intent intent = new Intent(currentContext,QuizListActivity.class);
         currentActivity.startActivity(intent);
