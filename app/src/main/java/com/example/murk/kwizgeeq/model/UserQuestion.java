@@ -98,9 +98,6 @@ public class UserQuestion extends Question {
 
     @Override
     public String toString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("Question: ").append(questionStr)
-                .append(System.lineSeparator()).append(super.toString());
-        return sb.toString();
+        return questionStr;
     }
 }
