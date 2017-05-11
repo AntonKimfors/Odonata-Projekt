@@ -4,9 +4,14 @@ import android.graphics.Color;
 
 public class SpotifyQuiz extends Quiz {
 
-	public SpotifyQuiz(String name, Color listColor) {
+	public SpotifyQuiz(String name, int listColor) {
 		super(name, listColor);
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	Question createQuestion() {
+		return null;
 	}
 
 	public Question createSpotifyQuestion() {

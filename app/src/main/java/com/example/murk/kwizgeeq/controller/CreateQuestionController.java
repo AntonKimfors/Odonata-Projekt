@@ -62,7 +62,7 @@ public class CreateQuestionController implements Controller, Observer{
     }
 
     public void imageCreated(String imagePath){
-        this.imagePath = imagePath;
+        model.setUserQuestionImagePath(quizIndex,questionIndex,imagePath);
     }
 
     public void correctTextFocus(View view){
@@ -70,13 +70,13 @@ public class CreateQuestionController implements Controller, Observer{
     }
 
     private void saveQuestion(){
-        model.createUserQuestion(quizIndex, questionIndex, createQuestionView.getQuestionString(),imagePath,0,0,null);
+        model.setUserQuestionText(quizIndex, questionIndex, createQuestionView.getQuestionString());
 
-        model.addStringAnswer(quizIndex,questionIndex, createQuestionView.getCorrectString(),true);
+        model.addTextAnswer(quizIndex,questionIndex, createQuestionView.getCorrectString(),true);
 
-        model.addStringAnswer(quizIndex,questionIndex, createQuestionView.getWrong1String(),false);
-        model.addStringAnswer(quizIndex,questionIndex, createQuestionView.getWrong2String(),false);
-        model.addStringAnswer(quizIndex,questionIndex, createQuestionView.getWrong3String(),false);
+        model.addTextAnswer(quizIndex,questionIndex, createQuestionView.getWrong1String(),false);
+        model.addTextAnswer(quizIndex,questionIndex, createQuestionView.getWrong2String(),false);
+        model.addTextAnswer(quizIndex,questionIndex, createQuestionView.getWrong3String(),false);
     }
 
     @Override

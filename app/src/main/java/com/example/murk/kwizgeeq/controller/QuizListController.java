@@ -25,26 +25,23 @@ public class QuizListController implements Controller, Observer{
         this.view = view;
         model = KwizGeeQ.getInstance();
 
-        UserQuiz quiz1 = new UserQuiz("Testquiz 1", new Color());
-        KwizGeeQ.getInstance().quizzList.add(quiz1);
-        UserQuestion question1 = new UserQuestion("Vad är svaret på fråga nummer 1?", null, 0, 0, null);
-        question1.addAnswer(new Answer(true, "Sant"));
-        question1.addAnswer(new Answer(false, "Falskt"));
-        question1.addAnswer(new Answer(false, "Falskt"));
-        question1.addAnswer(new Answer(false, "Falskt"));
-        UserQuestion question2 = new UserQuestion("Vad är svaret på fråga nummer 2?", null, 0, 0, null);
-        question2.addAnswer(new Answer(true, "Sant"));
-        question2.addAnswer(new Answer(false, "Falskt"));
-        question2.addAnswer(new Answer(false, "Falskt"));
-        question2.addAnswer(new Answer(false, "Falskt"));
-        UserQuestion question3 = new UserQuestion("Vad är svaret på fråga nummer 3?", null, 0, 0, null);
-        question3.addAnswer(new Answer(true, "Sant"));
-        question3.addAnswer(new Answer(false, "Falskt"));
-        question3.addAnswer(new Answer(false, "Falskt"));
-        question3.addAnswer(new Answer(false, "Falskt"));
-        quiz1.addQuestion(question1);
-        quiz1.addQuestion(question2);
-        quiz1.addQuestion(question3);
+
+        int quiz = model.createUserQuiz("Testquiz",Color.argb(255,100,100,100));
+        model.setUserQuestionText(quiz,0,"Vad är svaret på fråga nummer 1?");
+        model.addTextAnswer(quiz,0,"sant",true);
+        model.addTextAnswer(quiz,0,"falskt",false);
+        model.addTextAnswer(quiz,0,"falskt",false);
+        model.addTextAnswer(quiz,0,"falskt",false);
+        model.setUserQuestionText(quiz,1,"Vad är svaret på fråga nummer 2?");
+        model.addTextAnswer(quiz,1,"sant",true);
+        model.addTextAnswer(quiz,1,"falskt",false);
+        model.addTextAnswer(quiz,1,"falskt",false);
+        model.addTextAnswer(quiz,1,"falskt",false);
+        model.setUserQuestionText(quiz,2,"Vad är svaret på fråga nummer 3?");
+        model.addTextAnswer(quiz,2,"sant",true);
+        model.addTextAnswer(quiz,2,"falskt",false);
+        model.addTextAnswer(quiz,2,"falskt",false);
+        model.addTextAnswer(quiz,2,"falskt",false);
 
     }
 

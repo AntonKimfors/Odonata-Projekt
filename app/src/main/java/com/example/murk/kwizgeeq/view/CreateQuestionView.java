@@ -11,7 +11,6 @@ import android.widget.*;
 import java.io.File;
 import java.util.*;
 
-import com.example.murk.kwizgeeq.*;
 import com.example.murk.kwizgeeq.activity.*;
 import com.example.murk.kwizgeeq.model.*;
 import com.example.murk.kwizgeeq.utils.ImageFileHandler;
@@ -64,7 +63,7 @@ public class CreateQuestionView extends Observable{
     public void setTextFields(int quizIndex, int questionIndex){
         UserQuestion question = (UserQuestion)model.getQuestion(quizIndex,questionIndex);
 
-        setQuestionString(question.getQuestionStr());
+        setQuestionString(question.getQuestionText());
 
         Iterator<Answer> answerIterator = question.answerIterator(false);
 

@@ -32,7 +32,8 @@ public abstract class Question<T> implements Serializable {
         return answerList.iterator();
     }
 
-    public boolean addAnswer(Answer<T> answer){
+    public boolean addAnswer(T data, boolean isCorrect){
+        Answer<T> answer = new Answer<>(isCorrect,data);
         if(answer == null)
             throw new NullPointerException();
 

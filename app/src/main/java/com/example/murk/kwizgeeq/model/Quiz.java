@@ -11,12 +11,12 @@ import java.util.List;
  */
 
 public abstract class Quiz implements Iterable{
-    private ArrayList<Question> questions;
-    private Color listColor;
+    protected ArrayList<Question> questions;
+    private int listColor;
     private String name;
 
 
-    public Quiz(String name,Color listColor) {
+    public Quiz(String name,int listColor) {
         questions = new ArrayList<>();
         this.name = name;
         this.listColor = listColor;
@@ -30,11 +30,11 @@ public abstract class Quiz implements Iterable{
         this.name = name;
     }
 
-    public Color getListColor() {
+    public int getListColor() {
         return listColor;
     }
 
-    public void setListColor(Color listColor) {
+    public void setListColor(int listColor) {
         this.listColor = listColor;
     }
 
@@ -62,8 +62,10 @@ public abstract class Quiz implements Iterable{
         }
     }
 
-    public void addAnswer(int questionIndex, Answer answer){
-        questions.get(questionIndex).addAnswer(answer);
+    public void addTextAnswer(int questionIndex, String answerText, boolean isCorrect){
+        Question question = getQuestion(questionIndex);
+
+        question.addAnswer(answerText,isCorrect);
     }
 
     public void removeQuestion(Question question){
@@ -74,9 +76,24 @@ public abstract class Quiz implements Iterable{
         return questions.size();
     }
 
-    public Question getQuestion(int index){
-        return questions.get(index);
+    public Question getQuestion(int questionIndex){
+        if(questionIndex<=questions.size()){
+
+            if(questionIndex==questions.size()){
+                Question question = createQuestion();
+                questions.add(question);
+                return question;
+            } else {
+                return questions.get(questionIndex);
+            }
+
+        } else{
+            throw new IndexOutOfBoundsException("Requested question index too large. " +
+                    "Only modification of existing or putting new question on end are allowed.");
+        }
     }
+
+    abstract Question createQuestion();
 
 
     @Override

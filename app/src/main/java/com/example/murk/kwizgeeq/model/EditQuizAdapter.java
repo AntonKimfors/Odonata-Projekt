@@ -1,7 +1,6 @@
 package com.example.murk.kwizgeeq.model;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,6 @@ import android.widget.TextView;
 import com.example.murk.kwizgeeq.R;
 
 import java.util.ArrayList;
-
-import static com.example.murk.kwizgeeq.R.color.*;
 
 /**
  * Created by akimfors on 2017-04-26.
@@ -66,7 +63,7 @@ public class EditQuizAdapter extends BaseAdapter {
         }
 
         UserQuestion question = (UserQuestion) mQuestions.get(position);
-        holder.questionLabel.setText(question.getQuestionStr());
+        holder.questionLabel.setText(question.getQuestionText());
         //int RGB = android.graphics.Color.rgb(quiz.getListColor().RED,quiz.getListColor().GREEN,quiz.getListColor().BLUE);
         //holder.relativeLayout.setBackgroundColor(RGB);
 

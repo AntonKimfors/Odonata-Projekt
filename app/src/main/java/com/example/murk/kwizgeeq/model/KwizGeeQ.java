@@ -2,6 +2,8 @@ package com.example.murk.kwizgeeq.model;
 
 import android.graphics.Color;
 
+import com.wrapper.spotify.models.User;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -55,13 +57,6 @@ public class KwizGeeQ {
         quiz.addQuestionOnIndex(questionIndex,question);
     }
 
-    public void addStringAnswer(int quizIndex, int questionIndex, String answerStr,
-                                boolean isCorrect){
-        Quiz quiz = quizzList.get(quizIndex);
-        Answer<String> answer = new Answer(isCorrect,answerStr);
-        quiz.addAnswer(questionIndex,answer);
-    }
-
     public int getQuizSize(int quizIndex){
         Quiz quiz = quizzList.get(quizIndex);
         return quiz.getSize();
@@ -75,27 +70,46 @@ public class KwizGeeQ {
                                    String questionImg, double xPosition, double yPosition,
                                    String audioFile){
         Quiz quiz = quizzList.get(quizIndex);
-
-        if(quiz== null){
-            throw new IndexOutOfBoundsException("Quiz doesn't exist");
-        }
-
-        UserQuestion question = new UserQuestion(questionStr,questionImg,xPosition,yPosition,
-                audioFile);
-
-        quiz.addQuestionOnIndex(questionIndex,question);
     }
 
-    public void setUserQuestionString (int quizIndex, int questionIndex,String questionString){
+    public void setUserQuestionText (int quizIndex, int questionIndex, String questionText){
+        UserQuiz userQuiz = getUserQuiz(quizIndex);
+        userQuiz.setUserQuestionString(questionIndex,questionText);
+    }
+
+    public void setUserQuestionImagePath (int quizIndex, int questionIndex, String imagePath){
+        UserQuiz userQuiz = getUserQuiz(quizIndex);
+        userQuiz.setUserQuestionImagePath(questionIndex,imagePath);
+    }
+
+    public void setUserQuestionAudioPath (int quizIndex, int questionIndex, String audioPath){
+        UserQuiz userQuiz = getUserQuiz(quizIndex);
+        userQuiz.setUserQuestionImagePath(questionIndex,audioPath);
+    }
+
+    public void setUserQuestionPosition (int quizIndex, int questionIndex, double x, double y){
+        UserQuiz userQuiz = getUserQuiz(quizIndex);
+        userQuiz.setUserQuestionPosition(questionIndex,x,y);
+    }
+
+    public void addTextAnswer(int quizIndex, int questionIndex, String answerText,
+                                boolean isCorrect){
+        Quiz quiz = quizzList.get(quizIndex);
+        quiz.addTextAnswer(questionIndex,answerText,isCorrect);
+    }
+
+    private UserQuiz getUserQuiz(int quizIndex){
         Quiz quiz = quizzList.get(quizIndex);
 
         if(quiz== null){
-            throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" doesn't exist");
+            throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" does not exist.");
         }
 
-        if(quiz.getSize()<=questionIndex){
-            quiz.addQuestion(new UserQuestion());
+        if(quiz instanceof UserQuiz){
+            return (UserQuiz)quiz;
         }
+
+        throw new IllegalArgumentException("Requested quiz is not editible for users");
     }
 
     /**
@@ -105,7 +119,7 @@ public class KwizGeeQ {
      * @param color
      * @return the index of the created quiz
      */
-    public int createUserQuiz(String name, Color color){
+    public int createUserQuiz(String name, int color){
         UserQuiz userQuiz = new UserQuiz(name, color);
         quizzList.add(userQuiz);
         return quizzList.indexOf(userQuiz);

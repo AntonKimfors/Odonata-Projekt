@@ -5,32 +5,22 @@ package com.example.murk.kwizgeeq.model;
  */
 
 public class UserQuestion extends Question {
-    private String questionStr;
-    private String questionImg;
+    private String questionText;
+    private String imagePath;
     private double xPosition;
     private double yPosition;
-    private String audioFile;
+    private String audioPath;
 
-    public UserQuestion(){}
-
-    public UserQuestion(String questionStr, String questionImg, double xPosition, double yPosition, String audioFile) {
-        this.questionStr = questionStr;
-        this.questionImg = questionImg;
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
-        this.audioFile = audioFile;
+    public String getQuestionText() {
+        return questionText;
     }
 
-    public String getQuestionStr() {
-        return questionStr;
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
 
-    public void setQuestionStr(String questionStr) {
-        this.questionStr = questionStr;
-    }
-
-    public String getQuestionImg() {
-        return questionImg;
+    public String getImagePath() {
+        return imagePath;
     }
 
     public double getxPosition() {
@@ -41,12 +31,12 @@ public class UserQuestion extends Question {
         return yPosition;
     }
 
-    public String getAudioFile() {
-        return audioFile;
+    public String getAudioPath() {
+        return audioPath;
     }
 
-    public void setQuestionImg(String questionImg) {
-        this.questionImg = questionImg;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public void setxPosition(double xPosition) {
@@ -57,8 +47,8 @@ public class UserQuestion extends Question {
         this.yPosition = yPosition;
     }
 
-    public void setAudioFile(String audioFile) {
-        this.audioFile = audioFile;
+    public void setAudioPath(String audioPath) {
+        this.audioPath = audioPath;
     }
 
     @Override
@@ -66,18 +56,18 @@ public class UserQuestion extends Question {
         if(obj instanceof UserQuestion && super.equals(obj)){
             UserQuestion o = (UserQuestion) obj;
 
-            if(questionStr!=null){
-                if(o.getQuestionStr()!=null){
-                    if(!questionStr.equals(o.getQuestionStr()))
+            if(questionText !=null){
+                if(o.getQuestionText()!=null){
+                    if(!questionText.equals(o.getQuestionText()))
                         return false;
                 } else {
                     return false;
                 }
             }
 
-            if(questionImg!=null){
-                if(o.getQuestionImg()!=null){
-                    if(!questionImg.equals(o.getQuestionImg()))
+            if(imagePath !=null){
+                if(o.getImagePath()!=null){
+                    if(!imagePath.equals(o.getImagePath()))
                         return false;
                 } else {
                     return false;
@@ -100,6 +90,9 @@ public class UserQuestion extends Question {
 
     @Override
     public String toString(){
-        return questionStr;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Question: ").append(questionText)
+                .append(System.lineSeparator()).append(super.toString());
+        return sb.toString();
     }
 }
