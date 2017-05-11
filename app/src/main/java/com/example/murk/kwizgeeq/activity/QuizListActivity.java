@@ -21,7 +21,7 @@ public class QuizListActivity extends ListActivity implements NavigatableActivit
         setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_quiz_list);
 
-        view = new QuizListView(getListView(), this,this);
+        view = new QuizListView(getListView(), this,this, findViewById(R.id.fab));
         controller = new QuizListController(view);
         view.addObserver(controller);
         controller.onCreate();

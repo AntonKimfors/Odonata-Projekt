@@ -52,8 +52,6 @@ public class QuizListView extends Observable {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizzList.get(position); //Make the clicked quiz active quiz.
-
                 Intent intent = new Intent(context, QuestioneerActivity.class);
 
                 intent.putExtra("quizIndex", position);
@@ -98,23 +96,13 @@ public class QuizListView extends Observable {
                             }
                         })
                         .show();
-                ;
-
-
-                //AlertDialog ad = alertDialog.create();
-                //ad.show();
-
-                //ad.dismiss(); For wheb clicking cancel or similar
-
-
-
 
                 return true;
             }
         });
 
-        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
+        
         this.fab.setOnClickListener(new View.OnClickListener() {
             @Override
 
@@ -134,8 +122,6 @@ public class QuizListView extends Observable {
                 alertDialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Intent intent = new Intent(context, EditQuizActivity.class);
-                        //currentActivity.startActivity(intent);
 
                         String quizTitle = input.getText().toString();
                         model.getQuizList().add(new UserQuiz(quizTitle, 0));
