@@ -31,13 +31,13 @@ import java.util.Observable;
 public class QuizListView extends Observable {
 
     private ListView listView;
-    private NavigatableActivity currentActivity;
+    private Activity currentActivity;
     private KwizGeeQ model;
     private QuizListAdapter adapter;
     private FloatingActionButton fab;
 
 
-    public QuizListView(final ListView listView, final Context context, final NavigatableActivity currentActivity, FloatingActionButton fab){
+    public QuizListView(final ListView listView, final Context context, final Activity currentActivity, FloatingActionButton fab){
         this.listView = listView;
         this.model = KwizGeeQ.getInstance();
         this.currentActivity = currentActivity;
@@ -69,7 +69,7 @@ public class QuizListView extends Observable {
 
                 KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().getQuizList().get(position);
 
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder((Activity) currentActivity)
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(currentActivity)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("Edit Quiz?")
                         .setMessage("Do you want to Edit or Delete the quiz?");
@@ -91,7 +91,7 @@ public class QuizListView extends Observable {
 
 
                                 currentActivity.finish();
-                                currentActivity.startActivity(((Activity) currentActivity).getIntent());
+                                currentActivity.startActivity((currentActivity).getIntent());
 
 
 
@@ -120,10 +120,10 @@ public class QuizListView extends Observable {
 
             public void onClick(View view) {
 
-                final EditText input = new EditText((Activity) currentActivity);
+                final EditText input = new EditText(currentActivity);
 
 
-                final AlertDialog.Builder alertDialog = new AlertDialog.Builder((Activity) currentActivity)
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(currentActivity)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("Create Quiz?")
                         .setView(input);
