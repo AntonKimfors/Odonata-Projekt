@@ -27,7 +27,8 @@ public class CreateQuestionView extends Observable implements Observer{
     private NavigatableActivity currentActivity;
     private Context currentContext;
 
-    private File imageStorageDir;
+    /*
+    private File imageStorageDir;*/
     private PackageManager packageManager;
     private int captureImageRequestCode;
 
@@ -42,12 +43,6 @@ public class CreateQuestionView extends Observable implements Observer{
     private int quizIndex;
     private int questionIndex;
 
-    private Uri imageUri;
-
-    public Uri getImageUri(){
-        return imageUri;
-    }
-
     public CreateQuestionView(NavigatableActivity currentActivity, Context currentContext,
                               File imageStorageDir, PackageManager packageManager,
                               int captureImageRequestCode, EditText questionText,
@@ -58,7 +53,7 @@ public class CreateQuestionView extends Observable implements Observer{
         this.currentActivity = currentActivity;
         this.currentContext = currentContext;
 
-        this.imageStorageDir = imageStorageDir;
+        //this.imageStorageDir = imageStorageDir;
         this.packageManager = packageManager;
         this.captureImageRequestCode = captureImageRequestCode;
 
@@ -106,10 +101,10 @@ public class CreateQuestionView extends Observable implements Observer{
 
         if(textField.equals(correctText)){
             int greenColor = Color.argb(255,150, 255, 150);
-            correctText.setBackgroundColor(greenColor);
+            textField.setBackgroundColor(greenColor);
         } else{
             int redColor = Color.argb(255, 255, 129, 109);
-            correctText.setBackgroundColor(redColor);
+            textField.setBackgroundColor(redColor);
         }
 
     }
@@ -124,11 +119,7 @@ public class CreateQuestionView extends Observable implements Observer{
         UserQuestion question = (UserQuestion)model.getQuestion(quizIndex,questionIndex);
         String imagePath = question.getImagePath();
 
-
-        if(imageUri!=null){
-            /*BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
-            bitmap = Bitmap.createScaledBitmap(bitmap,thumbnail.getWidth(),thumbnail.getHeight(),true);*/
+        if(imagePath!=null){
             Uri imageUri = Uri.parse(imagePath);
             thumbnail.setImageURI(imageUri);
         }
@@ -190,12 +181,10 @@ public class CreateQuestionView extends Observable implements Observer{
         return wrongText3.getText().toString();
     }
 
-    public void takePhoto(){
+    public void takePhoto(Uri imageUri){
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePictureIntent.resolveActivity(packageManager) != null) {
-            imageUri = ImageFileHandler.getImageURI(imageStorageDir,currentContext);
-
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
             currentActivity.startActivityForResult(takePictureIntent, captureImageRequestCode);
         }

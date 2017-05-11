@@ -1,11 +1,14 @@
 package com.example.murk.kwizgeeq.controller;
 
+import android.content.Context;
 import android.net.Uri;
 import android.view.View;
 
+import com.example.murk.kwizgeeq.utils.ImageFileHandler;
 import com.example.murk.kwizgeeq.view.CreateQuestionView;
 import com.example.murk.kwizgeeq.model.*;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -17,11 +20,19 @@ public class CreateQuestionController implements Controller, Observer{
     private CreateQuestionView createQuestionView;
     private KwizGeeQ model;
 
+    private Context currentContext;
+    private File imageStorageDir;
+
+    private String imagePath;
+
     private int quizIndex;
     private int questionIndex;
 
-    public CreateQuestionController(CreateQuestionView createQuestionView, int quizIndex, int questionIndex){
+    public CreateQuestionController(CreateQuestionView createQuestionView, Context currentContext,
+                                    File imageStorageDir, int quizIndex, int questionIndex){
         this.createQuestionView = createQuestionView;
+        this.currentContext = currentContext;
+        this.imageStorageDir = imageStorageDir;
         this.quizIndex = quizIndex;
         this.questionIndex = questionIndex;
         model = KwizGeeQ.getInstance();
@@ -79,12 +90,16 @@ public class CreateQuestionController implements Controller, Observer{
     }
 
     public void mediaButtonAction(View view){
-        createQuestionView.takePhoto();
+        Uri imageUri = ImageFileHandler.getImageURI(imageStorageDir,currentContext);
+        imagePath = imageUri.toString();
+
+        createQuestionView.takePhoto(imageUri);
     }
 
     public void imageCreated(){
-        System.out.println(createQuestionView.getImageUri());
-        model.setUserQuestionImagePath(quizIndex,questionIndex,createQuestionView.getImageUri().toString());
+        if(imagePath!=null){
+            model.setUserQuestionImagePath(quizIndex,questionIndex,imagePath);
+        }
     }
 
     private boolean checkRequiredFields(){

@@ -4,13 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.health.PackageHealthStats;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -58,8 +54,8 @@ public class CreateQuestionActivity extends AppCompatActivity implements Navigat
                 packageManager,captureImageRequestCode, questionText,correctText,
                 wrongtext1,wrongtext2,wrongtext3,thumbnail,quizIndex,questionIndex);
 
-        createQuestionController = new CreateQuestionController(createQuestionView,quizIndex,
-                questionIndex);
+        createQuestionController = new CreateQuestionController(createQuestionView,
+                applicationContext, imageStorageDir, quizIndex, questionIndex);
         createQuestionController.onCreate();
 
         binding.setController(createQuestionController);
