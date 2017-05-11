@@ -8,7 +8,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.view.View;
@@ -43,6 +45,8 @@ public class CreateQuestionView extends Observable implements Observer{
     private int quizIndex;
     private int questionIndex;
 
+    private Drawable originalEditText;
+
     public CreateQuestionView(NavigatableActivity currentActivity, Context currentContext,
                               File imageStorageDir, PackageManager packageManager,
                               int captureImageRequestCode, EditText questionText,
@@ -69,6 +73,8 @@ public class CreateQuestionView extends Observable implements Observer{
         this.questionIndex = questionIndex;
 
         model = KwizGeeQ.getInstance();
+
+        originalEditText = correctText.getBackground();
     }
 
     public void addOnFocusChangeListener(View.OnFocusChangeListener listener){
@@ -86,18 +92,32 @@ public class CreateQuestionView extends Observable implements Observer{
         flash(wrongText3);
     }
 
-    private void flash(EditText editText){
+    private void flash(final EditText editText){
         if(editText.getText().toString().isEmpty()){
-            ColorDrawable f1 = new ColorDrawable(Color.argb(255,100,100,100));
-            ColorDrawable f2 = new ColorDrawable(Color.argb(255,255,255,255));
+            final Drawable f2 = editText.getBackground();
+            ColorDrawable f1 = new ColorDrawable(Color.argb(255,50,50,50));
             AnimationDrawable a = new AnimationDrawable();
             a.addFrame(f1,100);
             a.addFrame(f2,0);
+            a.stop();
+            a.setOneShot(true);
+            editText.setBackground(a);
+            a.start();
+
+            new CountDownTimer(100, 100){
+                public void onTick(long l){
+
+                }
+                public void onFinish(){
+                    editText.setBackground(f2);
+                }
+            }.start();
         }
     }
 
     public void highlightField(View view){
         EditText textField = (EditText) view;
+        originalEditText = textField.getBackground();
 
         if(textField.equals(correctText)){
             int greenColor = Color.argb(255,150, 255, 150);
@@ -110,9 +130,8 @@ public class CreateQuestionView extends Observable implements Observer{
     }
 
     public void normalizeField(View view){
-        int whiteColor = Color.argb(255,255,255,255);
         EditText textField = (EditText) view;
-        textField.setBackgroundColor(whiteColor);
+        textField.setBackground(originalEditText);
     }
 
     public void setThumbnail(){
