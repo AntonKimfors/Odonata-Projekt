@@ -1,5 +1,6 @@
 package com.example.murk.kwizgeeq.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -27,13 +28,13 @@ public class EditQuizView extends Observable {
     private KwizGeeQ model;
     private EditQuizAdapter adapter;
 
-    public EditQuizView(final int index, final ListView listView, final Context context, final NavigatableActivity oldActivity, EditText editText) {
+    public EditQuizView(final int index, final ListView listView, final Context context, final Activity oldActivity, EditText editText) {
         this.listView = listView;
         this.model = KwizGeeQ.getInstance();
         this.editText = editText;
 
-        //this.editText.setText(model.getQuiz(index).getName().toString());  //Checkwhayy
-        this.adapter = new EditQuizAdapter(context, model.getQuiz(index).getQuestions());
+        this.editText.setText(model.getQuizName(index));  //Checkwhayy
+        this.adapter = new EditQuizAdapter(context, model.getQuestionList(index));
         listView.setAdapter(adapter);
 
         //Play quiz
