@@ -35,7 +35,7 @@ public class QuizListView extends Observable {
 
 
 
-        this.adapter = new QuizListAdapter(context, model.quizzList);
+        this.adapter = new QuizListAdapter(context, model.getQuizList());
         listView.setAdapter(adapter);
 
         //Play quiz
@@ -43,7 +43,7 @@ public class QuizListView extends Observable {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizzList.get(position); //Make the clicked quiz active quiz.
+                //KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizList.get(position); //Make the clicked quiz active quiz.
 
                 Intent intent = new Intent(context, QuestioneerActivity.class);
                 intent.putExtra("quizIndex", position);
@@ -56,7 +56,7 @@ public class QuizListView extends Observable {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizzList.get(position);
+                //KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().quizList.get(position);
 
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder((Activity) oldActivity)
                         .setIcon(android.R.drawable.ic_dialog_alert)
@@ -74,7 +74,7 @@ public class QuizListView extends Observable {
                         .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                model.quizzList.remove(position);
+                                model.getQuizList().remove(position);
                                 oldActivity.finish();
                                 oldActivity.startActivity(((Activity) oldActivity).getIntent());
 
