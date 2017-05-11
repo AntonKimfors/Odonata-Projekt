@@ -8,7 +8,7 @@ import java.util.*;
 
 public class KwizGeeQ extends Observable{
 
-    public ArrayList<Quiz> quizzList;
+    private ArrayList<Quiz> quizList;
     public Quiz activeQuiz;
     public int activeQuestionIndex;
     private static KwizGeeQ singletonInstance = null;
@@ -23,20 +23,23 @@ public class KwizGeeQ extends Observable{
     }
 
     private KwizGeeQ(){
-        quizzList = new ArrayList<Quiz>();
+        quizList = new ArrayList<Quiz>();
         activeQuestionIndex = 1;
+    }
+    public ArrayList<Quiz> getQuizList(){
+        return quizList;
     }
 
     public Quiz getQuiz(int index){
-        return quizzList.get(index);
+        return quizList.get(index);
     }
 
     public Question getQuestion(int quizIndex, int questionIndex){
-        return quizzList.get(quizIndex).getQuestion(questionIndex);
+        return quizList.get(quizIndex).getQuestion(questionIndex);
     }
 
     /*public void addQuestion(int quizIndex, int questionIndex, Question question){
-        Quiz quiz = quizzList.get(quizIndex);
+        Quiz quiz = quizList.get(quizIndex);
 
         if(quiz== null){
             throw new IndexOutOfBoundsException("Quiz doesn't exist");
@@ -44,22 +47,25 @@ public class KwizGeeQ extends Observable{
 
         quiz.addQuestionOnIndex(questionIndex,question);
     }*/
-    public ArrayList<Question> getQuestionList(int quizindex){
-        return quizzList.get(quizindex).getQuestions();
+    public ArrayList<Question> getQuestionList(int quizIndex){
+        if(quizIndex < quizList.size()-1)
+            return quizList.get(quizIndex).getQuestions();
+        else
+            throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" does not exist.");
     }
     public int getQuizSize(int quizIndex){
-        Quiz quiz = quizzList.get(quizIndex);
+        Quiz quiz = quizList.get(quizIndex);
         return quiz.getSize();
     }
 
     public String getQuizName(int quizIndex){
-        return quizzList.get(quizIndex).getName();
+        return quizList.get(quizIndex).getName();
     }
 
     public void createUserQuestion(int quizIndex, int questionIndex, String questionStr,
                                    String questionImg, double xPosition, double yPosition,
                                    String audioFile){
-        Quiz quiz = quizzList.get(quizIndex);
+        Quiz quiz = quizList.get(quizIndex);
     }
 
     public void setUserQuestionText (int quizIndex, int questionIndex, String questionText){
@@ -88,12 +94,12 @@ public class KwizGeeQ extends Observable{
 
     public void addTextAnswer(int quizIndex, int questionIndex, String answerText,
                                 boolean isCorrect){
-        Quiz quiz = quizzList.get(quizIndex);
+        Quiz quiz = quizList.get(quizIndex);
         quiz.addTextAnswer(questionIndex,answerText,isCorrect);
     }
 
     private UserQuiz getUserQuiz(int quizIndex){
-        Quiz quiz = quizzList.get(quizIndex);
+        Quiz quiz = quizList.get(quizIndex);
 
         if(quiz== null){
             throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" does not exist.");
@@ -115,8 +121,8 @@ public class KwizGeeQ extends Observable{
      */
     public int createUserQuiz(String name, int color){
         UserQuiz userQuiz = new UserQuiz(name, color);
-        quizzList.add(userQuiz);
-        return quizzList.indexOf(userQuiz);
+        quizList.add(userQuiz);
+        return quizList.indexOf(userQuiz);
     }
 
     public void firePlayQuiz(Quiz quiz){
@@ -129,7 +135,7 @@ public class KwizGeeQ extends Observable{
     };
 
     public Iterator<Answer> getShuffledAnswers(int quizIndex, int questionIndex){
-        return quizzList.get(quizIndex).getQuestion(questionIndex).answerIterator(true);
+        return quizList.get(quizIndex).getQuestion(questionIndex).answerIterator(true);
     }
 
     public boolean checkAnswerIsCorrect(Answer answer){
