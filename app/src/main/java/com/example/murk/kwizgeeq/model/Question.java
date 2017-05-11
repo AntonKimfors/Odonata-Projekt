@@ -7,7 +7,7 @@ import java.util.*;
  * Created by Henrik on 04/04/2017.
  */
 
-public abstract class Question<T> implements Serializable {
+public abstract class Question<T> {
 
     private final List<Answer<T>> answers;
 

@@ -8,7 +8,7 @@ import java.util.*;
  * Created by akimfors on 2017-04-05.
  */
 
-public class KwizGeeQ {
+public class KwizGeeQ extends Observable{
 
     public ArrayList<Quiz> quizzList;
     public Quiz activeQuiz;
@@ -37,13 +37,7 @@ public class KwizGeeQ {
         return quizzList.get(quizIndex).getQuestion(questionIndex);
     }
 
-    /**
-     * Denna metod kanske inte behövs, se tex createUserQuestion
-     * @param quizIndex
-     * @param questionIndex
-     * @param question
-     */
-    public void addQuestion(int quizIndex, int questionIndex, Question question){
+    /*public void addQuestion(int quizIndex, int questionIndex, Question question){
         Quiz quiz = quizzList.get(quizIndex);
 
         if(quiz== null){
@@ -51,7 +45,7 @@ public class KwizGeeQ {
         }
 
         quiz.addQuestionOnIndex(questionIndex,question);
-    }
+    }*/
 
     public int getQuizSize(int quizIndex){
         Quiz quiz = quizzList.get(quizIndex);
@@ -76,6 +70,10 @@ public class KwizGeeQ {
     public void setUserQuestionImagePath (int quizIndex, int questionIndex, String imagePath){
         UserQuiz userQuiz = getUserQuiz(quizIndex);
         userQuiz.setUserQuestionImagePath(questionIndex,imagePath);
+
+        UserQuestion userQuestion = (UserQuestion)getQuestion(quizIndex,questionIndex);
+        setChanged();
+        notifyObservers();
     }
 
     public void setUserQuestionAudioPath (int quizIndex, int questionIndex, String audioPath){
@@ -119,12 +117,12 @@ public class KwizGeeQ {
         UserQuiz userQuiz = new UserQuiz(name, color);
         quizzList.add(userQuiz);
         return quizzList.indexOf(userQuiz);
-    };
+    }
 
     public void firePlayQuiz(Quiz quiz){
         activeQuiz = quiz;
 
-    };
+    }
 
     public void fireEditQuiz(Quiz quiz){
         activeQuiz = quiz;

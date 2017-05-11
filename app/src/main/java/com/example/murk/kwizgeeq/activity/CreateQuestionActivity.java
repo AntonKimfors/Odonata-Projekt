@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.*;
@@ -48,9 +49,11 @@ public class CreateQuestionActivity extends AppCompatActivity implements Navigat
         EditText wrongtext2 = (EditText)findViewById(R.id.wrongText2);
         EditText wrongtext3 = (EditText)findViewById(R.id.wrongText3);
 
+        ImageView thumbnail = (ImageView)findViewById(R.id.thumbnail);
+
         createQuestionView = new CreateQuestionView(this, applicationContext, imageStorageDir,
                 packageManager,captureImageRequestCode, questionText,correctText,
-                wrongtext1,wrongtext2,wrongtext3);
+                wrongtext1,wrongtext2,wrongtext3,thumbnail);
 
         int quizIndex = getIntent().getIntExtra("quizIndex",0);
         int questionIndex = getIntent().getIntExtra("questionIndex",0);

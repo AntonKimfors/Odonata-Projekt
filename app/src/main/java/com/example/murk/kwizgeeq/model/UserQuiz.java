@@ -1,5 +1,7 @@
 package com.example.murk.kwizgeeq.model;
 
+import java.util.Observer;
+
 /**
  * Created by Murk on 2017-04-05.
  */
@@ -18,6 +20,7 @@ public class UserQuiz extends Quiz {
     public void setUserQuestionString(int questionIndex, String questionString){
         UserQuestion userQuestion = (UserQuestion)getQuestion(questionIndex);
         userQuestion.setQuestionText(questionString);
+        System.out.println(toString());
     }
 
     public void setUserQuestionImagePath(int questionIndex, String questionImagePath){

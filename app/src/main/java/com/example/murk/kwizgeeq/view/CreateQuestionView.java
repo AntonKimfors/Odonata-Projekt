@@ -3,6 +3,8 @@ package com.example.murk.kwizgeeq.view;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -18,7 +20,7 @@ import com.example.murk.kwizgeeq.activity.*;
 import com.example.murk.kwizgeeq.model.*;
 import com.example.murk.kwizgeeq.utils.ImageFileHandler;
 
-public class CreateQuestionView extends Observable{
+public class CreateQuestionView extends Observable implements Observer{
 
     private KwizGeeQ model;
     private NavigatableActivity currentActivity;
@@ -34,11 +36,13 @@ public class CreateQuestionView extends Observable{
     private EditText wrongText2;
     private EditText wrongText3;
 
+    private ImageView thumbnail;
+
     public CreateQuestionView(NavigatableActivity currentActivity, Context currentContext,
                               File imageStorageDir, PackageManager packageManager,
                               int captureImageRequestCode, EditText questionText,
                               EditText correctText, EditText wrongText1, EditText wrongText2,
-                              EditText wrongText3) {
+                              EditText wrongText3, ImageView thumbnail) {
 
         this.currentActivity = currentActivity;
         this.currentContext = currentContext;
@@ -52,6 +56,8 @@ public class CreateQuestionView extends Observable{
         this.wrongText1 = wrongText1;
         this.wrongText2 = wrongText2;
         this.wrongText3 = wrongText3;
+
+        this.thumbnail = thumbnail;
 
         model = KwizGeeQ.getInstance();
     }
@@ -177,5 +183,19 @@ public class CreateQuestionView extends Observable{
     public void endAddOfQuestions(){
         Intent intent = new Intent(currentContext,QuizListActivity.class);
         currentActivity.startActivity(intent);
+    }
+
+    public void update(Observable o, Object arg) {
+        System.out.println("UPDATE IN VIEW");
+        if(arg instanceof UserQuestion){
+            System.out.println("THUMBNAIL!!!!");
+            /*String path = (String)arg;
+            File image = new File(path);
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
+            bitmap = Bitmap.createScaledBitmap(bitmap,thumbnail.getWidth(),thumbnail.getHeight()
+                    ,true);
+            thumbnail.setImageBitmap(bitmap);*/
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.murk.kwizgeeq.model;
 
+
 /**
  * Created by Henrik on 04/04/2017.
  */
@@ -50,6 +51,8 @@ public class UserQuestion extends Question {
     public void setAudioPath(String audioPath) {
         this.audioPath = audioPath;
     }
+
+
 
     @Override
     public boolean equals(Object obj) {

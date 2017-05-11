@@ -44,6 +44,8 @@ public class CreateQuestionController implements Controller, Observer{
         };
 
         createQuestionView.addOnFocusChangeListener(onFocusChangeListener);
+
+        model.addObserver(createQuestionView);
     }
 
     public void onPause() {
