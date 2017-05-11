@@ -2,6 +2,7 @@ package com.example.murk.kwizgeeq.activity;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.QuizListController;
@@ -21,7 +22,7 @@ public class QuizListActivity extends ListActivity implements NavigatableActivit
         setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_quiz_list);
 
-        view = new QuizListView(getListView(), this,this, findViewById(R.id.fab));
+        view = new QuizListView(getListView(), this,this, (FloatingActionButton) findViewById(R.id.fab));
         controller = new QuizListController(view);
         view.addObserver(controller);
         controller.onCreate();

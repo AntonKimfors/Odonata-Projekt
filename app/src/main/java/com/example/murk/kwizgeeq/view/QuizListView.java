@@ -72,17 +72,16 @@ public class QuizListView extends Observable {
                         .setTitle("Edit Quiz?")
                         .setMessage("Do you want to Edit or Delete the quiz?");
 
-                AlertDialog ad = alertDialog.create();
+                final AlertDialog ad = alertDialog.create();
 
-                alertDialog.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    alertDialog.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+                     @Override
+                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(context, EditQuizActivity.class);
                         currentActivity.startActivity(intent);
-                    }
-                })
-
-                        .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
+                        }
+                     })
+                            .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 model.getQuizList().remove(position);
@@ -95,6 +94,14 @@ public class QuizListView extends Observable {
 
                             }
                         })
+
+                           .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                               @Override
+                               public void onClick(DialogInterface dialog, int which) {
+                                   ad.dismiss();
+                               }
+                           })
+
                         .show();
 
                 return true;
@@ -102,7 +109,7 @@ public class QuizListView extends Observable {
         });
 
 
-        
+        //Added clickListenet to FloatingActionButton
         this.fab.setOnClickListener(new View.OnClickListener() {
             @Override
 
