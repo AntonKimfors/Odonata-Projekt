@@ -44,7 +44,9 @@ public class KwizGeeQ extends Observable{
 
         quiz.addQuestionOnIndex(questionIndex,question);
     }*/
-
+    public ArrayList<Question> getQuestionList(int quizindex){
+        return quizzList.get(quizindex).getQuestions();
+    }
     public int getQuizSize(int quizIndex){
         Quiz quiz = quizzList.get(quizIndex);
         return quiz.getSize();
