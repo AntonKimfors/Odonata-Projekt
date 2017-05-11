@@ -33,7 +33,11 @@ public class EditQuizView extends Observable {
         this.model = KwizGeeQ.getInstance();
         this.editText = editText;
 
-        this.editText.setText(model.getQuizName(index));  //Checkwhayy
+
+
+        //System.out.println(index);
+        //System.out.println(model.getQuizName(index));
+        //this.editText.setText(model.getQuizName(index));  //Checkwhayy
         this.adapter = new EditQuizAdapter(context, model.getQuestionList(index));
         listView.setAdapter(adapter);
 
@@ -42,8 +46,6 @@ public class EditQuizView extends Observable {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
-                //TODO make the above possible with sent intents.
 
                 Intent intent = new Intent(context, CreateQuestionActivity.class);
                 intent.putExtra("questionindex",position);
