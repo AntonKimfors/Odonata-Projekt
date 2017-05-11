@@ -65,7 +65,7 @@ public class KwizGeeQ extends Observable{
         userQuiz.setUserQuestionString(questionIndex,questionText);
     }
 
-    public void setUserQuestionImagePath (int quizIndex, int questionIndex, Uri imagePath){
+    public void setUserQuestionImagePath (int quizIndex, int questionIndex, String imagePath){
         UserQuiz userQuiz = getUserQuiz(quizIndex);
         userQuiz.setUserQuestionImagePath(questionIndex,imagePath);
 

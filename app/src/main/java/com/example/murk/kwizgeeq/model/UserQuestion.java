@@ -9,7 +9,7 @@ import android.net.Uri;
 
 public class UserQuestion extends Question {
     private String questionText;
-    private Uri imagePath;
+    private String imagePath;
     private double xPosition;
     private double yPosition;
     private String audioPath;
@@ -22,7 +22,7 @@ public class UserQuestion extends Question {
         this.questionText = questionText;
     }
 
-    public Uri getImagePath() {
+    public String getImagePath() {
         return imagePath;
     }
 
@@ -38,7 +38,7 @@ public class UserQuestion extends Question {
         return audioPath;
     }
 
-    public void setImagePath(Uri imagePath) {
+    public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
 

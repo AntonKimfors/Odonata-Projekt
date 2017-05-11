@@ -122,15 +122,15 @@ public class CreateQuestionView extends Observable implements Observer{
 
     public void setThumbnail(){
         UserQuestion question = (UserQuestion)model.getQuestion(quizIndex,questionIndex);
-        Uri imagePath = question.getImagePath();
+        String imagePath = question.getImagePath();
 
-        System.out.println(imagePath.toString());
-        if(imagePath!=null){
+
+        if(imageUri!=null){
             /*BitmapFactory.Options bmOptions = new BitmapFactory.Options();
             Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
             bitmap = Bitmap.createScaledBitmap(bitmap,thumbnail.getWidth(),thumbnail.getHeight(),true);*/
-
-            thumbnail.setImageURI(imagePath);
+            Uri imageUri = Uri.parse(imagePath);
+            thumbnail.setImageURI(imageUri);
         }
     }
 

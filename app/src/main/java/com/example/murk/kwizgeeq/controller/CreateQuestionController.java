@@ -84,7 +84,7 @@ public class CreateQuestionController implements Controller, Observer{
 
     public void imageCreated(){
         System.out.println(createQuestionView.getImageUri());
-        model.setUserQuestionImagePath(quizIndex,questionIndex,createQuestionView.getImageUri());
+        model.setUserQuestionImagePath(quizIndex,questionIndex,createQuestionView.getImageUri().toString());
     }
 
     private boolean checkRequiredFields(){
