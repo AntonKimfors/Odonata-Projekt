@@ -3,6 +3,7 @@ package com.example.murk.kwizgeeq.model;
 import android.graphics.Color;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -106,6 +107,10 @@ public class KwizGeeQ {
     public void fireEditQuiz(Quiz quiz){
         activeQuiz = quiz;
     };
+
+    public Iterator<Answer> getShuffledAnswers(int quizIndex, int questionIndex){
+        return quizzList.get(quizIndex).getQuestion(questionIndex).answerIterator(true);
+    }
 
     public boolean checkAnswerIsCorrect(Answer answer){
         return answer.isCorrect();

@@ -107,7 +107,7 @@ public class QuestioneerView extends Observable{
     public void updateQuestioneer(int quizIndex, int questionIndex){
         Question question = model.getQuestion(quizIndex, questionIndex);
 
-        Iterator answerIterator = question.answerIterator(true);
+        Iterator answerIterator = model.getShuffledAnswers(quizIndex, questionIndex);
         questNumLabel.setText("Question " + (questionIndex + 1));
         questLabel.setText(question.toString());
         progressNumbers.setText((questionIndex + 1) + " / " + model.getAmountOfQuestions(quizIndex));
