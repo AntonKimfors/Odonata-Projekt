@@ -8,7 +8,7 @@ import com.example.murk.kwizgeeq.controller.EditQuizController;
 import com.example.murk.kwizgeeq.view.*;
 import com.example.murk.kwizgeeq.R;
 
-public class EditQuizActivity extends ListActivity implements NavigatableActivity {
+public class EditQuizActivity extends ListActivity {
 
 
     private EditQuizController controller;
