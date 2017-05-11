@@ -1,5 +1,7 @@
 package com.example.murk.kwizgeeq.model;
 
+import android.net.Uri;
+
 import java.util.Observer;
 
 /**

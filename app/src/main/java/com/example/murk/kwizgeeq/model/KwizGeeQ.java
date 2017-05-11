@@ -1,7 +1,5 @@
 package com.example.murk.kwizgeeq.model;
 
-
-
 import java.util.*;
 
 /**
@@ -67,18 +65,18 @@ public class KwizGeeQ extends Observable{
         userQuiz.setUserQuestionString(questionIndex,questionText);
     }
 
-    public void setUserQuestionImagePath (int quizIndex, int questionIndex, String imagePath){
+    public void setUserQuestionImagePath (int quizIndex, int questionIndex, Uri imagePath){
         UserQuiz userQuiz = getUserQuiz(quizIndex);
         userQuiz.setUserQuestionImagePath(questionIndex,imagePath);
 
         UserQuestion userQuestion = (UserQuestion)getQuestion(quizIndex,questionIndex);
         setChanged();
-        notifyObservers();
+        notifyObservers(userQuestion);
     }
 
     public void setUserQuestionAudioPath (int quizIndex, int questionIndex, String audioPath){
         UserQuiz userQuiz = getUserQuiz(quizIndex);
-        userQuiz.setUserQuestionImagePath(questionIndex,audioPath);
+        userQuiz.setUserQuestionAudioPath(questionIndex,audioPath);
     }
 
     public void setUserQuestionPosition (int quizIndex, int questionIndex, double x, double y){

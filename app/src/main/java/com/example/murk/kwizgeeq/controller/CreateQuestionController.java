@@ -1,5 +1,6 @@
 package com.example.murk.kwizgeeq.controller;
 
+import android.net.Uri;
 import android.view.View;
 
 import com.example.murk.kwizgeeq.view.CreateQuestionView;
@@ -81,8 +82,9 @@ public class CreateQuestionController implements Controller, Observer{
         createQuestionView.takePhoto();
     }
 
-    public void imageCreated(String imagePath){
-        model.setUserQuestionImagePath(quizIndex,questionIndex,imagePath);
+    public void imageCreated(){
+        System.out.println(createQuestionView.getImageUri());
+        model.setUserQuestionImagePath(quizIndex,questionIndex,createQuestionView.getImageUri());
     }
 
     private boolean checkRequiredFields(){

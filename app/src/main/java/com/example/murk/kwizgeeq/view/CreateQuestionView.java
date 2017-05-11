@@ -10,6 +10,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.*;
 
@@ -38,11 +39,21 @@ public class CreateQuestionView extends Observable implements Observer{
 
     private ImageView thumbnail;
 
+    private int quizIndex;
+    private int questionIndex;
+
+    private Uri imageUri;
+
+    public Uri getImageUri(){
+        return imageUri;
+    }
+
     public CreateQuestionView(NavigatableActivity currentActivity, Context currentContext,
                               File imageStorageDir, PackageManager packageManager,
                               int captureImageRequestCode, EditText questionText,
                               EditText correctText, EditText wrongText1, EditText wrongText2,
-                              EditText wrongText3, ImageView thumbnail) {
+                              EditText wrongText3, ImageView thumbnail, int quizIndex,
+                              int questionIndex) {
 
         this.currentActivity = currentActivity;
         this.currentContext = currentContext;
@@ -58,6 +69,9 @@ public class CreateQuestionView extends Observable implements Observer{
         this.wrongText3 = wrongText3;
 
         this.thumbnail = thumbnail;
+
+        this.quizIndex = quizIndex;
+        this.questionIndex = questionIndex;
 
         model = KwizGeeQ.getInstance();
     }
@@ -90,7 +104,7 @@ public class CreateQuestionView extends Observable implements Observer{
     public void highlightField(View view){
         EditText textField = (EditText) view;
 
-        if(textField == correctText){
+        if(textField.equals(correctText)){
             int greenColor = Color.argb(255,150, 255, 150);
             correctText.setBackgroundColor(greenColor);
         } else{
@@ -104,6 +118,20 @@ public class CreateQuestionView extends Observable implements Observer{
         int whiteColor = Color.argb(255,255,255,255);
         EditText textField = (EditText) view;
         textField.setBackgroundColor(whiteColor);
+    }
+
+    public void setThumbnail(){
+        UserQuestion question = (UserQuestion)model.getQuestion(quizIndex,questionIndex);
+        Uri imagePath = question.getImagePath();
+
+        System.out.println(imagePath.toString());
+        if(imagePath!=null){
+            /*BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
+            bitmap = Bitmap.createScaledBitmap(bitmap,thumbnail.getWidth(),thumbnail.getHeight(),true);*/
+
+            thumbnail.setImageURI(imagePath);
+        }
     }
 
     public void setTextFields(int quizIndex, int questionIndex){
@@ -163,12 +191,12 @@ public class CreateQuestionView extends Observable implements Observer{
     }
 
     public void takePhoto(){
-        Uri photoURI = ImageFileHandler.getImageURI(imageStorageDir,currentContext);
-
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePictureIntent.resolveActivity(packageManager) != null) {
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            imageUri = ImageFileHandler.getImageURI(imageStorageDir,currentContext);
+
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
             currentActivity.startActivityForResult(takePictureIntent, captureImageRequestCode);
         }
     }
@@ -186,16 +214,6 @@ public class CreateQuestionView extends Observable implements Observer{
     }
 
     public void update(Observable o, Object arg) {
-        System.out.println("UPDATE IN VIEW");
-        if(arg instanceof UserQuestion){
-            System.out.println("THUMBNAIL!!!!");
-            /*String path = (String)arg;
-            File image = new File(path);
-            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
-            bitmap = Bitmap.createScaledBitmap(bitmap,thumbnail.getWidth(),thumbnail.getHeight()
-                    ,true);
-            thumbnail.setImageBitmap(bitmap);*/
-        }
+        setThumbnail();
     }
 }

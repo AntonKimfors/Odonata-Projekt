@@ -40,7 +40,7 @@ public class CreateQuestionActivity extends AppCompatActivity implements Navigat
         binding = DataBindingUtil.setContentView(this,R.layout.activity_create_question);
 
         Context applicationContext = getApplicationContext();
-        File imageStorageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File imageStorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         PackageManager packageManager = getPackageManager();
 
         EditText questionText = (EditText)findViewById(R.id.questionText);
@@ -51,12 +51,12 @@ public class CreateQuestionActivity extends AppCompatActivity implements Navigat
 
         ImageView thumbnail = (ImageView)findViewById(R.id.thumbnail);
 
-        createQuestionView = new CreateQuestionView(this, applicationContext, imageStorageDir,
-                packageManager,captureImageRequestCode, questionText,correctText,
-                wrongtext1,wrongtext2,wrongtext3,thumbnail);
-
         int quizIndex = getIntent().getIntExtra("quizIndex",0);
         int questionIndex = getIntent().getIntExtra("questionIndex",0);
+
+        createQuestionView = new CreateQuestionView(this, applicationContext, imageStorageDir,
+                packageManager,captureImageRequestCode, questionText,correctText,
+                wrongtext1,wrongtext2,wrongtext3,thumbnail,quizIndex,questionIndex);
 
         createQuestionController = new CreateQuestionController(createQuestionView,quizIndex,
                 questionIndex);
@@ -69,10 +69,9 @@ public class CreateQuestionActivity extends AppCompatActivity implements Navigat
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
         if (requestCode == captureImageRequestCode && resultCode == RESULT_OK) {
-            Uri uri = data.getData();
-            String path = uri.getPath();
-            createQuestionController.imageCreated(path);
+            createQuestionController.imageCreated();
         }
     }
 }

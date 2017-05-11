@@ -1,13 +1,15 @@
 package com.example.murk.kwizgeeq.model;
 
 
+import android.net.Uri;
+
 /**
  * Created by Henrik on 04/04/2017.
  */
 
 public class UserQuestion extends Question {
     private String questionText;
-    private String imagePath;
+    private Uri imagePath;
     private double xPosition;
     private double yPosition;
     private String audioPath;
@@ -20,7 +22,7 @@ public class UserQuestion extends Question {
         this.questionText = questionText;
     }
 
-    public String getImagePath() {
+    public Uri getImagePath() {
         return imagePath;
     }
 
@@ -36,7 +38,7 @@ public class UserQuestion extends Question {
         return audioPath;
     }
 
-    public void setImagePath(String imagePath) {
+    public void setImagePath(Uri imagePath) {
         this.imagePath = imagePath;
     }
 
