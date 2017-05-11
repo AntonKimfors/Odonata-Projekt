@@ -66,6 +66,10 @@ public class KwizGeeQ {
         return quiz.getSize();
     }
 
+    public String getQuizName(int quizIndex){
+        return quizzList.get(quizIndex).getName();
+    }
+
     public void createUserQuestion(int quizIndex, int questionIndex, String questionStr,
                                    String questionImg, double xPosition, double yPosition,
                                    String audioFile){

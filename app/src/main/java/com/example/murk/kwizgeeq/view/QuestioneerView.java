@@ -100,7 +100,7 @@ public class QuestioneerView extends Observable{
     }
 
     public void updateQuizRelatedItems(int quizIndex){
-        quizLabel.setText(model.getQuiz(quizIndex).getName());
+        quizLabel.setText(model.getQuizName(quizIndex));
         progressBar.setMax(model.getAmountOfQuestions(quizIndex));
     }
 
