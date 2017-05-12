@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
-import com.example.murk.kwizgeeq.model.Statistics;
 import com.example.murk.kwizgeeq.view.QuestioneerView;
 
 import java.util.Observable;
@@ -20,14 +19,16 @@ public class QuestioneerController implements Controller, Observer{
 
     private QuestioneerView view;
     private KwizGeeQ model;
-
+    private Class<? extends Activity> switchActivityClass;
+    private Activity currentActivity;
 
     private int quizIndex;
     private int questionIndex;
 
-    public QuestioneerController(QuestioneerView view, int quizIndex) {
+    public QuestioneerController(Activity activity, QuestioneerView view, int quizIndex) {
         this.view = view;
         this.model = KwizGeeQ.getInstance();
+        this.currentActivity = activity;
         this.quizIndex = quizIndex;
         this.questionIndex = 0;
     }
@@ -47,7 +48,15 @@ public class QuestioneerController implements Controller, Observer{
     }
 
     public void onDestroy() {
-        //TODO Switch to statistics activity
+        if(currentActivity.isFinishing()) {
+            Intent intent = new Intent(currentActivity, switchActivityClass);
+            currentActivity.startActivity(intent);
+        }
+        //TODO Switch to statistics activity...
+    }
+
+    public void setSwitchActivityClass(Class<? extends Activity> activityClass){
+        this.switchActivityClass = activityClass;
     }
 
     public void answerSelected(View view){

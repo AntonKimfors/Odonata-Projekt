@@ -41,8 +41,6 @@ public class QuestioneerView extends Observable{
     private KwizGeeQ model;
     private Activity activity;
 
-
-
     public QuestioneerView(Activity activity, Window window, TextView quizLabel, TextView questNumLabel, TextView questLabel, TextView progressNumbers, ProgressBar progressBar, Button answerButton1, Button answerButton2, Button answerButton3, Button answerButton4) {
         this.window = window;
         this.quizLabel = quizLabel;
