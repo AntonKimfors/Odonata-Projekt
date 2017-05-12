@@ -9,6 +9,7 @@ import java.util.*;
 public class KwizGeeQ extends Observable{
 
     private ArrayList<Quiz> quizList;
+    private Statistics globalStatistics;
     private static KwizGeeQ singletonInstance = null;
 
 
@@ -22,6 +23,7 @@ public class KwizGeeQ extends Observable{
 
     private KwizGeeQ(){
         quizList = new ArrayList<Quiz>();
+        globalStatistics = new Statistics();
     }
     public ArrayList<Quiz> getQuizList(){
         return quizList;
@@ -123,5 +125,8 @@ public class KwizGeeQ extends Observable{
         quizList.add(userQuiz);
         return quizList.indexOf(userQuiz);
     }
-
+    
+    public Statistics getGlobalStatistics() {
+        return globalStatistics;
+    }
 }
