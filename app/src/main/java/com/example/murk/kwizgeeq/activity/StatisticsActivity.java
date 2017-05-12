@@ -20,7 +20,7 @@ public class StatisticsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics_view);
 
-        view = new StatisticsView((TextView)findViewById(R.id.quizLabel), (ProgressBar)findViewById(R.id.answersProgressBar));
+        view = new StatisticsView((TextView)findViewById(R.id.quizLabel), (TextView)findViewById(R.id.answersLabel), (ProgressBar)findViewById(R.id.answersProgressBar));
         controller = new StatisticsController(view, this, getIntent().getIntExtra("quizIndex", 0));
         controller.onCreate();
     }

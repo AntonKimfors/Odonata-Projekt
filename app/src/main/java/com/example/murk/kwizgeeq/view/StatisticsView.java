@@ -15,23 +15,21 @@ public class StatisticsView {
     private KwizGeeQ model;
 
     private TextView quizLabel;
+    private TextView answersLabel;
     private ProgressBar answersProgressBar;
 
-    public StatisticsView(TextView quizLabel, ProgressBar answersProgressBar) {
+    public StatisticsView(TextView quizLabel, TextView answersLabel, ProgressBar answersProgressBar) {
         this.model = KwizGeeQ.getInstance();
         this.quizLabel = quizLabel;
+        this.answersLabel = answersLabel;
         this.answersProgressBar = answersProgressBar;
     }
 
     public void updateStatistics(int quizIndex){
         quizLabel.setText(model.getQuiz(quizIndex).getName());
         answersProgressBar.setMax(model.getCurrentQuizStatistics().getQuestionCount());
-        //answersProgressBar.setIndeterminate(false);
-        if(Build.VERSION.SDK_INT >= 24) {
-            answersProgressBar.setProgress(model.getCurrentQuizStatistics().getAnswerCorrectCount(), true);
-        } else {
-            answersProgressBar.setProgress(model.getCurrentQuizStatistics().getAnswerCorrectCount());
-        }
+        answersProgressBar.setProgress(model.getCurrentQuizStatistics().getAnswerCorrectCount());
+        answersLabel.setText("Correct: " + answersProgressBar.getProgress() + " / " + answersProgressBar.getMax());
     }
 
 }
