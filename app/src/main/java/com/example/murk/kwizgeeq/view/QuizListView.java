@@ -52,8 +52,8 @@ public class QuizListView extends Observable {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent intent = new Intent(context, questioneerActivityClass);
-
                 intent.putExtra("quizIndex", position);
+                model.startQuiz();
                 currentActivity.startActivity(intent);
 
             }

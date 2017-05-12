@@ -10,6 +10,7 @@ public class KwizGeeQ extends Observable{
 
     private ArrayList<Quiz> quizList;
     private Statistics globalStatistics;
+    private Statistics currentQuizStatistics;
     private static KwizGeeQ singletonInstance = null;
 
 
@@ -25,6 +26,19 @@ public class KwizGeeQ extends Observable{
         quizList = new ArrayList<Quiz>();
         globalStatistics = new Statistics();
     }
+
+    public void startQuiz(){
+        currentQuizStatistics = new Statistics();
+    }
+
+    public void endQuiz(){
+        currentQuizStatistics.mergeWith(globalStatistics);
+    }
+
+    public Statistics getCurrentQuizStatistics() {
+        return currentQuizStatistics;
+    }
+
     public ArrayList<Quiz> getQuizList(){
         return quizList;
     }
@@ -125,7 +139,7 @@ public class KwizGeeQ extends Observable{
         quizList.add(userQuiz);
         return quizList.indexOf(userQuiz);
     }
-    
+
     public Statistics getGlobalStatistics() {
         return globalStatistics;
     }
