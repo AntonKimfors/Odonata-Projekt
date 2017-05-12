@@ -21,7 +21,7 @@ public class EditQuizActivity extends ListActivity {
         setContentView(R.layout.activity_edit_quiz);
         int index = getIntent().getIntExtra("quizindex", 0);
 
-        view = new EditQuizView(index, getListView(), this, this, (EditText) findViewById(R.id.etQuizName));
+        view = new EditQuizView(CreateQuestionActivity.class,index, getListView(), this, this, (EditText) findViewById(R.id.etQuizName));
         controller = new EditQuizController(view);
         view.addObserver(controller);
         controller.onCreate();

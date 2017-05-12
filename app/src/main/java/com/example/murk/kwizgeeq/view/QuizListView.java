@@ -26,14 +26,18 @@ import java.util.Observable;
 public class QuizListView extends Observable {
 
     private ListView listView;
-    private Activity currentActivity;
+    private final Activity currentActivity;
+    private final Class<? extends Activity> editQuizActivityClass;
+    private final Class<? extends Activity> questioneerActivityClass;
     private KwizGeeQ model;
     private QuizListAdapter adapter;
     private FloatingActionButton fab;
 
 
-    public QuizListView(final ListView listView, final Context context, final Activity currentActivity, FloatingActionButton fab){
+    public QuizListView(final ListView listView, final Context context, final Activity currentActivity, final Class<? extends Activity> editQuizActivityClass, final Class<? extends Activity> questioneerActivityClass, FloatingActionButton fab){
         this.listView = listView;
+        this.editQuizActivityClass = editQuizActivityClass;
+        this.questioneerActivityClass = questioneerActivityClass;
         this.model = KwizGeeQ.getInstance();
         this.currentActivity = currentActivity;
         this.fab = fab;
@@ -47,7 +51,7 @@ public class QuizListView extends Observable {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(context, QuestioneerActivity.class);
+                Intent intent = new Intent(context, questioneerActivityClass);
 
                 intent.putExtra("quizIndex", position);
                 currentActivity.startActivity(intent);
@@ -72,7 +76,7 @@ public class QuizListView extends Observable {
                     alertDialog.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
                      @Override
                      public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(context, EditQuizActivity.class);
+                        Intent intent = new Intent(context, editQuizActivityClass);
                          intent.putExtra("quizIndex", position);
                         currentActivity.startActivity(intent);
                         }

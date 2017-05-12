@@ -22,7 +22,8 @@ public class QuizListActivity extends ListActivity{
         setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_quiz_list);
 
-        view = new QuizListView(getListView(), this,this, (FloatingActionButton) findViewById(R.id.fab));
+        view = new QuizListView(getListView(), this,this, EditQuizActivity.class,
+                QuestioneerActivity.class, (FloatingActionButton) findViewById(R.id.fab));
         controller = new QuizListController(view);
         view.addObserver(controller);
         controller.onCreate();

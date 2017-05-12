@@ -26,21 +26,21 @@ import com.example.murk.kwizgeeq.utils.ImageFileHandler;
 
 public class CreateQuestionView extends Observable implements Observer{
 
-    private KwizGeeQ model;
-    private Activity currentActivity;
-    private Class<CreateQuestionActivity> createQuestionActivityClass;
-    private Class<QuizListActivity> quizListActivityClass;
+    private final KwizGeeQ model;
+    private final Activity currentActivity;
+    private final Class<? extends Activity> createQuestionActivityClass;
+    private final Class<? extends Activity> quizListActivityClass;
 
     /*
     private File imageStorageDir;*/
-    private PackageManager packageManager;
-    private int captureImageRequestCode;
+    private final PackageManager packageManager;
+    private final int captureImageRequestCode;
 
-    private EditText questionText;
-    private EditText correctText;
-    private EditText wrongText1;
-    private EditText wrongText2;
-    private EditText wrongText3;
+    private final EditText questionText;
+    private final EditText correctText;
+    private final EditText wrongText1;
+    private final EditText wrongText2;
+    private final EditText wrongText3;
 
     private ImageView thumbnail;
 
@@ -50,8 +50,8 @@ public class CreateQuestionView extends Observable implements Observer{
     private Drawable originalEditText;
 
     public CreateQuestionView(Activity currentActivity,
-                              Class<CreateQuestionActivity> createQuestionActivityClass,
-                              Class<QuizListActivity> quizListActivityClass,
+                              Class<? extends Activity> createQuestionActivityClass,
+                              Class<? extends Activity> quizListActivityClass,
                               File imageStorageDir, PackageManager packageManager,
                               int captureImageRequestCode, EditText questionText,
                               EditText correctText, EditText wrongText1, EditText wrongText2,
@@ -215,14 +215,14 @@ public class CreateQuestionView extends Observable implements Observer{
     }
 
     public void addMoreQuestions(int quizIndex, int questionIndex){
-        Intent intent = new Intent(currentActivity,CreateQuestionActivity.class);
+        Intent intent = new Intent(currentActivity,createQuestionActivityClass);
         intent.putExtra("quizIndex",quizIndex);
         intent.putExtra("questionIndex",questionIndex);
         currentActivity.startActivity(intent);
     }
 
     public void endAddOfQuestions(){
-        Intent intent = new Intent(currentActivity,QuizListActivity.class);
+        Intent intent = new Intent(currentActivity,quizListActivityClass);
         currentActivity.startActivity(intent);
     }
 

@@ -21,12 +21,16 @@ import java.util.Observable;
 public class EditQuizView extends Observable {
 
 
+    private final Class<? extends Activity> createQuestionActivity;
     public ListView listView;
     private EditText editText;
     private KwizGeeQ model;
     private EditQuizAdapter adapter;
 
-    public EditQuizView(final int index, final ListView listView, final Context context, final Activity oldActivity, EditText editText) {
+    public EditQuizView(final Class<? extends Activity> createQuestionActivity, final int index,
+                        final ListView listView, final Context context, final Activity oldActivity,
+                        EditText editText) {
+        this.createQuestionActivity = createQuestionActivity;
         this.listView = listView;
         this.model = KwizGeeQ.getInstance();
         this.editText = editText;
@@ -45,7 +49,7 @@ public class EditQuizView extends Observable {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                Intent intent = new Intent(context, CreateQuestionActivity.class);
+                Intent intent = new Intent(context, createQuestionActivity);
                 intent.putExtra("questionindex",position);
                 intent.putExtra("quizindex",index);
 
