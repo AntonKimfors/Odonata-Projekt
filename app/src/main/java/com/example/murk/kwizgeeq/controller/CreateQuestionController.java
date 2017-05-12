@@ -39,7 +39,7 @@ public class CreateQuestionController implements Controller, Observer{
     }
 
     public void onCreate(){
-        if(questionIndex < model.getQuizSize(quizIndex)){
+        if(questionIndex < model.getQuiz(quizIndex).getSize()){
             createQuestionView.setTextFields(quizIndex,questionIndex);
         }
 

@@ -31,11 +31,10 @@ public class KwizGeeQ extends Observable{
     }
 
     public Quiz getQuiz(int index){
-        return quizList.get(index);
-    }
-
-    public Question getQuestion(int quizIndex, int questionIndex){
-        return quizList.get(quizIndex).getQuestion(questionIndex);
+        if(index < quizList.size()-1)
+            return quizList.get(index);
+        else
+            throw new IndexOutOfBoundsException("Quiz on index "+ index +" does not exist.");
     }
 
     /*public void addQuestion(int quizIndex, int questionIndex, Question question){
@@ -47,20 +46,6 @@ public class KwizGeeQ extends Observable{
 
         quiz.addQuestionOnIndex(questionIndex,question);
     }*/
-    public ArrayList<Question> getQuestionList(int quizIndex){
-        if(quizIndex < quizList.size()-1)
-            return quizList.get(quizIndex).getQuestions();
-        else
-            throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" does not exist.");
-    }
-    public int getQuizSize(int quizIndex){
-        Quiz quiz = quizList.get(quizIndex);
-        return quiz.getSize();
-    }
-
-    public String getQuizName(int quizIndex){
-        return quizList.get(quizIndex).getName();
-    }
 
     public void createUserQuestion(int quizIndex, int questionIndex, String questionStr,
                                    String questionImg, double xPosition, double yPosition,
@@ -77,7 +62,7 @@ public class KwizGeeQ extends Observable{
         UserQuiz userQuiz = getUserQuiz(quizIndex);
         userQuiz.setUserQuestionImagePath(questionIndex,imagePath);
 
-        UserQuestion userQuestion = (UserQuestion)getQuestion(quizIndex,questionIndex);
+        UserQuestion userQuestion = (UserQuestion)userQuiz.getQuestion(questionIndex);
         setChanged();
         notifyObservers(userQuestion);
     }
@@ -124,31 +109,5 @@ public class KwizGeeQ extends Observable{
         quizList.add(userQuiz);
         return quizList.indexOf(userQuiz);
     }
-
-    public void firePlayQuiz(Quiz quiz){
-        activeQuiz = quiz;
-
-    }
-
-    public void fireEditQuiz(Quiz quiz){
-        activeQuiz = quiz;
-    };
-
-    public Iterator<Answer> getShuffledAnswers(int quizIndex, int questionIndex){
-        return quizList.get(quizIndex).getQuestion(questionIndex).answerIterator(true);
-    }
-
-    public boolean checkAnswerIsCorrect(Answer answer){
-        return answer.isCorrect();
-    }
-
-    public void incActiveQuestion(){
-        activeQuestionIndex++;
-    }
-
-    public int getAmountOfQuestions(int quizIndex){
-        return getQuiz(quizIndex).getQuestions().size();
-    }
-
 
 }

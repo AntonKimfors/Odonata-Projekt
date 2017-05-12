@@ -36,7 +36,7 @@ public class EditQuizView extends Observable {
         //System.out.println(index);
         //System.out.println(model.getQuizName(index));
         //this.editText.setText(model.getQuizName(index));  //Checkwhayy
-        this.adapter = new EditQuizAdapter(context, model.getQuestionList(index));
+        this.adapter = new EditQuizAdapter(context, model.getQuiz(index).getQuestions());
         listView.setAdapter(adapter);
 
         //Play quiz

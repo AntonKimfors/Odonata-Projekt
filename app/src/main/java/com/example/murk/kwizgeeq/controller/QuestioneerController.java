@@ -50,7 +50,7 @@ public class QuestioneerController implements Controller, Observer{
     }
 
     public void answerSelected(View view){
-        if(model.checkAnswerIsCorrect((Answer)(view.getTag()))){
+        if(((Answer)view.getTag()).isCorrect()){
             this.view.flashCorrectAnswer(view);
             //TODO (Statistics) save relevant information
         } else{
@@ -60,8 +60,8 @@ public class QuestioneerController implements Controller, Observer{
     }
 
     public void finishQuestion(){
-        if(questionIndex + 1 == model.getAmountOfQuestions(quizIndex)) {
-            view.destroyActivity(activity);
+        if(questionIndex + 1 == model.getQuiz(quizIndex).getQuestions().size()) {
+            view.closeQuestioneer(activity);
         }
         else {
             questionIndex++;

@@ -136,7 +136,7 @@ public class CreateQuestionView extends Observable implements Observer{
     }
 
     public void setThumbnail(){
-        UserQuestion question = (UserQuestion)model.getQuestion(quizIndex,questionIndex);
+        UserQuestion question = (UserQuestion)model.getQuiz(quizIndex).getQuestion(questionIndex);
         String imagePath = question.getImagePath();
 
         if(imagePath!=null){
@@ -146,7 +146,7 @@ public class CreateQuestionView extends Observable implements Observer{
     }
 
     public void setTextFields(int quizIndex, int questionIndex){
-        UserQuestion question = (UserQuestion)model.getQuestion(quizIndex,questionIndex);
+        UserQuestion question = (UserQuestion)model.getQuiz(quizIndex).getQuestion(questionIndex);
 
         setQuestionString(question.getQuestionText());
 

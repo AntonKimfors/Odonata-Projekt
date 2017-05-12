@@ -75,6 +75,10 @@ public class QuestioneerView extends Observable{
         a.setOneShot(true);
         view.setBackground(a);
         a.start();
+        waitForFlashAnimation();
+    }
+
+    private void waitForFlashAnimation(){
         setWindowUntouchable(true);
         new CountDownTimer(2250, 2250){
             public void onTick(long l){
@@ -97,17 +101,17 @@ public class QuestioneerView extends Observable{
     }
 
     public void updateQuizRelatedItems(int quizIndex){
-        quizLabel.setText(model.getQuizName(quizIndex));
-        progressBar.setMax(model.getAmountOfQuestions(quizIndex));
+        quizLabel.setText(model.getQuiz(quizIndex).getName());
+        progressBar.setMax(model.getQuiz(quizIndex).getQuestions().size());
     }
 
     public void updateQuestioneer(int quizIndex, int questionIndex){
-        Question question = model.getQuestion(quizIndex, questionIndex);
+        Question question = model.getQuiz(quizIndex).getQuestion(questionIndex);
+        Iterator answerIterator = question.answerIterator(true);
 
-        Iterator answerIterator = model.getShuffledAnswers(quizIndex, questionIndex);
         questNumLabel.setText("Question " + (questionIndex + 1));
         questLabel.setText(question.toString());
-        progressNumbers.setText((questionIndex + 1) + " / " + model.getAmountOfQuestions(quizIndex));
+        progressNumbers.setText((questionIndex + 1) + " / " + model.getQuiz(quizIndex).getQuestions().size());
         progressBar.setProgress((questionIndex + 1));
         answerButton1.setTag(answerIterator.next());
         answerButton2.setTag(answerIterator.next());
@@ -119,19 +123,19 @@ public class QuestioneerView extends Observable{
         answerButton4.setText((String)((Answer)answerButton4.getTag()).getData());
     }
 
-    public void destroyActivity(Activity activity){
+    public void closeQuestioneer(Activity activity){
         activity.finish();
     }
 
-    public void onBackPressed(final Activity activity){
-        new AlertDialog.Builder((Activity) activity)
+    public void showCloseQuizDialog(final Activity activity){
+        new AlertDialog.Builder(activity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Closing Quiz")
                 .setMessage("Are you sure you want to quit?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        destroyActivity(activity);
+                        closeQuestioneer(activity);
                     }
                 })
                 .setNegativeButton("No", null)
