@@ -3,6 +3,7 @@ package com.example.murk.kwizgeeq.utils;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.os.Environment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,6 +11,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import static android.os.Environment.getExternalStorageState;
 
 /**
  * Created by akimfors on 2017-05-12.
@@ -58,6 +61,16 @@ public class FileUtilites {
             e.printStackTrace();
         }
     }
+
+    // Checks if external storage is available for read and write
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
 
 
 }
