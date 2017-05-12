@@ -1,8 +1,12 @@
 package com.example.murk.kwizgeeq.model;
 
+import org.apache.commons.lang.time.StopWatch;
+
 /**
  * Created by Are on 12/05/2017.
  */
+
+//TODO possibly add separate SpotifyStatistics which extends this when SpotifyQuiz is implemented.
 
 public class Statistics {
 
@@ -10,12 +14,25 @@ public class Statistics {
     private int questionCount;
     private int answerCorrectCount;
     private int answerIncorrectCount;
+    private long secondsSpent;
+
+    private StopWatch stopWatch;
 
     public Statistics(){
         this.quizCount = 0;
         this.questionCount = 0;
         this.answerCorrectCount = 0;
         this.answerIncorrectCount = 0;
+        this.stopWatch = new StopWatch();
+    }
+
+    public void startTimer(){
+        stopWatch.start();
+    }
+
+    public void stopTimer(){
+        stopWatch.stop();
+        secondsSpent = stopWatch.getTime() / 1000;
     }
 
     public void mergeWith(Statistics otherStat){
@@ -56,5 +73,9 @@ public class Statistics {
     public int getAnswerIncorrectCount() {
         return answerIncorrectCount;
     }
-    
+
+    public long getSecondsSpent(){
+        return secondsSpent;
+    }
+
 }
