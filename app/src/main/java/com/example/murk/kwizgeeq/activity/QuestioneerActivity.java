@@ -1,6 +1,5 @@
 package com.example.murk.kwizgeeq.activity;
 
-import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
