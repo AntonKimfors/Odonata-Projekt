@@ -39,9 +39,23 @@ public class FileUtilites {
         //FileOutputStream outOld = context.openFileOutput(fileToWrite.getAbsolutePath(), Context.MODE_PRIVATE);
     }
 
-    public static File getFileDirectory(Context context){
-        return context.getFilesDir();
+    public static File getFileDirectory(Context context) {
+        String storageType = StorageType.PRIVATE_EXTERNAL;
+        if (storageType.equals(StorageType.INTERNAL)) {
+            return context.getFilesDir();
+        } else{
+            if(isExternalStorageWritable()){
+                if(storageType.equals((StorageType.PRIVATE_EXTERNAL))){
+                    return context.getExternalFilesDir(null);
+                } else{
+                    return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                }
+            } else {
+                return context.getFilesDir();
+            }
+        }
     }
+
 
     private static void copyFile(InputStream in, OutputStream out) throws IOException{
         byte[] buffer = new byte[1024];
@@ -83,7 +97,7 @@ public class FileUtilites {
     }
 
     // Checks if external storage is available for read and write
-    public boolean isExternalStorageWritable() {
+    public static boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
             return true;
