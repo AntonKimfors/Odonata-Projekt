@@ -23,6 +23,7 @@ public class Statistics {
         this.questionCount = 0;
         this.answerCorrectCount = 0;
         this.answerIncorrectCount = 0;
+        this.secondsSpent = 0;
         this.stopWatch = new StopWatch();
     }
 
