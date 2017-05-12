@@ -14,7 +14,7 @@ public class Statistics {
     private int questionCount;
     private int answerCorrectCount;
     private int answerIncorrectCount;
-    private long secondsSpent;
+    private int secondsSpent;
 
     private StopWatch stopWatch;
 
@@ -32,7 +32,7 @@ public class Statistics {
 
     public void stopTimer(){
         stopWatch.stop();
-        secondsSpent = stopWatch.getTime() / 1000;
+        secondsSpent = (int)(stopWatch.getTime() / 1000);
     }
 
     public void mergeWith(Statistics otherStat){
@@ -40,6 +40,7 @@ public class Statistics {
         otherStat.questionCount += this.questionCount;
         otherStat.answerCorrectCount += this.answerCorrectCount;
         otherStat.answerIncorrectCount += this.answerIncorrectCount;
+        otherStat.secondsSpent += this.secondsSpent;
     }
 
     public void incQuizCount(){
@@ -74,7 +75,7 @@ public class Statistics {
         return answerIncorrectCount;
     }
 
-    public long getSecondsSpent(){
+    public int getSecondsSpent(){
         return secondsSpent;
     }
 
