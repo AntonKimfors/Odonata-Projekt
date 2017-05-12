@@ -2,10 +2,12 @@ package com.example.murk.kwizgeeq.view;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.CountDownTimer;
+import android.support.annotation.ColorRes;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Question;
@@ -57,11 +60,11 @@ public class QuestioneerView extends Observable{
     }
 
     public void flashCorrectAnswer(View view) {
-        flashAnswer(view, Color.GREEN);
+        flashAnswer(view, activity.getResources().getColor(R.color.colorCorrectAnswer, null));
     }
 
     public void flashIncorrectAnswer(View view) {
-        flashAnswer(view, Color.RED);
+        flashAnswer(view, activity.getResources().getColor(R.color.colorIncorrectAnswer, null));
     }
 
     private void flashAnswer(View view, int color) {
