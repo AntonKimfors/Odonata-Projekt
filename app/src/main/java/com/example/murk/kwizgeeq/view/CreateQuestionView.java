@@ -28,7 +28,8 @@ public class CreateQuestionView extends Observable implements Observer{
 
     private KwizGeeQ model;
     private Activity currentActivity;
-    private Context currentContext;
+    private Class<CreateQuestionActivity> createQuestionActivityClass;
+    private Class<QuizListActivity> quizListActivityClass;
 
     /*
     private File imageStorageDir;*/
@@ -48,7 +49,9 @@ public class CreateQuestionView extends Observable implements Observer{
 
     private Drawable originalEditText;
 
-    public CreateQuestionView(Activity currentActivity, Context currentContext,
+    public CreateQuestionView(Activity currentActivity,
+                              Class<CreateQuestionActivity> createQuestionActivityClass,
+                              Class<QuizListActivity> quizListActivityClass,
                               File imageStorageDir, PackageManager packageManager,
                               int captureImageRequestCode, EditText questionText,
                               EditText correctText, EditText wrongText1, EditText wrongText2,
@@ -56,7 +59,8 @@ public class CreateQuestionView extends Observable implements Observer{
                               int questionIndex) {
 
         this.currentActivity = currentActivity;
-        this.currentContext = currentContext;
+        this.createQuestionActivityClass = createQuestionActivityClass;
+        this.quizListActivityClass = quizListActivityClass;
 
         //this.imageStorageDir = imageStorageDir;
         this.packageManager = packageManager;
@@ -211,14 +215,14 @@ public class CreateQuestionView extends Observable implements Observer{
     }
 
     public void addMoreQuestions(int quizIndex, int questionIndex){
-        Intent intent = new Intent(currentContext,CreateQuestionActivity.class);
+        Intent intent = new Intent(currentActivity,CreateQuestionActivity.class);
         intent.putExtra("quizIndex",quizIndex);
         intent.putExtra("questionIndex",questionIndex);
         currentActivity.startActivity(intent);
     }
 
     public void endAddOfQuestions(){
-        Intent intent = new Intent(currentContext,QuizListActivity.class);
+        Intent intent = new Intent(currentActivity,QuizListActivity.class);
         currentActivity.startActivity(intent);
     }
 

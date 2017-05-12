@@ -35,7 +35,6 @@ public class CreateQuestionActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_create_question);
 
-        Context applicationContext = getApplicationContext();
         File imageStorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         PackageManager packageManager = getPackageManager();
 
@@ -50,12 +49,12 @@ public class CreateQuestionActivity extends AppCompatActivity{
         int quizIndex = getIntent().getIntExtra("quizIndex",0);
         int questionIndex = getIntent().getIntExtra("questionIndex",0);
 
-        createQuestionView = new CreateQuestionView(this, applicationContext, imageStorageDir,
+        createQuestionView = new CreateQuestionView(this, CreateQuestionActivity.class,QuizListActivity.class, imageStorageDir,
                 packageManager,captureImageRequestCode, questionText,correctText,
                 wrongtext1,wrongtext2,wrongtext3,thumbnail,quizIndex,questionIndex);
 
         createQuestionController = new CreateQuestionController(createQuestionView,
-                applicationContext, imageStorageDir, quizIndex, questionIndex);
+                this, imageStorageDir, quizIndex, questionIndex);
         createQuestionController.onCreate();
 
         binding.setController(createQuestionController);
