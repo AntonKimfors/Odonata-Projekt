@@ -87,11 +87,8 @@ public class QuizListView extends Observable {
                             public void onClick(DialogInterface dialog, int which) {
                                 model.getQuizList().remove(position);
 
-
                                 currentActivity.finish();
                                 currentActivity.startActivity((currentActivity).getIntent());
-
-
 
                             }
                         })
@@ -144,9 +141,6 @@ public class QuizListView extends Observable {
                             }
                         })
                         .show();
-                ;
-
-
             }
         });
     }
