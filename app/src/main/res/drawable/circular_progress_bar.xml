@@ -4,6 +4,8 @@
     <item android:id="@android:id/background">
         <shape
             android:shape="ring"
+            android:thicknessRatio="3"
+            android:innerRadius="0dp"
             android:useLevel="false">
             <solid
                 android:color="@color/colorIncorrectAnswer"/>
@@ -18,6 +20,8 @@
             android:toDegrees="-90">
             <shape
                 android:shape="ring"
+                android:thicknessRatio="3"
+                android:innerRadius="0dp"
                 android:useLevel="true">
                 <solid
                     android:color="@color/colorCorrectAnswer" />
