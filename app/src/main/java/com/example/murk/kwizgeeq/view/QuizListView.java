@@ -78,6 +78,7 @@ public class QuizListView extends Observable {
                      @Override
                      public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(context, EditQuizActivity.class);
+                         intent.putExtra("quizIndex", position);
                         currentActivity.startActivity(intent);
                         }
                      })
