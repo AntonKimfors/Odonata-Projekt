@@ -50,9 +50,9 @@ public class QuestioneerController implements Controller, Observer{
     public void onDestroy() {
         if(currentActivity.isFinishing()) {
             Intent intent = new Intent(currentActivity, switchActivityClass);
+            intent.putExtra("quizIndex", quizIndex);
             currentActivity.startActivity(intent);
         }
-        //TODO Switch to statistics activity...
     }
 
     public void setSwitchActivityClass(Class<? extends Activity> activityClass){

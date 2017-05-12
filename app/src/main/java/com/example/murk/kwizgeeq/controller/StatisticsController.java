@@ -1,5 +1,10 @@
 package com.example.murk.kwizgeeq.controller;
 
+import android.app.Activity;
+
+import com.example.murk.kwizgeeq.model.KwizGeeQ;
+import com.example.murk.kwizgeeq.view.StatisticsView;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -9,8 +14,21 @@ import java.util.Observer;
 
 public class StatisticsController implements Controller, Observer {
 
-    public void onCreate() {
+    private StatisticsView view;
+    private KwizGeeQ model;
+    private Activity currentActivity;
 
+    private int quizIndex;
+
+    public StatisticsController(StatisticsView view, Activity currentActivity, int quizIndex) {
+        this.view = view;
+        this.model = KwizGeeQ.getInstance();
+        this.currentActivity = currentActivity;
+        this.quizIndex = quizIndex;
+    }
+
+    public void onCreate() {
+        view.updateStatistics(quizIndex);
     }
 
     public void onPause() {
