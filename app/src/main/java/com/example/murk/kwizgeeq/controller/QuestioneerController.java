@@ -19,15 +19,12 @@ public class QuestioneerController implements Controller, Observer{
     private QuestioneerView view;
     private KwizGeeQ model;
 
-    private Activity activity;
-
     private int quizIndex;
     private int questionIndex;
 
-    public QuestioneerController(QuestioneerView view, Activity activity, int quizIndex) {
+    public QuestioneerController(QuestioneerView view, int quizIndex) {
         this.view = view;
         this.model = KwizGeeQ.getInstance();
-        this.activity = activity;
         this.quizIndex = quizIndex;
         this.questionIndex = 0;
     }
@@ -61,7 +58,7 @@ public class QuestioneerController implements Controller, Observer{
 
     public void finishQuestion(){
         if(questionIndex + 1 == model.getQuiz(quizIndex).getQuestions().size()) {
-            view.closeQuestioneer(activity);
+            view.closeQuestioneer();
         }
         else {
             questionIndex++;

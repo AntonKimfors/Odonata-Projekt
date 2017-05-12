@@ -39,9 +39,10 @@ public class QuestioneerView extends Observable{
     private Button answerButton4;
 
     private KwizGeeQ model;
+    private Activity activity;
 
 
-    public QuestioneerView(Window window, TextView quizLabel, TextView questNumLabel, TextView questLabel, TextView progressNumbers, ProgressBar progressBar, Button answerButton1, Button answerButton2, Button answerButton3, Button answerButton4) {
+    public QuestioneerView(Activity activity, Window window, TextView quizLabel, TextView questNumLabel, TextView questLabel, TextView progressNumbers, ProgressBar progressBar, Button answerButton1, Button answerButton2, Button answerButton3, Button answerButton4) {
         this.window = window;
         this.quizLabel = quizLabel;
         this.questNumLabel = questNumLabel;
@@ -53,6 +54,7 @@ public class QuestioneerView extends Observable{
         this.answerButton3 = answerButton3;
         this.answerButton4 = answerButton4;
         this.model = KwizGeeQ.getInstance();
+        this.activity = activity;
     }
 
     public void flashCorrectAnswer(View view) {
@@ -123,11 +125,11 @@ public class QuestioneerView extends Observable{
         answerButton4.setText((String)((Answer)answerButton4.getTag()).getData());
     }
 
-    public void closeQuestioneer(Activity activity){
+    public void closeQuestioneer(){
         activity.finish();
     }
 
-    public void showCloseQuizDialog(final Activity activity){
+    public void showCloseQuizDialog(){
         new AlertDialog.Builder(activity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Closing Quiz")
@@ -135,7 +137,7 @@ public class QuestioneerView extends Observable{
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        closeQuestioneer(activity);
+                        closeQuestioneer();
                     }
                 })
                 .setNegativeButton("No", null)
