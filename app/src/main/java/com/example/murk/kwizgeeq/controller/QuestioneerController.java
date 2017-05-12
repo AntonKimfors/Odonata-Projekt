@@ -1,8 +1,8 @@
 package com.example.murk.kwizgeeq.controller;
 
+import android.app.Activity;
 import android.view.View;
 
-import com.example.murk.kwizgeeq.activity.NavigatableActivity;
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.view.QuestioneerView;
@@ -19,12 +19,12 @@ public class QuestioneerController implements Controller, Observer{
     private QuestioneerView view;
     private KwizGeeQ model;
 
-    private NavigatableActivity activity;
+    private Activity activity;
 
     private int quizIndex;
     private int questionIndex;
 
-    public QuestioneerController(QuestioneerView view, NavigatableActivity activity, int quizIndex) {
+    public QuestioneerController(QuestioneerView view, Activity activity, int quizIndex) {
         this.view = view;
         this.model = KwizGeeQ.getInstance();
         this.activity = activity;

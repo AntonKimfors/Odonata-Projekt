@@ -9,8 +9,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.murk.kwizgeeq.activity.CreateQuestionActivity;
-import com.example.murk.kwizgeeq.activity.NavigatableActivity;
-import com.example.murk.kwizgeeq.activity.QuestioneerActivity;
 import com.example.murk.kwizgeeq.model.EditQuizAdapter;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 

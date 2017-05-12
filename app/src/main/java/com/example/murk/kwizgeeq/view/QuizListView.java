@@ -4,21 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.activity.EditQuizActivity;
-import com.example.murk.kwizgeeq.activity.NavigatableActivity;
 import com.example.murk.kwizgeeq.activity.QuestioneerActivity;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
-import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.model.QuizListAdapter;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 

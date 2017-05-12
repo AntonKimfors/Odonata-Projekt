@@ -14,12 +14,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.murk.kwizgeeq.activity.NavigatableActivity;
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Question;
-import com.example.murk.kwizgeeq.model.Quiz;
-import com.example.murk.kwizgeeq.model.UserQuestion;
 
 import java.util.Iterator;
 import java.util.Observable;
@@ -122,11 +119,11 @@ public class QuestioneerView extends Observable{
         answerButton4.setText((String)((Answer)answerButton4.getTag()).getData());
     }
 
-    public void destroyActivity(NavigatableActivity activity){
+    public void destroyActivity(Activity activity){
         activity.finish();
     }
 
-    public void onBackPressed(final NavigatableActivity activity){
+    public void onBackPressed(final Activity activity){
         new AlertDialog.Builder((Activity) activity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Closing Quiz")

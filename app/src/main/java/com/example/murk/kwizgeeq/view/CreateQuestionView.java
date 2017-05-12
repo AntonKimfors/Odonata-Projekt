@@ -1,5 +1,6 @@
 package com.example.murk.kwizgeeq.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -26,7 +27,7 @@ import com.example.murk.kwizgeeq.utils.ImageFileHandler;
 public class CreateQuestionView extends Observable implements Observer{
 
     private KwizGeeQ model;
-    private NavigatableActivity currentActivity;
+    private Activity currentActivity;
     private Context currentContext;
 
     /*
@@ -47,7 +48,7 @@ public class CreateQuestionView extends Observable implements Observer{
 
     private Drawable originalEditText;
 
-    public CreateQuestionView(NavigatableActivity currentActivity, Context currentContext,
+    public CreateQuestionView(Activity currentActivity, Context currentContext,
                               File imageStorageDir, PackageManager packageManager,
                               int captureImageRequestCode, EditText questionText,
                               EditText correctText, EditText wrongText1, EditText wrongText2,

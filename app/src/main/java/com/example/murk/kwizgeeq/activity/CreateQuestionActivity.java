@@ -21,7 +21,7 @@ import java.io.*;
  * Created by Henrik on 05/05/2017.
  */
 
-public class CreateQuestionActivity extends AppCompatActivity implements NavigatableActivity{
+public class CreateQuestionActivity extends AppCompatActivity{
 
     private CreateQuestionView createQuestionView;
     private CreateQuestionController createQuestionController;

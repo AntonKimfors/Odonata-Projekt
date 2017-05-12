@@ -12,7 +12,7 @@ import com.example.murk.kwizgeeq.controller.QuestioneerController;
 import com.example.murk.kwizgeeq.databinding.ActivityQuestioneerBinding;
 import com.example.murk.kwizgeeq.view.QuestioneerView;
 
-public class QuestioneerActivity extends AppCompatActivity implements NavigatableActivity{
+public class QuestioneerActivity extends AppCompatActivity{
 
     private QuestioneerController controller;
     private QuestioneerView view;

@@ -12,7 +12,7 @@ import com.example.murk.kwizgeeq.view.QuizListView;
  * Created by akimfors on 2017-05-05.
  */
 
-public class QuizListActivity extends ListActivity implements NavigatableActivity{
+public class QuizListActivity extends ListActivity{
 
     private QuizListController controller;
     private QuizListView view;
