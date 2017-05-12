@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Environment;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,7 +22,7 @@ import static android.os.Environment.getExternalStorageState;
 public class FileUtilites {
 
     public static void saveAssetImage(Context context, String assetName) {
-        File fileDirectory = context.getFilesDir();
+        File fileDirectory = getFileDirectory(context);
         File fileToWrite = new File(fileDirectory, assetName);
 
         AssetManager assetManager = context.getAssets();
@@ -38,6 +39,10 @@ public class FileUtilites {
         //FileOutputStream outOld = context.openFileOutput(fileToWrite.getAbsolutePath(), Context.MODE_PRIVATE);
     }
 
+    public static File getFileDirectory(Context context){
+        return context.getFilesDir();
+    }
+
     private static void copyFile(InputStream in, OutputStream out) throws IOException{
         byte[] buffer = new byte[1024];
         int read;
@@ -46,8 +51,23 @@ public class FileUtilites {
         }
     }
 
+    public static File [] listFiles(Context context) {
+        File fileDirectory = getFileDirectory(context);
+        File [] filteredFiles = fileDirectory.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                if(file.getAbsolutePath().contains(".jpg")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+
+        return filteredFiles;
+    }
     public static void saveImage(Context context, Bitmap bitmap, String name) {
-        File fileDirectory = context.getFilesDir();
+        File fileDirectory = getFileDirectory(context);
         File fileToWrite = new File(fileDirectory, name);
 
         try {
