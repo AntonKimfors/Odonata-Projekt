@@ -64,8 +64,6 @@ public class QuizListView extends Observable {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                KwizGeeQ.getInstance().activeQuiz = KwizGeeQ.getInstance().getQuizList().get(position);
-
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(currentActivity)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("Edit Quiz?")
