@@ -19,28 +19,6 @@ public class UserQuiz extends Quiz {
         return new UserQuestion();
     }
 
-    public void setUserQuestionString(int questionIndex, String questionString){
-        UserQuestion userQuestion = (UserQuestion)getQuestion(questionIndex);
-        userQuestion.setQuestionText(questionString);
-        System.out.println(toString());
-    }
-
-    public void setUserQuestionImagePath(int questionIndex, String questionImagePath){
-        UserQuestion userQuestion = (UserQuestion)getQuestion(questionIndex);
-        userQuestion.setImagePath(questionImagePath);
-    }
-
-    public void setUserQuestionPosition(int questionIndex, double x, double y){
-        UserQuestion userQuestion = (UserQuestion)getQuestion(questionIndex);
-        userQuestion.setxPosition(x);
-        userQuestion.setyPosition(y);
-    }
-
-    public void setUserQuestionAudioPath(int questionIndex, String audioPath){
-        UserQuestion userQuestion = (UserQuestion)getQuestion(questionIndex);
-        userQuestion.setAudioPath(audioPath);
-    }
-
     private UserQuestion getRequestedUserQuestion(int questionIndex){
         if(questionIndex<=questions.size()){
 

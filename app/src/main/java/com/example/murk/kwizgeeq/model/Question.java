@@ -106,6 +106,4 @@ public abstract class Question<T> {
         return sb.toString();
     }
 
-
-
 }

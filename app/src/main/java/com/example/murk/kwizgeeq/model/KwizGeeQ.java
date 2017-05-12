@@ -24,17 +24,24 @@ public class KwizGeeQ extends Observable{
 
     private KwizGeeQ(){
         quizList = new ArrayList<Quiz>();
-        activeQuestionIndex = 1;
+        //activeQuestionIndex = 1;
     }
     public ArrayList<Quiz> getQuizList(){
         return quizList;
     }
 
-    public Quiz getQuiz(int index){
-        if(index < quizList.size()-1)
-            return quizList.get(index);
-        else
-            throw new IndexOutOfBoundsException("Quiz on index "+ index +" does not exist.");
+    public Quiz getQuiz(int quizIndex){
+        Quiz quiz = quizList.get(quizIndex);
+
+        if(quiz== null){
+            throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" does not exist.");
+        }
+
+        return quiz;
+    }
+
+    public Question getQuestion(int quizIndex, int questionIndex){
+        return quizList.get(quizIndex).getQuestion(questionIndex);
     }
 
     /*public void addQuestion(int quizIndex, int questionIndex, Question question){
@@ -46,11 +53,20 @@ public class KwizGeeQ extends Observable{
 
         quiz.addQuestionOnIndex(questionIndex,question);
     }*/
+    public ArrayList<Question> getQuestionList(int quizIndex){
+        if(quizIndex < quizList.size()-1)
+            return quizList.get(quizIndex).getQuestions();
+        else
+            throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" does not exist.");
+    }
 
-    public void createUserQuestion(int quizIndex, int questionIndex, String questionStr,
-                                   String questionImg, double xPosition, double yPosition,
-                                   String audioFile){
+    public int getQuizSize(int quizIndex){
         Quiz quiz = quizList.get(quizIndex);
+        return quiz.getSize();
+    }
+
+    public String getQuizName(int quizIndex){
+        return quizList.get(quizIndex).getName();
     }
 
     public void setUserQuestionText (int quizIndex, int questionIndex, String questionText){
@@ -83,12 +99,13 @@ public class KwizGeeQ extends Observable{
         quiz.addTextAnswer(questionIndex,answerText,isCorrect);
     }
 
-    private UserQuiz getUserQuiz(int quizIndex){
-        Quiz quiz = quizList.get(quizIndex);
+    public void removeQuestion(int quizIndex, int questionIndex){
+        Quiz quiz = getQuiz(quizIndex);
+        quiz.removeQuestion(questionIndex);
+    }
 
-        if(quiz== null){
-            throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" does not exist.");
-        }
+    private UserQuiz getUserQuiz(int quizIndex){
+        Quiz quiz = getQuiz(quizIndex);
 
         if(quiz instanceof UserQuiz){
             return (UserQuiz)quiz;

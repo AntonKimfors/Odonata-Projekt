@@ -109,6 +109,8 @@ public class CreateQuestionController implements Controller, Observer{
         String wrong2text = createQuestionView.getWrong2String();
         String wrong3text = createQuestionView.getWrong3String();
 
+        //UserQuestion current = model.getQuestion()
+
         if(questionText.isEmpty() || correctText.isEmpty() || wrong1text.isEmpty() ||
                 wrong2text.isEmpty() || wrong3text.isEmpty()){
             return false;
