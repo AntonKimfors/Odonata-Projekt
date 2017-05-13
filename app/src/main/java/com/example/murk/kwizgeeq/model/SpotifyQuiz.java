@@ -9,7 +9,7 @@ public class SpotifyQuiz extends Quiz {
 	}
 
 	@Override
-	Question createQuestion() {
+	protected Question createQuestion() {
 		return null;
 	}
 

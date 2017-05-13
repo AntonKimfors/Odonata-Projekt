@@ -15,10 +15,10 @@ import static org.junit.Assert.*;
  */
 
 public class TestQuizCreation {
-    UserQuestion testQuestion = new UserQuestion("who dis!?",null,0,0,null);
+    /*UserQuestion testQuestion = new UserQuestion("who dis!?",null,0,0,null);
     UserQuiz testQuiz = new UserQuiz("TestQuiznumerouno",null);
     Answer corrAnswer = new Answer(true,"Fest");
-    Answer wrongAnswer = new Answer(false,"inte fest");
+    Answer wrongAnswer = new Answer(false,"inte fest");*/
 
 
     /*

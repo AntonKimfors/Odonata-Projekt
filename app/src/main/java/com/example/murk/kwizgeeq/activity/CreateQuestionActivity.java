@@ -49,7 +49,7 @@ public class CreateQuestionActivity extends AppCompatActivity{
         int quizIndex = getIntent().getIntExtra("quizIndex",0);
         int questionIndex = getIntent().getIntExtra("questionIndex",0);
 
-        createQuestionView = new CreateQuestionView(this, CreateQuestionActivity.class,QuizListActivity.class, imageStorageDir,
+        createQuestionView = new CreateQuestionView(this, CreateQuestionActivity.class,QuizListActivity.class,
                 packageManager,captureImageRequestCode, questionText,correctText,
                 wrongtext1,wrongtext2,wrongtext3,thumbnail,quizIndex,questionIndex);
 

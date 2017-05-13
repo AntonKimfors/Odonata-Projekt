@@ -25,7 +25,7 @@ public class QuizListController implements Controller, Observer{
         this.view = view;
         model = KwizGeeQ.getInstance();
         int quiz = model.createUserQuiz("Testquiz",Color.argb(255,100,100,100));
-        model.setUserQuestionText(quiz,0,"Vad är svaret på fråga nummer 1?");
+        /*model.setUserQuestionText(quiz,0,"Vad är svaret på fråga nummer 1?");
         model.addTextAnswer(quiz,0,"sant",true);
         model.addTextAnswer(quiz,0,"falskt",false);
         model.addTextAnswer(quiz,0,"falskt",false);
@@ -39,7 +39,7 @@ public class QuizListController implements Controller, Observer{
         model.addTextAnswer(quiz,2,"sant",true);
         model.addTextAnswer(quiz,2,"falskt",false);
         model.addTextAnswer(quiz,2,"falskt",false);
-        model.addTextAnswer(quiz,2,"falskt",false);
+        model.addTextAnswer(quiz,2,"falskt",false);*/
 
     }
 
