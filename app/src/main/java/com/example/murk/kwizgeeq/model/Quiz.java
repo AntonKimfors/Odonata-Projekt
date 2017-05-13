@@ -49,16 +49,6 @@ public abstract class Quiz implements Iterable{
         questions.remove(questionIndex);
     }
 
-    public void addTextAnswer(int questionIndex, String answerText, boolean isCorrect){
-        Question question = getQuestion(questionIndex);
-
-        question.addAnswer(answerText,isCorrect);
-    }
-
-    public void removeQuestion(Question question){
-        getQuestions().remove(question);
-    }
-
     public int getSize(){
         return questions.size();
     }
@@ -80,29 +70,7 @@ public abstract class Quiz implements Iterable{
         }
     }
 
-    abstract Question createQuestion();
-
-    public void setUserQuestionString(int questionIndex, String questionString){
-        UserQuestion userQuestion = (UserQuestion)getQuestion(questionIndex);
-        userQuestion.setQuestionText(questionString);
-        System.out.println(toString());
-    }
-
-    public void setUserQuestionImagePath(int questionIndex, String questionImagePath){
-        UserQuestion userQuestion = (UserQuestion)getQuestion(questionIndex);
-        userQuestion.setImagePath(questionImagePath);
-    }
-
-    public void setUserQuestionPosition(int questionIndex, double x, double y){
-        UserQuestion userQuestion = (UserQuestion)getQuestion(questionIndex);
-        userQuestion.setxPosition(x);
-        userQuestion.setyPosition(y);
-    }
-
-    public void setUserQuestionAudioPath(int questionIndex, String audioPath){
-        UserQuestion userQuestion = (UserQuestion)getQuestion(questionIndex);
-        userQuestion.setAudioPath(audioPath);
-    }
+    protected abstract Question createQuestion();
 
 
     @Override

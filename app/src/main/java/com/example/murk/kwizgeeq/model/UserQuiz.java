@@ -15,7 +15,7 @@ public class UserQuiz extends Quiz {
 	}
 
     @Override
-    Question createQuestion() {
+    protected Question createQuestion() {
         return new UserQuestion();
     }
 

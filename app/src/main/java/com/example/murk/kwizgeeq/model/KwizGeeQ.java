@@ -44,28 +44,18 @@ public class KwizGeeQ extends Observable{
     }
 
     public Quiz getQuiz(int quizIndex){
-        Quiz quiz = quizList.get(quizIndex);
-
-        if(quiz== null){
-            throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" does not exist.");
+        if(quizIndex<quizList.size()){
+            return quizList.get(quizIndex);
         }
 
-        return quiz;
+        throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" does not exist.");
     }
 
     public Question getQuestion(int quizIndex, int questionIndex){
-        return quizList.get(quizIndex).getQuestion(questionIndex);
+        Quiz quiz = getQuiz(quizIndex);
+        return quiz.getQuestion(questionIndex);
     }
 
-    /*public void addQuestion(int quizIndex, int questionIndex, Question question){
-        Quiz quiz = quizList.get(quizIndex);
-
-        if(quiz== null){
-            throw new IndexOutOfBoundsException("Quiz doesn't exist");
-        }
-
-        quiz.addQuestionOnIndex(questionIndex,question);
-    }*/
     public ArrayList<Question> getQuestionList(int quizIndex){
         if(quizIndex < quizList.size()-1)
             return quizList.get(quizIndex).getQuestions();
@@ -82,49 +72,9 @@ public class KwizGeeQ extends Observable{
         return quizList.get(quizIndex).getName();
     }
 
-    public void setUserQuestionText (int quizIndex, int questionIndex, String questionText){
-        UserQuiz userQuiz = getUserQuiz(quizIndex);
-        userQuiz.setUserQuestionString(questionIndex,questionText);
-    }
-
-    public void setUserQuestionImagePath (int quizIndex, int questionIndex, String imagePath){
-        UserQuiz userQuiz = getUserQuiz(quizIndex);
-        userQuiz.setUserQuestionImagePath(questionIndex,imagePath);
-
-        UserQuestion userQuestion = (UserQuestion)userQuiz.getQuestion(questionIndex);
-        setChanged();
-        notifyObservers(userQuestion);
-    }
-
-    public void setUserQuestionAudioPath (int quizIndex, int questionIndex, String audioPath){
-        UserQuiz userQuiz = getUserQuiz(quizIndex);
-        userQuiz.setUserQuestionAudioPath(questionIndex,audioPath);
-    }
-
-    public void setUserQuestionPosition (int quizIndex, int questionIndex, double x, double y){
-        UserQuiz userQuiz = getUserQuiz(quizIndex);
-        userQuiz.setUserQuestionPosition(questionIndex,x,y);
-    }
-
-    public void addTextAnswer(int quizIndex, int questionIndex, String answerText,
-                                boolean isCorrect){
-        Quiz quiz = quizList.get(quizIndex);
-        quiz.addTextAnswer(questionIndex,answerText,isCorrect);
-    }
-
     public void removeQuestion(int quizIndex, int questionIndex){
         Quiz quiz = getQuiz(quizIndex);
         quiz.removeQuestion(questionIndex);
-    }
-
-    private UserQuiz getUserQuiz(int quizIndex){
-        Quiz quiz = getQuiz(quizIndex);
-
-        if(quiz instanceof UserQuiz){
-            return (UserQuiz)quiz;
-        }
-
-        throw new IllegalArgumentException("Requested quiz is not editible for users");
     }
 
     /**

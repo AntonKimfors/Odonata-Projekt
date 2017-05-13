@@ -64,6 +64,10 @@ public abstract class Question<T> {
         throw new IllegalArgumentException("Element not in list");
     }
 
+    public void clearAnswers(){
+        answers.clear();
+    }
+
     public boolean checkNumberOfCorrect(int excepted){
         return excepted == correctAnswerCount;
     }

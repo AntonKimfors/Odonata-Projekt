@@ -18,7 +18,7 @@ import java.util.*;
 public class CreateQuestionController implements Controller, Observer{
 
     private CreateQuestionView createQuestionView;
-    private KwizGeeQ model;
+    private UserQuestion userQuestion;
 
     private Context currentContext;
     private File imageStorageDir;
@@ -35,13 +35,10 @@ public class CreateQuestionController implements Controller, Observer{
         this.imageStorageDir = imageStorageDir;
         this.quizIndex = quizIndex;
         this.questionIndex = questionIndex;
-        model = KwizGeeQ.getInstance();
+        userQuestion = (UserQuestion)KwizGeeQ.getInstance().getQuestion(quizIndex,questionIndex);
     }
 
     public void onCreate(){
-        if(questionIndex < model.getQuiz(quizIndex).getSize()){
-            createQuestionView.setTextFields(quizIndex,questionIndex);
-        }
 
         View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
             @Override
@@ -56,8 +53,6 @@ public class CreateQuestionController implements Controller, Observer{
         };
 
         createQuestionView.addOnFocusChangeListener(onFocusChangeListener);
-
-        model.addObserver(createQuestionView);
     }
 
     public void onPause() {
@@ -98,7 +93,7 @@ public class CreateQuestionController implements Controller, Observer{
 
     public void imageCreated(){
         if(imagePath!=null){
-            model.setUserQuestionImagePath(quizIndex,questionIndex,imagePath);
+            userQuestion.setImagePath(imagePath);
         }
     }
 
@@ -120,13 +115,14 @@ public class CreateQuestionController implements Controller, Observer{
     }
 
     private void saveQuestion(){
-        model.setUserQuestionText(quizIndex, questionIndex, createQuestionView.getQuestionString());
+        userQuestion.setQuestionText(createQuestionView.getQuestionString());
 
-        model.addTextAnswer(quizIndex,questionIndex, createQuestionView.getCorrectString(),true);
+        userQuestion.clearAnswers();
+        userQuestion.addAnswer(createQuestionView.getCorrectString(),true);
 
-        model.addTextAnswer(quizIndex,questionIndex, createQuestionView.getWrong1String(),false);
-        model.addTextAnswer(quizIndex,questionIndex, createQuestionView.getWrong2String(),false);
-        model.addTextAnswer(quizIndex,questionIndex, createQuestionView.getWrong3String(),false);
+        userQuestion.addAnswer(createQuestionView.getWrong1String(),false);
+        userQuestion.addAnswer(createQuestionView.getWrong2String(),false);
+        userQuestion.addAnswer(createQuestionView.getWrong3String(),false);
     }
 
     @Override

@@ -24,9 +24,9 @@ import com.example.murk.kwizgeeq.activity.*;
 import com.example.murk.kwizgeeq.model.*;
 import com.example.murk.kwizgeeq.utils.ImageFileHandler;
 
-public class CreateQuestionView extends Observable implements Observer{
+public class CreateQuestionView extends Observable {
 
-    private final KwizGeeQ model;
+    private final UserQuestion userQuestion;
     private final Activity currentActivity;
     private final Class<? extends Activity> createQuestionActivityClass;
     private final Class<? extends Activity> quizListActivityClass;
@@ -44,19 +44,15 @@ public class CreateQuestionView extends Observable implements Observer{
 
     private ImageView thumbnail;
 
-    private int quizIndex;
-    private int questionIndex;
-
     private Drawable originalEditText;
 
     public CreateQuestionView(Activity currentActivity,
                               Class<? extends Activity> createQuestionActivityClass,
                               Class<? extends Activity> quizListActivityClass,
-                              File imageStorageDir, PackageManager packageManager,
-                              int captureImageRequestCode, EditText questionText,
-                              EditText correctText, EditText wrongText1, EditText wrongText2,
-                              EditText wrongText3, ImageView thumbnail, int quizIndex,
-                              int questionIndex) {
+                              PackageManager packageManager, int captureImageRequestCode,
+                              EditText questionText, EditText correctText, EditText wrongText1,
+                              EditText wrongText2, EditText wrongText3, ImageView thumbnail,
+                              int quizIndex, int questionIndex) {
 
         this.currentActivity = currentActivity;
         this.createQuestionActivityClass = createQuestionActivityClass;
@@ -74,12 +70,11 @@ public class CreateQuestionView extends Observable implements Observer{
 
         this.thumbnail = thumbnail;
 
-        this.quizIndex = quizIndex;
-        this.questionIndex = questionIndex;
-
-        model = KwizGeeQ.getInstance();
+        userQuestion = (UserQuestion)KwizGeeQ.getInstance().getQuestion(quizIndex,questionIndex);
 
         originalEditText = correctText.getBackground();
+
+        setTextFields();
     }
 
     public void addOnFocusChangeListener(View.OnFocusChangeListener listener){
@@ -140,8 +135,7 @@ public class CreateQuestionView extends Observable implements Observer{
     }
 
     public void setThumbnail(){
-        UserQuestion question = (UserQuestion)model.getQuiz(quizIndex).getQuestion(questionIndex);
-        String imagePath = question.getImagePath();
+        String imagePath = userQuestion.getImagePath();
 
         if(imagePath!=null){
             Uri imageUri = Uri.parse(imagePath);
@@ -149,12 +143,10 @@ public class CreateQuestionView extends Observable implements Observer{
         }
     }
 
-    public void setTextFields(int quizIndex, int questionIndex){
-        UserQuestion question = (UserQuestion)model.getQuiz(quizIndex).getQuestion(questionIndex);
+    public void setTextFields(){
+        setQuestionString(userQuestion.getQuestionText());
 
-        setQuestionString(question.getQuestionText());
-
-        Iterator<Answer> answerIterator = question.answerIterator(false);
+        Iterator<Answer> answerIterator = userQuestion.answerIterator(false);
 
         while(answerIterator.hasNext()){
             Answer<String> answer = answerIterator.next();
@@ -214,10 +206,10 @@ public class CreateQuestionView extends Observable implements Observer{
         }
     }
 
-    public void addMoreQuestions(int quizIndex, int questionIndex){
+    public void addMoreQuestions(int nextQuizIndex, int nextQuestionIndex){
         Intent intent = new Intent(currentActivity,createQuestionActivityClass);
-        intent.putExtra("quizIndex",quizIndex);
-        intent.putExtra("questionIndex",questionIndex);
+        intent.putExtra("quizIndex",nextQuizIndex);
+        intent.putExtra("questionIndex",nextQuestionIndex);
         currentActivity.startActivity(intent);
     }
 
@@ -228,5 +220,6 @@ public class CreateQuestionView extends Observable implements Observer{
 
     public void update(Observable o, Object arg) {
         setThumbnail();
+        setTextFields();
     }
 }
