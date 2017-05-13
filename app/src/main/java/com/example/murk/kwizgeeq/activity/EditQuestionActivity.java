@@ -6,8 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.*;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.*;
@@ -43,14 +42,18 @@ public class EditQuestionActivity extends AppCompatActivity{
         EditText wrongtext2 = (EditText)findViewById(R.id.wrongText2);
         EditText wrongtext3 = (EditText)findViewById(R.id.wrongText3);
 
+        Button doneButton = (Button)findViewById(R.id.doneButton);
+        Button nextButton = (Button)findViewById(R.id.nextQuestionButton);
+
         ImageView thumbnail = (ImageView)findViewById(R.id.thumbnail);
 
         int quizIndex = getIntent().getIntExtra("quizIndex",0);
         int questionIndex = getIntent().getIntExtra("questionIndex",0);
 
-        editQuestionView = new EditQuestionView(this, EditQuestionActivity.class,QuizListActivity.class,
-                packageManager,captureImageRequestCode, questionText,correctText,
-                wrongtext1,wrongtext2,wrongtext3,thumbnail,quizIndex,questionIndex);
+        editQuestionView = new EditQuestionView(this, EditQuestionActivity.class,
+                QuizListActivity.class, packageManager,captureImageRequestCode, questionText,
+                correctText,wrongtext1,wrongtext2,wrongtext3,thumbnail,doneButton,nextButton,
+                quizIndex, questionIndex);
 
         editQuestionController = new EditQuestionController(editQuestionView,
                 this, imageStorageDir, quizIndex, questionIndex);

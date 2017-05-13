@@ -42,6 +42,9 @@ public class EditQuestionView extends Observable {
     private final EditText wrongText2;
     private final EditText wrongText3;
 
+    private final Button doneButton;
+    private final Button nextButton;
+
     private ImageView thumbnail;
 
     private Drawable originalEditText;
@@ -52,7 +55,7 @@ public class EditQuestionView extends Observable {
                             PackageManager packageManager, int captureImageRequestCode,
                             EditText questionText, EditText correctText, EditText wrongText1,
                             EditText wrongText2, EditText wrongText3, ImageView thumbnail,
-                            int quizIndex, int questionIndex) {
+                            Button doneButton, Button nextButton,int quizIndex, int questionIndex) {
 
         this.currentActivity = currentActivity;
         this.createQuestionActivityClass = createQuestionActivityClass;
@@ -69,12 +72,18 @@ public class EditQuestionView extends Observable {
         this.wrongText3 = wrongText3;
 
         this.thumbnail = thumbnail;
+        this.doneButton = doneButton;
+        this.nextButton = nextButton;
 
         userQuestion = (UserQuestion)KwizGeeQ.getInstance().getQuestion(quizIndex,questionIndex);
 
         originalEditText = correctText.getBackground();
 
         setTextFields();
+
+        if(questionIndex<KwizGeeQ.getInstance().getQuizSize(quizIndex)-1){
+            setEditButtonTexts();
+        }
     }
 
     public void addOnFocusChangeListener(View.OnFocusChangeListener listener){
@@ -134,7 +143,7 @@ public class EditQuestionView extends Observable {
         textField.setBackground(originalEditText);
     }
 
-    public void setThumbnail(){
+    private void setThumbnail(){
         String imagePath = userQuestion.getImagePath();
 
         if(imagePath!=null){
@@ -143,7 +152,13 @@ public class EditQuestionView extends Observable {
         }
     }
 
-    public void setTextFields(){
+    private void setEditButtonTexts(){
+        doneButton.setText("Quit editing");
+        nextButton.setText("Edit next");
+    }
+
+    private void setTextFields(){
+
         setQuestionString(userQuestion.getQuestionText());
 
         Iterator<Answer> answerIterator = userQuestion.answerIterator(false);
