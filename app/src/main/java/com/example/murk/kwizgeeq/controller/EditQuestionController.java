@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.view.View;
 
 import com.example.murk.kwizgeeq.utils.ImageFileHandler;
-import com.example.murk.kwizgeeq.view.CreateQuestionView;
+import com.example.murk.kwizgeeq.view.EditQuestionView;
 import com.example.murk.kwizgeeq.model.*;
 
 import java.io.File;
@@ -15,9 +15,9 @@ import java.util.*;
  * Created by Henrik on 02/05/2017.
  */
 
-public class CreateQuestionController implements Controller, Observer{
+public class EditQuestionController implements Controller, Observer{
 
-    private CreateQuestionView createQuestionView;
+    private EditQuestionView editQuestionView;
     private UserQuestion userQuestion;
 
     private Context currentContext;
@@ -28,9 +28,9 @@ public class CreateQuestionController implements Controller, Observer{
     private int quizIndex;
     private int questionIndex;
 
-    public CreateQuestionController(CreateQuestionView createQuestionView, Context currentContext,
-                                    File imageStorageDir, int quizIndex, int questionIndex){
-        this.createQuestionView = createQuestionView;
+    public EditQuestionController(EditQuestionView editQuestionView, Context currentContext,
+                                  File imageStorageDir, int quizIndex, int questionIndex){
+        this.editQuestionView = editQuestionView;
         this.currentContext = currentContext;
         this.imageStorageDir = imageStorageDir;
         this.quizIndex = quizIndex;
@@ -44,15 +44,15 @@ public class CreateQuestionController implements Controller, Observer{
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus){
-                    createQuestionView.highlightField(v);
+                    editQuestionView.highlightField(v);
                 } else {
-                    createQuestionView.normalizeField(v);
+                    editQuestionView.normalizeField(v);
                 }
 
             }
         };
 
-        createQuestionView.addOnFocusChangeListener(onFocusChangeListener);
+        editQuestionView.addOnFocusChangeListener(onFocusChangeListener);
     }
 
     public void onPause() {
@@ -67,20 +67,20 @@ public class CreateQuestionController implements Controller, Observer{
 
     public void nextButtonAction(View view){
         if(!checkRequiredFields()){
-            createQuestionView.flashEmpty();
+            editQuestionView.flashEmpty();
         } else{
             saveQuestion();
             int nextQuestionIndex = questionIndex +1;
-            createQuestionView.addMoreQuestions(quizIndex,nextQuestionIndex);
+            editQuestionView.addMoreQuestions(quizIndex,nextQuestionIndex);
         }
     }
 
     public void doneButtonAction(View view){
         if(!checkRequiredFields()){
-            createQuestionView.flashEmpty();
+            editQuestionView.flashEmpty();
         } else{
             saveQuestion();
-            createQuestionView.endAddOfQuestions();
+            editQuestionView.endAddOfQuestions();
         }
     }
 
@@ -88,7 +88,7 @@ public class CreateQuestionController implements Controller, Observer{
         Uri imageUri = ImageFileHandler.getImageURI(imageStorageDir,currentContext);
         imagePath = imageUri.toString();
 
-        createQuestionView.takePhoto(imageUri);
+        editQuestionView.takePhoto(imageUri);
     }
 
     public void imageCreated(){
@@ -98,11 +98,11 @@ public class CreateQuestionController implements Controller, Observer{
     }
 
     private boolean checkRequiredFields(){
-        String questionText = createQuestionView.getQuestionString();
-        String correctText = createQuestionView.getCorrectString();
-        String wrong1text = createQuestionView.getWrong1String();
-        String wrong2text = createQuestionView.getWrong2String();
-        String wrong3text = createQuestionView.getWrong3String();
+        String questionText = editQuestionView.getQuestionString();
+        String correctText = editQuestionView.getCorrectString();
+        String wrong1text = editQuestionView.getWrong1String();
+        String wrong2text = editQuestionView.getWrong2String();
+        String wrong3text = editQuestionView.getWrong3String();
 
         //UserQuestion current = model.getQuestion()
 
@@ -115,14 +115,14 @@ public class CreateQuestionController implements Controller, Observer{
     }
 
     private void saveQuestion(){
-        userQuestion.setQuestionText(createQuestionView.getQuestionString());
+        userQuestion.setQuestionText(editQuestionView.getQuestionString());
 
         userQuestion.clearAnswers();
-        userQuestion.addAnswer(createQuestionView.getCorrectString(),true);
+        userQuestion.addAnswer(editQuestionView.getCorrectString(),true);
 
-        userQuestion.addAnswer(createQuestionView.getWrong1String(),false);
-        userQuestion.addAnswer(createQuestionView.getWrong2String(),false);
-        userQuestion.addAnswer(createQuestionView.getWrong3String(),false);
+        userQuestion.addAnswer(editQuestionView.getWrong1String(),false);
+        userQuestion.addAnswer(editQuestionView.getWrong2String(),false);
+        userQuestion.addAnswer(editQuestionView.getWrong3String(),false);
     }
 
     @Override

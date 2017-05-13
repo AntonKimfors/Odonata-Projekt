@@ -24,7 +24,7 @@ import com.example.murk.kwizgeeq.activity.*;
 import com.example.murk.kwizgeeq.model.*;
 import com.example.murk.kwizgeeq.utils.ImageFileHandler;
 
-public class CreateQuestionView extends Observable {
+public class EditQuestionView extends Observable {
 
     private final UserQuestion userQuestion;
     private final Activity currentActivity;
@@ -46,13 +46,13 @@ public class CreateQuestionView extends Observable {
 
     private Drawable originalEditText;
 
-    public CreateQuestionView(Activity currentActivity,
-                              Class<? extends Activity> createQuestionActivityClass,
-                              Class<? extends Activity> quizListActivityClass,
-                              PackageManager packageManager, int captureImageRequestCode,
-                              EditText questionText, EditText correctText, EditText wrongText1,
-                              EditText wrongText2, EditText wrongText3, ImageView thumbnail,
-                              int quizIndex, int questionIndex) {
+    public EditQuestionView(Activity currentActivity,
+                            Class<? extends Activity> createQuestionActivityClass,
+                            Class<? extends Activity> quizListActivityClass,
+                            PackageManager packageManager, int captureImageRequestCode,
+                            EditText questionText, EditText correctText, EditText wrongText1,
+                            EditText wrongText2, EditText wrongText3, ImageView thumbnail,
+                            int quizIndex, int questionIndex) {
 
         this.currentActivity = currentActivity;
         this.createQuestionActivityClass = createQuestionActivityClass;

@@ -1,6 +1,5 @@
 package com.example.murk.kwizgeeq.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
@@ -21,10 +20,10 @@ import java.io.*;
  * Created by Henrik on 05/05/2017.
  */
 
-public class CreateQuestionActivity extends AppCompatActivity{
+public class EditQuestionActivity extends AppCompatActivity{
 
-    private CreateQuestionView createQuestionView;
-    private CreateQuestionController createQuestionController;
+    private EditQuestionView editQuestionView;
+    private EditQuestionController editQuestionController;
 
     final int captureImageRequestCode = 1;
 
@@ -49,24 +48,24 @@ public class CreateQuestionActivity extends AppCompatActivity{
         int quizIndex = getIntent().getIntExtra("quizIndex",0);
         int questionIndex = getIntent().getIntExtra("questionIndex",0);
 
-        createQuestionView = new CreateQuestionView(this, CreateQuestionActivity.class,QuizListActivity.class,
+        editQuestionView = new EditQuestionView(this, EditQuestionActivity.class,QuizListActivity.class,
                 packageManager,captureImageRequestCode, questionText,correctText,
                 wrongtext1,wrongtext2,wrongtext3,thumbnail,quizIndex,questionIndex);
 
-        createQuestionController = new CreateQuestionController(createQuestionView,
+        editQuestionController = new EditQuestionController(editQuestionView,
                 this, imageStorageDir, quizIndex, questionIndex);
-        createQuestionController.onCreate();
+        editQuestionController.onCreate();
 
-        binding.setController(createQuestionController);
+        binding.setController(editQuestionController);
 
-        createQuestionView.addObserver(createQuestionController);
+        editQuestionView.addObserver(editQuestionController);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
         if (requestCode == captureImageRequestCode && resultCode == RESULT_OK) {
-            createQuestionController.imageCreated();
+            editQuestionController.imageCreated();
         }
     }
 }
