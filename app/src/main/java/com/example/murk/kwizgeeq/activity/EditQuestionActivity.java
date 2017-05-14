@@ -10,7 +10,7 @@ import android.widget.*;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.*;
-import com.example.murk.kwizgeeq.databinding.ActivityCreateQuestionBinding;
+import com.example.murk.kwizgeeq.databinding.ActivityEditQuestionBinding;
 import com.example.murk.kwizgeeq.view.*;
 
 import java.io.*;
@@ -26,12 +26,10 @@ public class EditQuestionActivity extends AppCompatActivity{
 
     final int captureImageRequestCode = 1;
 
-    private ActivityCreateQuestionBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_create_question);
+        ActivityEditQuestionBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_edit_question);
 
         File imageStorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         PackageManager packageManager = getPackageManager();
