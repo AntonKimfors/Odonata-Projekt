@@ -5,17 +5,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.activity.EditQuizActivity;
 import com.example.murk.kwizgeeq.activity.QuestioneerActivity;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.QuizListAdapter;
 import com.example.murk.kwizgeeq.model.UserQuiz;
+
+import org.xdty.preference.colorpicker.ColorPickerDialog;
+import org.xdty.preference.colorpicker.ColorPickerSwatch;
 
 import java.util.Observable;
 
@@ -24,7 +31,7 @@ import java.util.Observable;
  */
 
 public class QuizListView extends Observable {
-
+    private int mSelectedColor;
     private ListView listView;
     private final Activity currentActivity;
     private final Class<? extends Activity> editQuizActivityClass;
@@ -107,38 +114,74 @@ public class QuizListView extends Observable {
         //Added clickListenet to FloatingActionButton
         this.fab.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View view) {
 
-                final EditText input = new EditText(currentActivity);
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
+                View mView = LayoutInflater.from(context).inflate(R.layout.dialog_create_quiz, null);
+                final EditText quizName = (EditText) mView.findViewById(R.id.etQuizName);
+                Button mCancel = (Button) mView.findViewById(R.id.btnCancel);
+                Button mCreateQuiz = (Button) mView.findViewById(R.id.btnCreateQuiz);
+                final Button mPickColor = (Button) mView.findViewById(R.id.btnPickColor);
 
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
 
-                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(currentActivity)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Create Quiz?")
-                        .setView(input);
-
-                final AlertDialog ad = alertDialog.create();
-
-
-                alertDialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                mPickColor.setBackgroundColor(context.getResources().getColor(R.color.flamingo));
+                mPickColor.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View view) {
 
-                        String quizTitle = input.getText().toString();
-                        model.getQuizList().add(new UserQuiz(quizTitle, 0));
-                    }
-                })
+                        mSelectedColor = ContextCompat.getColor(context, R.color.flamingo);
 
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                        int[] mColors = context.getResources().getIntArray(R.array.default_rainbow);
+
+                        ColorPickerDialog dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
+                                mColors,
+                                mSelectedColor,
+                                5, // Number of columns
+                                ColorPickerDialog.SIZE_SMALL,
+                                true // True or False to enable or disable the serpentine effect
+                                //0, // stroke width
+                                //Color.BLACK // stroke color
+                        );
+
+                        dialog.setOnColorSelectedListener(new ColorPickerSwatch.OnColorSelectedListener() {
+
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onColorSelected(int color) {
+                                mSelectedColor = color;
+                                mPickColor.setBackgroundColor(mSelectedColor);
 
-                                ad.dismiss();
                             }
-                        })
-                        .show();
+
+                        });
+
+                        dialog.show(currentActivity.getFragmentManager(), "color_dialog_test");
+                    }
+                });
+
+                mCreateQuiz.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = new Intent(context, EditQuizActivity.class);
+                        String quizTitle = quizName.getText().toString();
+                        int quizindex = model.getQuizList().size();
+                        model.getQuizList().add(new UserQuiz(quizTitle, quizindex));
+                        intent.putExtra("quizIndex",quizindex);  //TODO
+                        currentActivity.startActivity(intent);
+                    }
+                });
+                mCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
             }
+
         });
     }
 }
