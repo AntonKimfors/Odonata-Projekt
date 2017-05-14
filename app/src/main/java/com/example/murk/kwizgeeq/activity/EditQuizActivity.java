@@ -2,6 +2,7 @@ package com.example.murk.kwizgeeq.activity;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.widget.EditText;
 
 import com.example.murk.kwizgeeq.controller.EditQuizController;
@@ -19,9 +20,11 @@ public class EditQuizActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_edit_quiz);
-        int index = getIntent().getIntExtra("quizindex", 0);
+        int index = getIntent().getIntExtra("quizIndex",0);
 
-        view = new EditQuizView(EditQuestionActivity.class,index, getListView(), this, this, (EditText) findViewById(R.id.etQuizName));
+
+        view = new EditQuizView(EditQuestionActivity.class,index, getListView(), this, this, (EditText) findViewById(R.id.etQuizLabel),(FloatingActionButton) findViewById(R.id.fab));
+
         controller = new EditQuizController(view);
         view.addObserver(controller);
         controller.onCreate();
