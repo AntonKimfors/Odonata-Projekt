@@ -76,7 +76,10 @@ public class EditQuestionController implements Controller, Observer{
     }
 
     public void doneButtonAction(View view){
-        if(!checkRequiredFields()){
+        if(isAllFieldsEmpty()){
+            editQuestionView.endAddOfQuestions();
+        }
+        else if(!checkRequiredFields()){
             editQuestionView.flashEmpty();
         } else{
             saveQuestion();
@@ -112,6 +115,23 @@ public class EditQuestionController implements Controller, Observer{
         }
 
         return true;
+    }
+
+    private boolean isAllFieldsEmpty(){
+        String questionText = editQuestionView.getQuestionString();
+        String correctText = editQuestionView.getCorrectString();
+        String wrong1text = editQuestionView.getWrong1String();
+        String wrong2text = editQuestionView.getWrong2String();
+        String wrong3text = editQuestionView.getWrong3String();
+
+        //UserQuestion current = model.getQuestion()
+
+        if(questionText.isEmpty() && correctText.isEmpty() && wrong1text.isEmpty() &&
+                wrong2text.isEmpty() && wrong3text.isEmpty()){
+            return true;
+        }
+
+        return false;
     }
 
     private void saveQuestion(){
