@@ -34,6 +34,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.0'
     compile 'org.xdty.preference:color-picker:0.0.5'
+    compile 'com.google.guava:guava:20.0'
     compile('se.michaelthelin.spotify:spotify-web-api-java:1.5.0') {
         exclude group: "commons-beanutils", module: "commons-beanutils"
     }

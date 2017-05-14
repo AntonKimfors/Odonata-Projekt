@@ -23,6 +23,8 @@ import java.util.*;
 import com.example.murk.kwizgeeq.activity.*;
 import com.example.murk.kwizgeeq.model.*;
 import com.example.murk.kwizgeeq.utils.ImageFileHandler;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 
 public class EditQuestionView extends Observable {
 
@@ -31,8 +33,8 @@ public class EditQuestionView extends Observable {
     private final Class<? extends Activity> createQuestionActivityClass;
     private final Class<? extends Activity> quizListActivityClass;
 
-    /*
-    private File imageStorageDir;*/
+    private final EventBus eventBus;
+
     private final PackageManager packageManager;
     private final int captureImageRequestCode;
 
@@ -79,11 +81,16 @@ public class EditQuestionView extends Observable {
 
         originalEditText = correctText.getBackground();
 
+        eventBus = BusWrapper.BUS;
+        eventBus.register(this);
+
         setTextFields();
 
         if(questionIndex<KwizGeeQ.getInstance().getQuizSize(quizIndex)-1){
             setEditButtonTexts();
         }
+
+
     }
 
     public void addOnFocusChangeListener(View.OnFocusChangeListener listener){
@@ -233,8 +240,11 @@ public class EditQuestionView extends Observable {
         currentActivity.startActivity(intent);
     }
 
-    public void update(Observable o, Object arg) {
-        setThumbnail();
-        setTextFields();
+    @Subscribe
+    public void update(UserQuestion question){
+        if(question == userQuestion){
+            setThumbnail();
+            setTextFields();
+        }
     }
 }

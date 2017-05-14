@@ -36,13 +36,14 @@ public class UserQuiz extends Quiz {
         }
     }
 
+    /*
     public UserQuiz copyUserQuiz(){
         UserQuiz clonedQuiz = new UserQuiz(this.getName(),this.getListColor());
         for(Question question :getQuestions()){
             clonedQuiz.addQuestion(question);
         }
         return clonedQuiz;
-    }
+    }*/
 
 
 }

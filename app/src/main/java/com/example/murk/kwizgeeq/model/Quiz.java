@@ -38,13 +38,6 @@ public abstract class Quiz implements Iterable{
         return questions;
     }
 
-    /**
-     * eventuellt behövs inte denna metod
-     */
-    public void addQuestion(Question question){
-        questions.add(question);
-    }
-
     public void removeQuestion(int questionIndex){
         questions.remove(questionIndex);
     }

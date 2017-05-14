@@ -6,7 +6,7 @@ import java.util.*;
  * Created by akimfors on 2017-04-05.
  */
 
-public class KwizGeeQ extends Observable{
+public class KwizGeeQ {
 
     private ArrayList<Quiz> quizList;
     private Statistics globalStatistics;

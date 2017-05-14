@@ -3,6 +3,8 @@ package com.example.murk.kwizgeeq.model;
 
 import android.net.Uri;
 
+import com.google.common.eventbus.EventBus;
+
 /**
  * Created by Henrik on 04/04/2017.
  */
@@ -13,6 +15,13 @@ public class UserQuestion extends Question {
     private double xPosition;
     private double yPosition;
     private String audioPath;
+
+    EventBus eventBus;
+
+
+    public UserQuestion(){
+        eventBus = BusWrapper.BUS;
+    }
 
     public String getQuestionText() {
         return questionText;
@@ -40,18 +49,18 @@ public class UserQuestion extends Question {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+        eventBus.post(this);
     }
 
-    public void setxPosition(double xPosition) {
+    public void setPosition(double xPosition, double yPosition) {
         this.xPosition = xPosition;
-    }
-
-    public void setyPosition(double yPosition) {
         this.yPosition = yPosition;
+        eventBus.post(this);
     }
 
     public void setAudioPath(String audioPath) {
         this.audioPath = audioPath;
+        eventBus.post(this);
     }
 
 
