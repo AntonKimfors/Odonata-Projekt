@@ -51,11 +51,6 @@ public class KwizGeeQ {
         throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" does not exist.");
     }
 
-    public Question getQuestion(int quizIndex, int questionIndex){
-        Quiz quiz = getQuiz(quizIndex);
-        return quiz.getQuestion(questionIndex);
-    }
-
     public ArrayList<Question> getQuestionList(int quizIndex){
         if(quizIndex < quizList.size()-1)
             return quizList.get(quizIndex).getQuestions();
@@ -70,24 +65,6 @@ public class KwizGeeQ {
 
     public String getQuizName(int quizIndex){
         return quizList.get(quizIndex).getName();
-    }
-
-    public void removeQuestion(int quizIndex, int questionIndex){
-        Quiz quiz = getQuiz(quizIndex);
-        quiz.removeQuestion(questionIndex);
-    }
-
-    /**
-     *  This method both returns value and has side effects
-     *  but I have not came up with a better solution so far
-     * @param name
-     * @param color
-     * @return the index of the created quiz
-     */
-    public int createUserQuiz(String name, int color){
-        UserQuiz userQuiz = new UserQuiz(name, color);
-        quizList.add(userQuiz);
-        return quizList.indexOf(userQuiz);
     }
 
     public Statistics getGlobalStatistics() {

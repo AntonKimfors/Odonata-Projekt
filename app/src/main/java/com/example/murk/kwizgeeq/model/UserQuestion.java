@@ -1,8 +1,6 @@
 package com.example.murk.kwizgeeq.model;
 
-
-import android.net.Uri;
-
+import com.example.murk.kwizgeeq.utils.BusWrapper;
 import com.google.common.eventbus.EventBus;
 
 /**
@@ -17,7 +15,6 @@ public class UserQuestion extends Question {
     private String audioPath;
 
     EventBus eventBus;
-
 
     public UserQuestion(){
         eventBus = BusWrapper.BUS;
@@ -104,6 +101,10 @@ public class UserQuestion extends Question {
 
     @Override
     public String toString(){
-        return getQuestionText();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Question text: ").append(questionText).append(System.lineSeparator());
+        sb.append("Imagepath: ").append(imagePath).append(System.lineSeparator());
+        sb.append(super.toString());
+        return sb.toString();
     }
 }

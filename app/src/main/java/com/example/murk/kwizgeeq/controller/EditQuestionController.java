@@ -35,7 +35,8 @@ public class EditQuestionController implements Controller, Observer{
         this.imageStorageDir = imageStorageDir;
         this.quizIndex = quizIndex;
         this.questionIndex = questionIndex;
-        userQuestion = (UserQuestion)KwizGeeQ.getInstance().getQuestion(quizIndex,questionIndex);
+
+        getUserQuestion();
     }
 
     public void onCreate(){
@@ -53,6 +54,20 @@ public class EditQuestionController implements Controller, Observer{
         };
 
         editQuestionView.addOnFocusChangeListener(onFocusChangeListener);
+    }
+
+    private void getUserQuestion(){
+        KwizGeeQ model = KwizGeeQ.getInstance();
+        Quiz quiz = model.getQuiz(quizIndex);
+        if(quiz.getSize()>=questionIndex){
+            userQuestion = new UserQuestion();
+            quiz.addQuestion(userQuestion);
+        } else{
+            Question question = quiz.getQuestion(questionIndex);
+            if(question instanceof UserQuestion){
+                userQuestion = (UserQuestion) question;
+            }
+        }
     }
 
     public void onPause() {
@@ -77,6 +92,7 @@ public class EditQuestionController implements Controller, Observer{
 
     public void doneButtonAction(View view){
         if(isAllFieldsEmpty()){
+            removeQuestion();
             editQuestionView.endAddOfQuestions();
         }
         else if(!checkRequiredFields()){
@@ -85,6 +101,13 @@ public class EditQuestionController implements Controller, Observer{
             saveQuestion();
             editQuestionView.endAddOfQuestions();
         }
+    }
+
+    private void removeQuestion(){
+        KwizGeeQ model = KwizGeeQ.getInstance();
+        Quiz quiz = model.getQuiz(quizIndex);
+        List<Question> questions = quiz.getQuestions();
+        questions.remove(userQuestion);
     }
 
     public void mediaButtonAction(View view){

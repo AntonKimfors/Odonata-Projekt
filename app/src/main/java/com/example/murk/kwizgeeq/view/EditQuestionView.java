@@ -1,11 +1,8 @@
 package com.example.murk.kwizgeeq.view;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -13,22 +10,19 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.*;
 
-import java.io.File;
 import java.util.*;
 
-import com.example.murk.kwizgeeq.activity.*;
 import com.example.murk.kwizgeeq.model.*;
-import com.example.murk.kwizgeeq.utils.ImageFileHandler;
+import com.example.murk.kwizgeeq.utils.BusWrapper;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 public class EditQuestionView extends Observable {
 
-    private final UserQuestion userQuestion;
+    private UserQuestion userQuestion;
     private final Activity currentActivity;
     private final Class<? extends Activity> createQuestionActivityClass;
     private final Class<? extends Activity> quizListActivityClass;
@@ -77,13 +71,14 @@ public class EditQuestionView extends Observable {
         this.doneButton = doneButton;
         this.nextButton = nextButton;
 
-        userQuestion = (UserQuestion)KwizGeeQ.getInstance().getQuestion(quizIndex,questionIndex);
+
 
         originalEditText = correctText.getBackground();
 
         eventBus = BusWrapper.BUS;
         eventBus.register(this);
 
+        setUserQuestion(quizIndex,questionIndex);
         setTextFields();
 
         if(questionIndex<KwizGeeQ.getInstance().getQuizSize(quizIndex)-1){
@@ -91,6 +86,20 @@ public class EditQuestionView extends Observable {
         }
 
 
+    }
+
+    private void setUserQuestion(int quizIndex,int questionIndex){
+        KwizGeeQ model = KwizGeeQ.getInstance();
+        Quiz quiz = model.getQuiz(quizIndex);
+        if(quiz.getSize()>=questionIndex){
+            userQuestion = new UserQuestion();
+            quiz.addQuestion(userQuestion);
+        } else{
+            Question question = quiz.getQuestion(questionIndex);
+            if(question instanceof UserQuestion){
+                userQuestion = (UserQuestion) question;
+            }
+        }
     }
 
     public void addOnFocusChangeListener(View.OnFocusChangeListener listener){

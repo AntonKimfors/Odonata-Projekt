@@ -8,11 +8,6 @@ public class SpotifyQuiz extends Quiz {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	protected Question createQuestion() {
-		return null;
-	}
-
 	public Question createSpotifyQuestion() {
 		// TODO - kolla API
 

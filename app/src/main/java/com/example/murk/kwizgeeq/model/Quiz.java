@@ -38,8 +38,8 @@ public abstract class Quiz implements Iterable{
         return questions;
     }
 
-    public void removeQuestion(int questionIndex){
-        questions.remove(questionIndex);
+    public void removeQuestion(Question question){
+        questions.remove(question);
     }
 
     public int getSize(){
@@ -47,24 +47,12 @@ public abstract class Quiz implements Iterable{
     }
 
     public Question getQuestion(int questionIndex){
-        if(questionIndex<=questions.size()){
-
-            if(questionIndex==questions.size()){
-                Question question = createQuestion();
-                questions.add(question);
-                return question;
-            } else {
-                return questions.get(questionIndex);
-            }
-
-        } else{
-            throw new IndexOutOfBoundsException("Requested question index too large. " +
-                    "Only modification of existing or putting new question on end are allowed.");
-        }
+        return questions.get(questionIndex);
     }
 
-    protected abstract Question createQuestion();
-
+    public void addQuestion(Question question){
+        questions.add(question);
+    }
 
     @Override
     public Iterator iterator() {
@@ -74,7 +62,8 @@ public abstract class Quiz implements Iterable{
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-
+        sb.append("Quiz name: ").append(name).append(System.lineSeparator());
+        sb.append("Color: ").append(listColor).append(System.lineSeparator());
         for(Question q:questions){
             sb.append(q.toString());
         }

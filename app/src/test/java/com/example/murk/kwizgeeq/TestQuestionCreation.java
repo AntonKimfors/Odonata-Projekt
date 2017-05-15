@@ -2,6 +2,9 @@ package com.example.murk.kwizgeeq;
 import com.example.murk.kwizgeeq.model.*;
 
 import org.junit.Test;
+
+import java.util.List;
+
 import static org.junit.Assert.*;
 /**
  * Created by Henrik on 03/05/2017.
@@ -12,9 +15,12 @@ public class TestQuestionCreation {
     public void creationOfQuestion(){
         KwizGeeQ model = KwizGeeQ.getInstance();
 
-        model.createUserQuiz("test",0);
+        List<Quiz> quizList = model.getQuizList();
+        Quiz quiz = new UserQuiz("testQuiz",0);
+        quizList.add(quiz);
 
-        UserQuestion question = (UserQuestion)model.getQuestion(0,0);
+        UserQuestion question = new UserQuestion();
+        quiz.addQuestion(question);
         question.setQuestionText("Question 1");
         question.setImagePath("ImagePath 1");
         question.addAnswer("correct",true);
@@ -22,7 +28,8 @@ public class TestQuestionCreation {
         question.addAnswer("wrong2",false);
         question.addAnswer("wrong3",false);
 
-        UserQuestion question2 = (UserQuestion)KwizGeeQ.getInstance().getQuestion(0,1);
+        UserQuestion question2 = new UserQuestion();
+        quiz.addQuestion(question2);
         question2.setQuestionText("Question 1");
         question2.setImagePath("ImagePath 1");
         question2.addAnswer("correct",true);
@@ -36,8 +43,9 @@ public class TestQuestionCreation {
         question.addAnswer("wrong2",false);
         question.addAnswer("wrong3",false);
 
-        model.removeQuestion(0,0);
+        quiz.removeQuestion(question2);
 
+        System.out.println(quiz);
         assertTrue(model.getQuizSize(0)==1);
     }
 }
