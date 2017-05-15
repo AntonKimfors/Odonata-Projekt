@@ -40,7 +40,9 @@ public class FileUtilites {
     }
 
     public static File getFileDirectory(Context context) {
-        String storageType = StorageType.PRIVATE_EXTERNAL;
+
+        String storageType = StorageType.PRIVATE_EXTERNAL; 
+
         if (storageType.equals(StorageType.INTERNAL)) {
             return context.getFilesDir();
         } else{

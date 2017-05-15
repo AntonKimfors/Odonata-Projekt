@@ -1,3 +1,4 @@
+
 package com.example.murk.kwizgeeq.controller;
 
 import android.content.Context;
@@ -74,7 +75,7 @@ public class QuizListController implements Controller, Observer{
 
         Gson gson = new Gson();
         String jsonquizlist = gson.toJson(quizlist);
-
+        
         try
         {
             File quizFile = new File(context.getFilesDir(), "quiz.txt");
@@ -86,7 +87,6 @@ public class QuizListController implements Controller, Observer{
         catch (Exception e)
         {
             Log.e("Persistance", "Error saving file " + e.getMessage());
-
         }
 
 
@@ -126,3 +126,4 @@ public class QuizListController implements Controller, Observer{
 
 
 }
+
