@@ -8,6 +8,8 @@ import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.view.QuestioneerView;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,6 +23,7 @@ public class QuestioneerController implements Controller, Observer{
     private KwizGeeQ model;
     private Class<? extends Activity> switchActivityClass;
     private Activity currentActivity;
+    private HashSet<Integer> replayIndexSet;
 
     private int quizIndex;
     private int questionIndex;
