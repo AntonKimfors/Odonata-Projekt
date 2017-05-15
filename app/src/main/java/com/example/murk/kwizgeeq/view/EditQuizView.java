@@ -111,7 +111,7 @@ public class EditQuizView extends Observable {
             public void onClick(View view) {
                 Intent intent = new Intent(context, createQuestionActivity);
                 //model.getQuiz(index).
-                intent.putExtra("quizIndex",index);
+                intent.putExtra("quizIndex",1);  //TODO checkthis model.getQuestionList(index).size()
                 oldActivity.startActivity(intent);
 
             }
