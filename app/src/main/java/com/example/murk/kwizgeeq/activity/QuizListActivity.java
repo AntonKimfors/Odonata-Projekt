@@ -24,7 +24,7 @@ public class QuizListActivity extends ListActivity{
 
         view = new QuizListView(getListView(), this,this, EditQuizActivity.class,
                 QuestioneerActivity.class, (FloatingActionButton) findViewById(R.id.fab));
-        controller = new QuizListController(view);
+        controller = new QuizListController(view, this);
         view.addObserver(controller);
         controller.onCreate();
 

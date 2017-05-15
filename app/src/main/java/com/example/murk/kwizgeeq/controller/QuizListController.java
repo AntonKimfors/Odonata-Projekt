@@ -1,15 +1,19 @@
 package com.example.murk.kwizgeeq.controller;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PointF;
 
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
+import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.QuizListView;
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,10 +25,13 @@ public class QuizListController implements Controller, Observer{
 
     private QuizListView view;
     private KwizGeeQ model;
+    private Context context;
 
-    public QuizListController(QuizListView view){
+    public QuizListController(QuizListView view, Context context){
         this.view = view;
+        this.context = context;
         model = KwizGeeQ.getInstance();
+
         //int quiz = model.createUserQuiz("Testquiz",Color.argb(255,100,100,100));
         /*model.setUserQuestionText(quiz,0,"Vad är svaret på fråga nummer 1?");
         model.addTextAnswer(quiz,0,"sant",true);
@@ -56,6 +63,13 @@ public class QuizListController implements Controller, Observer{
         //TODO: Try saving the data
 
         Gson gson = new Gson();
+        List<Quiz> quizlist = model.getQuizList();
+        
+        try{
+            File drawingFile = new File(context.getFilesDir(), "writing.txt");
+        }catch (Exception e){
+
+        }
 
 
 
@@ -75,4 +89,6 @@ public class QuizListController implements Controller, Observer{
     public void update(Observable o, Object arg) {
 
     }
+
+
 }
