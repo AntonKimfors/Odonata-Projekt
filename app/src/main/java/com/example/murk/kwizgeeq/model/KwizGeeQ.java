@@ -1,7 +1,7 @@
 package com.example.murk.kwizgeeq.model;
 
 import java.util.*;
-import com.google.gson.*;
+import com.google.gson.Gson;
 
 /**
  * Created by akimfors on 2017-04-05.
