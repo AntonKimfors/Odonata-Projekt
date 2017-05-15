@@ -41,19 +41,19 @@ public class FileUtilites {
 
     public static File getFileDirectory(Context context) {
 
-        String storageType = StorageType.PRIVATE_EXTERNAL; 
+        String storageType = StorageType.PRIVATE_EXTERNAL; //Choose what sort of storage type
 
         if (storageType.equals(StorageType.INTERNAL)) {
-            return context.getFilesDir();
+            return context.getFilesDir(); //If internal, just return it
         } else{
             if(isExternalStorageWritable()){
                 if(storageType.equals((StorageType.PRIVATE_EXTERNAL))){
-                    return context.getExternalFilesDir(null);
+                    return context.getExternalFilesDir(null); //get private externel files dir //TODO: Why is parameter null?
                 } else{
-                    return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                    return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES); //Get public external file dir with standard "DIRECTORY_PICTURES"
                 }
             } else {
-                return context.getFilesDir();
+                return context.getFilesDir(); //If not writable, return internal anyways
             }
         }
     }
