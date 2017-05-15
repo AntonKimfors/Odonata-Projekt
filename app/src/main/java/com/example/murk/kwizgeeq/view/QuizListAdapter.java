@@ -69,14 +69,8 @@ public class QuizListAdapter extends BaseAdapter {
         Quiz quiz = mQuiz.get(position);
         holder.quizNameLabel.setText(quiz.getName());
         holder.quizQuestionAmountLabel.setText(quiz.getQuestions().size() + " Questions");
-        //int RGB = android.graphics.Color.rgb(quiz.getListColor().RED,quiz.getListColor().GREEN,quiz.getListColor().BLUE);
         holder.relativeLayout.setBackgroundColor(quiz.getListColor());
-
-        //holder.relativeLayout.setBackgroundColor(443344400); //Just for testing
-
-       
-
-
+        
         return convertView;
     }
 
