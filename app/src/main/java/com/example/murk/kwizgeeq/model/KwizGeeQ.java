@@ -9,6 +9,7 @@ import java.util.*;
 public class KwizGeeQ {
 
     private ArrayList<Quiz> quizList;
+    private ArrayList<Statistics> quizStatisticsList;
     private Statistics globalStatistics;
     private Statistics currentQuizStatistics;
     private static KwizGeeQ singletonInstance = null;
@@ -41,6 +42,23 @@ public class KwizGeeQ {
 
     public ArrayList<Quiz> getQuizList(){
         return quizList;
+    }
+
+    public ArrayList<Statistics> getQuizStatisticsList() {
+        return quizStatisticsList;
+    }
+
+    public void updateQuizStatistics(int quizIndex) {
+        int oldCorrectCount = quizStatisticsList.get(quizIndex).getAnswerCorrectCount();
+        int newCorrectCount = currentQuizStatistics.getAnswerCorrectCount();
+
+        if (newCorrectCount > oldCorrectCount) {
+            quizStatisticsList.add(quizIndex, currentQuizStatistics);
+        } else if (newCorrectCount == oldCorrectCount) {
+            if (currentQuizStatistics.getSecondsSpent() > quizStatisticsList.get(quizIndex).getSecondsSpent()) {
+                quizStatisticsList.add(quizIndex, currentQuizStatistics);
+            }
+        }
     }
 
     public Quiz getQuiz(int quizIndex){

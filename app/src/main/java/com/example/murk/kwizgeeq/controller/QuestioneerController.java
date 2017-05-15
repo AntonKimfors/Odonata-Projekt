@@ -119,6 +119,7 @@ public class QuestioneerController implements Controller, Observer{
         if(questionIndex + 1 == model.getQuiz(quizIndex).getQuestions().size()) {
             model.getCurrentQuizStatistics().incQuizCount();
             model.getCurrentQuizStatistics().stopTimer();
+            model.updateQuizStatistics(quizIndex);
             model.endQuiz();
             view.closeQuestioneer();
         }
