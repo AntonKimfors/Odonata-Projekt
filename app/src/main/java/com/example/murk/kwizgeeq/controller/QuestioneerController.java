@@ -95,6 +95,7 @@ public class QuestioneerController implements Controller, Observer{
         if(currentActivity.isFinishing()) {
             Intent intent = new Intent(currentActivity, switchActivityClass);
             intent.putExtra("quizIndex", quizIndex);
+            intent.putExtra("replayIndexSet", replayIndexSet);
             currentActivity.startActivity(intent);
         }
     }
