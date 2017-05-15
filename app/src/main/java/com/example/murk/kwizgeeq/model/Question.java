@@ -1,6 +1,8 @@
 package com.example.murk.kwizgeeq.model;
 
-import java.io.Serializable;
+import com.example.murk.kwizgeeq.utils.BusWrapper;
+import com.google.common.eventbus.EventBus;
+
 import java.util.*;
 
 /**
@@ -15,7 +17,10 @@ public abstract class Question {
 
     private int correctAnswerCount;
 
+    EventBus eventBus;
+
     public Question() {
+        eventBus = BusWrapper.BUS;
         answers = new ArrayList<>();
 
         wrongAnswerCount = 0;
@@ -32,7 +37,7 @@ public abstract class Question {
         return answerList.iterator();
     }
 
-    public void addAnswer(String data, boolean isCorrect,AnswerType answerType){
+    public void addAnswer(String data, boolean isCorrect, AnswerType answerType){
         Answer answer = new Answer(isCorrect,data,answerType);
         if(answer == null)
             throw new NullPointerException();
@@ -44,7 +49,9 @@ public abstract class Question {
                 wrongAnswerCount++;
         }
 
-        throw new IllegalArgumentException();
+        if(answerType == AnswerType.IMAGE){
+            eventBus.post(this);
+        }
     }
 
     public void removeAnswer(Answer answer){

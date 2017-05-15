@@ -66,7 +66,6 @@ public class EditQuestionActivity extends AppCompatActivity{
 
         editQuestionController = new EditQuestionController(editQuestionView,
                 this, imageStorageDir, quizIndex, questionIndex);
-        editQuestionController.onCreate();
 
         binding.setController(editQuestionController);
 

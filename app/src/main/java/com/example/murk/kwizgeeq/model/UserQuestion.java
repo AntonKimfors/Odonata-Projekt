@@ -14,12 +14,6 @@ public class UserQuestion extends Question {
     private double yPosition;
     private String audioPath;
 
-    EventBus eventBus;
-
-    public UserQuestion(){
-        eventBus = BusWrapper.BUS;
-    }
-
     public String getQuestionText() {
         return questionText;
     }

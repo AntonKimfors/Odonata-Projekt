@@ -18,7 +18,7 @@ import java.util.*;
 
 public class EditQuestionController implements Controller, Observer{
 
-    private EditQuestionView editQuestionView;
+    private final EditQuestionView editQuestionView;
     private UserQuestion userQuestion;
 
     private Context currentContext;
@@ -26,10 +26,16 @@ public class EditQuestionController implements Controller, Observer{
 
     private String imagePath;
 
+    private String correctImagePath;
+    private String wrong1ImagePath;
+    private String wrong2ImagePath;
+    private String wrong3ImagePath;
+
+
     private int quizIndex;
     private int questionIndex;
 
-    public EditQuestionController(EditQuestionView editQuestionView, Context currentContext,
+    public EditQuestionController(final EditQuestionView editQuestionView, Context currentContext,
                                   File imageStorageDir, int quizIndex, int questionIndex){
         this.editQuestionView = editQuestionView;
         this.currentContext = currentContext;
@@ -38,9 +44,6 @@ public class EditQuestionController implements Controller, Observer{
         this.questionIndex = questionIndex;
 
         getUserQuestion();
-    }
-
-    public void onCreate(){
 
         View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
             @Override
@@ -63,6 +66,12 @@ public class EditQuestionController implements Controller, Observer{
 
         editQuestionView.addOnFocusChangeListener(onFocusChangeListener);
         editQuestionView.setOnCheckedChangeListener(onCheckedChangeListener);
+        editQuestionView.setUserQuestion(userQuestion);
+    }
+
+    public void onCreate(){
+
+
     }
 
     private void getUserQuestion(){
@@ -126,9 +135,58 @@ public class EditQuestionController implements Controller, Observer{
         editQuestionView.takePhoto(imageUri);
     }
 
+    public void correctImageButton(View view){
+        Uri imageUri = ImageFileHandler.getImageURI(imageStorageDir,currentContext);
+        correctImagePath = imageUri.toString();
+
+        editQuestionView.takePhoto(imageUri);
+    }
+
+    public void wrong1ImageButton(View view){
+        Uri imageUri = ImageFileHandler.getImageURI(imageStorageDir,currentContext);
+        wrong1ImagePath = imageUri.toString();
+
+        editQuestionView.takePhoto(imageUri);
+    }
+
+    public void wrong2ImageButton(View view){
+        Uri imageUri = ImageFileHandler.getImageURI(imageStorageDir,currentContext);
+        wrong2ImagePath = imageUri.toString();
+
+        editQuestionView.takePhoto(imageUri);
+    }
+
+    public void wrong3ImageButton(View view){
+        Uri imageUri = ImageFileHandler.getImageURI(imageStorageDir,currentContext);
+        wrong3ImagePath = imageUri.toString();
+
+        editQuestionView.takePhoto(imageUri);
+    }
+
     public void imageCreated(){
         if(imagePath!=null){
-            userQuestion.setImagePath(imagePath);
+
+            if(imagePath!=null){
+                userQuestion.setImagePath(imagePath);
+            }
+
+            userQuestion.clearAnswers();
+
+            if(correctImagePath!=null){
+                userQuestion.addAnswer(correctImagePath,true,AnswerType.IMAGE);
+            }
+
+            if(wrong1ImagePath!=null){
+                userQuestion.addAnswer(wrong1ImagePath,true,AnswerType.IMAGE);
+            }
+
+            if(wrong2ImagePath!=null){
+                userQuestion.addAnswer(wrong2ImagePath,true,AnswerType.IMAGE);
+            }
+
+            if(wrong3ImagePath!=null){
+                userQuestion.addAnswer(wrong3ImagePath,true,AnswerType.IMAGE);
+            }
         }
     }
 

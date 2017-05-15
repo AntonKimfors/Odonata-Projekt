@@ -96,27 +96,16 @@ public class EditQuestionView extends Observable {
 
         originalEditText = correctText.getBackground();
 
-        setUserQuestion(quizIndex,questionIndex);
-        setTextFields();
-
         if(questionIndex<KwizGeeQ.getInstance().getQuizSize(quizIndex)-1){
             setEditButtonTexts();
         }
 
     }
 
-    private void setUserQuestion(int quizIndex,int questionIndex){
-        KwizGeeQ model = KwizGeeQ.getInstance();
-        Quiz quiz = model.getQuiz(quizIndex);
-        if(quiz.getSize()>=questionIndex){
-            userQuestion = new UserQuestion();
-            quiz.addQuestion(userQuestion);
-        } else{
-            Question question = quiz.getQuestion(questionIndex);
-            if(question instanceof UserQuestion){
-                userQuestion = (UserQuestion) question;
-            }
-        }
+    public void setUserQuestion(UserQuestion userQuestion){
+        this.userQuestion = userQuestion;
+
+        setTextFields();
     }
 
     public void addOnFocusChangeListener(View.OnFocusChangeListener listener){
@@ -219,26 +208,28 @@ public class EditQuestionView extends Observable {
                 if(answer.getAnswerType()==AnswerType.TEXT){
                     setCorrectStringAnswer(answer.getData());
                 }
-                if(answer.getAnswerType()==AnswerType.IMAGE){
-                    setCorrectImageAnswer(answer.getData());
-                }
             } else{
                 if(answer.getAnswerType()==AnswerType.TEXT){
                     setWrongStringAnswer(answer.getData());
-                }
-                if(answer.getAnswerType()==AnswerType.IMAGE){
-                    setWrongImageAnswer(answer.getData());
                 }
             }
         }
     }
 
-    private void setCorrectImageAnswer(String path){
-        //TODO
-    }
-
-    private void setWrongImageAnswer(String path){
-        //TODO
+    private void setAnswerImages() {
+        Iterator<Answer> answerIterator = userQuestion.answerIterator(false);
+        if(answerIterator.hasNext()){
+            correctImageView.setImageURI(Uri.parse(answerIterator.next().getData()));
+        }
+        if(answerIterator.hasNext()){
+            wrong1ImageView.setImageURI(Uri.parse(answerIterator.next().getData()));
+        }
+        if(answerIterator.hasNext()){
+            wrong2ImageView.setImageURI(Uri.parse(answerIterator.next().getData()));
+        }
+        if(answerIterator.hasNext()){
+            wrong3ImageView.setImageURI(Uri.parse(answerIterator.next().getData()));
+        }
     }
 
     private void setQuestionString(String s){
@@ -301,10 +292,14 @@ public class EditQuestionView extends Observable {
     }
 
     @Subscribe
-    public void update(UserQuestion question){
+    public void update(Question question){
+        System.out.println("updating");
         if(question == userQuestion){
+            System.out.println("userquestion");
             setThumbnail();
-            setTextFields();
+            setAnswerImages();
         }
     }
+
+
 }

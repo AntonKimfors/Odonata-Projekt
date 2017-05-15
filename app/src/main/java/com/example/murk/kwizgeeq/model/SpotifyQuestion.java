@@ -12,7 +12,7 @@ import java.util.*;
  * Created by Henrik on 23/04/2017.
  */
 
-public class SpotifyQuestion extends Question<String> {
+public class SpotifyQuestion extends Question {
     private final Api api;
     User user;
 
