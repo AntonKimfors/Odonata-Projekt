@@ -2,12 +2,10 @@ package com.example.murk.kwizgeeq.view;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.CountDownTimer;
-import android.support.annotation.ColorRes;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.Window;
@@ -69,7 +67,7 @@ public class QuestioneerView extends Observable{
 
     private void flashAnswer(View view, int color) {
         ColorDrawable f1 = new ColorDrawable(color);
-        ColorDrawable f2 = new ColorDrawable(Color.parseColor("#ffd6d7d7")); //TODO change to use background colour
+        ColorDrawable f2 = new ColorDrawable(activity.getResources().getColor(R.color.colorQuestioneerButton, null));
         AnimationDrawable a = new AnimationDrawable();
         a.addFrame(f2, 250);
         a.addFrame(f1, 250);

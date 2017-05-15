@@ -5,6 +5,7 @@
     <color name="colorAccent">#ff4081</color>
     <color name="colorCorrectAnswer">#50F050</color>
     <color name="colorIncorrectAnswer">#F05050</color>
+    <color name="colorQuestioneerButton">#ffd6d7d7</color>
 
     <array name="rainbow">
         <item>@color/bright_pink</item>
