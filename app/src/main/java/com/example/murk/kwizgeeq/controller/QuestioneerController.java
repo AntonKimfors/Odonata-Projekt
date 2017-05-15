@@ -8,7 +8,6 @@ import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.view.QuestioneerView;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
@@ -34,6 +33,7 @@ public class QuestioneerController implements Controller, Observer{
         this.currentActivity = activity;
         this.quizIndex = quizIndex;
         this.questionIndex = 0;
+        this.replayIndexSet = new HashSet<>();
     }
 
     public void onCreate() {
@@ -109,6 +109,7 @@ public class QuestioneerController implements Controller, Observer{
             model.getCurrentQuizStatistics().incAnswerCorrectCount();
             this.view.flashCorrectAnswer(view);
         } else{
+            replayIndexSet.add(questionIndex);
             model.getCurrentQuizStatistics().incAnswerIncorrectCount();
             this.view.flashIncorrectAnswer(view);
         }
