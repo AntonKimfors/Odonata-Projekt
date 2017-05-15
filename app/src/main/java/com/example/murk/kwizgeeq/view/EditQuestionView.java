@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.*;
 
@@ -38,6 +39,14 @@ public class EditQuestionView extends Observable {
     private final EditText wrongText2;
     private final EditText wrongText3;
 
+    private final ImageView correctImageView;
+    private final ImageView wrong1ImageView;
+    private final ImageView wrong2ImageView;
+    private final ImageView wrong3ImageView;
+
+    private final Switch answerSwitch;
+    private final ViewFlipper viewFlipper;
+
     private final Button doneButton;
     private final Button nextButton;
 
@@ -51,7 +60,10 @@ public class EditQuestionView extends Observable {
                             PackageManager packageManager, int captureImageRequestCode,
                             EditText questionText, EditText correctText, EditText wrongText1,
                             EditText wrongText2, EditText wrongText3, ImageView thumbnail,
-                            Button doneButton, Button nextButton,int quizIndex, int questionIndex) {
+                            Button doneButton, Button nextButton, int quizIndex, int questionIndex,
+                            ImageView correctImageView, ImageView wrong1ImageView,
+                            ImageView wrong2ImageView, ImageView wrong3ImageView,
+                            Switch answerSwitch, ViewFlipper viewFlipper) {
 
         this.currentActivity = currentActivity;
         this.createQuestionActivityClass = createQuestionActivityClass;
@@ -67,16 +79,22 @@ public class EditQuestionView extends Observable {
         this.wrongText2 = wrongText2;
         this.wrongText3 = wrongText3;
 
+
         this.thumbnail = thumbnail;
         this.doneButton = doneButton;
         this.nextButton = nextButton;
+        this.correctImageView = correctImageView;
+        this.wrong1ImageView = wrong1ImageView;
+        this.wrong2ImageView = wrong2ImageView;
+        this.wrong3ImageView = wrong3ImageView;
 
-
-
-        originalEditText = correctText.getBackground();
+        this.answerSwitch = answerSwitch;
+        this.viewFlipper = viewFlipper;
 
         eventBus = BusWrapper.BUS;
         eventBus.register(this);
+
+        originalEditText = correctText.getBackground();
 
         setUserQuestion(quizIndex,questionIndex);
         setTextFields();
@@ -84,7 +102,6 @@ public class EditQuestionView extends Observable {
         if(questionIndex<KwizGeeQ.getInstance().getQuizSize(quizIndex)-1){
             setEditButtonTexts();
         }
-
 
     }
 
@@ -107,6 +124,22 @@ public class EditQuestionView extends Observable {
         wrongText1.setOnFocusChangeListener(listener);
         wrongText2.setOnFocusChangeListener(listener);
         wrongText3.setOnFocusChangeListener(listener);
+    }
+
+    public void setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener listener){
+        answerSwitch.setOnCheckedChangeListener(listener);
+    }
+
+    public void changeAnswerView(boolean isChecked){
+        if(isChecked){
+            viewFlipper.setDisplayedChild(1);
+        } else {
+            viewFlipper.setDisplayedChild(0);
+        }
+    }
+
+    public boolean isSwitchChecked(){
+        return answerSwitch.isChecked();
     }
 
     public void flashEmpty(){
@@ -180,14 +213,32 @@ public class EditQuestionView extends Observable {
         Iterator<Answer> answerIterator = userQuestion.answerIterator(false);
 
         while(answerIterator.hasNext()){
-            Answer<String> answer = answerIterator.next();
+            Answer answer = answerIterator.next();
 
             if(answer.isCorrect()){
-                setCorrectStringAnswer(answer.getData());
+                if(answer.getAnswerType()==AnswerType.TEXT){
+                    setCorrectStringAnswer(answer.getData());
+                }
+                if(answer.getAnswerType()==AnswerType.IMAGE){
+                    setCorrectImageAnswer(answer.getData());
+                }
             } else{
-                setWrongStringAnswer(answer.getData());
+                if(answer.getAnswerType()==AnswerType.TEXT){
+                    setWrongStringAnswer(answer.getData());
+                }
+                if(answer.getAnswerType()==AnswerType.IMAGE){
+                    setWrongImageAnswer(answer.getData());
+                }
             }
         }
+    }
+
+    private void setCorrectImageAnswer(String path){
+        //TODO
+    }
+
+    private void setWrongImageAnswer(String path){
+        //TODO
     }
 
     private void setQuestionString(String s){

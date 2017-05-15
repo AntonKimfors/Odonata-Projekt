@@ -3,6 +3,7 @@ package com.example.murk.kwizgeeq.controller;
 import android.content.Context;
 import android.net.Uri;
 import android.view.View;
+import android.widget.CompoundButton;
 
 import com.example.murk.kwizgeeq.utils.ImageFileHandler;
 import com.example.murk.kwizgeeq.view.EditQuestionView;
@@ -53,7 +54,15 @@ public class EditQuestionController implements Controller, Observer{
             }
         };
 
+        CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                editQuestionView.changeAnswerView(isChecked);
+            }
+        };
+
         editQuestionView.addOnFocusChangeListener(onFocusChangeListener);
+        editQuestionView.setOnCheckedChangeListener(onCheckedChangeListener);
     }
 
     private void getUserQuestion(){
