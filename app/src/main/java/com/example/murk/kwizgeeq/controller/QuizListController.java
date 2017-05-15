@@ -105,7 +105,7 @@ public class QuizListController implements Controller, Observer{
             Gson gson = new Gson();
             Type collectionType = new TypeToken<ArrayList<Quiz>>(){}.getType();
 
-            Object quizlist = gson.fromJson(jsonquizlist, collectionType);
+            ArrayList quizlist = gson.fromJson(jsonquizlist, collectionType);
 
 
         }catch (Exception e){
