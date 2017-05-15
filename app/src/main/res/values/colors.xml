@@ -5,4 +5,17 @@
     <color name="colorAccent">#ff4081</color>
     <color name="colorCorrectAnswer">#50F050</color>
     <color name="colorIncorrectAnswer">#F05050</color>
+
+    <array name="rainbow">
+        <item>@color/bright_pink</item>
+        <item>@color/red</item>
+        <item>@color/orange</item>
+        <item>@color/yellow</item>
+        <item>@color/green</item>
+        <item>@color/cyan</item>
+        <item>@color/azure</item>
+        <item>@color/blue</item>
+        <item>@color/violet</item>
+        <item>@color/magenta</item>
+    </array>
 </resources>
