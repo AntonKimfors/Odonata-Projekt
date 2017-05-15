@@ -7,9 +7,9 @@ import java.util.*;
  * Created by Henrik on 04/04/2017.
  */
 
-public abstract class Question<T> {
+public abstract class Question {
 
-    private final List<Answer<T>> answers;
+    private final List<Answer> answers;
 
     private int wrongAnswerCount;
 
@@ -23,8 +23,8 @@ public abstract class Question<T> {
         correctAnswerCount = 0;
     }
 
-    public Iterator<Answer<T>> answerIterator(boolean shuffled) {
-        List<Answer<T>> answerList = new ArrayList<>(answers);
+    public Iterator<Answer> answerIterator(boolean shuffled) {
+        List<Answer> answerList = new ArrayList<>(answers);
         if(shuffled){
             Collections.shuffle(answerList);
         }
@@ -32,8 +32,8 @@ public abstract class Question<T> {
         return answerList.iterator();
     }
 
-    public boolean addAnswer(T data, boolean isCorrect,AnswerType answerType){
-        Answer<T> answer = new Answer<>(isCorrect,data,answerType);
+    public void addAnswer(String data, boolean isCorrect,AnswerType answerType){
+        Answer answer = new Answer(isCorrect,data,answerType);
         if(answer == null)
             throw new NullPointerException();
 
@@ -42,13 +42,12 @@ public abstract class Question<T> {
                 correctAnswerCount++;
             else
                 wrongAnswerCount++;
-            return true;
         }
 
         throw new IllegalArgumentException();
     }
 
-    public boolean removeAnswer(Answer<T> answer){
+    public void removeAnswer(Answer answer){
         if(answer == null)
             throw new NullPointerException();
 
@@ -58,7 +57,6 @@ public abstract class Question<T> {
             else
                 wrongAnswerCount--;
 
-            return true;
         }
 
         throw new IllegalArgumentException("Element not in list");

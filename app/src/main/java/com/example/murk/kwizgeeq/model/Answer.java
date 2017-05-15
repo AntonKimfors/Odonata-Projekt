@@ -4,12 +4,12 @@ package com.example.murk.kwizgeeq.model;
  * Created by Henrik on 04/04/2017.
  */
 
-public class Answer<T>  {
+public class Answer  {
     private final boolean isCorrect;
-    private final T data;
+    private final String data;
     private final AnswerType answerType;
 
-    public T getData() {
+    public String getData() {
         return data;
     }
 
@@ -21,7 +21,7 @@ public class Answer<T>  {
         return answerType;
     }
 
-    public Answer(boolean isCorrect, T data, AnswerType answerType) {
+    public Answer(boolean isCorrect, String data, AnswerType answerType) {
         this.isCorrect = isCorrect;
         this.data = data;
         this.answerType = answerType;
@@ -38,8 +38,8 @@ public class Answer<T>  {
             throw new NullPointerException();
         }
         if(obj instanceof Answer){
-            Answer<T> o = (Answer<T>) obj;
-            return data.equals(o.data);
+            return data.equals(((Answer)obj).data) && isCorrect == ((Answer)obj).isCorrect &&
+                    answerType.equals(((Answer)obj).answerType);
         }
         return false;
     }
