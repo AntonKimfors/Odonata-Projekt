@@ -54,6 +54,18 @@ public abstract class Quiz implements Iterable{
         questions.add(question);
     }
 
+    public Iterator<Question> questionsOnIndexIterator(List<Integer> indexes){
+        Collections.sort(indexes);
+        Iterator<Integer> indexIterator = indexes.iterator();
+        List<Question> questionToReturn = new ArrayList<>();
+
+        while(indexIterator.hasNext()){
+            questionToReturn.add(questions.get(indexIterator.next()));
+        }
+
+        return questionToReturn.iterator();
+    }
+
     @Override
     public Iterator iterator() {
         return questions.iterator();

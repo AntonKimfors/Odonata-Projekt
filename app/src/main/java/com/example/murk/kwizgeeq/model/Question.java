@@ -32,8 +32,8 @@ public abstract class Question<T> {
         return answerList.iterator();
     }
 
-    public boolean addAnswer(T data, boolean isCorrect){
-        Answer<T> answer = new Answer<>(isCorrect,data);
+    public boolean addAnswer(T data, boolean isCorrect,AnswerType answerType){
+        Answer<T> answer = new Answer<>(isCorrect,data,answerType);
         if(answer == null)
             throw new NullPointerException();
 

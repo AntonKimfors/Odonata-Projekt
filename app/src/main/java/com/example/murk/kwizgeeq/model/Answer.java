@@ -7,6 +7,7 @@ package com.example.murk.kwizgeeq.model;
 public class Answer<T>  {
     private final boolean isCorrect;
     private final T data;
+    private final AnswerType answerType;
 
     public T getData() {
         return data;
@@ -16,9 +17,14 @@ public class Answer<T>  {
         return isCorrect;
     }
 
-    public Answer(boolean isCorrect, T data) {
+    public AnswerType getAnswerType(){
+        return answerType;
+    }
+
+    public Answer(boolean isCorrect, T data, AnswerType answerType) {
         this.isCorrect = isCorrect;
         this.data = data;
+        this.answerType = answerType;
     }
 
     /**

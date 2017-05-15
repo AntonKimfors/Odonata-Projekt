@@ -23,25 +23,25 @@ public class TestQuestionCreation {
         quiz.addQuestion(question);
         question.setQuestionText("Question 1");
         question.setImagePath("ImagePath 1");
-        question.addAnswer("correct",true);
-        question.addAnswer("wrong1",false);
-        question.addAnswer("wrong2",false);
-        question.addAnswer("wrong3",false);
+        question.addAnswer("correct",true,AnswerType.TEXT);
+        question.addAnswer("wrong1",false,AnswerType.TEXT);
+        question.addAnswer("wrong2",false,AnswerType.TEXT);
+        question.addAnswer("wrong3",false,AnswerType.TEXT);
 
         UserQuestion question2 = new UserQuestion();
         quiz.addQuestion(question2);
         question2.setQuestionText("Question 1");
         question2.setImagePath("ImagePath 1");
-        question2.addAnswer("correct",true);
-        question2.addAnswer("wrong1",false);
-        question2.addAnswer("wrong2",false);
-        question2.addAnswer("wrong3",false);
+        question2.addAnswer("correct",true,AnswerType.TEXT);
+        question2.addAnswer("wrong1",false,AnswerType.TEXT);
+        question2.addAnswer("wrong2",false,AnswerType.TEXT);
+        question2.addAnswer("wrong3",false,AnswerType.TEXT);
 
         question.clearAnswers();
-        question.addAnswer("new correct",true);
-        question.addAnswer("wrong1",false);
-        question.addAnswer("wrong2",false);
-        question.addAnswer("wrong3",false);
+        question.addAnswer("new correct",true,AnswerType.TEXT);
+        question.addAnswer("wrong1",false,AnswerType.TEXT);
+        question.addAnswer("wrong2",false,AnswerType.TEXT);
+        question.addAnswer("wrong3",false,AnswerType.TEXT);
 
         quiz.removeQuestion(question2);
 

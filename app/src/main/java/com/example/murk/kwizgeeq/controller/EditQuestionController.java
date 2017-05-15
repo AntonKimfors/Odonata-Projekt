@@ -161,11 +161,11 @@ public class EditQuestionController implements Controller, Observer{
         userQuestion.setQuestionText(editQuestionView.getQuestionString());
 
         userQuestion.clearAnswers();
-        userQuestion.addAnswer(editQuestionView.getCorrectString(),true);
+        userQuestion.addAnswer(editQuestionView.getCorrectString(),true,AnswerType.TEXT);
 
-        userQuestion.addAnswer(editQuestionView.getWrong1String(),false);
-        userQuestion.addAnswer(editQuestionView.getWrong2String(),false);
-        userQuestion.addAnswer(editQuestionView.getWrong3String(),false);
+        userQuestion.addAnswer(editQuestionView.getWrong1String(),false,AnswerType.TEXT);
+        userQuestion.addAnswer(editQuestionView.getWrong2String(),false,AnswerType.TEXT);
+        userQuestion.addAnswer(editQuestionView.getWrong3String(),false,AnswerType.TEXT);
     }
 
     @Override
