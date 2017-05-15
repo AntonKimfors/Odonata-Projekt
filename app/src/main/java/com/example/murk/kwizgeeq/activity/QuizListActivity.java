@@ -12,7 +12,7 @@ import com.example.murk.kwizgeeq.view.QuizListView;
  * Created by akimfors on 2017-05-05.
  */
 
-public class QuizListActivity extends ListActivity{
+public class QuizListActivity extends ListActivity {
 
     private QuizListController controller;
     private QuizListView view;
@@ -22,13 +22,23 @@ public class QuizListActivity extends ListActivity{
         setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_quiz_list);
 
-        view = new QuizListView(getListView(), this,this, EditQuizActivity.class,
+        view = new QuizListView(getListView(), this, this, EditQuizActivity.class,
                 QuestioneerActivity.class, (FloatingActionButton) findViewById(R.id.fab));
-        controller = new QuizListController(view, this);
+        controller = new QuizListController(view, this, this);
         view.addObserver(controller);
         controller.onCreate();
 
     }
 
+    @Override
+    protected void onPause() {
+        controller.onPause();
+        super.onPause();
+    }
 
+    @Override
+    protected void onResume() {
+        controller.onResume();
+        super.onResume();
+    }
 }

@@ -1,6 +1,8 @@
 
+
 package com.example.murk.kwizgeeq.controller;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PointF;
@@ -26,6 +28,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+
+
 /**
  * Created by akimfors on 2017-05-05.
  */
@@ -35,13 +39,18 @@ public class QuizListController implements Controller, Observer{
     private QuizListView view;
     private KwizGeeQ model;
     private Context context;
+    //private Activity currentActivity;
 
-    public QuizListController(QuizListView view, Context context){
+    public QuizListController(QuizListView view, Context context, Activity currentActivity){
         this.view = view;
         this.context = context;
+        //this.currentActivity = currentActivity;
         model = KwizGeeQ.getInstance();
 
         //int quiz = model.createUserQuiz("Testquiz",Color.argb(255,100,100,100));
+
+
+
         /*model.setUserQuestionText(quiz,0,"Vad är svaret på fråga nummer 1?");
         model.addTextAnswer(quiz,0,"sant",true);
         model.addTextAnswer(quiz,0,"falskt",false);
