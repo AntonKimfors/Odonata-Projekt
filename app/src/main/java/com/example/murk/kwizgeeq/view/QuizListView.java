@@ -16,9 +16,7 @@ import android.widget.ListView;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.activity.EditQuizActivity;
-import com.example.murk.kwizgeeq.activity.QuestioneerActivity;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
-import com.example.murk.kwizgeeq.model.QuizListAdapter;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import org.xdty.preference.colorpicker.ColorPickerDialog;

@@ -80,6 +80,7 @@ public class FileUtilites {
 
         return filteredFiles;
     }
+
     public static void saveImage(Context context, Bitmap bitmap, String name) {
         File fileDirectory = getFileDirectory(context);
         File fileToWrite = new File(fileDirectory, name);
