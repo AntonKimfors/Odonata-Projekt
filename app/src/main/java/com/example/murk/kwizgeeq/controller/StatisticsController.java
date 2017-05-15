@@ -7,6 +7,7 @@ import android.view.View;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.view.StatisticsView;
 
+import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,15 +21,17 @@ public class StatisticsController implements Controller, Observer {
     private KwizGeeQ model;
     private Activity currentActivity;
     private Class<? extends Activity> switchActivityClass;
+    private HashSet<Integer> replayIndexSet;
 
     private int quizIndex;
 
-    public StatisticsController(StatisticsView view, Activity currentActivity, Class<? extends Activity> switchActivityClass, int quizIndex) {
+    public StatisticsController(StatisticsView view, Activity currentActivity, Class<? extends Activity> switchActivityClass, int quizIndex, HashSet<Integer> replayIndexSet) {
         this.view = view;
         this.model = KwizGeeQ.getInstance();
         this.currentActivity = currentActivity;
         this.switchActivityClass = switchActivityClass;
         this.quizIndex = quizIndex;
+        this.replayIndexSet = replayIndexSet;
     }
 
     public void onCreate() {

@@ -11,6 +11,8 @@ import com.example.murk.kwizgeeq.controller.StatisticsController;
 import com.example.murk.kwizgeeq.databinding.ActivityStatisticsViewBinding;
 import com.example.murk.kwizgeeq.view.StatisticsView;
 
+import java.util.HashSet;
+
 public class StatisticsActivity extends AppCompatActivity {
 
     private StatisticsController controller;
@@ -23,7 +25,7 @@ public class StatisticsActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_statistics_view);
 
         view = new StatisticsView((TextView)findViewById(R.id.quizLabel), (TextView)findViewById(R.id.answersLabel), (ProgressBar)findViewById(R.id.answersProgressBar));
-        controller = new StatisticsController(view, this, QuestioneerActivity.class, getIntent().getIntExtra("quizIndex", 0));
+        controller = new StatisticsController(view, this, QuestioneerActivity.class, getIntent().getIntExtra("quizIndex", 0), (HashSet<Integer>)getIntent().getParcelableExtra("replayIndexSet"));
         controller.onCreate();
         binding.setController(controller);
     }
