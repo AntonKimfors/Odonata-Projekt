@@ -61,6 +61,7 @@ public class QuizListView extends Observable {
                 model.startQuiz();
                 currentActivity.startActivity(intent);
 
+
             }
         });
 
