@@ -8,6 +8,7 @@ import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.QuizListView;
+import com.google.gson.Gson;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -52,6 +53,11 @@ public class QuizListController implements Controller, Observer{
 
     @Override
     public void onPause() {
+        //TODO: Try saving the data
+
+        Gson gson = new Gson();
+
+
 
     }
 
