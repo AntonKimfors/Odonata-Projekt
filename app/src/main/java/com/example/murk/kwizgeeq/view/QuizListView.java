@@ -126,13 +126,13 @@ public class QuizListView extends Observable {
                 mBuilder.setView(mView);
                 final AlertDialog dialog = mBuilder.create();
                 dialog.show();
-
+                mSelectedColor = ContextCompat.getColor(context, R.color.flamingo);
                 mPickColor.setBackgroundColor(context.getResources().getColor(R.color.flamingo));
                 mPickColor.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
-                        mSelectedColor = ContextCompat.getColor(context, R.color.flamingo);
+
 
 
                         int[] mColors = context.getResources().getIntArray(R.array.default_rainbow);
@@ -169,8 +169,8 @@ public class QuizListView extends Observable {
                         Intent intent = new Intent(context, EditQuizActivity.class);
                         String quizTitle = quizName.getText().toString();
                         int quizindex = model.getQuizList().size();
-                        model.getQuizList().add(new UserQuiz(quizTitle, quizindex));
-                        intent.putExtra("quizIndex",quizindex);  //TODO
+                        model.getQuizList().add(new UserQuiz(quizTitle, mSelectedColor));
+                        intent.putExtra("quizIndex",quizindex);
                         currentActivity.startActivity(intent);
                     }
                 });
