@@ -89,7 +89,7 @@ public class QuizListController implements Controller, Observer{
     public void onPause() {
         //TODO: Try saving the data
 
-        final ArrayList<Quiz> quizlist = model.getQuizList();
+        /*final ArrayList<Quiz> quizlist = model.getQuizList();
         Type listOfTestObject = new TypeToken<ArrayList<Quiz>>(){}.getType();
 
         Gson gson = new Gson();
@@ -110,7 +110,7 @@ public class QuizListController implements Controller, Observer{
             Log.e("Persistance", "Error saving file " + e.getMessage());
         }
 
-        //StorageUtils.saveQuizList(context);
+        //StorageUtils.saveQuizList(context);*/
 
     }
 

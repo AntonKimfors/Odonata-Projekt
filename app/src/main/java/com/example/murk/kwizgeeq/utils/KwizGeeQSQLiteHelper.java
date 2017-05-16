@@ -13,15 +13,14 @@ public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "data.db";
     private static final int DB_VERSION = 1;
+    private static final String COLUMN_ID = "_ID";
 
     //QUIZ Table Functionallity
     public static final String TABLE_QUIZES = "QUIZES";
-    public static final String COLUMN_QUIZ_ASSET = "ASSET";
     public static final String COLUMN_QUIZ_NAME = "QUIZ_NAME";
     private static String DB_CREATE =
-                    "CREATE TABLE " + TABLE_QUIZES + "(" + BaseColumns._ID +
-                    " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_QUIZ_ASSET +
-                    " TEXT, " + COLUMN_QUIZ_NAME + " TEXT)";
+                    "CREATE TABLE " + TABLE_QUIZES + " (" + COLUMN_ID +
+                    " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_QUIZ_NAME + " TEXT)";
 
     /*//  Table Annotations functionallity
     public static final String ANNOTATIONS_TABLE = "ANNOTATIONS";
