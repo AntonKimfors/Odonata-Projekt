@@ -1,6 +1,7 @@
 package com.example.murk.kwizgeeq.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Environment;
 import android.util.Log;
 
@@ -12,10 +13,15 @@ import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+import static android.R.attr.bitmap;
 
 /**
  * Created by akimfors on 2017-05-16.
@@ -35,7 +41,8 @@ public class storageUtils {
 
         try
         {
-            File quizFile = new File(context.getFilesDir(), "quiz.txt");
+            //File quizFile = new File(context.getFilesDir(), "quiz.txt");
+            File quizFile = getFileDirectory(context);
             FileWriter fileWriter = new FileWriter(quizFile, false);
             BufferedWriter writer = new BufferedWriter((fileWriter));
             writer.write(jsonquizlist);
@@ -45,11 +52,47 @@ public class storageUtils {
         {
             Log.e("Persistance", "Error saving file " + e.getMessage());
         }
-    }
+    }//end saveQuizList
 
-    public static void saveImage(Context context, String imageName){
+    public static void readQuizList(Context context){
+        try
+        {
+            File quizFile = getFileDirectory(context);
+            FileReader fileReader = new FileReader(quizFile);
+            BufferedReader reader = new BufferedReader(fileReader);
+            String jsonquizlist = reader.readLine();
+            Gson gson = new Gson();
+            Type collectionType = new TypeToken<ArrayList<Quiz>>(){}.getType();
+
+            ArrayList quizlist = gson.fromJson(jsonquizlist, collectionType);
+
+            //TODO: Setter for KwizGeeq QuizList
+            //KwizGeeQ.getInstance().getQuizList() = quizlist;
+
+        }catch (Exception e){
+            Log.e("Peresistence", "Could not read quizlist. Error " + e.getMessage());
+        }
+
+
+    } //end readQuizList
+
+
+
+    public static void saveImage(Context context, Bitmap bitmap){
         File fileDirectory = getFileDirectory(context);
-        //File fileToWrite = new
+        File imageFile = new File(fileDirectory, getImageName());
+
+        try{
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            outputStream.flush();
+            outputStream.close();
+
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -80,6 +123,11 @@ public class storageUtils {
         }
         return false;
     }//end isExternalStorageWritable
+
+    public static String getImageName(){
+        //TODO: REturn a image name
+        return "image.jpg";
+    }
 
 
 }
