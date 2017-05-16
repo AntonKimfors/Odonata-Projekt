@@ -104,6 +104,9 @@ public class EditQuestionController implements Controller, Observer{
                 editQuestionView.flashEmpty();
         } else{
             saveQuestionText();
+            if(!editQuestionView.isSwitchChecked()){
+                saveTextAnswers();
+            }
             int nextQuestionIndex = questionIndex +1;
             editQuestionView.addMoreQuestions(quizIndex,nextQuestionIndex);
         }
@@ -120,7 +123,9 @@ public class EditQuestionController implements Controller, Observer{
             editQuestionView.flashEmpty();
         } else{
             saveQuestionText();
-            saveTextAnswers();
+            if(!editQuestionView.isSwitchChecked()){
+                saveTextAnswers();
+            }
             editQuestionView.endAddOfQuestions();
         }
     }
