@@ -34,7 +34,7 @@ public class KwizGeeQ {
     }
 
     public void endQuiz(){
-        currentQuizStatistics.mergeWith(globalStatistics);
+        currentQuizStatistics.mergeInto(globalStatistics);
     }
 
     public Statistics getCurrentQuizStatistics() {
@@ -50,19 +50,15 @@ public class KwizGeeQ {
     }
 
     public void updateQuizStatistics(int quizIndex) {
-        try{
-            int oldCorrectCount = quizStatisticsList.get(quizIndex).getAnswerCorrectCount();
-            int newCorrectCount = currentQuizStatistics.getAnswerCorrectCount();
+        int oldCorrectCount = quizStatisticsList.get(quizIndex).getAnswerCorrectCount();
+        int newCorrectCount = currentQuizStatistics.getAnswerCorrectCount();
 
-            if (newCorrectCount > oldCorrectCount) {
-                quizStatisticsList.set(quizIndex, currentQuizStatistics);
-            } else if (newCorrectCount == oldCorrectCount) {
-                if (currentQuizStatistics.getSecondsSpent() > quizStatisticsList.get(quizIndex).getSecondsSpent()) {
-                    quizStatisticsList.set(quizIndex, currentQuizStatistics);
-                }
+        if (newCorrectCount > oldCorrectCount) {
+            currentQuizStatistics.mergeInto(quizStatisticsList.get(quizIndex));
+        } else if (newCorrectCount == oldCorrectCount) {
+            if (currentQuizStatistics.getSecondsSpent() > quizStatisticsList.get(quizIndex).getSecondsSpent()) {
+                currentQuizStatistics.mergeInto(quizStatisticsList.get(quizIndex));
             }
-        } catch (IndexOutOfBoundsException indexExcept){
-            quizStatisticsList.add(quizIndex, currentQuizStatistics);
         }
     }
 

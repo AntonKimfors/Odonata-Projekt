@@ -36,7 +36,7 @@ public class Statistics {
         secondsSpent = (int)(stopWatch.getTime() / 1000);
     }
 
-    public void mergeWith(Statistics otherStat){
+    public void mergeInto(Statistics otherStat){
         otherStat.quizCount += this.quizCount;
         otherStat.questionCount += this.questionCount;
         otherStat.answerCorrectCount += this.answerCorrectCount;

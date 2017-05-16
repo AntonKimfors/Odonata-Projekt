@@ -12,6 +12,7 @@ import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.AnswerType;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Quiz;
+import com.example.murk.kwizgeeq.model.Statistics;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.utils.FileUtilites;
@@ -73,6 +74,7 @@ public class QuizListController implements Controller, Observer{
         testQuiz.addQuestion(testQuestion2);
         testQuiz.addQuestion(testQuestion3);
         model.getQuizList().add(testQuiz);
+        model.getQuizStatisticsList().add(new Statistics());
 
     }
 

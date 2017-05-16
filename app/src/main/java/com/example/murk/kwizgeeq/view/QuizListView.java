@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
+import com.example.murk.kwizgeeq.model.Statistics;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import org.xdty.preference.colorpicker.ColorPickerDialog;
@@ -168,6 +169,7 @@ public class QuizListView extends Observable {
                         String quizTitle = quizName.getText().toString();
                         int quizindex = model.getQuizList().size();
                         model.getQuizList().add(new UserQuiz(quizTitle, mSelectedColor));
+                        model.getQuizStatisticsList().add(new Statistics());
                         intent.putExtra("quizIndex",quizindex);
                         currentActivity.startActivity(intent);
                     }
