@@ -8,7 +8,6 @@ import android.view.View;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.view.StatisticsView;
 
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -22,17 +21,16 @@ public class StatisticsController implements Controller, Observer {
     private KwizGeeQ model;
     private Activity currentActivity;
     private Class<? extends Activity> switchActivityClass;
-    private ArrayList<Integer> replayIndexList;
 
     private int quizIndex;
 
-    public StatisticsController(StatisticsView view, Activity currentActivity, Class<? extends Activity> switchActivityClass, int quizIndex, ArrayList replayIndexList) {
+    public StatisticsController(StatisticsView view, Activity currentActivity, Class<? extends Activity> switchActivityClass) {
         this.view = view;
         this.model = KwizGeeQ.getInstance();
         this.currentActivity = currentActivity;
         this.switchActivityClass = switchActivityClass;
-        this.quizIndex = quizIndex;
-        this.replayIndexList = replayIndexList;
+        this.quizIndex = currentActivity.getIntent().getIntExtra("quizIndex", 0);
+
     }
 
     public void onCreate() {
@@ -58,13 +56,15 @@ public class StatisticsController implements Controller, Observer {
     //TODO fix this
     public void retryAllSelected(View view){
         Intent intent = new Intent(currentActivity, switchActivityClass);
-        intent.putExtra("quizIndex", quizIndex);
-        currentActivity.startActivity(intent);
-        //currentActivity.finish();
+        intent.putExtra("replayByIndex", false);
+        currentActivity.setResult(currentActivity.RESULT_OK, intent);
+        currentActivity.finish();
     }
 
     public void retryIncorrectSelected(View view){
-        //TODO create and run new quiz with only incorrect questions in it
+        Intent intent = new Intent(currentActivity, switchActivityClass);
+        intent.putExtra("replayByIndex", true);
+        currentActivity.setResult(currentActivity.RESULT_OK, intent);
         currentActivity.finish();
     }
 

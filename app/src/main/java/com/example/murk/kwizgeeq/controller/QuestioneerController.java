@@ -22,18 +22,21 @@ public class QuestioneerController implements Controller, Observer{
     private KwizGeeQ model;
     private Class<? extends Activity> switchActivityClass;
     private Activity currentActivity;
-    private ArrayList<Integer> replayIndexList;
+    private ArrayList<Integer> outReplayIndexList;
 
     private int quizIndex;
     private int questionIndex;
+    private boolean replayingByIndex;
+    private int REPLAY__REQUEST_CODE = 1;
 
-    public QuestioneerController(Activity activity, QuestioneerView view, int quizIndex) {
+    public QuestioneerController(Activity activity, QuestioneerView view) {
         this.view = view;
         this.model = KwizGeeQ.getInstance();
         this.currentActivity = activity;
-        this.quizIndex = quizIndex;
+        this.outReplayIndexList = new ArrayList<>();
+        this.quizIndex = activity.getIntent().getIntExtra("quizIndex", 0);
         this.questionIndex = 0;
-        this.replayIndexList = new ArrayList<>();
+        this.replayingByIndex = false;
     }
 
     public void onCreate() {
@@ -95,7 +98,7 @@ public class QuestioneerController implements Controller, Observer{
         /*if(currentActivity.isFinishing()) {
             Intent intent = new Intent(currentActivity, switchActivityClass);
             intent.putExtra("quizIndex", quizIndex);
-            intent.putExtra("replayIndexList", replayIndexList);
+            intent.putExtra("outReplayIndexList", outReplayIndexList);
             currentActivity.startActivity(intent);
         }*/
     }
@@ -110,7 +113,7 @@ public class QuestioneerController implements Controller, Observer{
             model.getCurrentQuizStatistics().incAnswerCorrectCount();
             this.view.flashCorrectAnswer(view);
         } else{
-            replayIndexList.add(questionIndex);
+            outReplayIndexList.add(questionIndex);
             model.getCurrentQuizStatistics().incAnswerIncorrectCount();
             this.view.flashIncorrectAnswer(view);
         }
@@ -124,9 +127,7 @@ public class QuestioneerController implements Controller, Observer{
             model.endQuiz();
             Intent intent = new Intent(currentActivity, switchActivityClass);
             intent.putExtra("quizIndex", quizIndex);
-            intent.putExtra("replayIndexList", replayIndexList);
-            currentActivity.startActivity(intent);
-            view.closeQuestioneer();
+            currentActivity.startActivityForResult(intent, REPLAY__REQUEST_CODE);
         }
         else {
             questionIndex++;
@@ -137,6 +138,29 @@ public class QuestioneerController implements Controller, Observer{
     public void update(Observable o, Object arg) {
         if(arg == "question done"){
             finishQuestion();
+        }
+    }
+
+    private void replayQuestions(){
+        questionIndex = 0;
+        outReplayIndexList.clear();
+        model.startQuiz();
+        onCreate();
+    }
+
+    private void replayQuestionsByIndex(){
+        replayingByIndex = true;
+    }
+
+    public void onActivityResult(int requestCode, Intent data){
+        if(requestCode == REPLAY__REQUEST_CODE){
+            if(data.getBooleanExtra("replayByIndex", false)){
+                replayQuestionsByIndex();
+            } else {
+                replayQuestions();
+            }
+        } else {
+            view.closeQuestioneer();
         }
     }
 }

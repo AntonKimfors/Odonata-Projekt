@@ -23,7 +23,7 @@ public class StatisticsActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_statistics_view);
 
         view = new StatisticsView((TextView)findViewById(R.id.quizLabel), (TextView)findViewById(R.id.answersLabel), (ProgressBar)findViewById(R.id.answersProgressBar));
-        controller = new StatisticsController(view, this, QuestioneerActivity.class, getIntent().getIntExtra("quizIndex", 0), getIntent().getIntegerArrayListExtra("replayIndexList"));
+        controller = new StatisticsController(view, this, QuestioneerActivity.class);
         controller.onCreate();
         binding.setController(controller);
     }
@@ -32,4 +32,5 @@ public class StatisticsActivity extends AppCompatActivity {
         controller.onDestroy();
         super.onDestroy();
     }
+
 }
