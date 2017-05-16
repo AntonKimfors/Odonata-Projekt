@@ -9,6 +9,7 @@ import android.graphics.PointF;
 import android.util.Log;
 
 import com.example.murk.kwizgeeq.model.Answer;
+import com.example.murk.kwizgeeq.model.AnswerType;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.model.UserQuestion;
@@ -49,25 +50,29 @@ public class QuizListController implements Controller, Observer{
         //this.currentActivity = currentActivity;
         model = KwizGeeQ.getInstance();
 
-        //int quiz = model.createUserQuiz("Testquiz",Color.argb(255,100,100,100));
-
-
-
-        /*model.setUserQuestionText(quiz,0,"Vad är svaret på fråga nummer 1?");
-        model.addTextAnswer(quiz,0,"sant",true);
-        model.addTextAnswer(quiz,0,"falskt",false);
-        model.addTextAnswer(quiz,0,"falskt",false);
-        model.addTextAnswer(quiz,0,"falskt",false);
-        model.setUserQuestionText(quiz,1,"Vad är svaret på fråga nummer 2?");
-        model.addTextAnswer(quiz,1,"sant",true);
-        model.addTextAnswer(quiz,1,"falskt",false);
-        model.addTextAnswer(quiz,1,"falskt",false);
-        model.addTextAnswer(quiz,1,"falskt",false);
-        model.setUserQuestionText(quiz,2,"Vad är svaret på fråga nummer 3?");
-        model.addTextAnswer(quiz,2,"sant",true);
-        model.addTextAnswer(quiz,2,"falskt",false);
-        model.addTextAnswer(quiz,2,"falskt",false);
-        model.addTextAnswer(quiz,2,"falskt",false);*/
+        UserQuiz testQuiz = new UserQuiz("Test Quiz 1", Color.BLUE);
+        UserQuestion testQuestion1 = new UserQuestion();
+        UserQuestion testQuestion2 = new UserQuestion();
+        UserQuestion testQuestion3 = new UserQuestion();
+        testQuestion1.setQuestionText("This is question number 1");
+        testQuestion2.setQuestionText("This is question number 2");
+        testQuestion3.setQuestionText("This is question number 3");
+        testQuestion1.addAnswer("Correct Answer", true, AnswerType.TEXT);
+        testQuestion1.addAnswer("Incorrect Answer", false, AnswerType.TEXT);
+        testQuestion1.addAnswer("Incorrect Answer", false, AnswerType.TEXT);
+        testQuestion1.addAnswer("Incorrect Answer", false, AnswerType.TEXT);
+        testQuestion2.addAnswer("Correct Answer", true, AnswerType.TEXT);
+        testQuestion2.addAnswer("Incorrect Answer", false, AnswerType.TEXT);
+        testQuestion2.addAnswer("Incorrect Answer", false, AnswerType.TEXT);
+        testQuestion2.addAnswer("Incorrect Answer", false, AnswerType.TEXT);
+        testQuestion3.addAnswer("Correct Answer", true, AnswerType.TEXT);
+        testQuestion3.addAnswer("Incorrect Answer", false, AnswerType.TEXT);
+        testQuestion3.addAnswer("Incorrect Answer", false, AnswerType.TEXT);
+        testQuestion3.addAnswer("Incorrect Answer", false, AnswerType.TEXT);
+        testQuiz.addQuestion(testQuestion1);
+        testQuiz.addQuestion(testQuestion2);
+        testQuiz.addQuestion(testQuestion3);
+        model.getQuizList().add(testQuiz);
 
     }
 
