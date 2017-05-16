@@ -14,6 +14,7 @@ import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.utils.FileUtilites;
+import com.example.murk.kwizgeeq.utils.StorageUtils;
 import com.example.murk.kwizgeeq.view.QuizListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -97,11 +98,9 @@ public class QuizListController implements Controller, Observer{
         catch (Exception e)
         {
             Log.e("Persistance", "Error saving file " + e.getMessage());
-        }*/
+        }
 
-        
-
-
+        //StorageUtils.saveQuizList(context);*/
 
     }
 

@@ -32,13 +32,13 @@ public class QuizListActivity extends ListActivity {
 
     @Override
     protected void onPause() {
-        controller.onPause();
+        //controller.onPause();
         super.onPause();
     }
 
     @Override
     protected void onResume() {
-        controller.onResume();
+        //controller.onResume();
         super.onResume();
     }
 }
