@@ -92,12 +92,12 @@ public class QuestioneerController implements Controller, Observer{
     }
 
     public void onDestroy() {
-        if(currentActivity.isFinishing()) {
+        /*if(currentActivity.isFinishing()) {
             Intent intent = new Intent(currentActivity, switchActivityClass);
             intent.putExtra("quizIndex", quizIndex);
             intent.putExtra("replayIndexList", replayIndexList);
             currentActivity.startActivity(intent);
-        }
+        }*/
     }
 
     public void setSwitchActivityClass(Class<? extends Activity> activityClass){
@@ -122,6 +122,10 @@ public class QuestioneerController implements Controller, Observer{
             model.getCurrentQuizStatistics().stopTimer();
             model.updateQuizStatistics(quizIndex);
             model.endQuiz();
+            Intent intent = new Intent(currentActivity, switchActivityClass);
+            intent.putExtra("quizIndex", quizIndex);
+            intent.putExtra("replayIndexList", replayIndexList);
+            currentActivity.startActivity(intent);
             view.closeQuestioneer();
         }
         else {

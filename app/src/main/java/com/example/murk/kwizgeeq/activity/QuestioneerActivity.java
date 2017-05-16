@@ -26,13 +26,13 @@ public class QuestioneerActivity extends AppCompatActivity{
         view = new QuestioneerView(this, getWindow(), (TextView)findViewById(R.id.quizLabel), (TextView)findViewById(R.id.questLabel), (TextView)findViewById(R.id.progressNumbers), (ProgressBar)findViewById(R.id.progressBar), (Button)findViewById(R.id.answerButton1), (Button)findViewById(R.id.answerButton2), (Button)findViewById(R.id.answerButton3), (Button)findViewById(R.id.answerButton4));
         controller = new QuestioneerController(this, view, getIntent().getIntExtra("quizIndex", 0));
         controller.onCreate();
+        controller.setSwitchActivityClass(StatisticsActivity.class);
 
         view.addObserver(controller);
         binding.setController(controller);
     }
 
     protected void onDestroy(){
-        controller.setSwitchActivityClass(StatisticsActivity.class);
         controller.onDestroy();
         super.onDestroy();
     }
