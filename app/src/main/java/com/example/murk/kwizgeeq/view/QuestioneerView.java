@@ -30,7 +30,6 @@ public class QuestioneerView extends Observable{
 
     private Window window;
     private TextView quizLabel;
-    private TextView questNumLabel;
     private TextView questLabel;
     private TextView progressNumbers;
     private ProgressBar progressBar;
@@ -42,10 +41,9 @@ public class QuestioneerView extends Observable{
     private KwizGeeQ model;
     private Activity activity;
 
-    public QuestioneerView(Activity activity, Window window, TextView quizLabel, TextView questNumLabel, TextView questLabel, TextView progressNumbers, ProgressBar progressBar, Button answerButton1, Button answerButton2, Button answerButton3, Button answerButton4) {
+    public QuestioneerView(Activity activity, Window window, TextView quizLabel, TextView questLabel, TextView progressNumbers, ProgressBar progressBar, Button answerButton1, Button answerButton2, Button answerButton3, Button answerButton4) {
         this.window = window;
         this.quizLabel = quizLabel;
-        this.questNumLabel = questNumLabel;
         this.questLabel = questLabel;
         this.progressNumbers = progressNumbers;
         this.progressBar = progressBar;
@@ -111,7 +109,6 @@ public class QuestioneerView extends Observable{
         Question question = model.getQuiz(quizIndex).getQuestion(questionIndex);
         Iterator answerIterator = question.answerIterator(true);
 
-        questNumLabel.setText("Question " + (questionIndex + 1));
         questLabel.setText(question.toString());
         progressNumbers.setText((questionIndex + 1) + " / " + model.getQuiz(quizIndex).getQuestions().size());
         progressBar.setProgress((questionIndex + 1));
