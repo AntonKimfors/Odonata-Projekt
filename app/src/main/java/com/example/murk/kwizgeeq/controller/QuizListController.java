@@ -80,7 +80,7 @@ public class QuizListController implements Controller, Observer{
 
     @Override
     public void onPause() {
-        /*//TODO: Try saving the data
+        //TODO: Try saving the data
 
         ArrayList<Quiz> quizlist = model.getQuizList();
 
@@ -100,18 +100,17 @@ public class QuizListController implements Controller, Observer{
             Log.e("Persistance", "Error saving file " + e.getMessage());
         }
 
-        //StorageUtils.saveQuizList(context);*/
+        //StorageUtils.saveQuizList(context);
 
     }
 
     @Override
     public void onResume(){
 
-        File fileDirectory = FileUtilites.getFileDirectory(context);
+        //File fileDirectory = FileUtilites.getFileDirectory(context);
 
 
-
-        /*try
+        try
         {
             File quizFile = new File(context.getFilesDir(), "quiz.txt");
             FileReader fileReader = new FileReader(quizFile);
@@ -126,7 +125,7 @@ public class QuizListController implements Controller, Observer{
 
         }catch (Exception e){
             Log.e("Peresistence", "Could not read quizlist. Error " + e.getMessage());
-        }*/
+        }
 
     }
 
