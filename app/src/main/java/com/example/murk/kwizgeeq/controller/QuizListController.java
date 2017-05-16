@@ -13,6 +13,7 @@ import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
+import com.example.murk.kwizgeeq.utils.FileUtilites;
 import com.example.murk.kwizgeeq.view.QuizListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -104,7 +105,12 @@ public class QuizListController implements Controller, Observer{
 
     @Override
     public void onResume(){
-        /*/try
+
+        File fileDirectory = FileUtilites.getFileDirectory(context);
+
+
+
+        /*try
         {
             File quizFile = new File(context.getFilesDir(), "quiz.txt");
             FileReader fileReader = new FileReader(quizFile);
