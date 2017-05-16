@@ -18,9 +18,6 @@ public class KwizGeeQDataSource {
     public KwizGeeQDataSource(Context context){
         mContext = context;
         mQuizSqliteHelper = new KwizGeeQSQLiteHelper(context);
-        //mQuizSqliteHelper.getReadableDatabase();
-        //database.close();
-
     }
 
 

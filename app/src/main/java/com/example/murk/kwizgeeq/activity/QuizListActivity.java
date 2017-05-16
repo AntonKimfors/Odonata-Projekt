@@ -39,16 +39,11 @@ public class QuizListActivity extends ListActivity {
     protected void onPause() {
         super.onPause();
         mKwizGeeQDataSource.close();
-        //controller.onPause();
-
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mKwizGeeQDataSource.open();
-        // controller.onResume();
-         //Open data-stream
     }
 }

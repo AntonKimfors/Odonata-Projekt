@@ -22,18 +22,6 @@ public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
                     "CREATE TABLE " + TABLE_QUIZES + " (" + COLUMN_ID +
                     " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_QUIZ_NAME + " TEXT)";
 
-    /*//  Table Annotations functionallity
-    public static final String ANNOTATIONS_TABLE = "ANNOTATIONS";
-    public static final String COLUMN_ANNOTATION_COLOR = "COLOR";
-    public static final String COLUMN_ANNOTATION_TITLE = "TITLE";
-    public static final String COLUMN_ANNOTATION_QUIZLIST_INDEX = "QUIZLIST_INDEX";
-    public static final String COLUMN_FOREIGN_KEY_QUIZES = "QUIZES_ID";
-    private static final String CREATE_ANNOTATIONS = "CREATE TABLE " + ANNOTATIONS_TABLE + "(" +
-            BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            COLUMN_ANNOTATION_COLOR + " INTEGER, " +
-            COLUMN_ANNOTATION_QUIZLIST_INDEX + " INTEGER, " +
-            COLUMN_ANNOTATION_TITLE + " TEXT, " +
-            " FOREIGN KEY(" + COLUMN_FOREIGN_KEY_QUIZES + ") REFERENCES + QUIZES(_ID))";*/
 
 
     public KwizGeeQSQLiteHelper(Context context){

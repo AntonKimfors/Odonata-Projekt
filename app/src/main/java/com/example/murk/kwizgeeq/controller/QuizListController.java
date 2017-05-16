@@ -87,55 +87,11 @@ public class QuizListController implements Controller, Observer{
 
     @Override
     public void onPause() {
-        //TODO: Try saving the data
-
-        /*final ArrayList<Quiz> quizlist = model.getQuizList();
-        Type listOfTestObject = new TypeToken<ArrayList<Quiz>>(){}.getType();
-
-        Gson gson = new Gson();
-
-
-        String jsonquizlist = (String) gson.toJson(quizlist, listOfTestObject);
-        
-        try
-        {
-            File quizFile = new File(context.getFilesDir(), "quiz.txt");
-            FileWriter fileWriter = new FileWriter(quizFile, false);
-            BufferedWriter writer = new BufferedWriter((fileWriter));
-            writer.write(jsonquizlist);
-            writer.close();
-        }
-        catch (Exception e)
-        {
-            Log.e("Persistance", "Error saving file " + e.getMessage());
-        }
-
-        //StorageUtils.saveQuizList(context);*/
 
     }
 
     @Override
     public void onResume(){
-
-        //File fileDirectory = FileUtilites.getFileDirectory(context);
-
-
-        /*try
-        {
-            File quizFile = new File(context.getFilesDir(), "quiz.txt");
-            FileReader fileReader = new FileReader(quizFile);
-            BufferedReader reader = new BufferedReader(fileReader);
-            String jsonquizlist = reader.readLine();
-
-            Gson gson = new Gson();
-            Type collectionType = new TypeToken<ArrayList<Quiz>>(){}.getType();
-
-            ArrayList quizlist = gson.fromJson(jsonquizlist, collectionType);
-
-
-        }catch (Exception e){
-            Log.e("Peresistence", "Could not read quizlist. Error " + e.getMessage());
-        }*/
 
     }
 
