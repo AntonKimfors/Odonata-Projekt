@@ -1,6 +1,7 @@
 package com.example.murk.kwizgeeq.view;
 
 import android.os.Build;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,12 +18,18 @@ public class StatisticsView {
     private TextView quizLabel;
     private TextView answersLabel;
     private ProgressBar answersProgressBar;
+    private Button replayByIndexButton;
+    private Button replayAllButton;
+    private Button doneButton;
 
-    public StatisticsView(TextView quizLabel, TextView answersLabel, ProgressBar answersProgressBar) {
+    public StatisticsView(TextView quizLabel, TextView answersLabel, ProgressBar answersProgressBar, Button replayByIndexButton, Button replayAllButton, Button doneButton) {
         this.model = KwizGeeQ.getInstance();
         this.quizLabel = quizLabel;
         this.answersLabel = answersLabel;
         this.answersProgressBar = answersProgressBar;
+        this.replayByIndexButton = replayByIndexButton;
+        this.replayAllButton = replayAllButton;
+        this. doneButton = doneButton;
     }
 
     public void updateStatistics(int quizIndex){
@@ -30,6 +37,10 @@ public class StatisticsView {
         answersProgressBar.setMax(model.getCurrentQuizStatistics().getQuestionCount());
         answersProgressBar.setProgress(model.getCurrentQuizStatistics().getAnswerCorrectCount());
         answersLabel.setText("Correct: " + answersProgressBar.getProgress() + " / " + answersProgressBar.getMax());
+    }
+
+    public void disableReplayByIndexButton(){
+        replayByIndexButton.setEnabled(false);
     }
 
 }

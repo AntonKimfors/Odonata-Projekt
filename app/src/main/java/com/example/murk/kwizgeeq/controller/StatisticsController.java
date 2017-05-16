@@ -34,6 +34,9 @@ public class StatisticsController implements Controller, Observer {
     }
 
     public void onCreate() {
+        if(currentActivity.getIntent().getBooleanExtra("allCorrect", false)){
+            view.disableReplayByIndexButton();
+        }
         view.updateStatistics(quizIndex);
     }
 

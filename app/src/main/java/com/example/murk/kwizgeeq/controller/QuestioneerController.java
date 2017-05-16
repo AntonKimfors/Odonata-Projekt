@@ -152,6 +152,7 @@ public class QuestioneerController implements Controller, Observer{
             }
             Intent intent = new Intent(currentActivity, switchActivityClass);
             intent.putExtra("quizIndex", quizIndex);
+            intent.putExtra("allCorrect", outReplayIndexList.isEmpty());
             currentActivity.startActivityForResult(intent, REPLAY__REQUEST_CODE);
         }
         else {
