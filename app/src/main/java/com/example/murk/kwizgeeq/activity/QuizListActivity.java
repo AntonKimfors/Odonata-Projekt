@@ -25,7 +25,7 @@ public class QuizListActivity extends ListActivity {
         setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_quiz_list);
 
-        mKwizGeeQDataSource = new KwizGeeQDataSource(this);
+        mKwizGeeQDataSource = new KwizGeeQDataSource(QuizListActivity.this);
 
         view = new QuizListView(getListView(), this, this, EditQuizActivity.class,
                 QuestioneerActivity.class, (FloatingActionButton) findViewById(R.id.fab));
@@ -37,8 +37,8 @@ public class QuizListActivity extends ListActivity {
 
     @Override
     protected void onPause() {
-        mKwizGeeQDataSource.close();
         super.onPause();
+        mKwizGeeQDataSource.close();
         //controller.onPause();
 
 
@@ -46,8 +46,8 @@ public class QuizListActivity extends ListActivity {
 
     @Override
     protected void onResume() {
-        mKwizGeeQDataSource.open();
         super.onResume();
+        mKwizGeeQDataSource.open();
         // controller.onResume();
          //Open data-stream
     }

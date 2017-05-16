@@ -43,7 +43,7 @@ public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_QUIZES);
+        db.execSQL(DB_CREATE);
         //sqLiteDatabase.execSQL(CREATE_ANNOTATIONS);
 
     }
