@@ -10,14 +10,13 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
-import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.*;
 
 import java.util.*;
 
 import com.example.murk.kwizgeeq.model.*;
-import com.example.murk.kwizgeeq.utils.BusWrapper;
+import com.example.murk.kwizgeeq.events.BusWrapper;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 

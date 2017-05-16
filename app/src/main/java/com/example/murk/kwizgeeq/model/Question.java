@@ -1,6 +1,6 @@
 package com.example.murk.kwizgeeq.model;
 
-import com.example.murk.kwizgeeq.utils.BusWrapper;
+import com.example.murk.kwizgeeq.events.BusWrapper;
 import com.google.common.eventbus.EventBus;
 
 import java.util.*;

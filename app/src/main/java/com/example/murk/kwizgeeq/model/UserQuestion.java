@@ -1,8 +1,5 @@
 package com.example.murk.kwizgeeq.model;
 
-import com.example.murk.kwizgeeq.utils.BusWrapper;
-import com.google.common.eventbus.EventBus;
-
 /**
  * Created by Henrik on 04/04/2017.
  */

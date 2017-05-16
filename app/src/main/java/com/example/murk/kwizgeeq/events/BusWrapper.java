@@ -1,4 +1,4 @@
-package com.example.murk.kwizgeeq.utils;
+package com.example.murk.kwizgeeq.events;
 
 import com.google.common.eventbus.EventBus;
 
