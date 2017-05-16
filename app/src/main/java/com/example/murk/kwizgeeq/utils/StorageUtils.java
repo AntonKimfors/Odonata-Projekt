@@ -27,7 +27,7 @@ import static android.R.attr.bitmap;
  * Created by akimfors on 2017-05-16.
  */
 
-public class storageUtils {
+public class StorageUtils {
 
 
 
