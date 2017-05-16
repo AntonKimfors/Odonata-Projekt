@@ -9,21 +9,21 @@ import android.provider.BaseColumns;
  * Created by akimfors on 2017-05-16.
  */
 
-public class QuizSQLiteHelper extends SQLiteOpenHelper {
+public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "data.db";
     private static final int DB_VERSION = 1;
 
     //QUIZ Table Functionallity
-    public static final String QUIZES_TABLE = "QUIZES";
+    public static final String TABLE_QUIZES = "QUIZES";
     public static final String COLUMN_QUIZ_ASSET = "ASSET";
-    public static final String COLUMN_QUIZ_NAME = "NAME";
-    private static String CREATE_QUIZES =
-                    "CREATE TABLE " + QUIZES_TABLE + "(" + BaseColumns._ID +
+    public static final String COLUMN_QUIZ_NAME = "QUIZ_NAME";
+    private static String DB_CREATE =
+                    "CREATE TABLE " + TABLE_QUIZES + "(" + BaseColumns._ID +
                     " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_QUIZ_ASSET +
                     " TEXT, " + COLUMN_QUIZ_NAME + " TEXT)";
 
-    //  Table Annotations functionallity
+    /*//  Table Annotations functionallity
     public static final String ANNOTATIONS_TABLE = "ANNOTATIONS";
     public static final String COLUMN_ANNOTATION_COLOR = "COLOR";
     public static final String COLUMN_ANNOTATION_TITLE = "TITLE";
@@ -34,18 +34,18 @@ public class QuizSQLiteHelper extends SQLiteOpenHelper {
             COLUMN_ANNOTATION_COLOR + " INTEGER, " +
             COLUMN_ANNOTATION_QUIZLIST_INDEX + " INTEGER, " +
             COLUMN_ANNOTATION_TITLE + " TEXT, " +
-            " FOREIGN KEY(" + COLUMN_FOREIGN_KEY_QUIZES + ") REFERENCES QUIZES(_ID))";
+            " FOREIGN KEY(" + COLUMN_FOREIGN_KEY_QUIZES + ") REFERENCES + QUIZES(_ID))";*/
 
 
-    public QuizSQLiteHelper(Context context){
+    public KwizGeeQSQLiteHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
     }
 
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(CREATE_QUIZES);
-        sqLiteDatabase.execSQL(CREATE_ANNOTATIONS);
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(TABLE_QUIZES);
+        //sqLiteDatabase.execSQL(CREATE_ANNOTATIONS);
 
     }
 

@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.QuizListController;
+import com.example.murk.kwizgeeq.utils.KwizGeeQSQLiteHelper;
 import com.example.murk.kwizgeeq.utils.QuizDataSource;
 import com.example.murk.kwizgeeq.view.QuizListView;
 
@@ -33,17 +34,19 @@ public class QuizListActivity extends ListActivity {
 
     @Override
     protected void onPause() {
-        //controller.onPause();
         super.onPause();
+        //controller.onPause();
+
     }
 
     @Override
     protected void onResume() {
-        //controller.onResume();
         super.onResume();
+       // controller.onResume();
+
 
         try{
-            QuizDataSource dataSource = new QuizDataSource(this);
+        KwizGeeQSQLiteHelper dataSource = new KwizGeeQSQLiteHelper(this);
         }catch (Exception e){
 
         }

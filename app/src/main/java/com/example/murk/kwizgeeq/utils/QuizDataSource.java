@@ -1,6 +1,7 @@
 package com.example.murk.kwizgeeq.utils;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.ContextMenu;
 
@@ -11,14 +12,31 @@ import android.view.ContextMenu;
 public class QuizDataSource {
 
     private Context mContext;
-    private QuizSQLiteHelper mQuizSqliteHelper;
+    private KwizGeeQSQLiteHelper mQuizSqliteHelper;
+    private SQLiteDatabase mDatabase;
 
     public QuizDataSource(Context context){
-
         mContext = context;
-        mQuizSqliteHelper = new QuizSQLiteHelper(context);
-        SQLiteDatabase database = mQuizSqliteHelper.getReadableDatabase();
-        database.close();
+        mQuizSqliteHelper = new KwizGeeQSQLiteHelper(context);
+        //mQuizSqliteHelper.getReadableDatabase();
+        //database.close();
 
     }
+
+
+    // open
+    public void open() throws SQLException {
+        mDatabase = mQuizSqliteHelper.getWritableDatabase();
+    }
+
+    // close
+
+    // insert
+
+    // select
+
+    // update
+
+    // delete
+
 }

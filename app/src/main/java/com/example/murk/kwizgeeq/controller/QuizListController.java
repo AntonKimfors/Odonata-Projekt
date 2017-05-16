@@ -89,10 +89,13 @@ public class QuizListController implements Controller, Observer{
     public void onPause() {
         //TODO: Try saving the data
 
-        ArrayList<Quiz> quizlist = model.getQuizList();
+        final ArrayList<Quiz> quizlist = model.getQuizList();
+        Type listOfTestObject = new TypeToken<ArrayList<Quiz>>(){}.getType();
 
         Gson gson = new Gson();
-        String jsonquizlist = gson.toJson(quizlist);
+
+
+        String jsonquizlist = (String) gson.toJson(quizlist, listOfTestObject);
         
         try
         {
@@ -117,7 +120,7 @@ public class QuizListController implements Controller, Observer{
         //File fileDirectory = FileUtilites.getFileDirectory(context);
 
 
-        try
+        /*try
         {
             File quizFile = new File(context.getFilesDir(), "quiz.txt");
             FileReader fileReader = new FileReader(quizFile);
@@ -132,7 +135,7 @@ public class QuizListController implements Controller, Observer{
 
         }catch (Exception e){
             Log.e("Peresistence", "Could not read quizlist. Error " + e.getMessage());
-        }
+        }*/
 
     }
 
