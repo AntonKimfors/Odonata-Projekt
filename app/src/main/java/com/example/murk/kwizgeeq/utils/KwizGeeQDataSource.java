@@ -9,13 +9,13 @@ import android.view.ContextMenu;
  * Created by akimfors on 2017-05-16.
  */
 
-public class QuizDataSource {
+public class KwizGeeQDataSource {
 
     private Context mContext;
     private KwizGeeQSQLiteHelper mQuizSqliteHelper;
     private SQLiteDatabase mDatabase;
 
-    public QuizDataSource(Context context){
+    public KwizGeeQDataSource(Context context){
         mContext = context;
         mQuizSqliteHelper = new KwizGeeQSQLiteHelper(context);
         //mQuizSqliteHelper.getReadableDatabase();
@@ -30,6 +30,9 @@ public class QuizDataSource {
     }
 
     // close
+    public void close(){
+        mDatabase.close();
+    }
 
     // insert
 
