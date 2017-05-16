@@ -99,10 +99,11 @@ public class EditQuestionController implements Controller, Observer{
     }
 
     public void nextButtonAction(View view){
-        if(!checkRequiredFields()){
-            editQuestionView.flashEmpty();
+        if(!checkQuestionData() || (!editQuestionView.isSwitchChecked() && !checkTextAnswers())
+        ||(editQuestionView.isSwitchChecked() && !checkImageAnswers())){
+                editQuestionView.flashEmpty();
         } else{
-            saveQuestion();
+            saveQuestionText();
             int nextQuestionIndex = questionIndex +1;
             editQuestionView.addMoreQuestions(quizIndex,nextQuestionIndex);
         }
@@ -111,13 +112,24 @@ public class EditQuestionController implements Controller, Observer{
     public void doneButtonAction(View view){
         if(isAllFieldsEmpty()){
             removeQuestion();
+            removeQuizIfEmpty();
             editQuestionView.endAddOfQuestions();
         }
-        else if(!checkRequiredFields()){
+        else if(!checkQuestionData() || (!editQuestionView.isSwitchChecked() && !checkTextAnswers())
+                ||(editQuestionView.isSwitchChecked() && !checkImageAnswers())){
             editQuestionView.flashEmpty();
         } else{
-            saveQuestion();
+            saveQuestionText();
+            saveTextAnswers();
             editQuestionView.endAddOfQuestions();
+        }
+    }
+
+    private void removeQuizIfEmpty(){
+        KwizGeeQ model = KwizGeeQ.getInstance();
+        Quiz quiz= model.getQuiz(quizIndex);
+        if(quiz.getSize()==0){
+            model.removeQuiz(quiz);
         }
     }
 
@@ -190,49 +202,70 @@ public class EditQuestionController implements Controller, Observer{
         }
     }
 
-    private boolean checkRequiredFields(){
-        String questionText = editQuestionView.getQuestionString();
-        String correctText = editQuestionView.getCorrectString();
-        String wrong1text = editQuestionView.getWrong1String();
-        String wrong2text = editQuestionView.getWrong2String();
-        String wrong3text = editQuestionView.getWrong3String();
-
-        //UserQuestion current = model.getQuestion()
-
-        if(questionText.isEmpty() || correctText.isEmpty() || wrong1text.isEmpty() ||
-                wrong2text.isEmpty() || wrong3text.isEmpty()){
-            return false;
-        }
-
-        return true;
+    private boolean checkImageAnswers(){
+        return userQuestion.checkNumberOfAnswers(4);
     }
 
-    private boolean isAllFieldsEmpty(){
-        String questionText = editQuestionView.getQuestionString();
+    private boolean checkTextAnswers(){
         String correctText = editQuestionView.getCorrectString();
         String wrong1text = editQuestionView.getWrong1String();
         String wrong2text = editQuestionView.getWrong2String();
         String wrong3text = editQuestionView.getWrong3String();
 
-        //UserQuestion current = model.getQuestion()
-
-        if(questionText.isEmpty() && correctText.isEmpty() && wrong1text.isEmpty() &&
-                wrong2text.isEmpty() && wrong3text.isEmpty()){
+        if(!correctText.isEmpty() && !wrong1text.isEmpty() && !wrong2text.isEmpty() &&
+                !wrong3text.isEmpty()){
             return true;
         }
 
         return false;
     }
 
-    private void saveQuestion(){
+    private boolean checkQuestionData(){
+        String questionText = editQuestionView.getQuestionString();
+        if(userQuestion.getImagePath()!= null || !questionText.isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isAllFieldsEmpty(){
+        String questionText = editQuestionView.getQuestionString();
+
+        if(!editQuestionView.isSwitchChecked()){
+            String correctText = editQuestionView.getCorrectString();
+            String wrong1text = editQuestionView.getWrong1String();
+            String wrong2text = editQuestionView.getWrong2String();
+            String wrong3text = editQuestionView.getWrong3String();
+
+            if(questionText.isEmpty() && userQuestion.getImagePath() == null
+                    && correctText.isEmpty() && wrong1text.isEmpty() &&
+                    wrong2text.isEmpty() && wrong3text.isEmpty()){
+                return true;
+            }
+
+            return false;
+        } else {
+            if(questionText.isEmpty() && userQuestion.getImagePath() == null &&
+                    userQuestion.checkNumberOfAnswers(0)){
+                return true;
+            }
+            return false;
+        }
+
+
+    }
+
+    private void saveQuestionText(){
         userQuestion.setQuestionText(editQuestionView.getQuestionString());
+    }
 
-        userQuestion.clearAnswers();
-        userQuestion.addAnswer(editQuestionView.getCorrectString(),true,AnswerType.TEXT);
+    private void saveTextAnswers(){
+            userQuestion.clearAnswers();
+            userQuestion.addAnswer(editQuestionView.getCorrectString(),true,AnswerType.TEXT);
 
-        userQuestion.addAnswer(editQuestionView.getWrong1String(),false,AnswerType.TEXT);
-        userQuestion.addAnswer(editQuestionView.getWrong2String(),false,AnswerType.TEXT);
-        userQuestion.addAnswer(editQuestionView.getWrong3String(),false,AnswerType.TEXT);
+            userQuestion.addAnswer(editQuestionView.getWrong1String(),false,AnswerType.TEXT);
+            userQuestion.addAnswer(editQuestionView.getWrong2String(),false,AnswerType.TEXT);
+            userQuestion.addAnswer(editQuestionView.getWrong3String(),false,AnswerType.TEXT);
     }
 
     @Override

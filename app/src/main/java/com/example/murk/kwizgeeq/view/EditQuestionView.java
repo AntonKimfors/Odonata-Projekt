@@ -96,7 +96,9 @@ public class EditQuestionView extends Observable {
 
         originalEditText = correctText.getBackground();
 
-        if(questionIndex<KwizGeeQ.getInstance().getQuizSize(quizIndex)-1){
+        Quiz quiz = KwizGeeQ.getInstance().getQuiz(quizIndex);
+
+        if(questionIndex<(quiz.getSize()-1)){
             setEditButtonTexts();
         }
 
@@ -293,9 +295,7 @@ public class EditQuestionView extends Observable {
 
     @Subscribe
     public void update(Question question){
-        System.out.println("updating");
         if(question == userQuestion){
-            System.out.println("userquestion");
             setThumbnail();
             setAnswerImages();
         }

@@ -58,9 +58,8 @@ public class KwizGeeQ {
             throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" does not exist.");
     }
 
-    public int getQuizSize(int quizIndex){
-        Quiz quiz = quizList.get(quizIndex);
-        return quiz.getSize();
+    public void removeQuiz(Quiz quiz){
+        quizList.remove(quiz);
     }
 
     public String getQuizName(int quizIndex){

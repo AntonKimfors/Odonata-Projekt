@@ -69,7 +69,10 @@ public abstract class Question {
         throw new IllegalArgumentException("Element not in list");
     }
 
+
     public void clearAnswers(){
+        correctAnswerCount = 0;
+        wrongAnswerCount = 0;
         answers.clear();
     }
 
@@ -81,7 +84,7 @@ public abstract class Question {
         return expected == wrongAnswerCount;
     }
 
-    public boolean checkNumberOfQuestions(int excepted){
+    public boolean checkNumberOfAnswers(int excepted){
         return excepted == wrongAnswerCount + correctAnswerCount;
     }
 

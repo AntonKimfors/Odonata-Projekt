@@ -46,6 +46,6 @@ public class TestQuestionCreation {
         quiz.removeQuestion(question2);
 
         System.out.println(quiz);
-        assertTrue(model.getQuizSize(0)==1);
+        assertTrue(model.getQuiz(0).getSize()==1);
     }
 }
