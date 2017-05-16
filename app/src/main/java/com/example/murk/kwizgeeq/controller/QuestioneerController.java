@@ -23,10 +23,13 @@ public class QuestioneerController implements Controller, Observer{
     private Class<? extends Activity> switchActivityClass;
     private Activity currentActivity;
     private ArrayList<Integer> outReplayIndexList;
+    private ArrayList<Integer> inReplayIndexList;
 
     private int quizIndex;
     private int questionIndex;
-    private boolean replayingByIndex;
+    private int currentQuestion;
+    private int quizSize;
+    private boolean playingByIndex;
     private int REPLAY__REQUEST_CODE = 1;
 
     public QuestioneerController(Activity activity, QuestioneerView view) {
@@ -34,14 +37,18 @@ public class QuestioneerController implements Controller, Observer{
         this.model = KwizGeeQ.getInstance();
         this.currentActivity = activity;
         this.outReplayIndexList = new ArrayList<>();
+        this.inReplayIndexList = new ArrayList<>();
         this.quizIndex = activity.getIntent().getIntExtra("quizIndex", 0);
         this.questionIndex = 0;
-        this.replayingByIndex = false;
+        this.currentQuestion = 1;
+        this.playingByIndex = false;
     }
 
     public void onCreate() {
-        view.updateQuizRelatedItems(quizIndex);
-        view.updateQuestioneer(quizIndex, questionIndex);
+        updateQuestionIndex();
+        updateQuizSize();
+        view.updateQuizRelatedItems(model.getQuizName(quizIndex), quizSize);
+        view.updateQuestioneer(quizIndex, questionIndex, currentQuestion, quizSize);
         model.getCurrentQuizStatistics().startTimer();
     }
 
@@ -103,6 +110,22 @@ public class QuestioneerController implements Controller, Observer{
         }*/
     }
 
+    private void updateQuestionIndex(){
+        if(!playingByIndex) {
+            questionIndex = currentQuestion-1;
+        } else{
+            questionIndex = inReplayIndexList.get(currentQuestion-1);
+        }
+    }
+
+    private void updateQuizSize(){
+        if(!playingByIndex){
+            this.quizSize = model.getQuiz(quizIndex).getQuestions().size();
+        } else {
+            this.quizSize = inReplayIndexList.size();
+        }
+    }
+
     public void setSwitchActivityClass(Class<? extends Activity> activityClass){
         this.switchActivityClass = activityClass;
     }
@@ -120,18 +143,21 @@ public class QuestioneerController implements Controller, Observer{
     }
 
     public void finishQuestion(){
-        if(questionIndex + 1 == model.getQuiz(quizIndex).getQuestions().size()) {
-            model.getCurrentQuizStatistics().incQuizCount();
+        if(currentQuestion == quizSize) {
             model.getCurrentQuizStatistics().stopTimer();
+            model.getCurrentQuizStatistics().incQuizCount();
             model.updateQuizStatistics(quizIndex);
-            model.endQuiz();
+            if(!playingByIndex){
+                model.endQuiz();
+            }
             Intent intent = new Intent(currentActivity, switchActivityClass);
             intent.putExtra("quizIndex", quizIndex);
             currentActivity.startActivityForResult(intent, REPLAY__REQUEST_CODE);
         }
         else {
-            questionIndex++;
-            view.updateQuestioneer(quizIndex, questionIndex);
+            currentQuestion++;
+            updateQuestionIndex();
+            view.updateQuestioneer(quizIndex, questionIndex, currentQuestion, quizSize);
         }
     }
 
@@ -143,13 +169,19 @@ public class QuestioneerController implements Controller, Observer{
 
     private void replayQuestions(){
         questionIndex = 0;
+        currentQuestion = 1;
         outReplayIndexList.clear();
         model.startQuiz();
         onCreate();
     }
 
     private void replayQuestionsByIndex(){
-        replayingByIndex = true;
+        playingByIndex = true;
+        currentQuestion = 1;
+        inReplayIndexList = (ArrayList)outReplayIndexList.clone();
+        outReplayIndexList.clear();
+        model.startQuiz();
+        onCreate();
     }
 
     public void onActivityResult(int requestCode, Intent data){

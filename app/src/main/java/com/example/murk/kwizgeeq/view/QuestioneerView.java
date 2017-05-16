@@ -100,18 +100,18 @@ public class QuestioneerView extends Observable{
         }
     }
 
-    public void updateQuizRelatedItems(int quizIndex){
-        quizLabel.setText(model.getQuiz(quizIndex).getName());
-        progressBar.setMax(model.getQuiz(quizIndex).getQuestions().size());
+    public void updateQuizRelatedItems(String quizName, int quizSize){
+        quizLabel.setText(quizName);
+        progressBar.setMax(quizSize);
     }
 
-    public void updateQuestioneer(int quizIndex, int questionIndex){
+    public void updateQuestioneer(int quizIndex, int questionIndex, int currentQuestion, int quizSize){
         Question question = model.getQuiz(quizIndex).getQuestion(questionIndex);
         Iterator answerIterator = question.answerIterator(true);
 
         questLabel.setText(question.toString());
-        progressNumbers.setText((questionIndex + 1) + " / " + model.getQuiz(quizIndex).getQuestions().size());
-        progressBar.setProgress((questionIndex + 1));
+        progressNumbers.setText(currentQuestion + " / " + quizSize);
+        progressBar.setProgress(currentQuestion);
         answerButton1.setTag(answerIterator.next());
         answerButton2.setTag(answerIterator.next());
         answerButton3.setTag(answerIterator.next());
