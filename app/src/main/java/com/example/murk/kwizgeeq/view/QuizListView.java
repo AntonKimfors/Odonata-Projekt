@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.murk.kwizgeeq.R;
-import com.example.murk.kwizgeeq.activity.EditQuizActivity;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
@@ -165,7 +164,7 @@ public class QuizListView extends Observable {
                     @Override
                     public void onClick(View view) {
 
-                        Intent intent = new Intent(context, EditQuizActivity.class);
+                        Intent intent = new Intent(context, editQuizActivityClass);
                         String quizTitle = quizName.getText().toString();
                         int quizindex = model.getQuizList().size();
                         model.getQuizList().add(new UserQuiz(quizTitle, mSelectedColor));
