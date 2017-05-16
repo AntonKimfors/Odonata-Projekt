@@ -25,6 +25,7 @@ public class KwizGeeQ {
 
     private KwizGeeQ(){
         quizList = new ArrayList<Quiz>();
+        quizStatisticsList = new ArrayList<Statistics>();
         globalStatistics = new Statistics();
     }
 
@@ -49,15 +50,19 @@ public class KwizGeeQ {
     }
 
     public void updateQuizStatistics(int quizIndex) {
-        int oldCorrectCount = quizStatisticsList.get(quizIndex).getAnswerCorrectCount();
-        int newCorrectCount = currentQuizStatistics.getAnswerCorrectCount();
+        try{
+            int oldCorrectCount = quizStatisticsList.get(quizIndex).getAnswerCorrectCount();
+            int newCorrectCount = currentQuizStatistics.getAnswerCorrectCount();
 
-        if (newCorrectCount > oldCorrectCount) {
-            quizStatisticsList.add(quizIndex, currentQuizStatistics);
-        } else if (newCorrectCount == oldCorrectCount) {
-            if (currentQuizStatistics.getSecondsSpent() > quizStatisticsList.get(quizIndex).getSecondsSpent()) {
-                quizStatisticsList.add(quizIndex, currentQuizStatistics);
+            if (newCorrectCount > oldCorrectCount) {
+                quizStatisticsList.set(quizIndex, currentQuizStatistics);
+            } else if (newCorrectCount == oldCorrectCount) {
+                if (currentQuizStatistics.getSecondsSpent() > quizStatisticsList.get(quizIndex).getSecondsSpent()) {
+                    quizStatisticsList.set(quizIndex, currentQuizStatistics);
+                }
             }
+        } catch (IndexOutOfBoundsException indexExcept){
+            quizStatisticsList.add(quizIndex, currentQuizStatistics);
         }
     }
 
