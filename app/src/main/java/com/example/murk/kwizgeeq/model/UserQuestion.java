@@ -92,10 +92,6 @@ public class UserQuestion extends Question {
 
     @Override
     public String toString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append("Question text: ").append(questionText).append(System.lineSeparator());
-        sb.append("Imagepath: ").append(imagePath).append(System.lineSeparator());
-        sb.append(super.toString());
-        return sb.toString();
+        return questionText;
     }
 }
