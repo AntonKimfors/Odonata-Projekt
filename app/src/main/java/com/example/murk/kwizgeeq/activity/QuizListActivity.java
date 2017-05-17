@@ -46,16 +46,16 @@ public class QuizListActivity extends ListActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        mKwizGeeQDataSource.close();
+        //mKwizGeeQDataSource.close();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mKwizGeeQDataSource.open();
+        /*mKwizGeeQDataSource.open();
 
         Cursor cursor = mKwizGeeQDataSource.selectAllQuizes();
-        updateList(cursor);
+        updateList(cursor);*/
     }
 
     protected void updateList(Cursor cursor){
@@ -81,7 +81,7 @@ public class QuizListActivity extends ListActivity {
     //JUST FOR NOW: Creates a new quizlist from a String[] of quiz names
     private ArrayList<Quiz> oldQuizes() {
         ArrayList<Quiz> oldQuizes = new ArrayList<>();
-        for(int i = 0; i < mQuizNames.size(); i++){
+        for(int i = 0; i < mQuizNames.size() - 1; i++){
             oldQuizes.add(new Quiz(mQuizNames.get(i), 3) {
             });
         }
