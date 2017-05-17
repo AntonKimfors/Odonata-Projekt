@@ -72,6 +72,8 @@ public class KwizGeeQDataSource {
         }
 
     // + update
+
+    //TODO: Implement method when changing quizname
     public int updateQuizes(String newName){
         ContentValues values = new ContentValues();
 
@@ -80,7 +82,7 @@ public class KwizGeeQDataSource {
                 KwizGeeQSQLiteHelper.TABLE_QUIZES, //Table
                 values, //values
                 null,   //where clause
-                null   
+                null
 
         );
 
@@ -88,5 +90,12 @@ public class KwizGeeQDataSource {
     }
 
     // + delete
+    public void deleteAll() {
+        mDatabase.delete(
+            KwizGeeQSQLiteHelper.TABLE_QUIZES,
+            null, //where clause
+            null //where params
+        );
+    };
 
 }
