@@ -2,6 +2,7 @@ package com.example.murk.kwizgeeq.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.ContextMenu;
@@ -26,17 +27,17 @@ public class KwizGeeQDataSource {
     }
 
 
-    // open
+    // + open
     public void open() throws SQLException {
         mDatabase = mQuizSqliteHelper.getWritableDatabase();
     }
 
-    // close
+    // + close
     public void close(){
         mDatabase.close();
     }
 
-    // insert
+    // + insert
     public void insertQuizes(ArrayList<Quiz> quizArrayList) {
 
         //TODO: Hur funkar det här? Behövs en loop?
@@ -53,12 +54,25 @@ public class KwizGeeQDataSource {
         finally {
             mDatabase.endTransaction();
         }
-    } //end insertQuizes
+    } // - end insertQuizes
 
-    // select
+    // + select
+        public Cursor selectAllQuizes(){
+            Cursor cursor = mDatabase.query(
+                KwizGeeQSQLiteHelper.TABLE_QUIZES,
+                new String[] { KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME},  //Column names
+                null, //where clause
+                    null, //where params
+                    null, //Grop by
+                    null, //having
+                    null //orderBy
+            );
 
-    // update
+            return cursor;
+        }
 
-    // delete
+    // + update
+
+    // + delete
 
 }

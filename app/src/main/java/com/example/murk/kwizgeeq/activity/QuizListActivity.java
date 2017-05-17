@@ -1,6 +1,7 @@
 package com.example.murk.kwizgeeq.activity;
 
 import android.app.ListActivity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 
@@ -15,9 +16,10 @@ import com.example.murk.kwizgeeq.view.QuizListView;
 
 public class QuizListActivity extends ListActivity {
 
-    public KwizGeeQDataSource mKwizGeeQDataSource; //TODO: Make it private
+    public KwizGeeQDataSource mKwizGeeQDataSource; //TODO: Make it private. Take a look on Data for MVC!
     private QuizListController controller;
     private QuizListView view;
+    private String[] mQuizNames;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,5 +46,20 @@ public class QuizListActivity extends ListActivity {
     protected void onResume() {
         super.onResume();
         mKwizGeeQDataSource.open();
+
+        Cursor cursor = mKwizGeeQDataSource.selectAllQuizes();
+        updateList(cursor);
+    }
+
+    protected void updateList(Cursor cursor){
+        mQuizNames = null;
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            //TODO: do Stuff
+
+            cursor.moveToNext();
+        }
+
     }
 }
