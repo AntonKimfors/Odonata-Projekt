@@ -55,49 +55,9 @@ public class QuestioneerController implements Controller, Observer{
     //TODO: Anpassa vad som spara
     public void onPause() {
 
-         /*//TODO: Try saving the data
-
-        ArrayList<Quiz> quizlist = model.getQuizList();
-
-        Gson gson = new Gson();
-        String jsonquizlist = gson.toJson(quizlist);
-
-        try
-        {
-            File quizFile = new File(context.getFilesDir(), "quiz.txt");
-            FileWriter fileWriter = new FileWriter(quizFile, false);
-            BufferedWriter writer = new BufferedWriter((fileWriter));
-            writer.write(jsonquizlist);
-            writer.close();
-        }
-        catch (Exception e)
-        {
-            Log.e("Persistance", "Error saving file " + e.getMessage());
-        }*/
-
-
-
-
     }
 
     public void onResume() {
-
-          /*/try
-        {
-            File quizFile = new File(context.getFilesDir(), "quiz.txt");
-            FileReader fileReader = new FileReader(quizFile);
-            BufferedReader reader = new BufferedReader(fileReader);
-            String jsonquizlist = reader.readLine();
-
-            Gson gson = new Gson();
-            Type collectionType = new TypeToken<ArrayList<Quiz>>(){}.getType();
-
-            ArrayList quizlist = gson.fromJson(jsonquizlist, collectionType);
-
-
-        }catch (Exception e){
-            Log.e("Peresistence", "Could not read quizlist. Error " + e.getMessage());
-        }*/
 
     }
 
