@@ -75,6 +75,8 @@ public class EditQuizView extends Observable {
                         mSelectedColor = color;
                         btnColorPicker.setBackgroundColor(mSelectedColor);
                         model.getQuiz(index).setListColor(mSelectedColor);
+                        oldActivity.finish();
+                        oldActivity.startActivity((oldActivity).getIntent());
 
                     }
 
