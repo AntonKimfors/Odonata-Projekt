@@ -176,7 +176,7 @@ public class QuizListView extends Observable {
                         model.getQuizStatisticsList().add(new Statistics());
 
                         //TODO: Är detta mvc? FUnkar det??
-                        mKwizGeeQDataSource.insertQuizes(model.getQuizList());
+                        //mKwizGeeQDataSource.insertQuizes(model.getQuizList());
 
                         intent.putExtra("quizIndex",quizindex);
                         currentActivity.startActivity(intent);
