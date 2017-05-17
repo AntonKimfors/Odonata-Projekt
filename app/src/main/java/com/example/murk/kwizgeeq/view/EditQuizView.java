@@ -74,6 +74,7 @@ public class EditQuizView extends Observable {
                     public void onColorSelected(int color) {
                         mSelectedColor = color;
                         btnColorPicker.setBackgroundColor(mSelectedColor);
+                        model.getQuiz(index).setListColor(mSelectedColor);
 
                     }
 
@@ -85,7 +86,7 @@ public class EditQuizView extends Observable {
 
 
         this.editText.setText(model.getQuizName(index));
-        this.adapter = new EditQuizAdapter(context, model.getQuiz(index).getQuestions());
+        this.adapter = new EditQuizAdapter(context, model.getQuiz(index).getQuestions(),model.getQuiz(index));
         listView.setAdapter(adapter);
 
 
@@ -110,7 +111,7 @@ public class EditQuizView extends Observable {
             public void onClick(View view) {
                 Intent intent = new Intent(context, createQuestionActivity);
                 //model.getQuiz(index).
-                intent.putExtra("quizIndex",model.getQuizList().size()-1);  //TODO checkthis model.getQuestionList(index).size()
+                intent.putExtra("quizIndex",model.getQuizList().size()-1);
                 oldActivity.startActivity(intent);
 
             }

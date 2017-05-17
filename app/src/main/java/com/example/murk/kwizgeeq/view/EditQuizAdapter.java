@@ -10,23 +10,27 @@ import android.widget.TextView;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.Question;
+import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 
 import java.util.ArrayList;
 
-/**
- * Created by akimfors on 2017-04-26.
- */
+
+
+
+
+
 
 public class EditQuizAdapter extends BaseAdapter {
 
-
+    private Quiz quiz;
     private Context mContext;
     private ArrayList<Question> mQuestions;
 
-    public EditQuizAdapter(Context context, ArrayList<Question> questions){
+    public EditQuizAdapter(Context context, ArrayList<Question> questions, Quiz inQuiz){
         mContext = context;
         mQuestions = questions;
+        quiz = inQuiz;
     }
 
     @Override
@@ -43,7 +47,6 @@ public class EditQuizAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return 0;  //not using this. Tag items for easy refernece.
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -66,12 +69,8 @@ public class EditQuizAdapter extends BaseAdapter {
 
         UserQuestion question = (UserQuestion) mQuestions.get(position);
         holder.questionLabel.setText(question.getQuestionText());
-        //int RGB = android.graphics.Color.rgb(quiz.getListColor().RED,quiz.getListColor().GREEN,quiz.getListColor().BLUE);
-        //holder.relativeLayout.setBackgroundColor(RGB);
 
-        holder.relativeLayout.setBackgroundColor(443344400); //Just for testing
-
-
+        holder.relativeLayout.setBackgroundColor(quiz.getListColor());
 
 
         return convertView;
