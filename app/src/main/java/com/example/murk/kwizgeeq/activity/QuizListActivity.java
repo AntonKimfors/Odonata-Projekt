@@ -8,7 +8,10 @@ import android.support.design.widget.FloatingActionButton;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.QuizListController;
 import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
+import com.example.murk.kwizgeeq.utils.KwizGeeQSQLiteHelper;
 import com.example.murk.kwizgeeq.view.QuizListView;
+
+import java.util.ArrayList;
 
 /**
  * Created by akimfors on 2017-05-05.
@@ -19,7 +22,7 @@ public class QuizListActivity extends ListActivity {
     public KwizGeeQDataSource mKwizGeeQDataSource; //TODO: Make it private. Take a look on Data for MVC!
     private QuizListController controller;
     private QuizListView view;
-    private String[] mQuizNames;
+    private ArrayList<String> mQuizNames;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,10 @@ public class QuizListActivity extends ListActivity {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             //TODO: do Stuff
+            int columnIndex = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME);
+            String name = cursor.getColumnName(columnIndex);
+
+            mQuizNames.add(name);
 
             cursor.moveToNext();
         }
