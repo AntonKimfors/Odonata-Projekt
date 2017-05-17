@@ -7,9 +7,13 @@ import android.support.design.widget.FloatingActionButton;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.QuizListController;
+import com.example.murk.kwizgeeq.model.KwizGeeQ;
+import com.example.murk.kwizgeeq.model.Quiz;
+import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
 import com.example.murk.kwizgeeq.utils.KwizGeeQSQLiteHelper;
 import com.example.murk.kwizgeeq.view.QuizListView;
+import com.wrapper.spotify.models.User;
 
 import java.util.ArrayList;
 
@@ -68,5 +72,21 @@ public class QuizListActivity extends ListActivity {
             cursor.moveToNext();
         }
 
+        ArrayList<Quiz> tempList = oldQuizes();
+
+        KwizGeeQ.getInstance().setQuizList(tempList);
+
     }
+
+    //JUST FOR NOW: Creates a new quizlist from a String[] of quiz names
+    private ArrayList<Quiz> oldQuizes() {
+        ArrayList<Quiz> oldQuizes = new ArrayList<>();
+        for(int i = 0; i < mQuizNames.size(); i++){
+            oldQuizes.add(new Quiz(mQuizNames.get(i), 3) {
+            });
+        }
+
+        return oldQuizes;
+    }
+
 }

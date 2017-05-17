@@ -45,6 +45,10 @@ public class KwizGeeQ {
         return quizList;
     }
 
+    public void setQuizList(ArrayList<Quiz> quizList){
+        this.quizList = quizList;
+    }
+
     public ArrayList<Statistics> getQuizStatisticsList() {
         return quizStatisticsList;
     }

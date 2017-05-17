@@ -72,6 +72,20 @@ public class KwizGeeQDataSource {
         }
 
     // + update
+    public int updateQuizes(String newName){
+        ContentValues values = new ContentValues();
+
+        values.put(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, newName);
+        int rowsUpdated = mDatabase.update(
+                KwizGeeQSQLiteHelper.TABLE_QUIZES, //Table
+                values, //values
+                null,   //where clause
+                null   
+
+        );
+
+        return 1;
+    }
 
     // + delete
 
