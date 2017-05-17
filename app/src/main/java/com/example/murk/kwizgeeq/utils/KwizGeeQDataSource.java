@@ -39,8 +39,6 @@ public class KwizGeeQDataSource {
 
     // + insert
     public void insertQuizes(ArrayList<Quiz> quizArrayList) {
-
-        //TODO: Hur funkar det här? Behövs en loop?
         mDatabase.beginTransaction();
 
         try {

@@ -63,7 +63,7 @@ public class QuizListActivity extends ListActivity {
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            //TODO: do Stuff
+
             int columnIndex = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME);
             String name = cursor.getColumnName(columnIndex);
 
