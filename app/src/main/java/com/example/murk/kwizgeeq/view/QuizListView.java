@@ -18,6 +18,7 @@ import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Statistics;
 import com.example.murk.kwizgeeq.model.UserQuiz;
+import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
 
 import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
@@ -38,14 +39,17 @@ public class QuizListView extends Observable {
     private QuizListAdapter adapter;
     private FloatingActionButton fab;
 
+    private final KwizGeeQDataSource mKwizGeeQDataSource;
 
-    public QuizListView(final ListView listView, final Context context, final Activity currentActivity, final Class<? extends Activity> editQuizActivityClass, final Class<? extends Activity> questioneerActivityClass, FloatingActionButton fab){
+
+    public QuizListView(final ListView listView, final Context context, final Activity currentActivity, final Class<? extends Activity> editQuizActivityClass, final Class<? extends Activity> questioneerActivityClass, FloatingActionButton fab, final KwizGeeQDataSource mKwizGeeQDataSource){
         this.listView = listView;
         this.editQuizActivityClass = editQuizActivityClass;
         this.questioneerActivityClass = questioneerActivityClass;
         this.model = KwizGeeQ.getInstance();
         this.currentActivity = currentActivity;
         this.fab = fab;
+        this.mKwizGeeQDataSource = mKwizGeeQDataSource;
 
 
         this.adapter = new QuizListAdapter(context, model.getQuizList());
@@ -170,6 +174,10 @@ public class QuizListView extends Observable {
                         int quizindex = model.getQuizList().size();
                         model.getQuizList().add(new UserQuiz(quizTitle, mSelectedColor));
                         model.getQuizStatisticsList().add(new Statistics());
+
+                        //TODO: Är detta mvc? FUnkar det??
+                        mKwizGeeQDataSource.insertQuizes(model.getQuizList());
+
                         intent.putExtra("quizIndex",quizindex);
                         currentActivity.startActivity(intent);
                     }

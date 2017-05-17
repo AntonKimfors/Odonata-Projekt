@@ -7,7 +7,6 @@ import android.support.design.widget.FloatingActionButton;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.QuizListController;
 import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
-import com.example.murk.kwizgeeq.utils.KwizGeeQSQLiteHelper;
 import com.example.murk.kwizgeeq.view.QuizListView;
 
 /**
@@ -16,7 +15,7 @@ import com.example.murk.kwizgeeq.view.QuizListView;
 
 public class QuizListActivity extends ListActivity {
 
-    public KwizGeeQDataSource mKwizGeeQDataSource;
+    public KwizGeeQDataSource mKwizGeeQDataSource; //TODO: Make it private
     private QuizListController controller;
     private QuizListView view;
 
@@ -28,7 +27,7 @@ public class QuizListActivity extends ListActivity {
         mKwizGeeQDataSource = new KwizGeeQDataSource(QuizListActivity.this);
 
         view = new QuizListView(getListView(), this, this, EditQuizActivity.class,
-                QuestioneerActivity.class, (FloatingActionButton) findViewById(R.id.fab));
+                QuestioneerActivity.class, (FloatingActionButton) findViewById(R.id.fab), mKwizGeeQDataSource);
         controller = new QuizListController(view, this, this);
         view.addObserver(controller);
         controller.onCreate();
