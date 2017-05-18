@@ -1,21 +1,9 @@
 package com.example.murk.kwizgeeq.controller;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.AdapterView;
-
-import com.example.murk.kwizgeeq.R;
-import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
-import com.example.murk.kwizgeeq.model.UserQuestion;
-import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.EditQuizView;
-import com.example.murk.kwizgeeq.view.QuizListView;
-
-import org.xdty.preference.colorpicker.ColorPickerDialog;
-import org.xdty.preference.colorpicker.ColorPickerSwatch;
-
 import java.util.Observable;
 import java.util.Observer;
 

@@ -2,27 +2,18 @@ package com.example.murk.kwizgeeq.view;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-
-import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
-
 import com.example.murk.kwizgeeq.activity.QuizListActivity;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
-
 import com.example.murk.kwizgeeq.R;
-
 import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
-
 import java.util.Observable;
 
 
@@ -53,11 +44,9 @@ public class EditQuizView extends Observable {
         this.listView = listView;
         this.model = KwizGeeQ.getInstance();
         this.editText = editText;
-        //this.fab = fab;  // should not be needed ?
         this.index = index;
         this.btnColorPicker = btnColorPicker;
         mSelectedColor = model.getQuiz(index).getListColor();
-
         this.btnColorPicker.setBackgroundColor(mSelectedColor);
         this.editText.setText(model.getQuizName(index));
         this.adapter = new EditQuizAdapter(context, model.getQuiz(index).getQuestions(), model.getQuiz(index));
@@ -72,7 +61,7 @@ public class EditQuizView extends Observable {
 
     public void fabPressed() {
         Intent intent = new Intent(context, createQuestionActivity);
-        intent.putExtra("quizIndex", model.getUserQuizList().size()-1);
+        intent.putExtra("quizIndex", model.getUserQuizList().size() - 1);// TODO: change this to work with serializable
         currentActivity.startActivity(intent);
     }
 
@@ -86,15 +75,13 @@ public class EditQuizView extends Observable {
 
     public void changeView(int questionIndex) {
         Intent intent = new Intent(context, createQuestionActivity);
-        intent.putExtra("questionIndex", questionIndex);
+        intent.putExtra("questionIndex", questionIndex);// TODO: change this to work with serializable
         intent.putExtra("quizIndex", index);
 
         currentActivity.startActivity(intent);
     }
 
-    public void saveChanges() {
-        //TODO make a listener to handle this instead - but it Tworks!
-
+    public void reloadView() {
         Intent intent = new Intent(context, QuizListActivity.class);
         currentActivity.startActivity(intent);
     }

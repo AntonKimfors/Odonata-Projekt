@@ -1,7 +1,6 @@
 package com.example.murk.kwizgeeq.activity;
 
 import android.app.ListActivity;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -39,7 +38,7 @@ public class EditQuizActivity extends ListActivity {
     @Override
     public void onBackPressed(){
         controller.saveQuizName();
-        view.saveChanges();
+        view.reloadView();
     }
 
 }
