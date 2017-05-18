@@ -1,10 +1,9 @@
 package com.example.murk.kwizgeeq.model;
 
 
-public class SpotifyQuiz extends Quiz {
+public class SpotifyQuiz {
 
 	public SpotifyQuiz(String name, int listColor) {
-		super(name, listColor);
 		// TODO Auto-generated constructor stub
 	}
 
