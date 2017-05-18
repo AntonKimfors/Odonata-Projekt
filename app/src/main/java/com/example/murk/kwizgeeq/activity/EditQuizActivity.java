@@ -1,6 +1,7 @@
 package com.example.murk.kwizgeeq.activity;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -29,10 +30,16 @@ public class EditQuizActivity extends ListActivity {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_edit_quiz);
         view = new EditQuizView(EditQuestionActivity.class,index, getListView(), this, this, (EditText) findViewById(R.id.etQuizLabel),(FloatingActionButton) findViewById(R.id.fab),(Button) findViewById(R.id.btnColorPicker));
 
-        controller = new EditQuizController(view);
+        controller = new EditQuizController(view,index);
         binding.setController(controller);
         view.addObserver(controller);
         controller.onCreate();
 
     }
+    @Override
+    public void onBackPressed(){
+        controller.saveQuizName();
+        view.saveChanges();
+    }
+
 }
