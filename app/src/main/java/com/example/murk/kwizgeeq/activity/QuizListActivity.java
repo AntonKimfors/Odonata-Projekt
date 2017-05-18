@@ -73,53 +73,7 @@ public class QuizListActivity extends ListActivity {
         mKwizGeeQDataSource.updateList();
         mKwizGeeQDataSource.close();
     }
-
-
-    //SEEMS TO WORK FOR NOW - not using global
-    public void updateList(Cursor cursor){
-        ArrayList<Quiz> tmpQuizList = new ArrayList<Quiz>();
-
-
-        int columnIndexName = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME);
-        int columnIndexColor = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_COLOR);
-
-        cursor.moveToFirst();
-
-        while (!cursor.isAfterLast()){
-            /*String s = cursor.getString(columnIndex); //Spara namnet för ett quiz
-            mNames.add(s); //lägg till namnet i listan för namn*/
-            //int tmpInt = Integer.parseInt(cursor.getString(columnIndexColor));
-            //UserQuiz tmp = new UserQuiz(cursor.getString(columnIndexName), tmpInt);
-            //tmpQuizList.add(tmp);
-            cursor.moveToNext();
-        }
-
-
-        //KwizGeeQ.getInstance().setQuizList(tmpQuizList);
-
-        /*ArrayList<Quiz> tempList = oldQuizes(mNames); //Kalla oldQuizes med listan för namn
-        KwizGeeQ.getInstance().setQuizList(tempList); //Sätt quizList till den nya listan*/
-
-
-    }
-
-    //JUST FOR NOW: Creates a new quizlist from a String[] of quiz names
-
-    private ArrayList<UserQuiz> oldQuizes() {
-        ArrayList<UserQuiz> oldQuizes = new ArrayList<>();
-        for(int i = 0; i < mQuizNames.size() - 1; i++){
-            oldQuizes.add(new UserQuiz(mQuizNames.get(i), 3) {
-            });
-
-    private ArrayList<Quiz> oldQuizes(ArrayList<String> mNames) {
-        ArrayList<Quiz> oldQuizes = new ArrayList<>(); //Skapa en ny quizlist
-        for(int i = 0; i < mNames.size(); i++){
-
-            //Skapa ett quiz med namnet från namnlistan och lägg till i ny quizlist
-            oldQuizes.add(new UserQuiz(mNames.get(i), Color.BLUE));
-
-
-    }
+    
 
 
 }

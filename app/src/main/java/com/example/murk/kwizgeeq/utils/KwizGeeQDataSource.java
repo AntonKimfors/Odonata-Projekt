@@ -91,8 +91,8 @@ public class KwizGeeQDataSource {
 
         while (cursor.moveToNext()){
             //int tmpInt = Integer.parseInt(cursor.getString(columnIndexColor));
-            //UserQuiz tmp = new UserQuiz(cursor.getString(columnIndexName), 999999999/*tmpInt*/);
-            //tmpQuizList.add(tmp);
+            UserQuiz tmp = new UserQuiz(cursor.getString(columnIndexName), 999999999/*tmpInt*/);
+            tmpQuizList.add(tmp);
             cursor.moveToNext();
         }
 
