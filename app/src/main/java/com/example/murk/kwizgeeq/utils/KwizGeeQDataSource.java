@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.murk.kwizgeeq.model.KwizGeeQ;
+
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import java.util.ArrayList;
@@ -43,7 +45,10 @@ public class KwizGeeQDataSource {
         try {
             for (int i = 0; i < userQuizArrayList.size(); i++) {
                 ContentValues values = new ContentValues();
-                values.put(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, userQuizArrayList.get(i).getName());
+
+                values.put(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, quizArrayList.get(i).getName());
+                values.put(KwizGeeQSQLiteHelper.COLUMN_COLOR, quizArrayList.get(i).getListColor());
+
                 mDatabase.insert(KwizGeeQSQLiteHelper.TABLE_QUIZES, null, values);
             }
             mDatabase.setTransactionSuccessful();
@@ -53,12 +58,13 @@ public class KwizGeeQDataSource {
         }
     } // - end insertQuizes
 
+
     // + select
         public Cursor selectAllQuizes(){
-            Cursor cursor = mDatabase.query(
+            Cursor cursor =  mDatabase.query(
                 KwizGeeQSQLiteHelper.TABLE_QUIZES,
-                new String[] { KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME},  //Column names
-                null, //where clause
+                new String[] {KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME/*, KwizGeeQSQLiteHelper.COLUMN_COLOR*/},  //Column names
+                    null, //where clause
                     null, //where params
                     null, //Grop by
                     null, //having
@@ -70,20 +76,27 @@ public class KwizGeeQDataSource {
 
     // + update
 
-    //TODO: Implement method when changing quizname
-    public int updateQuizes(String newName){
-        ContentValues values = new ContentValues();
 
-        values.put(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, newName);
-        int rowsUpdated = mDatabase.update(
-                KwizGeeQSQLiteHelper.TABLE_QUIZES, //Table
-                values, //values
-                null,   //where clause
-                null
+    public void updateList(){
 
-        );
+        Cursor cursor = selectAllQuizes();
 
-        return 1;
+        ArrayList<Quiz> tmpQuizList = new ArrayList<Quiz>();
+
+
+        int columnIndexName = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME);
+        //int columnIndexColor = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_COLOR);
+
+        cursor.moveToFirst();
+
+        while (cursor.moveToNext()){
+            //int tmpInt = Integer.parseInt(cursor.getString(columnIndexColor));
+            //UserQuiz tmp = new UserQuiz(cursor.getString(columnIndexName), 999999999/*tmpInt*/);
+            //tmpQuizList.add(tmp);
+            cursor.moveToNext();
+        }
+
+        KwizGeeQ.getInstance().setQuizList(tmpQuizList);
     }
 
     // + delete

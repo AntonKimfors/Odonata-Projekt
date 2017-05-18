@@ -37,7 +37,9 @@ public class QuizListController implements Controller, Observer{
         //this.currentActivity = currentActivity;
         model = KwizGeeQ.getInstance();
 
+
         UserQuiz testQuiz = new UserQuiz("Test UserQuiz 1", Color.BLUE);
+
         UserQuestion testQuestion1 = new UserQuestion();
         UserQuestion testQuestion2 = new UserQuestion();
         UserQuestion testQuestion3 = new UserQuestion();
@@ -59,7 +61,9 @@ public class QuizListController implements Controller, Observer{
         testQuiz.addQuestion(testQuestion1);
         testQuiz.addQuestion(testQuestion2);
         testQuiz.addQuestion(testQuestion3);
-        model.getUserQuizList().add(testQuiz);
+
+        //model.getQuizList().add(testQuiz);
+        //model.getQuizStatisticsList().add(new Statistics());
 
 
 

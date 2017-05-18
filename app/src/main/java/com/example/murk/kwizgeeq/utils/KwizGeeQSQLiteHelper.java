@@ -23,12 +23,16 @@ public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
     //QUIZ Table Functionallity
     public static final String TABLE_QUIZES = "QUIZES";
     private static final String COLUMN_ID = "_ID";
+    public static final String COLUMN_COLOR = "COLOR";
     public static final String COLUMN_QUIZ_NAME = "QUIZ_NAME";
 
     private static String DB_CREATE =
                     "CREATE TABLE " + TABLE_QUIZES + " (" + COLUMN_ID +
-                    " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_QUIZ_NAME + " TEXT)";
+                    " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_QUIZ_NAME + " TEXT, " +
+                    COLUMN_COLOR + " INTEGER)";
 
+    //Quiz Annotations Table
+    //public static final String
 
 
     public KwizGeeQSQLiteHelper(Context context){
@@ -39,7 +43,7 @@ public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DB_CREATE);
-        //sqLiteDatabase.execSQL(CREATE_ANNOTATIONS);
+        //db.execSQL(CREATE_ANNOTATIONS);
 
     }
 
