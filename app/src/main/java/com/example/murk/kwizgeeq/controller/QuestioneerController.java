@@ -47,7 +47,7 @@ public class QuestioneerController implements Controller, Observer{
     public void onCreate() {
         updateQuestionIndex();
         updateQuizSize();
-        view.updateQuizRelatedItems(model.getQuizName(quizIndex), quizSize);
+        view.updateQuizRelatedItems(model.getQuizName(quizIndex), quizSize, model.getQuiz(quizIndex).getListColor());
         view.updateQuestioneer(quizIndex, questionIndex, currentQuestion, quizSize);
         model.getCurrentQuizStatistics().startTimer();
     }

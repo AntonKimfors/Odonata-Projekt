@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -110,9 +111,10 @@ public class QuestioneerView extends Observable{
         }
     }
 
-    public void updateQuizRelatedItems(String quizName, int quizSize){
+    public void updateQuizRelatedItems(String quizName, int quizSize, int quizColor){
         quizLabel.setText(quizName);
         progressBar.setMax(quizSize);
+        progressBar.getProgressDrawable().setColorFilter(quizColor, PorterDuff.Mode.SRC_IN);
     }
 
     public void updateQuestioneer(int quizIndex, int questionIndex, int currentQuestion, int quizSize){
