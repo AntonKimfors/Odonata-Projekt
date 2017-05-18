@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.AnswerType;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Question;
+import com.example.murk.kwizgeeq.model.UserQuestion;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -38,6 +40,7 @@ public class QuestioneerView extends Observable{
     private TextView quizLabel;
     private TextView questLabel;
     private TextView progressNumbers;
+    private ImageView questImage;
     private ProgressBar progressBar;
     private Button answerButton1;
     private Button answerButton2;
@@ -47,11 +50,12 @@ public class QuestioneerView extends Observable{
     private KwizGeeQ model;
     private Activity activity;
 
-    public QuestioneerView(Activity activity, Window window, TextView quizLabel, TextView questLabel, TextView progressNumbers, ProgressBar progressBar, Button answerButton1, Button answerButton2, Button answerButton3, Button answerButton4) {
+    public QuestioneerView(Activity activity, Window window, TextView quizLabel, TextView questLabel, TextView progressNumbers, ImageView questImage, ProgressBar progressBar, Button answerButton1, Button answerButton2, Button answerButton3, Button answerButton4) {
         this.window = window;
         this.quizLabel = quizLabel;
         this.questLabel = questLabel;
         this.progressNumbers = progressNumbers;
+        this.questImage = questImage;
         this.progressBar = progressBar;
         this.answerButton1 = answerButton1;
         this.answerButton2 = answerButton2;
@@ -112,12 +116,20 @@ public class QuestioneerView extends Observable{
     }
 
     public void updateQuestioneer(int quizIndex, int questionIndex, int currentQuestion, int quizSize){
-        Question question = model.getQuiz(quizIndex).getQuestion(questionIndex);
+        UserQuestion question = (UserQuestion)(model.getQuiz(quizIndex).getQuestion(questionIndex));
         Iterator answerIterator = question.answerIterator(true);
 
-        questLabel.setText(question.toString());
         progressNumbers.setText(currentQuestion + " / " + quizSize);
         progressBar.setProgress(currentQuestion);
+        questLabel.setText(question.toString());
+        if (question.getImagePath() != null){
+            try {
+                InputStream is = activity.getContentResolver().openInputStream(Uri.parse(question.getImagePath()));
+                questImage.setImageDrawable(Drawable.createFromStream(is, question.getImagePath()));
+            } catch (FileNotFoundException e) {
+                questImage.setImageAlpha(0);
+            }
+        }
         updateAnswerButtons(answerIterator);
     }
 
