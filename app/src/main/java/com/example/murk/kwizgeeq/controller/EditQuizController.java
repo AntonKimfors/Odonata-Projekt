@@ -1,6 +1,7 @@
 package com.example.murk.kwizgeeq.controller;
 
 import android.graphics.Color;
+import android.view.View;
 
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
@@ -33,7 +34,9 @@ public class EditQuizController implements Controller, Observer {
     public void onCreate() {
 
     }
-
+    public void onClickAction(View view){
+        this.view.fabPressed();
+    }
 
     //TODO: Anpassa vad som spara
     @Override

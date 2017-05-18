@@ -32,7 +32,9 @@ public class EditQuizView extends Observable {
 
 
     private final Class<? extends Activity> createQuestionActivity;
-    public ListView listView;
+    private final Activity currentActivity;
+    private Context context;
+    private ListView listView;
     private EditText editText;
     final private Button btnColorPicker;
     private KwizGeeQ model;
@@ -41,9 +43,11 @@ public class EditQuizView extends Observable {
     private int mSelectedColor;
 
     public EditQuizView(final Class<? extends Activity> createQuestionActivity, final int index,
-                        final ListView listView, final Context context, final Activity oldActivity,
+                        final ListView listView, final Context context, final Activity currentActivity,
                         EditText editText, FloatingActionButton fab,final Button btnColorPicker) {
         this.createQuestionActivity = createQuestionActivity;
+        this.currentActivity = currentActivity;
+        this.context = context;
         this.listView = listView;
         this.model = KwizGeeQ.getInstance();
         this.editText = editText;
@@ -75,14 +79,14 @@ public class EditQuizView extends Observable {
                         mSelectedColor = color;
                         btnColorPicker.setBackgroundColor(mSelectedColor);
                         model.getQuiz(index).setListColor(mSelectedColor);
-                        oldActivity.finish();
-                        oldActivity.startActivity((oldActivity).getIntent());
+                        currentActivity.finish();
+                        currentActivity.startActivity((currentActivity).getIntent());
 
                     }
 
                 });
 
-                dialog.show(oldActivity.getFragmentManager(), "color_dialog_test");
+                dialog.show(currentActivity.getFragmentManager(), "color_dialog_test");
             }
         });
 
@@ -103,7 +107,7 @@ public class EditQuizView extends Observable {
                 intent.putExtra("questionIndex",position);
                 intent.putExtra("quizIndex",index);
 
-                oldActivity.startActivity(intent);
+                currentActivity.startActivity(intent);
             }
         });
 
@@ -114,13 +118,20 @@ public class EditQuizView extends Observable {
                 Intent intent = new Intent(context, createQuestionActivity);
                 //model.getQuiz(index).
                 intent.putExtra("quizIndex",model.getQuizList().size()-1);
-                oldActivity.startActivity(intent);
+                currentActivity.startActivity(intent);
 
             }
 
         });
 
-    }
 
+
+    }
+    public void fabPressed(){
+        Intent intent = new Intent(context, createQuestionActivity);
+        //model.getQuiz(index).
+        intent.putExtra("quizIndex",model.getQuizList().size()-1);
+        currentActivity.startActivity(intent);
+    }
 
 }
