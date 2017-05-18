@@ -6,7 +6,7 @@ import java.util.*;
  * Created by Henrik on 04/04/2017.
  */
 
-public abstract class Quiz implements Iterable{
+public class Quiz implements Iterable{
     protected ArrayList<Question> questions;
     private int listColor;
     private String name;
