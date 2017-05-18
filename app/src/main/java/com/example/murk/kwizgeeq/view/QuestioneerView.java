@@ -74,8 +74,8 @@ public class QuestioneerView extends Observable{
     }
 
     private void flashAnswer(View view, int color) {
-        ColorDrawable f1 = new ColorDrawable(color);
-        ColorDrawable f2 = new ColorDrawable(activity.getResources().getColor(R.color.colorQuestioneerButton, null));
+        Drawable f1 = new ColorDrawable(color);
+        Drawable f2 = view.getBackground();
         AnimationDrawable a = new AnimationDrawable();
         a.addFrame(f2, 250);
         a.addFrame(f1, 250);
