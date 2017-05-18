@@ -195,15 +195,15 @@ public class EditQuestionController implements Controller, Observer{
             }
 
             if(wrong1ImagePath!=null){
-                userQuestion.addAnswer(wrong1ImagePath,true,AnswerType.IMAGE);
+                userQuestion.addAnswer(wrong1ImagePath,false,AnswerType.IMAGE);
             }
 
             if(wrong2ImagePath!=null){
-                userQuestion.addAnswer(wrong2ImagePath,true,AnswerType.IMAGE);
+                userQuestion.addAnswer(wrong2ImagePath,false,AnswerType.IMAGE);
             }
 
             if(wrong3ImagePath!=null){
-                userQuestion.addAnswer(wrong3ImagePath,true,AnswerType.IMAGE);
+                userQuestion.addAnswer(wrong3ImagePath,false,AnswerType.IMAGE);
             }
         }
     }

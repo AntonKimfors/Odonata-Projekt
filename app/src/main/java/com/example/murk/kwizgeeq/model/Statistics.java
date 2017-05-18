@@ -2,13 +2,15 @@ package com.example.murk.kwizgeeq.model;
 
 import org.apache.commons.lang.time.StopWatch;
 
+import java.io.Serializable;
+
 /**
  * Created by Are on 12/05/2017.
  */
 
 //TODO possibly add separate SpotifyStatistics which extends this when SpotifyQuiz is implemented.
 
-public class Statistics {
+public class Statistics implements Serializable{
 
     private int quizCount;
     private int questionCount;

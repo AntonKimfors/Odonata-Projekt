@@ -1,7 +1,9 @@
 package com.example.murk.kwizgeeq.model;
 
 
-public class SpotifyQuiz {
+import java.io.Serializable;
+
+public class SpotifyQuiz implements Serializable{
 
 	public SpotifyQuiz(String name, int listColor) {
 		// TODO Auto-generated constructor stub

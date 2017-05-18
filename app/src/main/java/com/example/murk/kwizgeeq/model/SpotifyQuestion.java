@@ -6,13 +6,14 @@ import com.wrapper.spotify.methods.UserPlaylistsRequest;
 import com.wrapper.spotify.models.*;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Created by Henrik on 23/04/2017.
  */
 
-public class SpotifyQuestion extends Question {
+public class SpotifyQuestion extends Question implements Serializable {
     private final Api api;
     User user;
 

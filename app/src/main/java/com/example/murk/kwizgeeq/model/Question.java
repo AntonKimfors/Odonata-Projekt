@@ -3,13 +3,14 @@ package com.example.murk.kwizgeeq.model;
 import com.example.murk.kwizgeeq.events.BusWrapper;
 import com.google.common.eventbus.EventBus;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Created by Henrik on 04/04/2017.
  */
 
-public abstract class Question {
+public abstract class Question implements Serializable {
 
     private final List<Answer> answers;
 

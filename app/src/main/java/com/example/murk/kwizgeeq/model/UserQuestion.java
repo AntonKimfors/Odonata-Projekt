@@ -1,10 +1,12 @@
 package com.example.murk.kwizgeeq.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Henrik on 04/04/2017.
  */
 
-public class UserQuestion extends Question {
+public class UserQuestion extends Question implements Serializable {
     private String questionText;
     private String imagePath;
     private double xPosition;

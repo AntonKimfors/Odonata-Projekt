@@ -1,10 +1,12 @@
 package com.example.murk.kwizgeeq.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Henrik on 04/04/2017.
  */
 
-public class Answer  {
+public class Answer implements Serializable {
     private final boolean isCorrect;
     private final String data;
     private final AnswerType answerType;

@@ -1,12 +1,13 @@
 package com.example.murk.kwizgeeq.model;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Created by akimfors on 2017-04-05.
  */
 
-public class KwizGeeQ {
+public class KwizGeeQ implements Serializable{
 
     private ArrayList<UserQuiz> userQuizList;
     private ArrayList<Statistics> quizStatisticsList;

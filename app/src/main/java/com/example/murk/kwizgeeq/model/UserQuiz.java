@@ -1,12 +1,13 @@
 package com.example.murk.kwizgeeq.model;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Created by Henrik on 04/04/2017.
  */
 
-public class UserQuiz implements Iterable{
+public class UserQuiz implements Iterable, Serializable{
     protected ArrayList<Question> questions;
     private int listColor;
     private String name;
