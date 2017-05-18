@@ -8,7 +8,7 @@ import java.util.*;
 
 public class KwizGeeQ {
 
-    private ArrayList<Quiz> quizList;
+    private ArrayList<UserQuiz> userQuizList;
     private ArrayList<Statistics> quizStatisticsList;
     private Statistics globalStatistics;
     private Statistics currentQuizStatistics;
@@ -24,7 +24,7 @@ public class KwizGeeQ {
     }
 
     private KwizGeeQ(){
-        quizList = new ArrayList<Quiz>();
+        userQuizList = new ArrayList<UserQuiz>();
         quizStatisticsList = new ArrayList<Statistics>();
         globalStatistics = new Statistics();
     }
@@ -41,12 +41,12 @@ public class KwizGeeQ {
         return currentQuizStatistics;
     }
 
-    public ArrayList<Quiz> getQuizList(){
-        return quizList;
+    public ArrayList<UserQuiz> getUserQuizList(){
+        return userQuizList;
     }
 
-    public void setQuizList(ArrayList<Quiz> quizList){
-        this.quizList = quizList;
+    public void setUserQuizList(ArrayList<UserQuiz> userQuizList){
+        this.userQuizList = userQuizList;
     }
 
     public ArrayList<Statistics> getQuizStatisticsList() {
@@ -66,27 +66,27 @@ public class KwizGeeQ {
         }
     }
 
-    public Quiz getQuiz(int quizIndex){
-        if(quizIndex<quizList.size()){
-            return quizList.get(quizIndex);
+    public UserQuiz getQuiz(int quizIndex){
+        if(quizIndex< userQuizList.size()){
+            return userQuizList.get(quizIndex);
         }
 
-        throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" does not exist.");
+        throw new IndexOutOfBoundsException("UserQuiz on index "+ quizIndex +" does not exist.");
     }
 
     public ArrayList<Question> getQuestionList(int quizIndex){
-        if(quizIndex < quizList.size()-1)
-            return quizList.get(quizIndex).getQuestions();
+        if(quizIndex < userQuizList.size()-1)
+            return userQuizList.get(quizIndex).getQuestions();
         else
-            throw new IndexOutOfBoundsException("Quiz on index "+ quizIndex +" does not exist.");
+            throw new IndexOutOfBoundsException("UserQuiz on index "+ quizIndex +" does not exist.");
     }
 
-    public void removeQuiz(Quiz quiz){
-        quizList.remove(quiz);
+    public void removeQuiz(UserQuiz userQuiz){
+        userQuizList.remove(userQuiz);
     }
 
     public String getQuizName(int quizIndex){
-        return quizList.get(quizIndex).getName();
+        return userQuizList.get(quizIndex).getName();
     }
 
     public Statistics getGlobalStatistics() {

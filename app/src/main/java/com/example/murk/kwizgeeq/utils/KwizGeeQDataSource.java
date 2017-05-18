@@ -5,9 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.view.ContextMenu;
 
-import com.example.murk.kwizgeeq.model.Quiz;
+import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import java.util.ArrayList;
 
@@ -38,13 +37,13 @@ public class KwizGeeQDataSource {
     }
 
     // + insert
-    public void insertQuizes(ArrayList<Quiz> quizArrayList) {
+    public void insertQuizes(ArrayList<UserQuiz> userQuizArrayList) {
         mDatabase.beginTransaction();
 
         try {
-            for (int i = 0; i < quizArrayList.size(); i++) {
+            for (int i = 0; i < userQuizArrayList.size(); i++) {
                 ContentValues values = new ContentValues();
-                values.put(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, quizArrayList.get(i).getName());
+                values.put(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, userQuizArrayList.get(i).getName());
                 mDatabase.insert(KwizGeeQSQLiteHelper.TABLE_QUIZES, null, values);
             }
             mDatabase.setTransactionSuccessful();

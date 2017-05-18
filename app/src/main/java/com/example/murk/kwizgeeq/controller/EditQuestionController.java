@@ -76,12 +76,12 @@ public class EditQuestionController implements Controller, Observer{
 
     private void getUserQuestion(){
         KwizGeeQ model = KwizGeeQ.getInstance();
-        Quiz quiz = model.getQuiz(quizIndex);
-        if(quiz.getSize()>=questionIndex){
+        UserQuiz userQuiz = model.getQuiz(quizIndex);
+        if(userQuiz.getSize()>=questionIndex){
             userQuestion = new UserQuestion();
-            quiz.addQuestion(userQuestion);
+            userQuiz.addQuestion(userQuestion);
         } else{
-            Question question = quiz.getQuestion(questionIndex);
+            Question question = userQuiz.getQuestion(questionIndex);
             if(question instanceof UserQuestion){
                 userQuestion = (UserQuestion) question;
             }
@@ -133,16 +133,16 @@ public class EditQuestionController implements Controller, Observer{
 
     private void removeQuizIfEmpty(){
         KwizGeeQ model = KwizGeeQ.getInstance();
-        Quiz quiz= model.getQuiz(quizIndex);
-        if(quiz.getSize()==0){
-            model.removeQuiz(quiz);
+        UserQuiz userQuiz = model.getQuiz(quizIndex);
+        if(userQuiz.getSize()==0){
+            model.removeQuiz(userQuiz);
         }
     }
 
     private void removeQuestion(){
         KwizGeeQ model = KwizGeeQ.getInstance();
-        Quiz quiz = model.getQuiz(quizIndex);
-        List<Question> questions = quiz.getQuestions();
+        UserQuiz userQuiz = model.getQuiz(quizIndex);
+        List<Question> questions = userQuiz.getQuestions();
         questions.remove(userQuestion);
     }
 

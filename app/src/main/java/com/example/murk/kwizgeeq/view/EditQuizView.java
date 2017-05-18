@@ -117,7 +117,7 @@ public class EditQuizView extends Observable {
             public void onClick(View view) {
                 Intent intent = new Intent(context, createQuestionActivity);
                 //model.getQuiz(index).
-                intent.putExtra("quizIndex",model.getQuizList().size()-1);
+                intent.putExtra("quizIndex",model.getUserQuizList().size()-1);
                 currentActivity.startActivity(intent);
 
             }
@@ -130,7 +130,7 @@ public class EditQuizView extends Observable {
     public void fabPressed(){
         Intent intent = new Intent(context, createQuestionActivity);
         //model.getQuiz(index).
-        intent.putExtra("quizIndex",model.getQuizList().size()-1);
+        intent.putExtra("quizIndex",model.getUserQuizList().size()-1);
         currentActivity.startActivity(intent);
     }
 

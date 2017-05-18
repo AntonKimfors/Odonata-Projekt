@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.Question;
-import com.example.murk.kwizgeeq.model.Quiz;
+import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 
 import java.util.ArrayList;
@@ -23,14 +23,14 @@ import java.util.ArrayList;
 
 public class EditQuizAdapter extends BaseAdapter {
 
-    private Quiz quiz;
+    private UserQuiz userQuiz;
     private Context mContext;
     private ArrayList<Question> mQuestions;
 
-    public EditQuizAdapter(Context context, ArrayList<Question> questions, Quiz inQuiz){
+    public EditQuizAdapter(Context context, ArrayList<Question> questions, UserQuiz inUserQuiz){
         mContext = context;
         mQuestions = questions;
-        quiz = inQuiz;
+        userQuiz = inUserQuiz;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class EditQuizAdapter extends BaseAdapter {
         UserQuestion question = (UserQuestion) mQuestions.get(position);
         holder.questionLabel.setText(question.getQuestionText());
 
-        holder.relativeLayout.setBackgroundColor(quiz.getListColor());
+        holder.relativeLayout.setBackgroundColor(userQuiz.getListColor());
 
 
         return convertView;

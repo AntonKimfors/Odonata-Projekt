@@ -52,7 +52,7 @@ public class QuizListView extends Observable {
         this.mKwizGeeQDataSource = mKwizGeeQDataSource;
 
 
-        this.adapter = new QuizListAdapter(context, model.getQuizList());
+        this.adapter = new QuizListAdapter(context, model.getUserQuizList());
         listView.setAdapter(adapter);
 
         //Play quiz
@@ -76,7 +76,7 @@ public class QuizListView extends Observable {
 
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(currentActivity)
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Edit Quiz?")
+                        .setTitle("Edit UserQuiz?")
                         .setMessage("Do you want to Edit or Delete the quiz?");
 
                 final AlertDialog ad = alertDialog.create();
@@ -92,7 +92,7 @@ public class QuizListView extends Observable {
                             .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                model.getQuizList().remove(position);
+                                model.getUserQuizList().remove(position);
 
                                 currentActivity.finish();
                                 currentActivity.startActivity((currentActivity).getIntent());
@@ -171,12 +171,12 @@ public class QuizListView extends Observable {
 
                         Intent intent = new Intent(context, editQuizActivityClass);
                         String quizTitle = quizName.getText().toString();
-                        int quizindex = model.getQuizList().size();
-                        model.getQuizList().add(new UserQuiz(quizTitle, mSelectedColor));
+                        int quizindex = model.getUserQuizList().size();
+                        model.getUserQuizList().add(new UserQuiz(quizTitle, mSelectedColor));
                         model.getQuizStatisticsList().add(new Statistics());
 
                         //TODO: Är detta mvc? FUnkar det??
-                        //mKwizGeeQDataSource.insertQuizes(model.getQuizList());
+                        //mKwizGeeQDataSource.insertQuizes(model.getUserQuizList());
 
                         intent.putExtra("quizIndex",quizindex);
                         currentActivity.startActivity(intent);

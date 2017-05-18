@@ -15,12 +15,12 @@ public class TestQuestionCreation {
     public void creationOfQuestion(){
         KwizGeeQ model = KwizGeeQ.getInstance();
 
-        List<Quiz> quizList = model.getQuizList();
-        Quiz quiz = new UserQuiz("testQuiz",0);
-        quizList.add(quiz);
+        List<UserQuiz> userQuizList = model.getUserQuizList();
+        UserQuiz userQuiz = new UserQuiz("testQuiz",0);
+        userQuizList.add(userQuiz);
 
         UserQuestion question = new UserQuestion();
-        quiz.addQuestion(question);
+        userQuiz.addQuestion(question);
         question.setQuestionText("Question 1");
         question.setImagePath("ImagePath 1");
         question.addAnswer("correct",true,AnswerType.TEXT);
@@ -29,7 +29,7 @@ public class TestQuestionCreation {
         question.addAnswer("wrong3",false,AnswerType.TEXT);
 
         UserQuestion question2 = new UserQuestion();
-        quiz.addQuestion(question2);
+        userQuiz.addQuestion(question2);
         question2.setQuestionText("Question 1");
         question2.setImagePath("ImagePath 1");
         question2.addAnswer("correct",true,AnswerType.TEXT);
@@ -43,9 +43,9 @@ public class TestQuestionCreation {
         question.addAnswer("wrong2",false,AnswerType.TEXT);
         question.addAnswer("wrong3",false,AnswerType.TEXT);
 
-        quiz.removeQuestion(question2);
+        userQuiz.removeQuestion(question2);
 
-        System.out.println(quiz);
+        System.out.println(userQuiz);
         assertTrue(model.getQuiz(0).getSize()==1);
     }
 }

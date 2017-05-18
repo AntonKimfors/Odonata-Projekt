@@ -129,7 +129,7 @@ public class QuestioneerView extends Observable{
     public void showCloseQuizDialog(){
         new AlertDialog.Builder(activity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Closing Quiz")
+                .setTitle("Closing UserQuiz")
                 .setMessage("Are you sure you want to quit?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override

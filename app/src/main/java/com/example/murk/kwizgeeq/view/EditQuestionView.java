@@ -95,9 +95,9 @@ public class EditQuestionView extends Observable {
 
         originalEditText = correctText.getBackground();
 
-        Quiz quiz = KwizGeeQ.getInstance().getQuiz(quizIndex);
+        UserQuiz userQuiz = KwizGeeQ.getInstance().getQuiz(quizIndex);
 
-        if(questionIndex<(quiz.getSize()-1)){
+        if(questionIndex<(userQuiz.getSize()-1)){
             setEditButtonTexts();
         }
 

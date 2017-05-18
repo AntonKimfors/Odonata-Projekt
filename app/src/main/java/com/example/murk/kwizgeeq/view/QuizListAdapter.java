@@ -1,7 +1,6 @@
 package com.example.murk.kwizgeeq.view;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +9,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.murk.kwizgeeq.R;
-import com.example.murk.kwizgeeq.model.Quiz;
+import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import java.util.ArrayList;
-
-import static com.example.murk.kwizgeeq.R.color.*;
 
 /**
  * Created by akimfors on 2017-04-26.
@@ -24,21 +21,21 @@ public class QuizListAdapter extends BaseAdapter {
 
 
     private Context mContext;
-    private ArrayList<Quiz> mQuiz;
+    private ArrayList<UserQuiz> mUserQuiz;
 
-    public QuizListAdapter(Context context, ArrayList<Quiz> quizs){
+    public QuizListAdapter(Context context, ArrayList<UserQuiz> userQuizs){
         mContext = context;
-        mQuiz = quizs;
+        mUserQuiz = userQuizs;
     }
 
     @Override
     public int getCount() {
-        return mQuiz.size();
+        return mUserQuiz.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mQuiz.get(position);
+        return mUserQuiz.get(position);
     }
 
     @Override
@@ -66,10 +63,10 @@ public class QuizListAdapter extends BaseAdapter {
 
         }
 
-        Quiz quiz = mQuiz.get(position);
-        holder.quizNameLabel.setText(quiz.getName());
-        holder.quizQuestionAmountLabel.setText(quiz.getQuestions().size() + " Questions");
-        holder.relativeLayout.setBackgroundColor(quiz.getListColor());
+        UserQuiz userQuiz = mUserQuiz.get(position);
+        holder.quizNameLabel.setText(userQuiz.getName());
+        holder.quizQuestionAmountLabel.setText(userQuiz.getQuestions().size() + " Questions");
+        holder.relativeLayout.setBackgroundColor(userQuiz.getListColor());
         
         return convertView;
     }

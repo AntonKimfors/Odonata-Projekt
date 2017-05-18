@@ -13,17 +13,17 @@ import java.util.*;
 public class TestQuestionsOnIndexIterator {
     @Test
     public void testIterator(){
-        Quiz quiz = new UserQuiz("test",0);
+        UserQuiz userQuiz = new UserQuiz("test",0);
 
         for(int i=0;i<10;i++){
-            quiz.addQuestion(createUserQuestion(i));
+            userQuiz.addQuestion(createUserQuestion(i));
         }
 
         List<Integer> index = new ArrayList<>();
         index.add(2);
         index.add(3);
         index.add(8);
-        Iterator<Question> wrong = quiz.questionsOnIndexIterator(index);
+        Iterator<Question> wrong = userQuiz.questionsOnIndexIterator(index);
         int numberOfWrong = 0;
 
         while(wrong.hasNext()){

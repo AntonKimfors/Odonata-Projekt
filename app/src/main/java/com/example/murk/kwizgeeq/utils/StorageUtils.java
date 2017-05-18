@@ -6,7 +6,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
-import com.example.murk.kwizgeeq.model.Quiz;
+import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
@@ -21,8 +21,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import static android.R.attr.bitmap;
-
 /**
  * Created by akimfors on 2017-05-16.
  */
@@ -34,7 +32,7 @@ public class StorageUtils {
     public static void saveQuizList(Context context) {
         //TODO: Try saving the data
 
-        ArrayList<Quiz> quizlist = KwizGeeQ.getInstance().getQuizList();
+        ArrayList<UserQuiz> quizlist = KwizGeeQ.getInstance().getUserQuizList();
 
         Gson gson = new Gson();
         String jsonquizlist = gson.toJson(quizlist);
@@ -62,12 +60,12 @@ public class StorageUtils {
             BufferedReader reader = new BufferedReader(fileReader);
             String jsonquizlist = reader.readLine();
             Gson gson = new Gson();
-            Type collectionType = new TypeToken<ArrayList<Quiz>>(){}.getType();
+            Type collectionType = new TypeToken<ArrayList<UserQuiz>>(){}.getType();
 
             ArrayList quizlist = gson.fromJson(jsonquizlist, collectionType);
 
             //TODO: Setter for KwizGeeq QuizList
-            //KwizGeeQ.getInstance().getQuizList() = quizlist;
+            //KwizGeeQ.getInstance().getUserQuizList() = quizlist;
 
         }catch (Exception e){
             Log.e("Peresistence", "Could not read quizlist. Error " + e.getMessage());
