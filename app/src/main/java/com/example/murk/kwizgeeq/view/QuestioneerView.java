@@ -1,10 +1,13 @@
 package com.example.murk.kwizgeeq.view;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -16,9 +19,12 @@ import android.widget.TextView;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.Answer;
+import com.example.murk.kwizgeeq.model.AnswerType;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Question;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Observable;
 
@@ -112,14 +118,49 @@ public class QuestioneerView extends Observable{
         questLabel.setText(question.toString());
         progressNumbers.setText(currentQuestion + " / " + quizSize);
         progressBar.setProgress(currentQuestion);
-        answerButton1.setTag(answerIterator.next());
-        answerButton2.setTag(answerIterator.next());
-        answerButton3.setTag(answerIterator.next());
-        answerButton4.setTag(answerIterator.next());
-        answerButton1.setText((String)((Answer)answerButton1.getTag()).getData());
-        answerButton2.setText((String)((Answer)answerButton2.getTag()).getData());
-        answerButton3.setText((String)((Answer)answerButton3.getTag()).getData());
-        answerButton4.setText((String)((Answer)answerButton4.getTag()).getData());
+        updateAnswerButtons(answerIterator);
+    }
+
+    private void updateAnswerButtons(Iterator answerIterator){
+        for(int i = 1; i <= 4; i++){
+            Answer answer = (Answer)answerIterator.next();
+            switch (i) {
+                case 1: answerButton1.setTag(answer);
+                case 2: answerButton2.setTag(answer);
+                case 3: answerButton3.setTag(answer);
+                case 4: answerButton4.setTag(answer);
+            }
+
+            if(answer.getAnswerType() == AnswerType.TEXT) {
+                switch (i) {
+                    case 1:
+                        answerButton1.setText(answer.getData());
+                    case 2:
+                        answerButton2.setText(answer.getData());
+                    case 3:
+                        answerButton3.setText(answer.getData());
+                    case 4:
+                        answerButton4.setText(answer.getData());
+                }
+            } else if (answer.getAnswerType() == AnswerType.IMAGE) {
+                try {
+                    InputStream is = activity.getContentResolver().openInputStream(Uri.parse(answer.getData()));
+                    switch (i) {
+                        case 1: answerButton1.setBackground(Drawable.createFromStream(is, answer.getData()));
+                        case 2: answerButton2.setBackground(Drawable.createFromStream(is, answer.getData()));
+                        case 3: answerButton3.setBackground(Drawable.createFromStream(is, answer.getData()));
+                        case 4: answerButton4.setBackground(Drawable.createFromStream(is, answer.getData()));
+                    }
+                } catch (FileNotFoundException e) {
+                    switch (i) {
+                        case 1: answerButton1.setText("IMAGE NOT FOUND");
+                        case 2: answerButton2.setText("IMAGE NOT FOUND");
+                        case 3: answerButton3.setText("IMAGE NOT FOUND");
+                        case 4: answerButton4.setText("IMAGE NOT FOUND");
+                    }
+                }
+            }
+        }
     }
 
     public void closeQuestioneer(){
