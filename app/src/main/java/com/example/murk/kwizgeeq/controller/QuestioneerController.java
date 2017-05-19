@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
+import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.QuestioneerView;
 
@@ -48,8 +49,8 @@ public class QuestioneerController implements Controller, Observer{
     public void onCreate() {
         updateQuestionIndex();
         updateQuizSize();
-        view.updateQuizRelatedItems(model.getQuizName(quizIndex), quizSize, model.getQuiz(quizIndex).getListColor());
-        view.updateQuestioneer(quizIndex, questionIndex, currentQuestion, quizSize);
+        view.updateQuizRelatedItems(quiz.getName(), quizSize, quiz.getListColor());
+        view.updateQuestioneer((UserQuestion) quiz.getQuestion(questionIndex), currentQuestion, quizSize);
         model.getCurrentQuizStatistics().startTimer();
     }
 
@@ -81,7 +82,7 @@ public class QuestioneerController implements Controller, Observer{
 
     private void updateQuizSize(){
         if(!playingByIndex){
-            this.quizSize = model.getQuiz(quizIndex).getQuestions().size();
+            this.quizSize = quiz.getSize();
         } else {
             this.quizSize = inReplayIndexList.size();
         }
@@ -107,19 +108,19 @@ public class QuestioneerController implements Controller, Observer{
         if(currentQuestion == quizSize) {
             model.getCurrentQuizStatistics().stopTimer();
             model.getCurrentQuizStatistics().incQuizCount();
-            model.updateQuizStatistics(quizIndex);
+            //model.updateQuizStatistics(quizIndex);
             if(!playingByIndex){
                 model.endQuiz();
             }
             Intent intent = new Intent(currentActivity, switchActivityClass);
-            intent.putExtra("quizIndex", quizIndex);
+            intent.putExtra("quiz", quiz);
             intent.putExtra("allCorrect", outReplayIndexList.isEmpty());
             currentActivity.startActivityForResult(intent, REPLAY__REQUEST_CODE);
         }
         else {
             currentQuestion++;
             updateQuestionIndex();
-            view.updateQuestioneer(quizIndex, questionIndex, currentQuestion, quizSize);
+            view.updateQuestioneer((UserQuestion) quiz.getQuestion(questionIndex), currentQuestion, quizSize);
         }
     }
 
