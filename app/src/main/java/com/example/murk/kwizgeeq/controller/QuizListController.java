@@ -5,6 +5,8 @@ package com.example.murk.kwizgeeq.controller;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.example.murk.kwizgeeq.model.AnswerType;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
@@ -24,13 +26,13 @@ import java.util.Observer;
 
 public class QuizListController implements Controller, Observer{
 
-    private QuizListView view;
+    private QuizListView quizListView;
     private KwizGeeQ model;
     private Context context;
     //private Activity currentActivity;
 
     public QuizListController(QuizListView view, Context context, Activity currentActivity){
-        this.view = view;
+        this.quizListView = view;
         this.context = context;
         //this.currentActivity = currentActivity;
         model = KwizGeeQ.getInstance();
@@ -60,9 +62,31 @@ public class QuizListController implements Controller, Observer{
         model.getUserQuizList().add(testQuiz);
         model.getQuizStatisticsList().add(new Statistics());
 
+
+
+        AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int questionIndex, long id) {
+                quizListView.changeView(questionIndex);
+            }
+        };
+        view.setOnListItemClickedListener(onItemClickListener);
+
+        AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int questionIndex, long id) {
+                quizListView.openLongPressDialog(questionIndex);
+                return true;
+            }
+
+        };
+        view.setOnItemLongClickListener(itemLongClickListener);
+
     }
 
-
+    public void onClickAction(View view) {
+        this.quizListView.fabPressed();
+    }
 
     @Override
     public void onCreate() {
