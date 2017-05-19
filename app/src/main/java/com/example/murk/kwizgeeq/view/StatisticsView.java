@@ -27,7 +27,7 @@ public class StatisticsView {
     public StatisticsView(Activity activity) {
         this.model = KwizGeeQ.getInstance();
         this.quizLabel = (TextView) activity.findViewById(R.id.quizLabel);
-        this.answersLabel = (TextView) activity.findViewById(R.id.quizLabel);
+        this.answersLabel = (TextView) activity.findViewById(R.id.answersLabel);
         this.answersProgressBar = (ProgressBar) activity.findViewById(R.id.answersProgressBar);
         this.retryIncorrectButton = (Button) activity.findViewById(R.id.retryIncorrectButton);
         this.retryAllButton = (Button) activity.findViewById(R.id.retryAllButton);

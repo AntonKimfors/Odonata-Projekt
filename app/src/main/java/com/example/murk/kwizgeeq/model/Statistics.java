@@ -18,7 +18,7 @@ public class Statistics implements Serializable{
     private int answerIncorrectCount;
     private int secondsSpent;
 
-    private StopWatch stopWatch;
+    private transient StopWatch stopWatch;
 
     public Statistics(){
         this.quizCount = 0;
