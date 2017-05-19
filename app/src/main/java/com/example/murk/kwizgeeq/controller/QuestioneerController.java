@@ -65,12 +65,7 @@ public class QuestioneerController implements Controller, Observer{
     }
 
     public void onDestroy() {
-        /*if(currentActivity.isFinishing()) {
-            Intent intent = new Intent(currentActivity, switchActivityClass);
-            intent.putExtra("quizIndex", quizIndex);
-            intent.putExtra("outReplayIndexList", outReplayIndexList);
-            currentActivity.startActivity(intent);
-        }*/
+
     }
 
     private void updateQuestionIndex(){

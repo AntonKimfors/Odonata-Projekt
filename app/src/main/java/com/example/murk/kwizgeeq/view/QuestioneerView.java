@@ -46,18 +46,18 @@ public class QuestioneerView extends Observable{
 
     private Activity activity;
 
-    public QuestioneerView(Activity activity, Window window, TextView quizLabel, TextView questLabel, TextView progressNumbers, ImageView questImage, ProgressBar progressBar, Button answerButton1, Button answerButton2, Button answerButton3, Button answerButton4) {
-        this.window = window;
-        this.quizLabel = quizLabel;
-        this.questLabel = questLabel;
-        this.progressNumbers = progressNumbers;
-        this.questImage = questImage;
-        this.progressBar = progressBar;
-        this.answerButton1 = answerButton1;
-        this.answerButton2 = answerButton2;
-        this.answerButton3 = answerButton3;
-        this.answerButton4 = answerButton4;
+    public QuestioneerView(Activity activity) {
         this.activity = activity;
+        this.window = activity.getWindow();
+        this.quizLabel = (TextView) activity.findViewById(R.id.quizLabel);
+        this.questLabel = (TextView) activity.findViewById(R.id.questLabel);
+        this.progressNumbers = (TextView) activity.findViewById(R.id.progressNumbers);
+        this.questImage = (ImageView) activity.findViewById(R.id.imageView);
+        this.progressBar = (ProgressBar) activity.findViewById(R.id.progressBar);
+        this.answerButton1 = (Button) activity.findViewById(R.id.answerButton1);
+        this.answerButton2 = (Button) activity.findViewById(R.id.answerButton2);
+        this.answerButton3 = (Button) activity.findViewById(R.id.answerButton3);
+        this.answerButton4 = (Button) activity.findViewById(R.id.answerButton4);
     }
 
     public void flashCorrectAnswer(View view) {

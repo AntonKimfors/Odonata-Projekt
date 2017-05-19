@@ -2,7 +2,6 @@ package com.example.murk.kwizgeeq.controller;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.View;
 
 import com.example.murk.kwizgeeq.model.KwizGeeQ;

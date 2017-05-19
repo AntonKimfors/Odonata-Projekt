@@ -1,10 +1,11 @@
 package com.example.murk.kwizgeeq.view;
 
-import android.os.Build;
+import android.app.Activity;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
@@ -19,18 +20,18 @@ public class StatisticsView {
     private TextView quizLabel;
     private TextView answersLabel;
     private ProgressBar answersProgressBar;
-    private Button replayByIndexButton;
-    private Button replayAllButton;
+    private Button retryIncorrectButton;
+    private Button retryAllButton;
     private Button doneButton;
 
-    public StatisticsView(TextView quizLabel, TextView answersLabel, ProgressBar answersProgressBar, Button replayByIndexButton, Button replayAllButton, Button doneButton) {
+    public StatisticsView(Activity activity) {
         this.model = KwizGeeQ.getInstance();
-        this.quizLabel = quizLabel;
-        this.answersLabel = answersLabel;
-        this.answersProgressBar = answersProgressBar;
-        this.replayByIndexButton = replayByIndexButton;
-        this.replayAllButton = replayAllButton;
-        this.doneButton = doneButton;
+        this.quizLabel = (TextView) activity.findViewById(R.id.quizLabel);
+        this.answersLabel = (TextView) activity.findViewById(R.id.quizLabel);
+        this.answersProgressBar = (ProgressBar) activity.findViewById(R.id.answersProgressBar);
+        this.retryIncorrectButton = (Button) activity.findViewById(R.id.retryIncorrectButton);
+        this.retryAllButton = (Button) activity.findViewById(R.id.retryAllButton);
+        this.doneButton = (Button) activity.findViewById(R.id.doneButton);
     }
 
     public void updateStatistics(UserQuiz quiz){
@@ -41,7 +42,7 @@ public class StatisticsView {
     }
 
     public void disableReplayByIndexButton(){
-        replayByIndexButton.setEnabled(false);
+        retryIncorrectButton.setEnabled(false);
     }
 
 }
