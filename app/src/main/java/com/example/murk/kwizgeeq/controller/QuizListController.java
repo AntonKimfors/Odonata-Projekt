@@ -66,8 +66,8 @@ public class QuizListController implements Controller, Observer{
 
         AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int questionIndex, long id) {
-                quizListView.changeView(questionIndex);
+            public void onItemClick(AdapterView<?> parent, View view, int quizIndex, long id) {
+                quizListView.changeView(quizIndex);
             }
         };
         view.setOnListItemClickedListener(onItemClickListener);

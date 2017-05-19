@@ -138,14 +138,11 @@ public class QuizListView extends Observable {
     }
 
 
-    public void changeView(int questionIndex) {
-
+    public void changeView(int quizIndex) {
         Intent intent = new Intent(context, questioneerActivityClass);
-        intent.putExtra("quizIndex", questionIndex);
+        intent.putExtra("quiz", model.getQuiz(quizIndex));
         model.startQuiz();
         currentActivity.startActivity(intent);
-
-
     }
 
     public void openLongPressDialog(final int questionIndex) {

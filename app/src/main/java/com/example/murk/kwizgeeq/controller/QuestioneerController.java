@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
+import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.QuestioneerView;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class QuestioneerController implements Controller, Observer{
     private ArrayList<Integer> outReplayIndexList;
     private ArrayList<Integer> inReplayIndexList;
 
-    private int quizIndex;
+    private UserQuiz quiz;
     private int questionIndex;
     private int currentQuestion;
     private int quizSize;
@@ -38,7 +39,7 @@ public class QuestioneerController implements Controller, Observer{
         this.currentActivity = activity;
         this.outReplayIndexList = new ArrayList<>();
         this.inReplayIndexList = new ArrayList<>();
-        this.quizIndex = activity.getIntent().getIntExtra("quizIndex", 0);
+        this.quiz = (UserQuiz) activity.getIntent().getSerializableExtra("quiz");
         this.questionIndex = 0;
         this.currentQuestion = 1;
         this.playingByIndex = false;
