@@ -3,7 +3,10 @@ package com.example.murk.kwizgeeq.controller;
 import android.view.View;
 import android.widget.AdapterView;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
+import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.view.EditQuizView;
+
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,17 +19,22 @@ public class EditQuizController implements Controller, Observer {
     private EditQuizView editQuizview;
     private KwizGeeQ model;
     private int index;
+    private List<Question> questions;
 
 
     public EditQuizController(final EditQuizView editQuizview, int index) {
         this.editQuizview = editQuizview;
         this.model = KwizGeeQ.getInstance();
+        this.questions = model.getQuiz(index).getQuestions(); //TODO: this variable should be passed in by constructor
+        if(questions==null){
+            System.out.println("questions is null");
+        }
         this.index = index;
 
         AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int questionIndex, long id) {
-                editQuizview.changeView(questionIndex);
+                editQuizview.changeView(questions,questionIndex);
             }
         };
 
@@ -49,7 +57,7 @@ public class EditQuizController implements Controller, Observer {
     }
 
     public void onClickAction(View view) {
-        this.editQuizview.fabPressed();
+        this.editQuizview.fabPressed(questions);
     }
 
 

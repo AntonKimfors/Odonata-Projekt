@@ -39,8 +39,10 @@ public class EditQuestionActivity extends AppCompatActivity{
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        List<Question> questions = (List)bundle.getSerializable("questionList");
+        List<Question> questions = (List)bundle.getSerializable("questions");
         int questionIndex = intent.getIntExtra("questionIndex",0);
+        System.out.println(questions.toString());
+        System.out.println("Question index: " + questionIndex);
 
         editQuestionView = new EditQuestionView(this, EditQuestionActivity.class,
                 QuizListActivity.class, captureImageRequestCode);

@@ -16,7 +16,7 @@ import java.util.*;
  * Created by Henrik on 02/05/2017.
  */
 
-public class EditQuestionController implements Controller, Observer{
+public class EditQuestionController implements Observer{
 
     private final EditQuestionView editQuestionView;
     private UserQuestion userQuestion;
@@ -63,6 +63,7 @@ public class EditQuestionController implements Controller, Observer{
             }
         };
 
+
         editQuestionView.addOnFocusChangeListener(onFocusChangeListener);
         editQuestionView.setOnCheckedChangeListener(onCheckedChangeListener);
 
@@ -77,13 +78,16 @@ public class EditQuestionController implements Controller, Observer{
         if(questions.size()<=questionIndex){
             userQuestion = new UserQuestion();
             questions.add(userQuestion);
+
+            editQuestionView.setUserQuestion(userQuestion,false);
         } else{
             Question questionFromList = questions.get(questionIndex);
+
             if(questionFromList instanceof UserQuestion){
                 userQuestion = (UserQuestion) questionFromList;
+                editQuestionView.setUserQuestion(userQuestion,true);
             }
         }
-        throw new IllegalArgumentException();
     }
 
     //TODO: Anpassa vad som spara
@@ -256,12 +260,12 @@ public class EditQuestionController implements Controller, Observer{
     }
 
     private void saveTextAnswers(){
-            userQuestion.clearAnswers();
-            userQuestion.addAnswer(editQuestionView.getCorrectString(),true,AnswerType.TEXT);
+        userQuestion.clearAnswers();
+        userQuestion.addAnswer(editQuestionView.getCorrectString(),true,AnswerType.TEXT);
 
-            userQuestion.addAnswer(editQuestionView.getWrong1String(),false,AnswerType.TEXT);
-            userQuestion.addAnswer(editQuestionView.getWrong2String(),false,AnswerType.TEXT);
-            userQuestion.addAnswer(editQuestionView.getWrong3String(),false,AnswerType.TEXT);
+        userQuestion.addAnswer(editQuestionView.getWrong1String(),false,AnswerType.TEXT);
+        userQuestion.addAnswer(editQuestionView.getWrong2String(),false,AnswerType.TEXT);
+        userQuestion.addAnswer(editQuestionView.getWrong3String(),false,AnswerType.TEXT);
     }
 
     @Override

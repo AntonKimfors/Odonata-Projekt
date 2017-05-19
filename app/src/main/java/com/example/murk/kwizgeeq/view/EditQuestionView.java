@@ -19,7 +19,7 @@ import java.util.*;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.*;
-import com.example.murk.kwizgeeq.events.EventBus;
+import com.example.murk.kwizgeeq.events.EventBusWrapper;
 import com.google.common.eventbus.Subscribe;
 
 public class EditQuestionView extends Observable {
@@ -88,7 +88,7 @@ public class EditQuestionView extends Observable {
         doneButton = (Button)currentActivity.findViewById(R.id.doneButton);
         nextButton = (Button)currentActivity.findViewById(R.id.nextQuestionButton);
 
-        eventBus = EventBus.BUS;
+        eventBus = EventBusWrapper.BUS;
         eventBus.register(this);
 
         originalEditText = correctText.getBackground();
@@ -99,8 +99,8 @@ public class EditQuestionView extends Observable {
         this.userQuestion = userQuestion;
         if(questionIsEdited){
             setEditButtonTexts();
+            setTextFields();
         }
-        setTextFields();
     }
 
     public void addOnFocusChangeListener(View.OnFocusChangeListener listener){
@@ -272,10 +272,11 @@ public class EditQuestionView extends Observable {
         }
     }
 
-    public void addMoreQuestions(List<Question> questionList, int nextQuestionIndex){
+    public void addMoreQuestions(List<Question> questions, int nextQuestionIndex){
         Intent intent = new Intent(currentActivity, editQuestionActivityClass);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("questionList",(Serializable)questionList);
+        bundle.putSerializable("questions",(Serializable)questions);
+        intent.putExtras(bundle);
         intent.putExtra("questionIndex",nextQuestionIndex);
         currentActivity.startActivity(intent);
     }

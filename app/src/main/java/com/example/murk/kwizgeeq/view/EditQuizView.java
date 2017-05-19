@@ -3,6 +3,7 @@ package com.example.murk.kwizgeeq.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,8 +13,13 @@ import android.widget.ListView;
 import com.example.murk.kwizgeeq.activity.QuizListActivity;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.R;
+import com.example.murk.kwizgeeq.model.Question;
+
 import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
+
+import java.io.Serializable;
+import java.util.List;
 import java.util.Observable;
 
 
@@ -59,9 +65,12 @@ public class EditQuizView extends Observable {
         return editText.getText().toString();
     }
 
-    public void fabPressed() {
+    public void fabPressed(List<Question> questions) {
         Intent intent = new Intent(context, createQuestionActivity);
-        intent.putExtra("quizIndex", model.getUserQuizList().size() - 1);// TODO: change this to work with serializable
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("questions",(Serializable)questions);
+        intent.putExtras(bundle);
+        //the quiz index should be decided by controller and sent in to this method when called
         currentActivity.startActivity(intent);
     }
 
@@ -73,10 +82,12 @@ public class EditQuizView extends Observable {
         listView.setOnItemClickListener(listener);
     }
 
-    public void changeView(int questionIndex) {
+    public void changeView(List<Question> questions, int questionIndex) {
         Intent intent = new Intent(context, createQuestionActivity);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("questions",(Serializable)questions);
+        intent.putExtras(bundle);
         intent.putExtra("questionIndex", questionIndex);// TODO: change this to work with serializable
-        intent.putExtra("quizIndex", index);
 
         currentActivity.startActivity(intent);
     }

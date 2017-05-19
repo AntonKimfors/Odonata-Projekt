@@ -6,7 +6,7 @@ import com.google.common.eventbus.EventBus;
  * Created by Henrik on 14/05/2017.
  */
 
-public class EventBus {
+public class EventBusWrapper {
 
     // Google Guava Eventbus
     public static final com.google.common.eventbus.EventBus BUS = new com.google.common.eventbus.EventBus();
