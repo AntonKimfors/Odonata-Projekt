@@ -118,11 +118,6 @@ public class EditQuestionController implements Observer{
     public void doneButtonAction(View view){
         if(isAllFieldsEmpty()){
             removeQuestion();
-            if(questions.size()==0){
-                editQuestionView.killEditQuestionActivity();
-            } else {
-                editQuestionView.endAddOfQuestions();
-            }
         }
         else if(!checkQuestionData() || (!editQuestionView.isSwitchChecked() && !checkTextAnswers())
                 ||(editQuestionView.isSwitchChecked() && !checkImageAnswers())){
@@ -132,8 +127,8 @@ public class EditQuestionController implements Observer{
             if(!editQuestionView.isSwitchChecked()){
                 saveTextAnswers();
             }
-            editQuestionView.endAddOfQuestions();
         }
+        editQuestionView.killEditQuestionActivity();
     }
 
     private void removeQuestion(){

@@ -33,6 +33,7 @@ public class EditQuestionView extends Observable {
 
     private final PackageManager packageManager;
     private final int captureImageRequestCode;
+    private final int questionEditingRequestCode;
 
     private final EditText questionText;
     private final EditText correctText;
@@ -51,6 +52,7 @@ public class EditQuestionView extends Observable {
     private final Button doneButton;
     private final Button nextButton;
 
+
     private final ImageView questionThumbnail;
 
     private Drawable originalEditText;
@@ -58,7 +60,7 @@ public class EditQuestionView extends Observable {
     public EditQuestionView(Activity currentActivity,
                             Class<? extends Activity> editQuestionActivityClass,
                             Class<? extends Activity> quizListActivityClass,
-                            int captureImageRequestCode) {
+                            int captureImageRequestCode, int questionEditingRequestCode) {
 
         this.currentActivity = currentActivity;
         this.editQuestionActivityClass = editQuestionActivityClass;
@@ -87,6 +89,7 @@ public class EditQuestionView extends Observable {
 
         doneButton = (Button)currentActivity.findViewById(R.id.doneButton);
         nextButton = (Button)currentActivity.findViewById(R.id.nextQuestionButton);
+        this.questionEditingRequestCode = questionEditingRequestCode;
 
         eventBus = EventBusWrapper.BUS;
         eventBus.register(this);
@@ -278,16 +281,13 @@ public class EditQuestionView extends Observable {
         bundle.putSerializable("questions",(Serializable)questions);
         intent.putExtras(bundle);
         intent.putExtra("questionIndex",nextQuestionIndex);
-        currentActivity.startActivity(intent);
+        currentActivity.startActivityForResult(intent,questionEditingRequestCode);
     }
 
     public void killEditQuestionActivity(){
+        currentActivity.setResult(Activity.RESULT_CANCELED);
+        System.out.println(userQuestion.toString());
         currentActivity.finish();
-    }
-
-    public void endAddOfQuestions(){
-        Intent intent = new Intent(currentActivity,quizListActivityClass);
-        currentActivity.startActivity(intent);
     }
 
     @Subscribe

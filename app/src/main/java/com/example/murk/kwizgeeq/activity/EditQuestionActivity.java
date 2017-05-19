@@ -30,6 +30,8 @@ public class EditQuestionActivity extends AppCompatActivity{
 
     final int captureImageRequestCode = 1;
 
+    final int questionEditingRequestCode = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,7 @@ public class EditQuestionActivity extends AppCompatActivity{
         System.out.println("Question index: " + questionIndex);
 
         editQuestionView = new EditQuestionView(this, EditQuestionActivity.class,
-                QuizListActivity.class, captureImageRequestCode);
+                QuizListActivity.class, captureImageRequestCode,questionEditingRequestCode);
 
         editQuestionController = new EditQuestionController(editQuestionView,
                 this, imageStorageDir, questions, questionIndex);
@@ -60,6 +62,11 @@ public class EditQuestionActivity extends AppCompatActivity{
         super.onActivityResult(requestCode,resultCode,data);
         if (requestCode == captureImageRequestCode && resultCode == RESULT_OK) {
             editQuestionController.imageCreated();
+        }
+
+        if (requestCode == questionEditingRequestCode && resultCode == RESULT_CANCELED) {
+            setResult(RESULT_CANCELED);
+            finish();
         }
     }
 }
