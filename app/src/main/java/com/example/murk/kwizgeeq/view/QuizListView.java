@@ -111,7 +111,6 @@ public class QuizListView extends Observable {
                 String quizTitle = quizName.getText().toString();
                 int quizindex = model.getUserQuizList().size();
                 model.getUserQuizList().add(new UserQuiz(quizTitle, mSelectedColor));
-                model.getQuizStatisticsList().add(new Statistics());
 
                 //TODO: Är detta mvc? FUnkar det??
                 //mKwizGeeQDataSource.insertQuizes(model.getUserQuizList());
@@ -141,7 +140,6 @@ public class QuizListView extends Observable {
     public void changeView(int quizIndex) {
         Intent intent = new Intent(context, questioneerActivityClass);
         intent.putExtra("quiz", model.getQuiz(quizIndex));
-        model.startQuiz();
         currentActivity.startActivity(intent);
     }
 

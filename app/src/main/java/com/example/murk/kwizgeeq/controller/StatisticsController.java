@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.view.View;
 
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
+import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.StatisticsView;
 
 import java.util.Observable;
@@ -22,14 +23,14 @@ public class StatisticsController implements Controller, Observer {
     private Activity currentActivity;
     private Class<? extends Activity> switchActivityClass;
 
-    private int quizIndex;
+    private UserQuiz quiz;
 
     public StatisticsController(StatisticsView view, Activity currentActivity, Class<? extends Activity> switchActivityClass) {
         this.view = view;
         this.model = KwizGeeQ.getInstance();
         this.currentActivity = currentActivity;
         this.switchActivityClass = switchActivityClass;
-        this.quizIndex = currentActivity.getIntent().getIntExtra("quizIndex", 0);
+        this.quiz = (UserQuiz) currentActivity.getIntent().getSerializableExtra("quiz");
 
     }
 
@@ -37,7 +38,7 @@ public class StatisticsController implements Controller, Observer {
         if(currentActivity.getIntent().getBooleanExtra("allCorrect", false)){
             view.disableReplayByIndexButton();
         }
-        view.updateStatistics(quizIndex);
+        view.updateStatistics(quiz);
     }
 
     public void onPause() {

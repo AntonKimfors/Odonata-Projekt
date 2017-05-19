@@ -60,7 +60,6 @@ public class QuizListController implements Controller, Observer{
         testQuiz.addQuestion(testQuestion2);
         testQuiz.addQuestion(testQuestion3);
         model.getUserQuizList().add(testQuiz);
-        model.getQuizStatisticsList().add(new Statistics());
 
 
 

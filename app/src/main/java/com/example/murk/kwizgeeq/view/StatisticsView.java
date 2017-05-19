@@ -6,6 +6,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
+import com.example.murk.kwizgeeq.model.UserQuiz;
 
 /**
  * Created by Are on 09/05/2017.
@@ -29,13 +30,13 @@ public class StatisticsView {
         this.answersProgressBar = answersProgressBar;
         this.replayByIndexButton = replayByIndexButton;
         this.replayAllButton = replayAllButton;
-        this. doneButton = doneButton;
+        this.doneButton = doneButton;
     }
 
-    public void updateStatistics(int quizIndex){
-        quizLabel.setText(model.getQuiz(quizIndex).getName());
-        answersProgressBar.setMax(model.getCurrentQuizStatistics().getQuestionCount());
-        answersProgressBar.setProgress(model.getCurrentQuizStatistics().getAnswerCorrectCount());
+    public void updateStatistics(UserQuiz quiz){
+        quizLabel.setText(quiz.getName());
+        answersProgressBar.setMax(quiz.getCurrentTempStatistics().getQuestionCount());
+        answersProgressBar.setProgress(quiz.getCurrentTempStatistics().getAnswerCorrectCount());
         answersLabel.setText("Correct: " + answersProgressBar.getProgress() + " / " + answersProgressBar.getMax());
     }
 
