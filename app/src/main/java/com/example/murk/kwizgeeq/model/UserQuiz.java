@@ -12,7 +12,6 @@ public class UserQuiz implements Iterable, Serializable{
     private int listColor;
     private String name;
 
-
     public UserQuiz(String name, int listColor) {
         questions = new ArrayList<>();
         this.name = name;

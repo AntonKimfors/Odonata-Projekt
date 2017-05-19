@@ -20,6 +20,7 @@ public class EditQuestionController implements Controller, Observer{
 
     private final EditQuestionView editQuestionView;
     private UserQuestion userQuestion;
+    private List<Question> questions;
 
     private Context currentContext;
     private File imageStorageDir;
@@ -31,19 +32,17 @@ public class EditQuestionController implements Controller, Observer{
     private String wrong2ImagePath;
     private String wrong3ImagePath;
 
-
-    private int quizIndex;
     private int questionIndex;
 
     public EditQuestionController(final EditQuestionView editQuestionView, Context currentContext,
-                                  File imageStorageDir, int quizIndex, int questionIndex){
+                                  File imageStorageDir, List<Question> questions, int questionIndex){
         this.editQuestionView = editQuestionView;
         this.currentContext = currentContext;
         this.imageStorageDir = imageStorageDir;
-        this.quizIndex = quizIndex;
         this.questionIndex = questionIndex;
+        this.questions = questions;
 
-        getUserQuestion();
+        setUserQuestion();
 
         View.OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
             @Override
@@ -66,7 +65,7 @@ public class EditQuestionController implements Controller, Observer{
 
         editQuestionView.addOnFocusChangeListener(onFocusChangeListener);
         editQuestionView.setOnCheckedChangeListener(onCheckedChangeListener);
-        editQuestionView.setUserQuestion(userQuestion);
+
     }
 
     public void onCreate(){
@@ -74,18 +73,17 @@ public class EditQuestionController implements Controller, Observer{
 
     }
 
-    private void getUserQuestion(){
-        KwizGeeQ model = KwizGeeQ.getInstance();
-        UserQuiz userQuiz = model.getQuiz(quizIndex);
-        if(userQuiz.getSize()>=questionIndex){
+    private void setUserQuestion(){
+        if(questions.size()<=questionIndex){
             userQuestion = new UserQuestion();
-            userQuiz.addQuestion(userQuestion);
+            questions.add(userQuestion);
         } else{
-            Question question = userQuiz.getQuestion(questionIndex);
-            if(question instanceof UserQuestion){
-                userQuestion = (UserQuestion) question;
+            Question questionFromList = questions.get(questionIndex);
+            if(questionFromList instanceof UserQuestion){
+                userQuestion = (UserQuestion) questionFromList;
             }
         }
+        throw new IllegalArgumentException();
     }
 
     //TODO: Anpassa vad som spara
@@ -109,15 +107,18 @@ public class EditQuestionController implements Controller, Observer{
                 saveTextAnswers();
             }
             int nextQuestionIndex = questionIndex +1;
-            editQuestionView.addMoreQuestions(quizIndex,nextQuestionIndex);
+            editQuestionView.addMoreQuestions(questions,nextQuestionIndex);
         }
     }
 
     public void doneButtonAction(View view){
         if(isAllFieldsEmpty()){
             removeQuestion();
-            removeQuizIfEmpty();
-            editQuestionView.endAddOfQuestions();
+            if(questions.size()==0){
+                editQuestionView.killEditQuestionActivity();
+            } else {
+                editQuestionView.endAddOfQuestions();
+            }
         }
         else if(!checkQuestionData() || (!editQuestionView.isSwitchChecked() && !checkTextAnswers())
                 ||(editQuestionView.isSwitchChecked() && !checkImageAnswers())){
@@ -131,18 +132,7 @@ public class EditQuestionController implements Controller, Observer{
         }
     }
 
-    private void removeQuizIfEmpty(){
-        KwizGeeQ model = KwizGeeQ.getInstance();
-        UserQuiz userQuiz = model.getQuiz(quizIndex);
-        if(userQuiz.getSize()==0){
-            model.removeQuiz(userQuiz);
-        }
-    }
-
     private void removeQuestion(){
-        KwizGeeQ model = KwizGeeQ.getInstance();
-        UserQuiz userQuiz = model.getQuiz(quizIndex);
-        List<Question> questions = userQuiz.getQuestions();
         questions.remove(userQuestion);
     }
 

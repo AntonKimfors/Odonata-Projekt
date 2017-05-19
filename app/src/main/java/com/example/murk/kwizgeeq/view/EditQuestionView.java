@@ -8,26 +8,28 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.*;
 
+import java.io.Serializable;
 import java.util.*;
 
+import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.*;
-import com.example.murk.kwizgeeq.events.BusWrapper;
-import com.google.common.eventbus.EventBus;
+import com.example.murk.kwizgeeq.events.EventBus;
 import com.google.common.eventbus.Subscribe;
 
 public class EditQuestionView extends Observable {
 
     private UserQuestion userQuestion;
     private final Activity currentActivity;
-    private final Class<? extends Activity> createQuestionActivityClass;
+    private final Class<? extends Activity> editQuestionActivityClass;
     private final Class<? extends Activity> quizListActivityClass;
 
-    private final EventBus eventBus;
+    private final com.google.common.eventbus.EventBus eventBus;
 
     private final PackageManager packageManager;
     private final int captureImageRequestCode;
@@ -49,63 +51,55 @@ public class EditQuestionView extends Observable {
     private final Button doneButton;
     private final Button nextButton;
 
-    private ImageView thumbnail;
+    private final ImageView questionThumbnail;
 
     private Drawable originalEditText;
 
     public EditQuestionView(Activity currentActivity,
-                            Class<? extends Activity> createQuestionActivityClass,
+                            Class<? extends Activity> editQuestionActivityClass,
                             Class<? extends Activity> quizListActivityClass,
-                            PackageManager packageManager, int captureImageRequestCode,
-                            EditText questionText, EditText correctText, EditText wrongText1,
-                            EditText wrongText2, EditText wrongText3, ImageView thumbnail,
-                            Button doneButton, Button nextButton, int quizIndex, int questionIndex,
-                            ImageView correctImageView, ImageView wrong1ImageView,
-                            ImageView wrong2ImageView, ImageView wrong3ImageView,
-                            Switch answerSwitch, ViewFlipper viewFlipper) {
+                            int captureImageRequestCode) {
 
         this.currentActivity = currentActivity;
-        this.createQuestionActivityClass = createQuestionActivityClass;
+        this.editQuestionActivityClass = editQuestionActivityClass;
         this.quizListActivityClass = quizListActivityClass;
 
-        //this.imageStorageDir = imageStorageDir;
-        this.packageManager = packageManager;
+        this.packageManager = currentActivity.getPackageManager();
         this.captureImageRequestCode = captureImageRequestCode;
 
-        this.questionText = questionText;
-        this.correctText = correctText;
-        this.wrongText1 = wrongText1;
-        this.wrongText2 = wrongText2;
-        this.wrongText3 = wrongText3;
+        questionText = (EditText)currentActivity.findViewById(R.id.questionText);
 
+        questionThumbnail = (ImageView)currentActivity.findViewById(R.id.thumbnail);
 
-        this.thumbnail = thumbnail;
-        this.doneButton = doneButton;
-        this.nextButton = nextButton;
-        this.correctImageView = correctImageView;
-        this.wrong1ImageView = wrong1ImageView;
-        this.wrong2ImageView = wrong2ImageView;
-        this.wrong3ImageView = wrong3ImageView;
+        answerSwitch = (Switch)currentActivity.findViewById(R.id.answerSwitch);
 
-        this.answerSwitch = answerSwitch;
-        this.viewFlipper = viewFlipper;
+        viewFlipper = (ViewFlipper)currentActivity.findViewById(R.id.viewFlipper);
 
-        eventBus = BusWrapper.BUS;
+        correctText = (EditText)currentActivity.findViewById(R.id.correctText);
+        wrongText1 = (EditText)currentActivity.findViewById(R.id.wrongText1);
+        wrongText2 = (EditText)currentActivity.findViewById(R.id.wrongText2);
+        wrongText3 = (EditText)currentActivity.findViewById(R.id.wrongText3);
+
+        correctImageView = (ImageView)currentActivity.findViewById(R.id.correctImageView);
+        wrong1ImageView = (ImageView)currentActivity.findViewById(R.id.wrong1ImageView);
+        wrong2ImageView = (ImageView)currentActivity.findViewById(R.id.wrong2ImageView);
+        wrong3ImageView = (ImageView)currentActivity.findViewById(R.id.wrong3ImageView);
+
+        doneButton = (Button)currentActivity.findViewById(R.id.doneButton);
+        nextButton = (Button)currentActivity.findViewById(R.id.nextQuestionButton);
+
+        eventBus = EventBus.BUS;
         eventBus.register(this);
 
         originalEditText = correctText.getBackground();
 
-        UserQuiz userQuiz = KwizGeeQ.getInstance().getQuiz(quizIndex);
-
-        if(questionIndex<(userQuiz.getSize()-1)){
-            setEditButtonTexts();
-        }
-
     }
 
-    public void setUserQuestion(UserQuestion userQuestion){
+    public void setUserQuestion(UserQuestion userQuestion, boolean questionIsEdited){
         this.userQuestion = userQuestion;
-
+        if(questionIsEdited){
+            setEditButtonTexts();
+        }
         setTextFields();
     }
 
@@ -174,7 +168,6 @@ public class EditQuestionView extends Observable {
             int redColor = Color.argb(255, 255, 129, 109);
             textField.setBackgroundColor(redColor);
         }
-
     }
 
     public void normalizeField(View view){
@@ -187,7 +180,7 @@ public class EditQuestionView extends Observable {
 
         if(imagePath!=null){
             Uri imageUri = Uri.parse(imagePath);
-            thumbnail.setImageURI(imageUri);
+            questionThumbnail.setImageURI(imageUri);
         }
     }
 
@@ -197,7 +190,6 @@ public class EditQuestionView extends Observable {
     }
 
     private void setTextFields(){
-
         setQuestionString(userQuestion.getQuestionText());
 
         Iterator<Answer> answerIterator = userQuestion.answerIterator(false);
@@ -280,11 +272,16 @@ public class EditQuestionView extends Observable {
         }
     }
 
-    public void addMoreQuestions(int nextQuizIndex, int nextQuestionIndex){
-        Intent intent = new Intent(currentActivity,createQuestionActivityClass);
-        intent.putExtra("quizIndex",nextQuizIndex);
+    public void addMoreQuestions(List<Question> questionList, int nextQuestionIndex){
+        Intent intent = new Intent(currentActivity, editQuestionActivityClass);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("questionList",(Serializable)questionList);
         intent.putExtra("questionIndex",nextQuestionIndex);
         currentActivity.startActivity(intent);
+    }
+
+    public void killEditQuestionActivity(){
+        currentActivity.finish();
     }
 
     public void endAddOfQuestions(){

@@ -6,9 +6,9 @@ import com.google.common.eventbus.EventBus;
  * Created by Henrik on 14/05/2017.
  */
 
-public class BusWrapper {
+public class EventBus {
 
     // Google Guava Eventbus
-    public static final EventBus BUS = new EventBus();
+    public static final com.google.common.eventbus.EventBus BUS = new com.google.common.eventbus.EventBus();
     // Outgoing from model to GUI
 }

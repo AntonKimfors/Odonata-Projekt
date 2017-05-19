@@ -1,7 +1,6 @@
 package com.example.murk.kwizgeeq.model;
 
-import com.example.murk.kwizgeeq.events.BusWrapper;
-import com.google.common.eventbus.EventBus;
+import com.example.murk.kwizgeeq.events.EventBus;
 
 import java.io.Serializable;
 import java.util.*;
@@ -18,10 +17,10 @@ public abstract class Question implements Serializable {
 
     private int correctAnswerCount;
 
-    EventBus eventBus;
+    com.google.common.eventbus.EventBus eventBus;
 
     public Question() {
-        eventBus = BusWrapper.BUS;
+        eventBus = EventBus.BUS;
         answers = new ArrayList<>();
 
         wrongAnswerCount = 0;

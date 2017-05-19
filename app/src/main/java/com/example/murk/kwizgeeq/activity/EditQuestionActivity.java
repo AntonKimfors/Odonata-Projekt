@@ -11,9 +11,13 @@ import android.widget.*;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.*;
 import com.example.murk.kwizgeeq.databinding.ActivityEditQuestionBinding;
+import com.example.murk.kwizgeeq.model.Question;
+import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.*;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Henrik on 05/05/2017.
@@ -32,40 +36,17 @@ public class EditQuestionActivity extends AppCompatActivity{
         ActivityEditQuestionBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_edit_question);
 
         File imageStorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        PackageManager packageManager = getPackageManager();
 
-        EditText questionText = (EditText)findViewById(R.id.questionText);
-
-        ImageView thumbnail = (ImageView)findViewById(R.id.thumbnail);
-
-        Switch answerSwitch = (Switch)findViewById(R.id.answerSwitch);
-
-        ViewFlipper viewFlipper = (ViewFlipper)findViewById(R.id.viewFlipper);
-
-        EditText correctText = (EditText)findViewById(R.id.correctText);
-        EditText wrongtext1 = (EditText)findViewById(R.id.wrongText1);
-        EditText wrongtext2 = (EditText)findViewById(R.id.wrongText2);
-        EditText wrongtext3 = (EditText)findViewById(R.id.wrongText3);
-
-        ImageView correctImageView = (ImageView)findViewById(R.id.correctImageView);
-        ImageView wrong1ImageView = (ImageView)findViewById(R.id.wrong1ImageView);
-        ImageView wrong2ImageView = (ImageView)findViewById(R.id.wrong2ImageView);
-        ImageView wrong3ImageView = (ImageView)findViewById(R.id.wrong3ImageView);
-
-        Button doneButton = (Button)findViewById(R.id.doneButton);
-        Button nextButton = (Button)findViewById(R.id.nextQuestionButton);
-
-        int quizIndex = getIntent().getIntExtra("quizIndex",0);
-        int questionIndex = getIntent().getIntExtra("questionIndex",0);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        List<Question> questions = (List)bundle.getSerializable("questionList");
+        int questionIndex = intent.getIntExtra("questionIndex",0);
 
         editQuestionView = new EditQuestionView(this, EditQuestionActivity.class,
-                QuizListActivity.class, packageManager,captureImageRequestCode, questionText,
-                correctText,wrongtext1,wrongtext2,wrongtext3, thumbnail,doneButton,
-                nextButton,quizIndex, questionIndex,correctImageView,wrong1ImageView,
-                wrong2ImageView,wrong3ImageView,answerSwitch,viewFlipper);
+                QuizListActivity.class, captureImageRequestCode);
 
         editQuestionController = new EditQuestionController(editQuestionView,
-                this, imageStorageDir, quizIndex, questionIndex);
+                this, imageStorageDir, questions, questionIndex);
 
         binding.setController(editQuestionController);
 
