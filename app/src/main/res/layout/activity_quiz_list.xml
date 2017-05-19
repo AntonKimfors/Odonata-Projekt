@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="controller"
+            type="com.example.murk.kwizgeeq.controller.QuizListController" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,9 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:onClick="fabPressed"
+        android:onClick="@{controller::onClickAction}"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
     <include layout="@layout/content_quiz_list" />
 
 </android.support.design.widget.CoordinatorLayout>
+</layout>

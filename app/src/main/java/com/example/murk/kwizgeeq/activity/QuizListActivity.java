@@ -2,11 +2,14 @@ package com.example.murk.kwizgeeq.activity;
 
 import android.app.ListActivity;
 import android.database.Cursor;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.QuizListController;
+import com.example.murk.kwizgeeq.databinding.ActivityEditQuizBinding;
+import com.example.murk.kwizgeeq.databinding.ActivityQuizListBinding;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
@@ -29,13 +32,18 @@ public class QuizListActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar);
-        setContentView(R.layout.activity_quiz_list);
+
+        ActivityQuizListBinding binding;
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_quiz_list);
+
 
         mKwizGeeQDataSource = new KwizGeeQDataSource(QuizListActivity.this);
 
         view = new QuizListView(getListView(), this, this, EditQuizActivity.class,
                 QuestioneerActivity.class, (FloatingActionButton) findViewById(R.id.fab), mKwizGeeQDataSource);
         controller = new QuizListController(view, this, this);
+
+        binding.setController(controller);
         view.addObserver(controller);
         controller.onCreate();
 
