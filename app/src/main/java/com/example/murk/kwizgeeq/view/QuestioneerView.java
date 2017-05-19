@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.AnswerType;
-import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.UserQuestion;
 
 import java.io.FileNotFoundException;
@@ -45,7 +44,6 @@ public class QuestioneerView extends Observable{
     private Button answerButton3;
     private Button answerButton4;
 
-    private KwizGeeQ model;
     private Activity activity;
 
     public QuestioneerView(Activity activity, Window window, TextView quizLabel, TextView questLabel, TextView progressNumbers, ImageView questImage, ProgressBar progressBar, Button answerButton1, Button answerButton2, Button answerButton3, Button answerButton4) {
@@ -59,7 +57,6 @@ public class QuestioneerView extends Observable{
         this.answerButton2 = answerButton2;
         this.answerButton3 = answerButton3;
         this.answerButton4 = answerButton4;
-        this.model = KwizGeeQ.getInstance();
         this.activity = activity;
     }
 

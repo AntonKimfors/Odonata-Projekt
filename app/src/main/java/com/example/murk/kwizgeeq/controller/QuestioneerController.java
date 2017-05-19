@@ -49,9 +49,10 @@ public class QuestioneerController implements Controller, Observer{
     public void onCreate() {
         updateQuestionIndex();
         updateQuizSize();
+        quiz.resetCurrentTempStatistics();
         view.updateQuizRelatedItems(quiz.getName(), quizSize, quiz.getListColor());
         view.updateQuestioneer((UserQuestion) quiz.getQuestion(questionIndex), currentQuestion, quizSize);
-        model.getCurrentQuizStatistics().startTimer();
+        quiz.getCurrentTempStatistics().startTimer();
     }
 
     //TODO: Anpassa vad som spara
@@ -93,24 +94,24 @@ public class QuestioneerController implements Controller, Observer{
     }
 
     public void answerSelected(View view){
-        model.getCurrentQuizStatistics().incQuestionCount();
+        quiz.getCurrentTempStatistics().incQuestionCount();
         if(((Answer)view.getTag()).isCorrect()){
-            model.getCurrentQuizStatistics().incAnswerCorrectCount();
+            quiz.getCurrentTempStatistics().incAnswerCorrectCount();
             this.view.flashCorrectAnswer(view);
         } else{
             outReplayIndexList.add(questionIndex);
-            model.getCurrentQuizStatistics().incAnswerIncorrectCount();
+            quiz.getCurrentTempStatistics().incAnswerIncorrectCount();
             this.view.flashIncorrectAnswer(view);
         }
     }
 
     public void finishQuestion(){
         if(currentQuestion == quizSize) {
-            model.getCurrentQuizStatistics().stopTimer();
-            model.getCurrentQuizStatistics().incQuizCount();
-            //model.updateQuizStatistics(quizIndex);
+            quiz.getCurrentTempStatistics().stopTimer();
+            quiz.getCurrentTempStatistics().incQuizCount();
+            quiz.updateBestStatistics();
             if(!playingByIndex){
-                model.endQuiz();
+                model.updateGlobalStatistics(quiz);
             }
             Intent intent = new Intent(currentActivity, switchActivityClass);
             intent.putExtra("quiz", quiz);
@@ -134,7 +135,6 @@ public class QuestioneerController implements Controller, Observer{
         questionIndex = 0;
         currentQuestion = 1;
         outReplayIndexList.clear();
-        model.startQuiz();
         onCreate();
     }
 
@@ -143,7 +143,6 @@ public class QuestioneerController implements Controller, Observer{
         currentQuestion = 1;
         inReplayIndexList = (ArrayList)outReplayIndexList.clone();
         outReplayIndexList.clear();
-        model.startQuiz();
         onCreate();
     }
 

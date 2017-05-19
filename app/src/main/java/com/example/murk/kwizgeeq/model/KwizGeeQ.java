@@ -10,9 +10,7 @@ import java.util.*;
 public class KwizGeeQ implements Serializable{
 
     private ArrayList<UserQuiz> userQuizList;
-    private ArrayList<Statistics> quizStatisticsList;
     private Statistics globalStatistics;
-    private Statistics currentQuizStatistics;
     private static KwizGeeQ singletonInstance = null;
 
 
@@ -26,20 +24,11 @@ public class KwizGeeQ implements Serializable{
 
     private KwizGeeQ(){
         userQuizList = new ArrayList<UserQuiz>();
-        quizStatisticsList = new ArrayList<Statistics>();
         globalStatistics = new Statistics();
     }
 
-    public void startQuiz(){
-        currentQuizStatistics = new Statistics();
-    }
-
-    public void endQuiz(){
-        currentQuizStatistics.mergeInto(globalStatistics);
-    }
-
-    public Statistics getCurrentQuizStatistics() {
-        return currentQuizStatistics;
+    public void updateGlobalStatistics(UserQuiz quiz){
+        quiz.getCurrentTempStatistics().mergeInto(globalStatistics);
     }
 
     public ArrayList<UserQuiz> getUserQuizList(){
@@ -48,23 +37,6 @@ public class KwizGeeQ implements Serializable{
 
     public void setUserQuizList(ArrayList<UserQuiz> userQuizList){
         this.userQuizList = userQuizList;
-    }
-
-    public ArrayList<Statistics> getQuizStatisticsList() {
-        return quizStatisticsList;
-    }
-
-    public void updateQuizStatistics(int quizIndex) {
-        int oldCorrectCount = quizStatisticsList.get(quizIndex).getAnswerCorrectCount();
-        int newCorrectCount = currentQuizStatistics.getAnswerCorrectCount();
-
-        if (newCorrectCount > oldCorrectCount) {
-            currentQuizStatistics.mergeInto(quizStatisticsList.get(quizIndex));
-        } else if (newCorrectCount == oldCorrectCount) {
-            if (currentQuizStatistics.getSecondsSpent() > quizStatisticsList.get(quizIndex).getSecondsSpent()) {
-                currentQuizStatistics.mergeInto(quizStatisticsList.get(quizIndex));
-            }
-        }
     }
 
     public UserQuiz getQuiz(int quizIndex){

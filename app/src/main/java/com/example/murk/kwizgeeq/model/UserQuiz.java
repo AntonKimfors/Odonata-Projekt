@@ -11,11 +11,15 @@ public class UserQuiz implements Iterable, Serializable{
     protected ArrayList<Question> questions;
     private int listColor;
     private String name;
+    private Statistics bestStatistics;
+    private Statistics currentTempStatistics;
 
     public UserQuiz(String name, int listColor) {
         questions = new ArrayList<>();
         this.name = name;
         this.listColor = listColor;
+        bestStatistics = new Statistics();
+        currentTempStatistics = new Statistics();
     }
 
     public String getName() {
@@ -64,6 +68,31 @@ public class UserQuiz implements Iterable, Serializable{
         }
 
         return questionToReturn.iterator();
+    }
+
+    public Statistics getBestStatistics() {
+        return bestStatistics;
+    }
+
+    public Statistics getCurrentTempStatistics() {
+        return currentTempStatistics;
+    }
+
+    public void resetCurrentTempStatistics(){
+        currentTempStatistics = new Statistics();
+    }
+
+    public void updateBestStatistics() {
+        int oldCorrectCount = bestStatistics.getAnswerCorrectCount();
+        int newCorrectCount = currentTempStatistics.getAnswerCorrectCount();
+
+        if (newCorrectCount > oldCorrectCount) {
+            currentTempStatistics.mergeInto(bestStatistics);
+        } else if (newCorrectCount == oldCorrectCount) {
+            if (currentTempStatistics.getSecondsSpent() > bestStatistics.getSecondsSpent()) {
+                currentTempStatistics.mergeInto(bestStatistics);
+            }
+        }
     }
 
     @Override
