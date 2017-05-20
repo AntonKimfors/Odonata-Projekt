@@ -37,6 +37,7 @@ public abstract class Question implements Serializable {
         return answerList.iterator();
     }
 
+
     public void addAnswer(String data, boolean isCorrect, AnswerType answerType){
         Answer answer = new Answer(isCorrect,data,answerType);
         if(answer == null)
@@ -86,6 +87,14 @@ public abstract class Question implements Serializable {
 
     public boolean checkNumberOfAnswers(int excepted){
         return excepted == wrongAnswerCount + correctAnswerCount;
+    }
+
+    public ArrayList<Answer> getOrderedList(){
+        //Return a array list of the answers with the correct answer at index 0
+         ArrayList<Answer> newOrderedList = new ArrayList<Answer>();
+        //TODO: put the correct answer at index 0;
+
+        return newOrderedList;
     }
 
     @Override

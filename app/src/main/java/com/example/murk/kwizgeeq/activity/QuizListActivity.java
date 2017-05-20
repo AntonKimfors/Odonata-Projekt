@@ -62,6 +62,8 @@ public class QuizListActivity extends ListActivity {
 
         ArrayList<Quiz> tmpQuizList= KwizGeeQ.getInstance().getQuizList();
         mKwizGeeQDataSource.open();
+        int i = tmpQuizList.size();
+        Quiz g = tmpQuizList.get(0);
         mKwizGeeQDataSource.insertQuizes(tmpQuizList);
         mKwizGeeQDataSource.close();
     }
@@ -69,6 +71,7 @@ public class QuizListActivity extends ListActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.updateList();
         mKwizGeeQDataSource.close();
