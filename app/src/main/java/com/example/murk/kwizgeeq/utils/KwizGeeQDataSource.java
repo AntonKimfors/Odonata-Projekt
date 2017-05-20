@@ -5,22 +5,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-<<<<<<< HEAD
-=======
 import android.provider.BaseColumns;
-import android.view.ContextMenu;
->>>>>>> Done qith sqlite classes, need to implement when to save and read data
+
 
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.AnswerType;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
-<<<<<<< HEAD
 
-=======
-import com.example.murk.kwizgeeq.model.Question;
-import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.model.UserQuestion;
->>>>>>> Done qith sqlite classes, need to implement when to save and read data
+
+
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import org.w3c.dom.Text;
@@ -33,8 +27,8 @@ import java.util.ArrayList;
 
 public class KwizGeeQDataSource {
 
-    private Context mContext;
-    private KwizGeeQSQLiteHelper mQuizSqliteHelper;
+    private static Context mContext;
+    private static KwizGeeQSQLiteHelper mQuizSqliteHelper;
     private SQLiteDatabase mDatabase;
 
     public KwizGeeQDataSource(Context context){

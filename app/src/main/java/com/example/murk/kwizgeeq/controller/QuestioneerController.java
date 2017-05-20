@@ -6,12 +6,15 @@ import android.view.View;
 
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
-<<<<<<< HEAD
+
+
+
 import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
-=======
-import com.example.murk.kwizgeeq.model.Quiz;
->>>>>>> Done qith sqlite classes, need to implement when to save and read data
+
+
+
+
 import com.example.murk.kwizgeeq.view.QuestioneerView;
 
 import java.util.ArrayList;
@@ -61,6 +64,7 @@ public class QuestioneerController implements Controller, Observer{
 
     //TODO: Anpassa vad som spara
     public void onPause() {
+
     }
 
     public void onResume() {

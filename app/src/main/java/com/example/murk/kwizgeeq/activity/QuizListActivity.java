@@ -54,27 +54,33 @@ public class QuizListActivity extends ListActivity {
 
     }
 
+    public KwizGeeQDataSource getMainDataSource(){
+        return this.mKwizGeeQDataSource;
+    }
+
 
     //TODO: TROR KLAR - for sql i alla fall
     @Override
     protected void onPause() {
         super.onPause();
+        controller.onPause();
 
-        ArrayList<Quiz> tmpQuizList= KwizGeeQ.getInstance().getQuizList();
+        /*ArrayList<Quiz> tmpQuizList= KwizGeeQ.getInstance().getQuizList();
         mKwizGeeQDataSource.open();
         int i = tmpQuizList.size();
         Quiz g = tmpQuizList.get(0);
         mKwizGeeQDataSource.insertQuizes(tmpQuizList);
-        mKwizGeeQDataSource.close();
+        mKwizGeeQDataSource.close();*/
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        controller.onResume();
 
-        mKwizGeeQDataSource.open();
+        /*mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.updateList();
-        mKwizGeeQDataSource.close();
+        mKwizGeeQDataSource.close();*/
     }
     
 

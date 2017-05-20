@@ -79,6 +79,19 @@ public class QuizListController implements Controller, Observer{
         model.getQuizStatisticsList().add(new Statistics());*/
 
 
+    public void saveCurrentData(){
+        ArrayList<Quiz> tmpQuizList= KwizGeeQ.getInstance().getQuizList();
+        mKwizGeeQDataSource.open();
+        int i = tmpQuizList.size();
+        Quiz g = tmpQuizList.get(0);
+        mKwizGeeQDataSource.insertQuizes(tmpQuizList);
+        mKwizGeeQDataSource.close();
+    }
+
+    public void readCurrentData(){
+        mKwizGeeQDataSource.open();
+        mKwizGeeQDataSource.updateList();
+        mKwizGeeQDataSource.close();
 
 
         AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
@@ -105,6 +118,7 @@ public class QuizListController implements Controller, Observer{
         this.quizListView.fabPressed();
     }
 
+
     @Override
     public void onCreate() {
 
@@ -112,14 +126,13 @@ public class QuizListController implements Controller, Observer{
 
     @Override
     public void onPause() {
-
+        saveCurrentData();
     }
 
     @Override
-    public void onResume(){
-
+    public void onResume() {
+        readCurrentData();
     }
-
     @Override
     public void onDestroy() {
 
