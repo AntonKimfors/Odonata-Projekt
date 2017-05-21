@@ -51,5 +51,17 @@ public class EditQuizActivity extends ListActivity {
         view.reloadView();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        controller.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        controller.onResume();
+    }
+
 
 }

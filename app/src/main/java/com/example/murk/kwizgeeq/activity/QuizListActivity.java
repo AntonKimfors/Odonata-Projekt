@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class QuizListActivity extends ListActivity {
 
-    public KwizGeeQDataSource mKwizGeeQDataSource; //TODO: Make it private. Take a look on Data for MVC!
+    public KwizGeeQDataSource mKwizGeeQDataSource;
     private QuizListController controller;
     private QuizListView view;
     //private ArrayList<String> mQuizNames;
@@ -54,33 +54,17 @@ public class QuizListActivity extends ListActivity {
 
     }
 
-    public KwizGeeQDataSource getMainDataSource(){
-        return this.mKwizGeeQDataSource;
-    }
 
-
-    //TODO: TROR KLAR - for sql i alla fall
     @Override
     protected void onPause() {
         super.onPause();
         controller.onPause();
-
-        /*ArrayList<Quiz> tmpQuizList= KwizGeeQ.getInstance().getQuizList();
-        mKwizGeeQDataSource.open();
-        int i = tmpQuizList.size();
-        Quiz g = tmpQuizList.get(0);
-        mKwizGeeQDataSource.insertQuizes(tmpQuizList);
-        mKwizGeeQDataSource.close();*/
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         controller.onResume();
-
-        /*mKwizGeeQDataSource.open();
-        mKwizGeeQDataSource.updateList();
-        mKwizGeeQDataSource.close();*/
     }
     
 

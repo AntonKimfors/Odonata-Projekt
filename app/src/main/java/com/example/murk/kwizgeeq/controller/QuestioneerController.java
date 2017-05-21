@@ -159,4 +159,6 @@ public class QuestioneerController implements Controller, Observer{
             view.closeQuestioneer();
         }
     }
+
+    //TODO: Behövs read DATA?
 }

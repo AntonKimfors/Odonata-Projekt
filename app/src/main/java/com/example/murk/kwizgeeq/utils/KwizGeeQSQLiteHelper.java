@@ -17,9 +17,10 @@ public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
 
     //TODO: Add columns for Color and Assets(maybe) ---- CHECK ----
     //TODO: Assets should be for questions. Each question has title and maybe image. ---- CHECK ----
-    //TODO: Also 4 answers. 4 text answers. Each Questions
-    // ---- CHECK ----
-    //TODO: should also have an id to identify what quiz it belongs to.
+    //TODO: Also 4 answers. 4 text answers. Each Questions ---- CHECK ----
+    //TODO: should also have an id to identify what quiz it belongs to. ---CHECK--
+
+    //TODO: HUR SPARAS BIULDER??
 
     //-------------QUIZ Table ----------------------
     public static final String TABLE_QUIZES = "QUIZES";

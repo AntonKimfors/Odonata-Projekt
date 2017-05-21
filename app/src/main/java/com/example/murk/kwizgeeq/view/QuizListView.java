@@ -33,7 +33,6 @@ public class QuizListView extends Observable {
     private final Activity currentActivity;
     private final Class<? extends Activity> editQuizActivityClass;
     private final Class<? extends Activity> questioneerActivityClass;
-    private final KwizGeeQDataSource mKwizGeeQDataSource;
     private int mSelectedColor;
     private ListView listView;
     private KwizGeeQ model;
@@ -50,7 +49,6 @@ public class QuizListView extends Observable {
         this.model = KwizGeeQ.getInstance();
         this.currentActivity = currentActivity;
         this.fab = fab;
-        this.mKwizGeeQDataSource = mKwizGeeQDataSource;
 
 
         this.adapter = new QuizListAdapter(context, model.getUserQuizList());
@@ -143,6 +141,7 @@ public class QuizListView extends Observable {
         currentActivity.startActivity(intent);
     }
 
+
     public void openLongPressDialog(final int questionIndex) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(currentActivity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -170,7 +169,12 @@ public class QuizListView extends Observable {
                     }
                 })
 
+
+
                 .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    //Går detta att flytta ut??
+
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ad.dismiss();

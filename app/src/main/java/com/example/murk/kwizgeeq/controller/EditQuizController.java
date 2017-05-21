@@ -65,6 +65,7 @@ public class EditQuizController implements Controller, Observer {
         model.getQuiz(index).setName(editQuizview.getQuizName().toString());
     }
 
+    //TODO: Anpassa när det ska sparas. On button clicks istället?
     public void onPause() {
         QuizListController.saveCurrentData();
     }

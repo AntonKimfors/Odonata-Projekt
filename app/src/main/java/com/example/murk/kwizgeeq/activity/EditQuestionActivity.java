@@ -73,4 +73,16 @@ public class EditQuestionActivity extends AppCompatActivity{
             finish();
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EditQuestionController.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EditQuestionController.onResume();
+    }
 }

@@ -48,7 +48,7 @@ public class FileUtilites {
         } else{
             if(isExternalStorageWritable()){
                 if(storageType.equals((StorageType.PRIVATE_EXTERNAL))){
-                    return context.getExternalFilesDir(null); //get private externel files dir //TODO: Why is parameter null?
+                    return context.getExternalFilesDir(null); //get private externel files dir
                 } else{
                     return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES); //Get public external file dir with standard "DIRECTORY_PICTURES"
                 }

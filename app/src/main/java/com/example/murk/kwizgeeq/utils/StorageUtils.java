@@ -27,6 +27,8 @@ import java.util.ArrayList;
 
 public class StorageUtils {
 
+    //TODO: DELETE CLASS??
+
 
 
     public static void saveQuizList(Context context) {

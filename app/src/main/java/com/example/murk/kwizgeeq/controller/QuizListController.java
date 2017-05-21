@@ -4,6 +4,7 @@ package com.example.murk.kwizgeeq.controller;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.AdapterView;
@@ -94,6 +95,7 @@ public class QuizListController implements Controller, Observer{
 
     }
 
+    //TODO: Spara onClick istället??
     @Override
     public void onPause() {
         saveCurrentData();
