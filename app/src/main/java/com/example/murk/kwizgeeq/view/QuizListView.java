@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -23,6 +24,7 @@ import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
 import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
 
+import java.io.Serializable;
 import java.util.Observable;
 
 /**
@@ -105,15 +107,19 @@ public class QuizListView extends Observable {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(context, editQuizActivityClass);
+
                 String quizTitle = quizName.getText().toString();
                 int quizindex = model.getUserQuizList().size();
-                model.getUserQuizList().add(new UserQuiz(quizTitle, mSelectedColor));
+                UserQuiz newQuiz = new UserQuiz(quizTitle, mSelectedColor);
+                model.getUserQuizList().add(newQuiz);
 
                 //TODO: Är detta mvc? FUnkar det??
                 //mKwizGeeQDataSource.insertQuizes(model.getUserQuizList());
 
-                intent.putExtra("quizIndex", quizindex);
+                Intent intent = new Intent(context, editQuizActivityClass);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("quiz",newQuiz);
+                intent.putExtras(bundle);
                 currentActivity.startActivity(intent);
             }
         });

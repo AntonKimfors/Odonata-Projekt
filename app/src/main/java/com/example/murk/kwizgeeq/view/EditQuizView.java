@@ -14,6 +14,7 @@ import com.example.murk.kwizgeeq.activity.QuizListActivity;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.Question;
+import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
@@ -41,21 +42,19 @@ public class EditQuizView extends Observable {
     private FloatingActionButton fab;
     private int mSelectedColor;
 
-    public EditQuizView(final Class<? extends Activity> createQuestionActivity, final int index,
+    public EditQuizView(final Class<? extends Activity> createQuestionActivity, final UserQuiz quiz,
                         final ListView listView, final Context context, final Activity currentActivity,
-                        EditText editText, FloatingActionButton fab, final Button btnColorPicker) {
+                        EditText editText, final Button btnColorPicker) {
         this.createQuestionActivity = createQuestionActivity;
         this.currentActivity = currentActivity;
         this.context = context;
         this.listView = listView;
-        this.model = KwizGeeQ.getInstance();
         this.editText = editText;
-        this.index = index;
         this.btnColorPicker = btnColorPicker;
-        mSelectedColor = model.getQuiz(index).getListColor();
+        mSelectedColor = quiz.getListColor();
         this.btnColorPicker.setBackgroundColor(mSelectedColor);
-        this.editText.setText(model.getQuizName(index));
-        this.adapter = new EditQuizAdapter(context, model.getQuiz(index).getQuestions(), model.getQuiz(index));
+        this.editText.setText(quiz.getName());
+        this.adapter = new EditQuizAdapter(context, quiz.getQuestions(), quiz);
         listView.setAdapter(adapter);
 
 
@@ -65,11 +64,12 @@ public class EditQuizView extends Observable {
         return editText.getText().toString();
     }
 
-    public void fabPressed(List<Question> questions) {
+    public void fabPressed(List<Question> questions,int index) {
         Intent intent = new Intent(context, createQuestionActivity);
         Bundle bundle = new Bundle();
         bundle.putSerializable("questions",(Serializable)questions);
         intent.putExtras(bundle);
+        intent.putExtra("questionIndex",index);
         //the quiz index should be decided by controller and sent in to this method when called
         currentActivity.startActivity(intent);
     }

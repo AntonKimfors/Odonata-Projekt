@@ -1,6 +1,7 @@
 package com.example.murk.kwizgeeq.activity;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import com.example.murk.kwizgeeq.controller.EditQuizController;
 
 import com.example.murk.kwizgeeq.databinding.ActivityEditQuizBinding;
 
+import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.*;
 import com.example.murk.kwizgeeq.R;
 
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 
 public class EditQuizActivity extends ListActivity {
 
-
+    private UserQuiz quiz;
     private EditQuizController controller;
     private EditQuizView view;
 
@@ -26,19 +28,20 @@ public class EditQuizActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar);
-
-        setContentView(R.layout.activity_edit_quiz);
-        int index = getIntent().getIntExtra("quizIndex", 0);
+        //int index = getIntent().getIntExtra("quizIndex", 0);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        quiz = (UserQuiz) bundle.getSerializable("quiz");
 
 
         ActivityEditQuizBinding binding;
         binding = DataBindingUtil.setContentView(this,R.layout.activity_edit_quiz);
-        view = new EditQuizView(EditQuestionActivity.class,index, getListView(), this, this, (EditText) findViewById(R.id.etQuizLabel),(FloatingActionButton) findViewById(R.id.fab),(Button) findViewById(R.id.btnColorPicker));
+        view = new EditQuizView(EditQuestionActivity.class,quiz, getListView(), this, this, (EditText) findViewById(R.id.etQuizLabel),(Button) findViewById(R.id.btnColorPicker));
 
 
 
 
-        controller = new EditQuizController(view,index);
+        controller = new EditQuizController(view,quiz);
         binding.setController(controller);
         view.addObserver(controller);
         controller.onCreate();

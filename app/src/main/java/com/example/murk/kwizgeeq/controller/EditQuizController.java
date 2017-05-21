@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.Question;
+import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.EditQuizView;
 
 import java.util.List;
@@ -17,19 +18,19 @@ import java.util.Observer;
 public class EditQuizController implements Controller, Observer {
 
     private EditQuizView editQuizview;
-    private KwizGeeQ model;
+    private UserQuiz quiz;
     private int index;
     private List<Question> questions;
 
 
-    public EditQuizController(final EditQuizView editQuizview, int index) {
+    public EditQuizController(final EditQuizView editQuizview, final UserQuiz quiz) {
         this.editQuizview = editQuizview;
-        this.model = KwizGeeQ.getInstance();
-        this.questions = model.getQuiz(index).getQuestions(); //TODO: this variable should be passed in by constructor
+        this.quiz = quiz;
+        this.questions = quiz.getQuestions();
         if(questions==null){
             System.out.println("questions is null");
         }
-        this.index = index;
+
 
         AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
             @Override
@@ -57,12 +58,14 @@ public class EditQuizController implements Controller, Observer {
     }
 
     public void onClickAction(View view) {
-        this.editQuizview.fabPressed(questions);
+        int index = quiz.getQuestions().size();
+        this.editQuizview.fabPressed(questions,index);
     }
 
 
     public void saveQuizName() {
-        model.getQuiz(index).setName(editQuizview.getQuizName().toString());
+
+        quiz.setName(editQuizview.getQuizName().toString());
     }
 
     //TODO: Anpassa när det ska sparas. On button clicks istället?
