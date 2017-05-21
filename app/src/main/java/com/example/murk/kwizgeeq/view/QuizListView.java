@@ -148,7 +148,7 @@ public class QuizListView extends Observable {
     }
 
 
-    public void openLongPressDialog(final int questionIndex) {
+    public void openLongPressDialog(final int quizIndex) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(currentActivity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Edit UserQuiz?")
@@ -159,15 +159,18 @@ public class QuizListView extends Observable {
         alertDialog.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 Intent intent = new Intent(context, editQuizActivityClass);
-                intent.putExtra("quizIndex", questionIndex);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("quiz",model.getQuiz(quizIndex));
+                intent.putExtras(bundle);
                 currentActivity.startActivity(intent);
             }
         })
                 .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        model.getUserQuizList().remove(questionIndex);
+                        model.getUserQuizList().remove(quizIndex);
 
                         currentActivity.finish();
                         currentActivity.startActivity((currentActivity).getIntent());
