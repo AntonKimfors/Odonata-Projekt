@@ -9,7 +9,6 @@ import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.QuestioneerController;
 import com.example.murk.kwizgeeq.databinding.ActivityQuestioneerBinding;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
-import com.example.murk.kwizgeeq.model.Quiz;
 import com.example.murk.kwizgeeq.view.QuestioneerView;
 
 import java.util.ArrayList;

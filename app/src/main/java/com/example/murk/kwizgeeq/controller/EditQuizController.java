@@ -65,14 +65,12 @@ public class EditQuizController implements Controller, Observer {
         model.getQuiz(index).setName(editQuizview.getQuizName().toString());
     }
 
-    @Override
     public void onPause() {
-
+        QuizListController.saveCurrentData();
     }
 
-    @Override
     public void onResume() {
-
+        QuizListController.readCurrentData();
     }
 
     @Override

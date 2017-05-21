@@ -92,10 +92,11 @@ public class EditQuestionController implements Observer{
 
     //TODO: Anpassa vad som spara
     public void onPause() {
-
+        QuizListController.saveCurrentData();
     }
-    public void onResume() {
 
+    public void onResume() {
+        QuizListController.readCurrentData();
     }
     public void onDestroy() {
 

@@ -55,18 +55,18 @@ public class KwizGeeQDataSource {
             for (int i = 0; i < userQuizArrayList.size(); i++) {
                 ContentValues values = new ContentValues();
 
-                values.put(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, quizArrayList.get(i).getName());
+                values.put(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, userQuizArrayList.get(i).getName());
 
                 //TODO: parseToString?
-                values.put(KwizGeeQSQLiteHelper.COLUMN_COLOR, "" + (quizArrayList.get(i).getListColor()));
+                values.put(KwizGeeQSQLiteHelper.COLUMN_COLOR, "" + (userQuizArrayList.get(i).getListColor()));
                 mDatabase.insert(KwizGeeQSQLiteHelper.TABLE_QUIZES, null, values);
 
-                for(int y = 0; y < quizArrayList.get(i).getQuestions().size(); y++){
+                for(int y = 0; y < userQuizArrayList.get(i).getQuestions().size(); y++){
 
                     ContentValues questionValues = new ContentValues();
 
 
-                    UserQuestion tmpQuestion = (UserQuestion) quizArrayList.get(i).getQuestion(y);
+                    UserQuestion tmpQuestion = (UserQuestion) userQuizArrayList.get(i).getQuestion(y);
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_TITLE, tmpQuestion.getQuestionText());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_CORRECT_ANSWER, tmpQuestion.getOrderedList().get(0).getData());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_INCORRECT_ANSWER_1, tmpQuestion.getOrderedList().get(1).getData());
@@ -88,7 +88,7 @@ public class KwizGeeQDataSource {
         public Cursor selectAllQuizes(){
             Cursor cursor =  mDatabase.query(
                 KwizGeeQSQLiteHelper.TABLE_QUIZES,
-                new String[] {KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, (String) KwizGeeQSQLiteHelper.COLUMN_COLOR},  //Column names
+                new String[] {KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, KwizGeeQSQLiteHelper.COLUMN_COLOR},  //Column names
                     null, //where clause
                     null, //where params
                     null, //Grop by
@@ -127,18 +127,19 @@ public class KwizGeeQDataSource {
         Cursor cursor = selectAllQuizes();
         //String[] ny = cursor.getColumnNames();
 
-        ArrayList<Quiz> tmpQuizList = new ArrayList<Quiz>();
+        ArrayList<UserQuiz> tmpQuizList = new ArrayList<>();
         int columnIndexName = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME);
         int columnIndexColor = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_COLOR);
         cursor.moveToFirst();
 
         while (cursor.moveToNext()){
             int tmpInt = Integer.parseInt(cursor.getString(columnIndexColor));
-            UserQuiz tmp = new UserQuiz(cursor.getString(columnIndexName),  tmpInt);
+            String tmpName =  cursor.getString(columnIndexName);
+            UserQuiz tmp = new UserQuiz(tmpName,  tmpInt);
             tmpQuizList.add(tmp);
             cursor.moveToNext();
         }
-        KwizGeeQ.getInstance().setQuizList(tmpQuizList);
+        KwizGeeQ.getInstance().setUserQuizList(tmpQuizList);
     };
 
 
@@ -163,7 +164,7 @@ public class KwizGeeQDataSource {
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_1), false, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_2), false, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_3), false, AnswerType.TEXT);
-            KwizGeeQ.getInstance().getQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).addQuestion(tmpQuestion);
+            KwizGeeQ.getInstance().getUserQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).addQuestion(tmpQuestion);
         }
 
     };
