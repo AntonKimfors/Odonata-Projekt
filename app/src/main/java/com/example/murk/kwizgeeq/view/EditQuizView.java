@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
 import com.example.murk.kwizgeeq.activity.QuizListActivity;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.R;
@@ -33,7 +34,7 @@ public class EditQuizView extends Observable {
     private final Class<? extends Activity> createQuestionActivity;
     private final Activity currentActivity;
     final private Button btnColorPicker;
-    private int index;
+    private UserQuiz quiz;
     private Context context;
     private ListView listView;
     private EditText editText;
@@ -43,14 +44,14 @@ public class EditQuizView extends Observable {
     private int mSelectedColor;
 
     public EditQuizView(final Class<? extends Activity> createQuestionActivity, final UserQuiz quiz,
-                        final ListView listView, final Context context, final Activity currentActivity,
-                        EditText editText, final Button btnColorPicker) {
+                        final ListView listView, final Context context, final Activity currentActivity) {
         this.createQuestionActivity = createQuestionActivity;
         this.currentActivity = currentActivity;
         this.context = context;
+        this.quiz = quiz;
         this.listView = listView;
-        this.editText = editText;
-        this.btnColorPicker = btnColorPicker;
+        this.editText = (EditText) currentActivity.findViewById(R.id.etQuizLabel);
+        this.btnColorPicker = (Button) currentActivity.findViewById(R.id.btnColorPicker);
         mSelectedColor = quiz.getListColor();
         this.btnColorPicker.setBackgroundColor(mSelectedColor);
         this.editText.setText(quiz.getName());
@@ -64,12 +65,12 @@ public class EditQuizView extends Observable {
         return editText.getText().toString();
     }
 
-    public void fabPressed(List<Question> questions,int index) {
+    public void fabPressed(List<Question> questions, int index) {
         Intent intent = new Intent(context, createQuestionActivity);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("questions",(Serializable)questions);
+        bundle.putSerializable("questions", (Serializable) questions);
         intent.putExtras(bundle);
-        intent.putExtra("questionIndex",index);
+        intent.putExtra("questionIndex", index);
         //the quiz index should be decided by controller and sent in to this method when called
         currentActivity.startActivity(intent);
     }
@@ -85,7 +86,7 @@ public class EditQuizView extends Observable {
     public void changeView(List<Question> questions, int questionIndex) {
         Intent intent = new Intent(context, createQuestionActivity);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("questions",(Serializable)questions);
+        bundle.putSerializable("questions", (Serializable) questions);
         intent.putExtras(bundle);
         intent.putExtra("questionIndex", questionIndex);// TODO: change this to work with serializable
 
@@ -116,7 +117,7 @@ public class EditQuizView extends Observable {
             public void onColorSelected(int color) {
                 mSelectedColor = color;
                 btnColorPicker.setBackgroundColor(mSelectedColor);
-                model.getQuiz(index).setListColor(mSelectedColor);
+                quiz.setListColor(mSelectedColor);
                 currentActivity.finish();
                 currentActivity.startActivity((currentActivity).getIntent());
 

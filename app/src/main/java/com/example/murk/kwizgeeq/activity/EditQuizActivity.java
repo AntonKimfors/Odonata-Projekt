@@ -35,13 +35,11 @@ public class EditQuizActivity extends ListActivity {
 
 
         ActivityEditQuizBinding binding;
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_edit_quiz);
-        view = new EditQuizView(EditQuestionActivity.class,quiz, getListView(), this, this, (EditText) findViewById(R.id.etQuizLabel),(Button) findViewById(R.id.btnColorPicker));
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_quiz);
+        view = new EditQuizView(EditQuestionActivity.class, quiz, getListView(), this, this);
 
 
-
-
-        controller = new EditQuizController(view,quiz);
+        controller = new EditQuizController(view, quiz);
         binding.setController(controller);
         view.addObserver(controller);
         controller.onCreate();
@@ -49,7 +47,7 @@ public class EditQuizActivity extends ListActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         controller.saveQuizName();
         view.reloadView();
     }
