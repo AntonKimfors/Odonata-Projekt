@@ -47,6 +47,15 @@ public class EditQuizController implements Controller, Observer {
             }
 
         };
+        AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int questionIndex, long id) {
+                editQuizview.openLongPressDialog(questions,questionIndex);
+                return true;
+            }
+
+        };
+        editQuizview.setOnItemLongClickListener(itemLongClickListener);
         editQuizview.setColorItemClickedListener(colorOnClickListener);
         editQuizview.setOnListItemClickedListener(onItemClickListener);
     }

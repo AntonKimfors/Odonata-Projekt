@@ -2,9 +2,11 @@ package com.example.murk.kwizgeeq.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -31,7 +33,7 @@ import java.util.Observable;
 
 public class EditQuizView extends Observable {
 
-    private final Class<? extends Activity> createQuestionActivity;
+    private final Class<? extends Activity> editQuestionActivity;
     private final Activity currentActivity;
     final private Button btnColorPicker;
     private UserQuiz quiz;
@@ -43,9 +45,9 @@ public class EditQuizView extends Observable {
     private FloatingActionButton fab;
     private int mSelectedColor;
 
-    public EditQuizView(final Class<? extends Activity> createQuestionActivity, final UserQuiz quiz,
+    public EditQuizView(final Class<? extends Activity> editQuestionActivity, final UserQuiz quiz,
                         final ListView listView, final Context context, final Activity currentActivity) {
-        this.createQuestionActivity = createQuestionActivity;
+        this.editQuestionActivity = editQuestionActivity;
         this.currentActivity = currentActivity;
         this.context = context;
         this.quiz = quiz;
@@ -66,7 +68,7 @@ public class EditQuizView extends Observable {
     }
 
     public void fabPressed(List<Question> questions, int index) {
-        Intent intent = new Intent(context, createQuestionActivity);
+        Intent intent = new Intent(context, editQuestionActivity);
         Bundle bundle = new Bundle();
         bundle.putSerializable("questions", (Serializable) questions);
         intent.putExtras(bundle);
@@ -82,9 +84,12 @@ public class EditQuizView extends Observable {
     public void setOnListItemClickedListener(AdapterView.OnItemClickListener listener) {
         listView.setOnItemClickListener(listener);
     }
+    public void setOnItemLongClickListener(AdapterView.OnItemLongClickListener listener) {
+        listView.setOnItemLongClickListener(listener);
+    }
 
     public void changeView(List<Question> questions, int questionIndex) {
-        Intent intent = new Intent(context, createQuestionActivity);
+        Intent intent = new Intent(context, editQuestionActivity);
         Bundle bundle = new Bundle();
         bundle.putSerializable("questions", (Serializable) questions);
         intent.putExtras(bundle);
@@ -126,6 +131,52 @@ public class EditQuizView extends Observable {
         });
 
         dialog.show(currentActivity.getFragmentManager(), "color_dialog_test");
+    }
+    public void openLongPressDialog(final List<Question> questions, final int questionIndex) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(currentActivity)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Edit UserQuiz?")
+                .setMessage("Do you want to Edit or Delete the quiz?");
+
+        final AlertDialog ad = alertDialog.create();
+
+        alertDialog.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(context, editQuestionActivity);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("questions",(Serializable) questions);
+                intent.putExtra("quizIndex",questionIndex);
+                intent.putExtras(bundle);
+
+                currentActivity.startActivity(intent);
+            }
+        })
+                .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        quiz.getQuestions().remove(questionIndex);
+
+                        currentActivity.finish();
+                        currentActivity.startActivity((currentActivity).getIntent());
+
+                    }
+                })
+
+
+
+                .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    //Går detta att flytta ut??
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ad.dismiss();
+                    }
+                })
+
+                .show();
     }
 }
 
