@@ -4,25 +4,23 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.murk.kwizgeeq.controller.EditQuizController;
 
 import com.example.murk.kwizgeeq.databinding.ActivityEditQuizBinding;
 
+import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.*;
 import com.example.murk.kwizgeeq.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EditQuizActivity extends ListActivity {
-
-    private UserQuiz quiz;
     private EditQuizController controller;
     private EditQuizView view;
+    private final int questionListRequestCode = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +29,13 @@ public class EditQuizActivity extends ListActivity {
         //int index = getIntent().getIntExtra("quizIndex", 0);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        quiz = (UserQuiz) bundle.getSerializable("quiz");
+        UserQuiz quiz = (UserQuiz) bundle.getSerializable("quiz");
 
 
         ActivityEditQuizBinding binding;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_quiz);
-        view = new EditQuizView(EditQuestionActivity.class, quiz, getListView(), this, this);
+        view = new EditQuizView(EditQuestionActivity.class, quiz, getListView(), this, this,
+                questionListRequestCode);
 
 
         controller = new EditQuizController(view, quiz);
@@ -62,6 +61,16 @@ public class EditQuizActivity extends ListActivity {
     protected void onResume() {
         super.onResume();
         controller.onResume();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == questionListRequestCode && resultCode == RESULT_OK){
+            if(data.getSerializableExtra("questions")!=null){
+                ArrayList<Question> questions = (ArrayList)data.getSerializableExtra("questions");
+                controller.setQuestionList(questions);
+            }
+        }
     }
 
 

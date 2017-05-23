@@ -94,6 +94,8 @@ public class UserQuestion extends Question implements Serializable {
 
     @Override
     public String toString(){
-        return questionText;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Question: ").append(questionText).append(super.toString());
+        return sb.toString();
     }
 }

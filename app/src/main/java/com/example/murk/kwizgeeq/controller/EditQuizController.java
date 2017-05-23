@@ -7,6 +7,7 @@ import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.EditQuizView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -94,6 +95,10 @@ public class EditQuizController implements Controller, Observer {
     @Override
     public void update(Observable o, Object arg) {
 
+    }
+
+    public void setQuestionList(ArrayList<Question> newQuestions) {
+        quiz.replaceQuestions(newQuestions);
     }
 }
 

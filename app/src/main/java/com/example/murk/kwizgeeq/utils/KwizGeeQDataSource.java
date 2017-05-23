@@ -164,7 +164,7 @@ public class KwizGeeQDataSource {
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_1), false, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_2), false, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_3), false, AnswerType.TEXT);
-            KwizGeeQ.getInstance().getUserQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).addQuestion(tmpQuestion);
+            KwizGeeQ.getInstance().getUserQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).getQuestions().add(tmpQuestion);
         }
 
     };

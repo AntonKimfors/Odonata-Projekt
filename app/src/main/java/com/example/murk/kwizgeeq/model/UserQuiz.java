@@ -1,5 +1,8 @@
 package com.example.murk.kwizgeeq.model;
 
+import com.example.murk.kwizgeeq.events.EventBusWrapper;
+import com.google.common.eventbus.EventBus;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -42,6 +45,13 @@ public class UserQuiz implements Iterable, Serializable{
         return questions;
     }
 
+    public void replaceQuestions(ArrayList<Question> newQuestions){
+        questions.clear();
+        questions.addAll(newQuestions);
+
+        EventBusWrapper.BUS.post(this);
+    }
+
     public void removeQuestion(Question question){
         questions.remove(question);
     }
@@ -52,10 +62,6 @@ public class UserQuiz implements Iterable, Serializable{
 
     public Question getQuestion(int questionIndex){
         return questions.get(questionIndex);
-    }
-
-    public void addQuestion(Question question){
-        questions.add(question);
     }
 
     public Iterator<Question> questionsOnIndexIterator(List<Integer> indexes){

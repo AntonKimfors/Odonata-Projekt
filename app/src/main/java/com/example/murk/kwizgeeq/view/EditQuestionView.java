@@ -277,16 +277,19 @@ public class EditQuestionView extends Observable {
 
     public void addMoreQuestions(List<Question> questions, int nextQuestionIndex){
         Intent intent = new Intent(currentActivity, editQuestionActivityClass);
-        Bundle bundle = new Bundle();
+        Bundle bundle = currentActivity.getIntent().getExtras();
         bundle.putSerializable("questions",(Serializable)questions);
         intent.putExtras(bundle);
         intent.putExtra("questionIndex",nextQuestionIndex);
         currentActivity.startActivityForResult(intent,questionEditingRequestCode);
     }
 
-    public void killEditQuestionActivity(){
-        currentActivity.setResult(Activity.RESULT_CANCELED);
-        System.out.println(userQuestion.toString());
+    public void killEditQuestionActivity(List<Question> questions){
+        Intent intent = currentActivity.getIntent();
+        Bundle bundle = intent.getExtras();
+        bundle.putSerializable("questions",(Serializable)questions);
+        intent.putExtras(bundle);
+        currentActivity.setResult(Activity.RESULT_OK,intent);
         currentActivity.finish();
     }
 

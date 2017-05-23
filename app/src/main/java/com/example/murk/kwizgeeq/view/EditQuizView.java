@@ -18,11 +18,13 @@ import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuiz;
+import com.google.common.eventbus.Subscribe;
 
 import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -42,9 +44,12 @@ public class EditQuizView extends Observable {
     private EditText editText;
     private EditQuizAdapter adapter;
     private int mSelectedColor;
+    private final int questionListRequestCode;
 
     public EditQuizView(final Class<? extends Activity> editQuestionActivity, final UserQuiz quiz,
-                        final ListView listView, final Context context, final Activity currentActivity) {
+                        final ListView listView, final Context context, final Activity currentActivity,
+                        int questionListRequestCode) {
+
         this.editQuestionActivity = editQuestionActivity;
         this.currentActivity = currentActivity;
         this.context = context;
@@ -53,12 +58,11 @@ public class EditQuizView extends Observable {
         this.editText = (EditText) currentActivity.findViewById(R.id.etQuizLabel);
         this.btnColorPicker = (Button) currentActivity.findViewById(R.id.btnColorPicker);
         mSelectedColor = quiz.getListColor();
+        this.questionListRequestCode = questionListRequestCode;
         this.btnColorPicker.setBackgroundColor(mSelectedColor);
         this.editText.setText(quiz.getName());
         this.adapter = new EditQuizAdapter(context, quiz.getQuestions(), quiz);
         listView.setAdapter(adapter);
-
-
     }
 
     public String getQuizName() {
@@ -72,7 +76,7 @@ public class EditQuizView extends Observable {
         intent.putExtras(bundle);
         intent.putExtra("questionIndex", index);
         //the quiz index should be decided by controller and sent in to this method when called
-        currentActivity.startActivity(intent);
+        currentActivity.startActivityForResult(intent,questionListRequestCode);
     }
 
     public void setColorItemClickedListener(View.OnClickListener listener) {
@@ -93,7 +97,7 @@ public class EditQuizView extends Observable {
         intent.putExtras(bundle);
         intent.putExtra("questionIndex", questionIndex);// TODO: change this to work with serializable
 
-        currentActivity.startActivity(intent);
+        currentActivity.startActivityForResult(intent,questionListRequestCode);
     }
 
     public void reloadView() {
@@ -130,6 +134,9 @@ public class EditQuizView extends Observable {
 
         dialog.show(currentActivity.getFragmentManager(), "color_dialog_test");
     }
+
+
+
     public void openLongPressDialog(final List<Question> questions, final int questionIndex) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(currentActivity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -148,7 +155,7 @@ public class EditQuizView extends Observable {
                 intent.putExtra("questionIndex",questionIndex);
                 intent.putExtras(bundle);
 
-                currentActivity.startActivity(intent);
+                currentActivity.startActivityForResult(intent,questionListRequestCode);
             }
         })
                 .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
@@ -175,6 +182,13 @@ public class EditQuizView extends Observable {
                 })
 
                 .show();
+    }
+
+    @Subscribe
+    public void update(UserQuiz userQuiz){
+        if(this.quiz == userQuiz){
+            adapter.notifyDataSetChanged();
+        }
     }
 }
 

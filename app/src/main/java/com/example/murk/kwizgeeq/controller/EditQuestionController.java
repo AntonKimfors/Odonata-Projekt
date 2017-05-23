@@ -131,7 +131,7 @@ public class EditQuestionController implements Observer{
                 saveTextAnswers();
             }
         }
-        editQuestionView.killEditQuestionActivity();
+        editQuestionView.killEditQuestionActivity(questions);
     }
 
     private void removeQuestion(){

@@ -68,8 +68,9 @@ public class EditQuestionActivity extends AppCompatActivity{
             editQuestionController.imageCreated();
         }
 
-        if (requestCode == questionEditingRequestCode && resultCode == RESULT_CANCELED) {
-            setResult(RESULT_CANCELED);
+        if (requestCode == questionEditingRequestCode && resultCode == RESULT_OK) {
+            setResult(RESULT_OK,getIntent());
+            getIntent().putExtras(data.getExtras());
             finish();
         }
     }
