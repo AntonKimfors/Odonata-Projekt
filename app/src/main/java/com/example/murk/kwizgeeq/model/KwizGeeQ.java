@@ -15,16 +15,16 @@ public class KwizGeeQ implements Serializable{
     private Statistics globalStatistics;
     private static KwizGeeQ singletonInstance = null;
 
-
+    /*
     public static KwizGeeQ getInstance(){
         if (singletonInstance == null){
             singletonInstance = new KwizGeeQ();
         }
 
         return singletonInstance;
-    }
+    }*/
 
-    private KwizGeeQ(){
+    public KwizGeeQ(){
         userQuizList = new ArrayList<UserQuiz>();
         globalStatistics = new Statistics();
     }

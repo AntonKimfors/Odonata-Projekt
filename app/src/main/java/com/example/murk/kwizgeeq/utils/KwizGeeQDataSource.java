@@ -26,6 +26,7 @@ import java.util.ArrayList;
  */
 
 public class KwizGeeQDataSource {
+    /*
 
     private static Context mContext;
     private static KwizGeeQSQLiteHelper mQuizSqliteHelper;
@@ -143,7 +144,7 @@ public class KwizGeeQDataSource {
     };
 
 
-
+/*
     public void updateCurrentListWithDatabaseQuestions(){
         Cursor cursor = selectAllQuestions();
         //ArrayList<Answer> tmpAnswerList = new ArrayList<>();
@@ -179,6 +180,6 @@ public class KwizGeeQDataSource {
             null, //where clause
             null //where params
         );
-    };
+    };*/
 
 }

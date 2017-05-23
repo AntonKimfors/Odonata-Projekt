@@ -39,7 +39,7 @@ public class QuizListController implements Controller, Observer{
     private final View.OnClickListener mPickColorListener;
 
     private QuizListView quizListView;
-    private KwizGeeQ model;
+    private KwizGeeQ kwizGeeQ;
     private Context context;
     private Activity currentActivity;
     private List<UserQuiz> quizList;
@@ -47,17 +47,19 @@ public class QuizListController implements Controller, Observer{
     //private Activity currentActivity;
 
     public QuizListController(QuizListView view, Context context, Activity currentActivity) {
+        this.kwizGeeQ = new KwizGeeQ();
         this.quizListView = view;
         this.context = context;
         this.currentActivity = currentActivity;
-        model = KwizGeeQ.getInstance();
-        quizList = model.getUserQuizList();
-        mKwizGeeQDataSource = new KwizGeeQDataSource(context);
+        quizList = kwizGeeQ.getUserQuizList();
+        //mKwizGeeQDataSource = new KwizGeeQDataSource(context);
+
+        quizListView.setQuestions((ArrayList)quizList);
 
         AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int quizIndex, long id) {
-                quizListView.startQuestioneer(quizIndex);
+                quizListView.startQuestioneer(quizList.get(quizIndex));
             }
         };
 
@@ -84,6 +86,7 @@ public class QuizListController implements Controller, Observer{
                 int color = quizListView.getmSelectedColor();
                 UserQuiz newQuiz = new UserQuiz(quizTitle, color);
                 quizListView.createNewQuiz(newQuiz);
+                quizListView.dismissCreationDialog();
             }
         };
         quizListView.setmCreateQuizOnClickListener(createQuizListener);
@@ -102,7 +105,7 @@ public class QuizListController implements Controller, Observer{
         mCancelListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                quizListView.dismissDialog();
+                quizListView.dismissCreationDialog();
             }
         };
         quizListView.setmCancelOnClickListener(mCancelListener);
@@ -120,16 +123,16 @@ public class QuizListController implements Controller, Observer{
 
 
     public static void saveCurrentData() {
-        ArrayList<UserQuiz> tmpQuizList = KwizGeeQ.getInstance().getUserQuizList();
+        /*ArrayList<UserQuiz> tmpQuizList = KwizGeeQ.getInstance().getUserQuizList();
         mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.insertQuizes(tmpQuizList);
-        mKwizGeeQDataSource.close();
+        mKwizGeeQDataSource.close();*/
     }
 
     public static void readCurrentData() {
-        mKwizGeeQDataSource.open();
+        /*mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.updateList();
-        mKwizGeeQDataSource.close();
+        mKwizGeeQDataSource.close();*/
     }
 
     private DialogInterface.OnClickListener getPositiveListener(final int quizIndex){
@@ -137,6 +140,7 @@ public class QuizListController implements Controller, Observer{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 quizListView.editQuiz(quizList.get(quizIndex),quizIndex);
+                quizListView.dismissAlertDialog();
             }
         };
     }
@@ -145,7 +149,7 @@ public class QuizListController implements Controller, Observer{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                model.removeQuiz(quizIndex);
+                kwizGeeQ.removeQuiz(quizIndex);
             }
         };
     }
@@ -192,13 +196,13 @@ public class QuizListController implements Controller, Observer{
 
     public void addQuiz(Serializable quiz) {
         if(quiz instanceof UserQuiz){
-            model.addQuiz((UserQuiz)quiz);
+            kwizGeeQ.addQuiz((UserQuiz)quiz);
         }
     }
 
     public void replaceQuiz(Serializable quiz, int quizIndex) {
         if(quiz instanceof UserQuiz){
-            model.replaceQuiz(quizIndex,(UserQuiz)quiz);
+            kwizGeeQ.replaceQuiz(quizIndex,(UserQuiz)quiz);
         }
     }
 }

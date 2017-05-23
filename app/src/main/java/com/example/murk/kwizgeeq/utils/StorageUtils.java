@@ -30,7 +30,7 @@ public class StorageUtils {
     //TODO: DELETE CLASS??
 
 
-
+    /*
     public static void saveQuizList(Context context) {
         //TODO: Try saving the data
 
@@ -127,7 +127,7 @@ public class StorageUtils {
     public static String getImageName(){
         //TODO: REturn a image name
         return "image.jpg";
-    }
+    }*/
 
 
 }

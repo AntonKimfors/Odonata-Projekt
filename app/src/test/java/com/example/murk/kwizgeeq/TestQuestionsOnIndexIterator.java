@@ -11,7 +11,7 @@ import java.util.*;
  */
 
 public class TestQuestionsOnIndexIterator {
-    @Test
+    /*@Test
     public void testIterator(){
         UserQuiz userQuiz = new UserQuiz("test",0);
 
@@ -45,5 +45,5 @@ public class TestQuestionsOnIndexIterator {
         userQuestion.addAnswer("WrongC"+i,false,AnswerType.TEXT);
 
         return userQuestion;
-    }
+    }*/
 }

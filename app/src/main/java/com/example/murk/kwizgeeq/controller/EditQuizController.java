@@ -100,6 +100,11 @@ public class EditQuizController implements Controller, Observer {
     public void setQuestionList(ArrayList<Question> newQuestions) {
         quiz.replaceQuestions(newQuestions);
     }
+
+    public void onBackPressed() {
+        saveQuizName();
+        editQuizview.quitQuizEditing();
+    }
 }
 
 

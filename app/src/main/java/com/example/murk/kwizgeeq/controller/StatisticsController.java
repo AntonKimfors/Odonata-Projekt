@@ -26,7 +26,7 @@ public class StatisticsController implements Controller, Observer {
 
     public StatisticsController(StatisticsView view, Activity currentActivity, Class<? extends Activity> switchActivityClass) {
         this.view = view;
-        this.model = KwizGeeQ.getInstance();
+        //this.model = KwizGeeQ.getInstance();
         this.currentActivity = currentActivity;
         this.switchActivityClass = switchActivityClass;
         this.quiz = (UserQuiz) currentActivity.getIntent().getSerializableExtra("quiz");

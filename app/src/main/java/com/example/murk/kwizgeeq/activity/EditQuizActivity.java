@@ -15,11 +15,11 @@ import com.example.murk.kwizgeeq.view.*;
 import com.example.murk.kwizgeeq.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class EditQuizActivity extends ListActivity {
     private EditQuizController controller;
     private EditQuizView view;
+    private int quizIndex;
     private final int questionListRequestCode = 3000;
 
     @Override
@@ -30,12 +30,13 @@ public class EditQuizActivity extends ListActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         UserQuiz quiz = (UserQuiz) bundle.getSerializable("quiz");
+        quizIndex = intent.getIntExtra("quizIndex",0);
 
 
         ActivityEditQuizBinding binding;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_quiz);
         view = new EditQuizView(EditQuestionActivity.class, quiz, getListView(), this, this,
-                questionListRequestCode);
+                questionListRequestCode, quizIndex);
 
 
         controller = new EditQuizController(view, quiz);
@@ -47,8 +48,7 @@ public class EditQuizActivity extends ListActivity {
 
     @Override
     public void onBackPressed() {
-        controller.saveQuizName();
-        view.reloadView();
+        controller.onBackPressed();
     }
 
     @Override

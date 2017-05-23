@@ -43,7 +43,7 @@ public class QuestioneerController implements Controller, Observer{
 
     public QuestioneerController(Activity activity, QuestioneerView view) {
         this.view = view;
-        this.model = KwizGeeQ.getInstance();
+        //this.model = KwizGeeQ.getInstance();
         this.currentActivity = activity;
         this.outReplayIndexList = new ArrayList<>();
         this.inReplayIndexList = new ArrayList<>();
