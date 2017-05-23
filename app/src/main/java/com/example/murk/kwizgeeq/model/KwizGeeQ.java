@@ -1,5 +1,7 @@
 package com.example.murk.kwizgeeq.model;
 
+import com.example.murk.kwizgeeq.events.EventBusWrapper;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -47,15 +49,9 @@ public class KwizGeeQ implements Serializable{
         throw new IndexOutOfBoundsException("UserQuiz on index "+ quizIndex +" does not exist.");
     }
 
-    public ArrayList<Question> getQuestionList(int quizIndex){
-        if(quizIndex < userQuizList.size()-1)
-            return userQuizList.get(quizIndex).getQuestions();
-        else
-            throw new IndexOutOfBoundsException("UserQuiz on index "+ quizIndex +" does not exist.");
-    }
-
-    public void removeQuiz(UserQuiz userQuiz){
-        userQuizList.remove(userQuiz);
+    public void removeQuiz(int quizIndex){
+        userQuizList.remove(quizIndex);
+        EventBusWrapper.BUS.post(this);
     }
 
     public String getQuizName(int quizIndex){
@@ -64,5 +60,15 @@ public class KwizGeeQ implements Serializable{
 
     public Statistics getGlobalStatistics() {
         return globalStatistics;
+    }
+
+    public void addQuiz(UserQuiz quiz) {
+        userQuizList.add(quiz);
+        EventBusWrapper.BUS.post(this);
+    }
+
+    public void replaceQuiz(int quizIndex, UserQuiz quiz) {
+        userQuizList.set(quizIndex,quiz);
+        EventBusWrapper.BUS.post(this);
     }
 }

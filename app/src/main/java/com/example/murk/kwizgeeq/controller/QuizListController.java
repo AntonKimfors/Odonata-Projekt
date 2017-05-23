@@ -32,6 +32,12 @@ import java.util.Observer;
 
 public class QuizListController implements Controller, Observer{
 
+    private final AdapterView.OnItemLongClickListener itemLongClickListener;
+    private final View.OnClickListener createQuizListener;
+    private final ColorPickerSwatch.OnColorSelectedListener colorPickerListener;
+    private final View.OnClickListener mCancelListener;
+    private final View.OnClickListener mPickColorListener;
+
     private QuizListView quizListView;
     private KwizGeeQ model;
     private Context context;
@@ -57,7 +63,7 @@ public class QuizListController implements Controller, Observer{
 
         view.setOnListItemClickedListener(onItemClickListener);
 
-        AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener(){
+        itemLongClickListener = new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int quizIndex, long id) {
                 quizListView.showAlertDialog();
@@ -71,7 +77,7 @@ public class QuizListController implements Controller, Observer{
         };
         view.setOnItemLongClickListener(itemLongClickListener);
 
-        View.OnClickListener createQuizListener = new View.OnClickListener() {
+        createQuizListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String quizTitle = quizListView.getQuizName();
@@ -82,8 +88,7 @@ public class QuizListController implements Controller, Observer{
         };
         quizListView.setmCreateQuizOnClickListener(createQuizListener);
 
-        ColorPickerSwatch.OnColorSelectedListener colorPickerListener =
-                new ColorPickerSwatch.OnColorSelectedListener() {
+        colorPickerListener = new ColorPickerSwatch.OnColorSelectedListener() {
 
             @Override
             public void onColorSelected(int color) {
@@ -94,8 +99,7 @@ public class QuizListController implements Controller, Observer{
         };
         quizListView.setColorPickerListener(colorPickerListener);
 
-        View.OnClickListener mCancelListener = new View.OnClickListener() {
-
+        mCancelListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 quizListView.dismissDialog();
@@ -103,7 +107,7 @@ public class QuizListController implements Controller, Observer{
         };
         quizListView.setmCancelOnClickListener(mCancelListener);
 
-        View.OnClickListener mPickColorListener = new View.OnClickListener(){
+        mPickColorListener = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 quizListView.showColorDialog();
@@ -141,7 +145,7 @@ public class QuizListController implements Controller, Observer{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                quizList.remove(quizIndex);
+                model.removeQuiz(quizIndex);
             }
         };
     }
@@ -150,7 +154,7 @@ public class QuizListController implements Controller, Observer{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                quizListView.dismissDialog();
+                quizListView.dismissAlertDialog();
             }
         };
     }
@@ -188,13 +192,13 @@ public class QuizListController implements Controller, Observer{
 
     public void addQuiz(Serializable quiz) {
         if(quiz instanceof UserQuiz){
-            quizList.add((UserQuiz)quiz);
+            model.addQuiz((UserQuiz)quiz);
         }
     }
 
     public void replaceQuiz(Serializable quiz, int quizIndex) {
         if(quiz instanceof UserQuiz){
-            quizList.set(quizIndex,(UserQuiz)quiz);
+            model.replaceQuiz(quizIndex,(UserQuiz)quiz);
         }
     }
 }
