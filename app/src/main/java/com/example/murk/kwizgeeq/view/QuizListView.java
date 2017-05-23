@@ -17,14 +17,12 @@ import android.widget.ListView;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
-import com.example.murk.kwizgeeq.model.Statistics;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
 
 import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
 
-import java.io.Serializable;
 import java.util.Observable;
 
 /**
@@ -41,13 +39,23 @@ public class QuizListView extends Observable {
     private QuizListAdapter adapter;
     private FloatingActionButton fab;
     private Context context;
+    private int editQuizRequestCode;
+    private int createQuizRequestCode;
 
 
-    public QuizListView(final ListView listView, final Context context, final Activity currentActivity, final Class<? extends Activity> editQuizActivityClass, final Class<? extends Activity> questioneerActivityClass, FloatingActionButton fab, final KwizGeeQDataSource mKwizGeeQDataSource) {
+    public QuizListView(final ListView listView, final Context context,
+                        final Activity currentActivity,
+                        final Class<? extends Activity> editQuizActivityClass,
+                        final Class<? extends Activity> questioneerActivityClass,
+                        FloatingActionButton fab, final KwizGeeQDataSource mKwizGeeQDataSource,
+                        int editQuizRequestCode, int createQuizRequestCode) {
+
         this.listView = listView;
         this.context = context;
         this.editQuizActivityClass = editQuizActivityClass;
         this.questioneerActivityClass = questioneerActivityClass;
+        this.editQuizRequestCode = editQuizRequestCode;
+        this.createQuizRequestCode = createQuizRequestCode;
         this.model = KwizGeeQ.getInstance();
         this.currentActivity = currentActivity;
         this.fab = fab;
@@ -74,7 +82,6 @@ public class QuizListView extends Observable {
         mPickColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 int[] mColors = context.getResources().getIntArray(R.array.default_rainbow);
 
@@ -119,7 +126,7 @@ public class QuizListView extends Observable {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("quiz",newQuiz);
                 intent.putExtras(bundle);
-                currentActivity.startActivity(intent);
+                currentActivity.startActivityForResult(intent,createQuizRequestCode);
             }
         });
         mCancel.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +137,6 @@ public class QuizListView extends Observable {
         });
     }
 
-
     public void setOnListItemClickedListener(AdapterView.OnItemClickListener listener) {
         listView.setOnItemClickListener(listener);
     }
@@ -140,7 +146,15 @@ public class QuizListView extends Observable {
     }
 
 
-    public void changeView(int quizIndex) {
+    public void createNewQuiz(UserQuiz quiz){
+        Intent intent = new Intent(context, editQuizActivityClass);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("quiz",quiz);
+        intent.putExtras(bundle);
+        currentActivity.startActivityForResult(intent,createQuizRequestCode);
+    }
+
+    public void startQuestioneer(int quizIndex) {
         Intent intent = new Intent(context, questioneerActivityClass);
         intent.putExtra("quiz", model.getQuiz(quizIndex));
         currentActivity.startActivity(intent);
@@ -163,7 +177,7 @@ public class QuizListView extends Observable {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("quiz",model.getQuiz(quizIndex));
                 intent.putExtras(bundle);
-                currentActivity.startActivity(intent);
+                currentActivity.startActivityForResult(intent, editQuizRequestCode);
             }
         })
                 .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {

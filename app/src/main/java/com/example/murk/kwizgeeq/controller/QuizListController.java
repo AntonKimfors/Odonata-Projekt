@@ -4,26 +4,20 @@ package com.example.murk.kwizgeeq.controller;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
 import android.view.View;
 import android.widget.AdapterView;
 
 
-import com.example.murk.kwizgeeq.model.AnswerType;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.UserQuiz;
-import com.example.murk.kwizgeeq.model.Statistics;
-import com.example.murk.kwizgeeq.model.UserQuestion;
 
-import com.example.murk.kwizgeeq.model.UserQuiz;
-import com.example.murk.kwizgeeq.utils.FileUtilites;
 import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
-import com.example.murk.kwizgeeq.utils.StorageUtils;
 
 import com.example.murk.kwizgeeq.view.QuizListView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -39,6 +33,7 @@ public class QuizListController implements Controller, Observer{
     private KwizGeeQ model;
     private Context context;
     private Activity currentActivity;
+    private List<UserQuiz> quizList;
     public static KwizGeeQDataSource mKwizGeeQDataSource;
     //private Activity currentActivity;
 
@@ -47,12 +42,13 @@ public class QuizListController implements Controller, Observer{
         this.context = context;
         this.currentActivity = currentActivity;
         model = KwizGeeQ.getInstance();
+        quizList = model.getUserQuizList();
         mKwizGeeQDataSource = new KwizGeeQDataSource(context);
 
         AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int quizIndex, long id) {
-                quizListView.changeView(quizIndex);
+                quizListView.startQuestioneer(quizIndex);
             }
         };
 
@@ -116,5 +112,16 @@ public class QuizListController implements Controller, Observer{
 
     }
 
+    public void addQuiz(Serializable quiz) {
+        if(quiz instanceof UserQuiz){
+            quizList.add((UserQuiz)quiz);
+        }
+    }
+
+    public void replaceQuiz(Serializable quiz, int quizIndex) {
+        if(quiz instanceof UserQuiz){
+            quizList.set(quizIndex,(UserQuiz)quiz);
+        }
+    }
 }
 
