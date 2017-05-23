@@ -4,6 +4,7 @@ package com.example.murk.kwizgeeq.controller;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -14,6 +15,8 @@ import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
 
 import com.example.murk.kwizgeeq.view.QuizListView;
+
+import org.xdty.preference.colorpicker.ColorPickerSwatch;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -56,13 +59,59 @@ public class QuizListController implements Controller, Observer{
 
         AdapterView.OnItemLongClickListener itemLongClickListener = new AdapterView.OnItemLongClickListener(){
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int questionIndex, long id) {
-                quizListView.openLongPressDialog(questionIndex);
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int quizIndex, long id) {
+                quizListView.showAlertDialog();
+                quizListView.setAlertDialogPositiveListener(getPositiveListener(quizIndex));
+                quizListView.setAlertDialogNegativeListener(getNegativeListener(quizIndex));
+                quizListView.setAlertDialogNeutralListener(getDismissListener());
+
                 return true;
             }
 
         };
         view.setOnItemLongClickListener(itemLongClickListener);
+
+        View.OnClickListener createQuizListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String quizTitle = quizListView.getQuizName();
+                int color = quizListView.getmSelectedColor();
+                UserQuiz newQuiz = new UserQuiz(quizTitle, color);
+                quizListView.createNewQuiz(newQuiz);
+            }
+        };
+        quizListView.setmCreateQuizOnClickListener(createQuizListener);
+
+        ColorPickerSwatch.OnColorSelectedListener colorPickerListener =
+                new ColorPickerSwatch.OnColorSelectedListener() {
+
+            @Override
+            public void onColorSelected(int color) {
+                quizListView.setmSelectedColor(color);
+                quizListView.updatePickColorBackground();
+            }
+
+        };
+        quizListView.setColorPickerListener(colorPickerListener);
+
+        View.OnClickListener mCancelListener = new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                quizListView.dismissDialog();
+            }
+        };
+        quizListView.setmCancelOnClickListener(mCancelListener);
+
+        View.OnClickListener mPickColorListener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                quizListView.showColorDialog();
+            }
+        };
+        quizListView.setmPickColorListener(mPickColorListener);
+
+
     };
 
 
@@ -79,7 +128,32 @@ public class QuizListController implements Controller, Observer{
         mKwizGeeQDataSource.close();
     }
 
+    private DialogInterface.OnClickListener getPositiveListener(final int quizIndex){
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                quizListView.editQuiz(quizList.get(quizIndex),quizIndex);
+            }
+        };
+    }
 
+    private DialogInterface.OnClickListener getNegativeListener(final int quizIndex){
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                quizList.remove(quizIndex);
+            }
+        };
+    }
+
+    private DialogInterface.OnClickListener getDismissListener(){
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                quizListView.dismissDialog();
+            }
+        };
+    }
 
     public void onClickAction(View view) {
         this.quizListView.fabPressed();

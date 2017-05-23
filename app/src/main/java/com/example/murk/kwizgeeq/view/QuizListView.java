@@ -33,6 +33,15 @@ public class QuizListView extends Observable {
     private final Activity currentActivity;
     private final Class<? extends Activity> editQuizActivityClass;
     private final Class<? extends Activity> questioneerActivityClass;
+    private final EditText quizName;
+    private final Button mCancel;
+    private final Button mCreateQuiz;
+    private final Button mPickColor;
+    private final AlertDialog.Builder mBuilder;
+    private final View mView;
+    private final ColorPickerDialog dialog;
+    private final AlertDialog.Builder alertDialog;
+    private final AlertDialog ad;
     private int mSelectedColor;
     private ListView listView;
     private KwizGeeQ model;
@@ -64,77 +73,65 @@ public class QuizListView extends Observable {
         this.adapter = new QuizListAdapter(context, model.getUserQuizList());
         listView.setAdapter(adapter);
 
+        mBuilder = new AlertDialog.Builder(context);
+        mView = LayoutInflater.from(context).inflate(R.layout.dialog_create_quiz, null);
+        quizName = (EditText) mView.findViewById(R.id.etQuizName);
+        mCancel = (Button) mView.findViewById(R.id.btnCancel);
+        mCreateQuiz = (Button) mView.findViewById(R.id.btnCreateQuiz);
+        mPickColor = (Button) mView.findViewById(R.id.btnPickColor);
+
+
+        int[] mColors = context.getResources().getIntArray(R.array.default_rainbow);
+        dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
+                mColors,
+                mSelectedColor,
+                5, // Number of columns
+                ColorPickerDialog.SIZE_SMALL,
+                true // True or False to enable or disable the serpentine effect
+                //0, // stroke width
+                //Color.BLACK // stroke color
+        );
+
+        alertDialog = new AlertDialog.Builder(currentActivity)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Edit UserQuiz?")
+                .setMessage("Do you want to Edit or Delete the quiz?");
+        ad = alertDialog.create();
+
     }
 
     public void fabPressed() {
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
-        View mView = LayoutInflater.from(context).inflate(R.layout.dialog_create_quiz, null);
-        final EditText quizName = (EditText) mView.findViewById(R.id.etQuizName);
-        Button mCancel = (Button) mView.findViewById(R.id.btnCancel);
-        Button mCreateQuiz = (Button) mView.findViewById(R.id.btnCreateQuiz);
-        final Button mPickColor = (Button) mView.findViewById(R.id.btnPickColor);
-
         mBuilder.setView(mView);
         final AlertDialog dialog = mBuilder.create();
         dialog.show();
-        mSelectedColor = ContextCompat.getColor(context, R.color.flamingo);
-        mPickColor.setBackgroundColor(context.getResources().getColor(R.color.flamingo));
-        mPickColor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    }
 
-                int[] mColors = context.getResources().getIntArray(R.array.default_rainbow);
+    public void setmSelectedColor(int color){
+        mSelectedColor = color;
+    }
 
-                ColorPickerDialog dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
-                        mColors,
-                        mSelectedColor,
-                        5, // Number of columns
-                        ColorPickerDialog.SIZE_SMALL,
-                        true // True or False to enable or disable the serpentine effect
-                        //0, // stroke width
-                        //Color.BLACK // stroke color
-                );
+    public void showColorDialog(){
+        dialog.show(currentActivity.getFragmentManager(), "color_dialog_test");
+    }
 
-                dialog.setOnColorSelectedListener(new ColorPickerSwatch.OnColorSelectedListener() {
+    public void dismissDialog(){
+        dialog.dismiss();
+    }
 
-                    @Override
-                    public void onColorSelected(int color) {
-                        mSelectedColor = color;
-                        mPickColor.setBackgroundColor(mSelectedColor);
+    public void setmCancelOnClickListener(View.OnClickListener listener){
+        mCancel.setOnClickListener(listener);
+    }
 
-                    }
+    public void setmPickColorListener(View.OnClickListener listener){
+        mPickColor.setOnClickListener(listener);
+    }
 
-                });
+    public void setColorPickerListener(ColorPickerSwatch.OnColorSelectedListener listener){
+        dialog.setOnColorSelectedListener(listener);
+    }
 
-                dialog.show(currentActivity.getFragmentManager(), "color_dialog_test");
-            }
-        });
-
-        mCreateQuiz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                String quizTitle = quizName.getText().toString();
-                UserQuiz newQuiz = new UserQuiz(quizTitle, mSelectedColor);
-                model.getUserQuizList().add(newQuiz);
-
-                //TODO: Är detta mvc? FUnkar det??
-                //mKwizGeeQDataSource.insertQuizes(model.getUserQuizList());
-
-                Intent intent = new Intent(context, editQuizActivityClass);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("quiz",newQuiz);
-                intent.putExtras(bundle);
-                currentActivity.startActivityForResult(intent,createQuizRequestCode);
-            }
-        });
-        mCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+    public void setmCreateQuizOnClickListener(View.OnClickListener listener){
+        mCreateQuiz.setOnClickListener(listener);
     }
 
     public void setOnListItemClickedListener(AdapterView.OnItemClickListener listener) {
@@ -145,6 +142,21 @@ public class QuizListView extends Observable {
         listView.setOnItemLongClickListener(listener);
     }
 
+    public String getQuizName(){
+        return quizName.getText().toString();
+    }
+
+    public int getmSelectedColor(){
+        return mSelectedColor;
+    }
+
+    public void editQuiz(UserQuiz quiz,int quizIndex){
+        Intent intent = new Intent(context, editQuizActivityClass);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("quiz",quiz);
+        intent.putExtras(bundle);
+        currentActivity.startActivityForResult(intent, editQuizRequestCode);
+    }
 
     public void createNewQuiz(UserQuiz quiz){
         Intent intent = new Intent(context, editQuizActivityClass);
@@ -160,50 +172,28 @@ public class QuizListView extends Observable {
         currentActivity.startActivity(intent);
     }
 
+    public void showAlertDialog(){
+        alertDialog.show();
+    }
 
-    public void openLongPressDialog(final int quizIndex) {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(currentActivity)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Edit UserQuiz?")
-                .setMessage("Do you want to Edit or Delete the quiz?");
+    public void dismissAlertDialog(){
+        ad.dismiss();
+    }
 
-        final AlertDialog ad = alertDialog.create();
+    public void setAlertDialogPositiveListener(DialogInterface.OnClickListener listener){
+        alertDialog.setPositiveButton("Edit",listener);
+    }
 
-        alertDialog.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+    public void setAlertDialogNegativeListener(DialogInterface.OnClickListener listener){
+        alertDialog.setNegativeButton("DELETE",listener);
+    }
 
-                Intent intent = new Intent(context, editQuizActivityClass);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("quiz",model.getQuiz(quizIndex));
-                intent.putExtras(bundle);
-                currentActivity.startActivityForResult(intent, editQuizRequestCode);
-            }
-        })
-                .setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        model.getUserQuizList().remove(quizIndex);
+    public void setAlertDialogNeutralListener(DialogInterface.OnClickListener listener){
+        alertDialog.setNeutralButton("Cancel",listener);
+    }
 
-                        currentActivity.finish();
-                        currentActivity.startActivity((currentActivity).getIntent());
-
-                    }
-                })
-
-
-
-                .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-
-                    //Går detta att flytta ut??
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ad.dismiss();
-                    }
-                })
-
-                .show();
+    public void updatePickColorBackground() {
+        mPickColor.setBackgroundColor(mSelectedColor);
     }
 }
 
