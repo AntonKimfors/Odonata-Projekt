@@ -19,6 +19,7 @@ import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
+import com.google.common.eventbus.Subscribe;
 
 import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
@@ -96,6 +97,7 @@ public class QuizListView extends Observable {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Edit UserQuiz?")
                 .setMessage("Do you want to Edit or Delete the quiz?");
+
         ad = alertDialog.create();
 
     }
@@ -194,6 +196,13 @@ public class QuizListView extends Observable {
 
     public void updatePickColorBackground() {
         mPickColor.setBackgroundColor(mSelectedColor);
+    }
+
+    @Subscribe
+    public void update(KwizGeeQ kwizGeeQ){
+        if(kwizGeeQ == model){
+            adapter.notifyDataSetChanged();
+        }
     }
 }
 
