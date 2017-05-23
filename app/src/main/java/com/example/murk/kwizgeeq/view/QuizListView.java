@@ -24,6 +24,8 @@ import com.google.common.eventbus.Subscribe;
 import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 /**
@@ -45,12 +47,12 @@ public class QuizListView extends Observable {
     private final AlertDialog ad;
     private int mSelectedColor;
     private ListView listView;
-    private KwizGeeQ model;
     private QuizListAdapter adapter;
     private FloatingActionButton fab;
     private Context context;
     private int editQuizRequestCode;
     private int createQuizRequestCode;
+    private AlertDialog creationDialog;
 
 
     public QuizListView(final ListView listView, final Context context,
@@ -66,21 +68,16 @@ public class QuizListView extends Observable {
         this.questioneerActivityClass = questioneerActivityClass;
         this.editQuizRequestCode = editQuizRequestCode;
         this.createQuizRequestCode = createQuizRequestCode;
-        this.model = KwizGeeQ.getInstance();
         this.currentActivity = currentActivity;
         this.fab = fab;
 
-
-        this.adapter = new QuizListAdapter(context, model.getUserQuizList());
-        listView.setAdapter(adapter);
-
-        mBuilder = new AlertDialog.Builder(context);
         mView = LayoutInflater.from(context).inflate(R.layout.dialog_create_quiz, null);
         quizName = (EditText) mView.findViewById(R.id.etQuizName);
         mCancel = (Button) mView.findViewById(R.id.btnCancel);
         mCreateQuiz = (Button) mView.findViewById(R.id.btnCreateQuiz);
         mPickColor = (Button) mView.findViewById(R.id.btnPickColor);
-
+        mPickColor.setBackgroundColor(context.getResources().getColor(R.color.flamingo));
+        mSelectedColor = ContextCompat.getColor(context, R.color.flamingo);
 
         int[] mColors = context.getResources().getIntArray(R.array.default_rainbow);
         dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
@@ -98,14 +95,21 @@ public class QuizListView extends Observable {
                 .setTitle("Edit UserQuiz?")
                 .setMessage("Do you want to Edit or Delete the quiz?");
 
+        mBuilder = new AlertDialog.Builder(context);
+        mBuilder.setView(mView);
+        creationDialog = mBuilder.create();
+
         ad = alertDialog.create();
 
     }
 
+    public void setQuestions(ArrayList<UserQuiz> quizList){
+        this.adapter = new QuizListAdapter(context, quizList);
+        listView.setAdapter(adapter);
+    }
+
     public void fabPressed() {
-        mBuilder.setView(mView);
-        final AlertDialog dialog = mBuilder.create();
-        dialog.show();
+        creationDialog.show();
     }
 
     public void setmSelectedColor(int color){
@@ -116,8 +120,8 @@ public class QuizListView extends Observable {
         dialog.show(currentActivity.getFragmentManager(), "color_dialog_test");
     }
 
-    public void dismissDialog(){
-        dialog.dismiss();
+    public void dismissCreationDialog(){
+        creationDialog.dismiss();
     }
 
     public void setmCancelOnClickListener(View.OnClickListener listener){
@@ -168,9 +172,9 @@ public class QuizListView extends Observable {
         currentActivity.startActivityForResult(intent,createQuizRequestCode);
     }
 
-    public void startQuestioneer(int quizIndex) {
+    public void startQuestioneer(UserQuiz quiz) {
         Intent intent = new Intent(context, questioneerActivityClass);
-        intent.putExtra("quiz", model.getQuiz(quizIndex));
+        intent.putExtra("quiz", quiz);
         currentActivity.startActivity(intent);
     }
 
@@ -200,9 +204,8 @@ public class QuizListView extends Observable {
 
     @Subscribe
     public void update(KwizGeeQ kwizGeeQ){
-        if(kwizGeeQ == model){
-            adapter.notifyDataSetChanged();
-        }
+        System.out.println("Update!");
+        adapter.notifyDataSetChanged();
     }
 }
 

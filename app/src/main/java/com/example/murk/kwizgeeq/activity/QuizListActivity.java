@@ -37,7 +37,7 @@ public class QuizListActivity extends ListActivity {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_quiz_list);
 
 
-        mKwizGeeQDataSource = new KwizGeeQDataSource(QuizListActivity.this);
+        //mKwizGeeQDataSource = new KwizGeeQDataSource(QuizListActivity.this);
 
         editQuizRequestCode = 1;
 
@@ -70,12 +70,14 @@ public class QuizListActivity extends ListActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == createQuizRequestCode && requestCode == RESULT_OK){
-            controller.addQuiz(data.getSerializableExtra("Quiz"));
+        System.out.println(requestCode==createQuizRequestCode);
+        System.out.println(resultCode==RESULT_OK);
+        if(requestCode == createQuizRequestCode && resultCode == RESULT_OK){
+            controller.addQuiz(data.getSerializableExtra("quiz"));
         }
 
-        if(requestCode == editQuizRequestCode && requestCode == RESULT_OK){
-            controller.replaceQuiz(data.getSerializableExtra("Quiz"), data.getIntExtra("quizIndex",0));
+        if(requestCode == editQuizRequestCode && resultCode == RESULT_OK){
+            controller.replaceQuiz(data.getSerializableExtra("quiz"), data.getIntExtra("quizIndex",0));
         }
     }
     

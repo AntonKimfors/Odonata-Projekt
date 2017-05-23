@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.murk.kwizgeeq.activity.QuizListActivity;
-import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuiz;
@@ -45,10 +44,11 @@ public class EditQuizView extends Observable {
     private EditQuizAdapter adapter;
     private int mSelectedColor;
     private final int questionListRequestCode;
+    private int quizIndex;
 
     public EditQuizView(final Class<? extends Activity> editQuestionActivity, final UserQuiz quiz,
                         final ListView listView, final Context context, final Activity currentActivity,
-                        int questionListRequestCode) {
+                        int questionListRequestCode, int quizIndex) {
 
         this.editQuestionActivity = editQuestionActivity;
         this.currentActivity = currentActivity;
@@ -59,6 +59,7 @@ public class EditQuizView extends Observable {
         this.btnColorPicker = (Button) currentActivity.findViewById(R.id.btnColorPicker);
         mSelectedColor = quiz.getListColor();
         this.questionListRequestCode = questionListRequestCode;
+        this.quizIndex = quizIndex;
         this.btnColorPicker.setBackgroundColor(mSelectedColor);
         this.editText.setText(quiz.getName());
         this.adapter = new EditQuizAdapter(context, quiz.getQuestions(), quiz);
@@ -184,11 +185,22 @@ public class EditQuizView extends Observable {
                 .show();
     }
 
+
+
     @Subscribe
     public void update(UserQuiz userQuiz){
         if(this.quiz == userQuiz){
             adapter.notifyDataSetChanged();
         }
+    }
+
+    public void quitQuizEditing() {
+        Intent intent = currentActivity.getIntent();
+        Bundle bundle = intent.getExtras();
+        bundle.putSerializable("quiz",quiz);
+        intent.putExtras(bundle);
+        currentActivity.setResult(Activity.RESULT_OK,intent);
+        currentActivity.finish();
     }
 }
 
