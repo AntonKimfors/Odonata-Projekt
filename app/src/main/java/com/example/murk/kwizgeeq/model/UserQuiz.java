@@ -49,6 +49,8 @@ public class UserQuiz implements Iterable, Serializable{
         questions.clear();
         questions.addAll(newQuestions);
 
+        System.out.println("replacing questions");
+
         EventBusWrapper.BUS.post(this);
     }
 

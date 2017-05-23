@@ -74,7 +74,6 @@ public class EditQuizController implements Controller, Observer {
 
 
     public void saveQuizName() {
-
         quiz.setName(editQuizview.getQuizName().toString());
     }
 

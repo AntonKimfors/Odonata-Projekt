@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.example.murk.kwizgeeq.activity.QuizListActivity;
 import com.example.murk.kwizgeeq.R;
+import com.example.murk.kwizgeeq.events.EventBusWrapper;
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.google.common.eventbus.Subscribe;
@@ -64,6 +65,8 @@ public class EditQuizView extends Observable {
         this.editText.setText(quiz.getName());
         this.adapter = new EditQuizAdapter(context, quiz.getQuestions(), quiz);
         listView.setAdapter(adapter);
+
+        EventBusWrapper.BUS.register(this);
     }
 
     public String getQuizName() {
@@ -189,6 +192,7 @@ public class EditQuizView extends Observable {
 
     @Subscribe
     public void update(UserQuiz userQuiz){
+        System.out.println("notified");
         if(this.quiz == userQuiz){
             adapter.notifyDataSetChanged();
         }

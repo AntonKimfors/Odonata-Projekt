@@ -68,10 +68,10 @@ public class QuizListController implements Controller, Observer{
         itemLongClickListener = new AdapterView.OnItemLongClickListener(){
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int quizIndex, long id) {
-                quizListView.showAlertDialog();
                 quizListView.setAlertDialogPositiveListener(getPositiveListener(quizIndex));
                 quizListView.setAlertDialogNegativeListener(getNegativeListener(quizIndex));
                 quizListView.setAlertDialogNeutralListener(getDismissListener());
+                quizListView.showAlertDialog();
 
                 return true;
             }

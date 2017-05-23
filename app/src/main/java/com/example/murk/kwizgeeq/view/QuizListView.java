@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.murk.kwizgeeq.R;
+import com.example.murk.kwizgeeq.events.EventBusWrapper;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
@@ -101,6 +102,8 @@ public class QuizListView extends Observable {
 
         ad = alertDialog.create();
 
+        EventBusWrapper.BUS.register(this);
+
     }
 
     public void setQuestions(ArrayList<UserQuiz> quizList){
@@ -109,6 +112,7 @@ public class QuizListView extends Observable {
     }
 
     public void fabPressed() {
+        quizName.setText("");
         creationDialog.show();
     }
 
