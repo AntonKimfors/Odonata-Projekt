@@ -75,14 +75,16 @@ public class EditQuestionController implements Observer{
     }
 
     private void setUserQuestion(){
+        System.out.println("Just inside");
         if(questions.size()<=questionIndex){
             userQuestion = new UserQuestion();
+            System.out.println("seTUserQuestion");
             questions.add(userQuestion);
-
+            System.out.println(questions.toString());
             editQuestionView.setUserQuestion(userQuestion,false);
         } else{
             Question questionFromList = questions.get(questionIndex);
-
+            System.out.println("get from list");
             if(questionFromList instanceof UserQuestion){
                 userQuestion = (UserQuestion) questionFromList;
                 editQuestionView.setUserQuestion(userQuestion,true);

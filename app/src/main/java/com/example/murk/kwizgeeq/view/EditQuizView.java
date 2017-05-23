@@ -40,9 +40,7 @@ public class EditQuizView extends Observable {
     private Context context;
     private ListView listView;
     private EditText editText;
-    private KwizGeeQ model;
     private EditQuizAdapter adapter;
-    private FloatingActionButton fab;
     private int mSelectedColor;
 
     public EditQuizView(final Class<? extends Activity> editQuestionActivity, final UserQuiz quiz,
@@ -147,7 +145,7 @@ public class EditQuizView extends Observable {
                 Intent intent = new Intent(context, editQuestionActivity);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("questions",(Serializable) questions);
-                intent.putExtra("quizIndex",questionIndex);
+                intent.putExtra("questionIndex",questionIndex);
                 intent.putExtras(bundle);
 
                 currentActivity.startActivity(intent);

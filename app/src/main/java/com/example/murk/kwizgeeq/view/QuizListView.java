@@ -109,7 +109,6 @@ public class QuizListView extends Observable {
 
 
                 String quizTitle = quizName.getText().toString();
-                int quizindex = model.getUserQuizList().size();
                 UserQuiz newQuiz = new UserQuiz(quizTitle, mSelectedColor);
                 model.getUserQuizList().add(newQuiz);
 
