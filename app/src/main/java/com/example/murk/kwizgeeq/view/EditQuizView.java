@@ -5,14 +5,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+
+import com.example.murk.kwizgeeq.activity.EditQuizActivity;
 import com.example.murk.kwizgeeq.activity.QuizListActivity;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.events.EventBusWrapper;
@@ -24,7 +26,6 @@ import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -46,6 +47,10 @@ public class EditQuizView extends Observable {
     private int mSelectedColor;
     private final int questionListRequestCode;
     private int quizIndex;
+    private final AlertDialog.Builder alertDialog;
+    private final ColorPickerDialog dialog;
+    private final AlertDialog ad;
+
 
     public EditQuizView(final Class<? extends Activity> editQuestionActivity, final UserQuiz quiz,
                         final ListView listView, final Context context, final Activity currentActivity,
@@ -66,35 +71,99 @@ public class EditQuizView extends Observable {
         this.adapter = new EditQuizAdapter(context, quiz.getQuestions(), quiz);
         listView.setAdapter(adapter);
 
+
+
+        int[] mColors = context.getResources().getIntArray(R.array.default_rainbow);
+        dialog = ColorPickerDialog.newInstance(R.string.color_picker_default_title,
+                mColors,
+                mSelectedColor,
+                5, // Number of columns
+                ColorPickerDialog.SIZE_SMALL,
+                true // True or False to enable or disable the serpentine effect
+                //0, // stroke width
+                //Color.BLACK // stroke color
+        );
+
+
+        alertDialog = new AlertDialog.Builder(currentActivity)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Edit UserQuiz?")
+                .setMessage("do you want to edit or delete the Quiz");
+
+
+        ad = alertDialog.create();
+
+
+
         EventBusWrapper.BUS.register(this);
     }
+
+
+
+    public void fabPressed(List<Question> questions) {
+        Intent intent = new Intent(context, editQuestionActivity);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("questions", (Serializable) questions);
+        intent.putExtras(bundle);
+        currentActivity.startActivityForResult(intent,questionListRequestCode);
+    }
+
+    //START---------------------------------------------------ListClick functionality
+    public void setOnListItemClickedListener(AdapterView.OnItemClickListener listener) {
+        listView.setOnItemClickListener(listener);
+    }
+    //END-----------------------------------------------------ListClick functionality
+
+    //START---------------------------------------------------ColorPicker functionality
+
+    public void showColorDialog(){
+        dialog.show(currentActivity.getFragmentManager(), "color_dialog_test");
+    }
+    public void setmSelectedColor(int color){
+        mSelectedColor= color;
+    }
+    public int getmSelectedColor(){
+        return mSelectedColor;
+    }
+    public void updatePickColorBackground(){
+        btnColorPicker.setBackgroundColor(mSelectedColor);
+    }
+    public void setmPickColorListener(View.OnClickListener listener) {
+        btnColorPicker.setOnClickListener(listener);
+    }
+    public void setColorPickerListener(ColorPickerSwatch.OnColorSelectedListener listener){
+        dialog.setOnColorSelectedListener(listener);
+    }
+    //END-----------------------------------------------------ColorPicker functionality
+
+
+
+    //START---------------------------------------------------Longpress functionality
+    public void setOnItemLongClickListener(AdapterView.OnItemLongClickListener listener) {
+        listView.setOnItemLongClickListener(listener);
+    }
+    public void showAlertDialog(){
+        alertDialog.show();
+    }
+    public void dismissAlertDialog(){
+        ad.dismiss();
+    }
+    public void setAlertDialogPositiveListener(DialogInterface.OnClickListener listener){
+        alertDialog.setPositiveButton("Edit",listener);
+    }
+    public void setAlertDialogNegativeListener(DialogInterface.OnClickListener listener){
+        alertDialog.setNegativeButton("DELETE",listener);
+    }
+    public void setAlertDialogNeutralListener(DialogInterface.OnClickListener listener){
+        alertDialog.setNeutralButton("Cancel",listener);
+    }
+    //END-----------------------------------------------------Longpress functionality
 
     public String getQuizName() {
         return editText.getText().toString();
     }
 
-    public void fabPressed(List<Question> questions, int index) {
-        Intent intent = new Intent(context, editQuestionActivity);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("questions", (Serializable) questions);
-        intent.putExtras(bundle);
-        intent.putExtra("questionIndex", index);
-        //the quiz index should be decided by controller and sent in to this method when called
-        currentActivity.startActivityForResult(intent,questionListRequestCode);
-    }
-
-    public void setColorItemClickedListener(View.OnClickListener listener) {
-        btnColorPicker.setOnClickListener(listener);
-    }
-
-    public void setOnListItemClickedListener(AdapterView.OnItemClickListener listener) {
-        listView.setOnItemClickListener(listener);
-    }
-    public void setOnItemLongClickListener(AdapterView.OnItemLongClickListener listener) {
-        listView.setOnItemLongClickListener(listener);
-    }
-
-    public void changeView(List<Question> questions, int questionIndex) {
+    public void openEditQuestion(List<Question> questions, int questionIndex) {
         Intent intent = new Intent(context, editQuestionActivity);
         Bundle bundle = new Bundle();
         bundle.putSerializable("questions", (Serializable) questions);
@@ -105,10 +174,11 @@ public class EditQuizView extends Observable {
     }
 
     public void reloadView() {
-        Intent intent = new Intent(context, QuizListActivity.class);
-        currentActivity.startActivity(intent);
+
+
     }
 
+/*
     public void openColorDialog() {
         int[] mColors = context.getResources().getIntArray(R.array.default_rainbow);
 
@@ -138,9 +208,9 @@ public class EditQuizView extends Observable {
 
         dialog.show(currentActivity.getFragmentManager(), "color_dialog_test");
     }
+*/
 
-
-
+/*
     public void openLongPressDialog(final List<Question> questions, final int questionIndex) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(currentActivity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -187,7 +257,7 @@ public class EditQuizView extends Observable {
 
                 .show();
     }
-
+*/
 
 
     @Subscribe
