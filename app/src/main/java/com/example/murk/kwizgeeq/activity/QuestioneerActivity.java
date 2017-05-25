@@ -8,10 +8,7 @@ import android.os.Bundle;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.QuestioneerController;
 import com.example.murk.kwizgeeq.databinding.ActivityQuestioneerBinding;
-import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.view.QuestioneerView;
-
-import java.util.ArrayList;
 
 public class QuestioneerActivity extends AppCompatActivity{
 
@@ -26,7 +23,7 @@ public class QuestioneerActivity extends AppCompatActivity{
 
         view = new QuestioneerView(this);
         controller = new QuestioneerController(this, view);
-        controller.onCreate();
+        controller.setUpQuestioneer();
         controller.setSwitchActivityClass(StatisticsActivity.class);
 
         view.addObserver(controller);
@@ -34,7 +31,6 @@ public class QuestioneerActivity extends AppCompatActivity{
     }
 
     protected void onDestroy(){
-        controller.onDestroy();
         super.onDestroy();
     }
 

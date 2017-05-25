@@ -12,27 +12,13 @@ import java.util.Observer;
  * Created by Murk on 2017-05-16.
  */
 
-public class SplashScreenController implements Controller, Observer {
+public class SplashScreenController implements Observer {
     private SplashScreenView view;
 
     public SplashScreenController(SplashScreenView view){
         this.view = view;
     }
-    public void onCreate() {
 
-    }
-
-    public void onPause() {
-
-    }
-
-    public void onResume() {
-
-    }
-
-    public void onDestroy() {
-
-    }
     public void update(Observable o, Object arg) {
 
     }

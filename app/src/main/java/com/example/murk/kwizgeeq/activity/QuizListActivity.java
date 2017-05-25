@@ -51,8 +51,6 @@ public class QuizListActivity extends ListActivity {
 
         binding.setController(controller);
         view.addObserver(controller);
-        controller.onCreate();
-
     }
 
 

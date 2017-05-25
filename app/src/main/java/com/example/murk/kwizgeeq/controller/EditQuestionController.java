@@ -69,11 +69,6 @@ public class EditQuestionController implements Observer{
 
     }
 
-    public void onCreate(){
-
-
-    }
-
     private void setUserQuestion(){
         if(questions.size()<=questionIndex){
             userQuestion = new UserQuestion();
@@ -95,9 +90,6 @@ public class EditQuestionController implements Observer{
 
     public static void onResume() {
         QuizListController.readCurrentData();
-    }
-    public void onDestroy() {
-
     }
 
     public void nextButtonAction(View view){

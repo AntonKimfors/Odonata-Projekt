@@ -21,7 +21,7 @@ import java.util.Observer;
  * Created by Murk on 2017-05-06.
  */
 
-public class EditQuizController implements Controller, Observer {
+public class EditQuizController implements Observer {
 
     private final ColorPickerSwatch.OnColorSelectedListener colorPickerListener;
     private final AdapterView.OnItemClickListener onItemClickListener;
@@ -94,12 +94,6 @@ public class EditQuizController implements Controller, Observer {
 
     }
 
-
-    @Override
-    public void onCreate() {
-
-    }
-
     public void onClickAction(View view) {
         this.editQuizview.fabPressed(questions);
     }
@@ -148,11 +142,6 @@ public class EditQuizController implements Controller, Observer {
 
     public void onResume() {
         QuizListController.readCurrentData();
-    }
-
-    @Override
-    public void onDestroy() {
-
     }
 
     @Override

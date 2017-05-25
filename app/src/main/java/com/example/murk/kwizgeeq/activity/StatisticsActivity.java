@@ -22,12 +22,10 @@ public class StatisticsActivity extends AppCompatActivity {
 
         view = new StatisticsView(this);
         controller = new StatisticsController(view, this, QuestioneerActivity.class);
-        controller.onCreate();
         binding.setController(controller);
     }
 
     protected void onDestroy(){
-        controller.onDestroy();
         super.onDestroy();
     }
 

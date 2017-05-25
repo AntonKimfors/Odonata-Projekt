@@ -15,7 +15,7 @@ import java.util.Observer;
  * Created by Are on 09/05/2017.
  */
 
-public class StatisticsController implements Controller, Observer {
+public class StatisticsController implements Observer {
 
     private StatisticsView view;
     private KwizGeeQ model;
@@ -30,26 +30,10 @@ public class StatisticsController implements Controller, Observer {
         this.currentActivity = currentActivity;
         this.switchActivityClass = switchActivityClass;
         this.quiz = (UserQuiz) currentActivity.getIntent().getSerializableExtra("quiz");
-
-    }
-
-    public void onCreate() {
         if(currentActivity.getIntent().getBooleanExtra("allCorrect", false)){
             view.disableReplayByIndexButton();
         }
         view.updateStatistics(quiz);
-    }
-
-    public void onPause() {
-
-    }
-
-    public void onResume() {
-
-    }
-
-    public void onDestroy() {
-
     }
 
     public void backSelected(View view){

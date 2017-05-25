@@ -25,7 +25,7 @@ import java.util.Observer;
  * Created by Are on 03/05/2017.
  */
 
-public class QuestioneerController implements Controller, Observer{
+public class QuestioneerController implements Observer{
 
     private QuestioneerView view;
     private KwizGeeQ model;
@@ -53,7 +53,7 @@ public class QuestioneerController implements Controller, Observer{
         this.playingByIndex = false;
     }
 
-    public void onCreate() {
+    public void setUpQuestioneer() {
         updateQuestionIndex();
         updateQuizSize();
         quiz.resetCurrentTempStatistics();
@@ -62,17 +62,12 @@ public class QuestioneerController implements Controller, Observer{
         quiz.getCurrentTempStatistics().startTimer();
     }
 
-    //TODO: Anpassa vad som spara
     public void onPause() {
         QuizListController.saveCurrentData();
     }
 
     public void onResume() {
         QuizListController.readCurrentData();
-    }
-
-    public void onDestroy() {
-
     }
 
     private void updateQuestionIndex(){
@@ -137,7 +132,7 @@ public class QuestioneerController implements Controller, Observer{
         questionIndex = 0;
         currentQuestion = 1;
         outReplayIndexList.clear();
-        onCreate();
+        setUpQuestioneer();
     }
 
     private void replayQuestionsByIndex(){
@@ -145,7 +140,7 @@ public class QuestioneerController implements Controller, Observer{
         currentQuestion = 1;
         inReplayIndexList = (ArrayList)outReplayIndexList.clone();
         outReplayIndexList.clear();
-        onCreate();
+        setUpQuestioneer();
     }
 
     public void onActivityResult(int requestCode, Intent data){

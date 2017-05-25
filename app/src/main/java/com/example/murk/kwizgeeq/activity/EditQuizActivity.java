@@ -42,8 +42,6 @@ public class EditQuizActivity extends ListActivity {
         controller = new EditQuizController(view, quiz);
         binding.setController(controller);
         view.addObserver(controller);
-        controller.onCreate();
-
     }
 
     @Override

@@ -25,9 +25,6 @@ public class SplashScreenActivity extends Activity {
         view = new SplashScreenView((ImageView) findViewById(R.id.imgLogo));
         controller = new SplashScreenController(view);
         view.addObserver(controller);
-        controller.onCreate();
-
-
 
         new Handler().postDelayed(new Runnable() {
  

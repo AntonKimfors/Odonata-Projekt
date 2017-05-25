@@ -30,7 +30,7 @@ import java.util.Observer;
  * Created by akimfors on 2017-05-05.
  */
 
-public class QuizListController implements Controller, Observer{
+public class QuizListController implements Observer{
 
     private final AdapterView.OnItemLongClickListener itemLongClickListener;
     private final View.OnClickListener createQuizListener;
@@ -167,26 +167,13 @@ public class QuizListController implements Controller, Observer{
         this.quizListView.fabPressed();
     }
 
-
-    @Override
-    public void onCreate() {
-
-    }
-
     //TODO: Spara onClick istället??
-    @Override
     public void onPause() {
         saveCurrentData();
     }
 
-    @Override
     public void onResume() {
         readCurrentData();
-    }
-
-    @Override
-    public void onDestroy() {
-
     }
 
     @Override
