@@ -19,6 +19,7 @@ import com.example.murk.kwizgeeq.activity.QuizListActivity;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.events.EventBusWrapper;
 import com.example.murk.kwizgeeq.model.Question;
+import com.example.murk.kwizgeeq.model.UserQuestion;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.google.common.eventbus.Subscribe;
 
@@ -26,6 +27,7 @@ import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -39,17 +41,17 @@ public class EditQuizView extends Observable {
     private final Class<? extends Activity> editQuestionActivity;
     private final Activity currentActivity;
     final private Button btnColorPicker;
+    private final int questionListRequestCode;
+    private final AlertDialog.Builder alertDialog;
+    private final ColorPickerDialog dialog;
+    private final AlertDialog ad;
     private UserQuiz quiz;
     private Context context;
     private ListView listView;
     private EditText editText;
     private EditQuizAdapter adapter;
     private int mSelectedColor;
-    private final int questionListRequestCode;
     private int quizIndex;
-    private final AlertDialog.Builder alertDialog;
-    private final ColorPickerDialog dialog;
-    private final AlertDialog ad;
 
 
     public EditQuizView(final Class<? extends Activity> editQuestionActivity, final UserQuiz quiz,
@@ -69,8 +71,6 @@ public class EditQuizView extends Observable {
         this.btnColorPicker.setBackgroundColor(mSelectedColor);
         this.editText.setText(quiz.getName());
         this.adapter = new EditQuizAdapter(context, quiz.getQuestions(), quiz);
-        listView.setAdapter(adapter);
-
 
 
         int[] mColors = context.getResources().getIntArray(R.array.default_rainbow);
@@ -94,10 +94,8 @@ public class EditQuizView extends Observable {
         ad = alertDialog.create();
 
 
-
         EventBusWrapper.BUS.register(this);
     }
-
 
 
     public void fabPressed(List<Question> questions) {
@@ -105,7 +103,7 @@ public class EditQuizView extends Observable {
         Bundle bundle = new Bundle();
         bundle.putSerializable("questions", (Serializable) questions);
         intent.putExtras(bundle);
-        currentActivity.startActivityForResult(intent,questionListRequestCode);
+        currentActivity.startActivityForResult(intent, questionListRequestCode);
     }
 
     //START---------------------------------------------------ListClick functionality
@@ -116,46 +114,54 @@ public class EditQuizView extends Observable {
 
     //START---------------------------------------------------ColorPicker functionality
 
-    public void showColorDialog(){
+    public void showColorDialog() {
         dialog.show(currentActivity.getFragmentManager(), "color_dialog_test");
     }
-    public void setmSelectedColor(int color){
-        mSelectedColor= color;
+
+    public void setmSelectedColor(int color) {
+        mSelectedColor = color;
     }
+
     public int getmSelectedColor(){
-        return mSelectedColor;
+        return mSelectedColor;  // Kan nog ta bort
     }
-    public void updatePickColorBackground(){
+    public void updatePickColorBackground() {
         btnColorPicker.setBackgroundColor(mSelectedColor);
     }
+
     public void setmPickColorListener(View.OnClickListener listener) {
         btnColorPicker.setOnClickListener(listener);
     }
-    public void setColorPickerListener(ColorPickerSwatch.OnColorSelectedListener listener){
+
+    public void setColorPickerListener(ColorPickerSwatch.OnColorSelectedListener listener) {
         dialog.setOnColorSelectedListener(listener);
     }
     //END-----------------------------------------------------ColorPicker functionality
-
 
 
     //START---------------------------------------------------Longpress functionality
     public void setOnItemLongClickListener(AdapterView.OnItemLongClickListener listener) {
         listView.setOnItemLongClickListener(listener);
     }
-    public void showAlertDialog(){
+
+    public void showAlertDialog() {
         alertDialog.show();
     }
-    public void dismissAlertDialog(){
+
+    public void dismissAlertDialog() {
         ad.dismiss();
     }
-    public void setAlertDialogPositiveListener(DialogInterface.OnClickListener listener){
-        alertDialog.setPositiveButton("Edit",listener);
+
+    public void setAlertDialogPositiveListener(DialogInterface.OnClickListener listener) {
+        alertDialog.setPositiveButton("Edit", listener);
     }
-    public void setAlertDialogNegativeListener(DialogInterface.OnClickListener listener){
-        alertDialog.setNegativeButton("DELETE",listener);
+
+    public void setAlertDialogNegativeListener(DialogInterface.OnClickListener listener) {
+        alertDialog.setNegativeButton("DELETE", listener);
     }
-    public void setAlertDialogNeutralListener(DialogInterface.OnClickListener listener){
-        alertDialog.setNeutralButton("Cancel",listener);
+
+    public void setAlertDialogNeutralListener(DialogInterface.OnClickListener listener) {
+        alertDialog.setNeutralButton("Cancel", listener);
     }
     //END-----------------------------------------------------Longpress functionality
 
@@ -170,14 +176,18 @@ public class EditQuizView extends Observable {
         intent.putExtras(bundle);
         intent.putExtra("questionIndex", questionIndex);// TODO: change this to work with serializable
 
-        currentActivity.startActivityForResult(intent,questionListRequestCode);
+        currentActivity.startActivityForResult(intent, questionListRequestCode);
     }
 
     public void reloadView() {
-
+        this.adapter.notifyDataSetChanged();
 
     }
 
+    public void setQuestions(ArrayList<Question> questions) {
+        this.adapter = new EditQuizAdapter(context, questions, quiz);
+        listView.setAdapter(adapter);
+    }
 /*
     public void openColorDialog() {
         int[] mColors = context.getResources().getIntArray(R.array.default_rainbow);
@@ -261,9 +271,9 @@ public class EditQuizView extends Observable {
 
 
     @Subscribe
-    public void update(UserQuiz userQuiz){
+    public void update(UserQuiz userQuiz) {
         System.out.println("notified");
-        if(this.quiz == userQuiz){
+        if (this.quiz == userQuiz) {
             adapter.notifyDataSetChanged();
         }
     }
@@ -271,9 +281,9 @@ public class EditQuizView extends Observable {
     public void quitQuizEditing() {
         Intent intent = currentActivity.getIntent();
         Bundle bundle = intent.getExtras();
-        bundle.putSerializable("quiz",quiz);
+        bundle.putSerializable("quiz", quiz);
         intent.putExtras(bundle);
-        currentActivity.setResult(Activity.RESULT_OK,intent);
+        currentActivity.setResult(Activity.RESULT_OK, intent);
         currentActivity.finish();
     }
 }

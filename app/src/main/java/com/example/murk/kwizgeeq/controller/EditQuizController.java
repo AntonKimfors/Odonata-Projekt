@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuiz;
+import com.example.murk.kwizgeeq.view.EditQuizAdapter;
 import com.example.murk.kwizgeeq.view.EditQuizView;
 
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
@@ -29,7 +30,6 @@ public class EditQuizController implements Controller, Observer {
 
     private EditQuizView editQuizview;
     private UserQuiz quiz;
-    private int index;
     private List<Question> questions;
 
 
@@ -40,7 +40,7 @@ public class EditQuizController implements Controller, Observer {
         if (questions == null) {
             System.out.println("questions is null");
         }
-
+        editQuizview.setQuestions((ArrayList<Question>) questions);
         //Start on item ClickListerner for the List
         onItemClickListener = new AdapterView.OnItemClickListener() {
             @Override
@@ -71,7 +71,9 @@ public class EditQuizController implements Controller, Observer {
             public void onColorSelected(int color) {
                 editQuizview.setmSelectedColor(color);
                 editQuizview.updatePickColorBackground();
+                saveQuizColor();
                 editQuizview.reloadView();
+
             }
         };
         editQuizview.setColorPickerListener(colorPickerListener);
@@ -131,6 +133,10 @@ public class EditQuizController implements Controller, Observer {
 
     public void saveQuizName() {
         quiz.setName(editQuizview.getQuizName().toString());
+    }
+    public void saveQuizColor(){
+        quiz.setListColor(editQuizview.getmSelectedColor());
+
     }
 
     //TODO: Anpassa när det ska sparas. On button clicks istället?
