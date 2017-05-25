@@ -16,13 +16,15 @@ public class QuestioneerActivity extends AppCompatActivity{
     private QuestioneerView view;
     private ActivityQuestioneerBinding binding;
 
+    private int statisticsRequestCode = 1;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_questioneer);
 
         view = new QuestioneerView(this);
-        controller = new QuestioneerController(this, view);
+        controller = new QuestioneerController(this, view, statisticsRequestCode);
         controller.setUpQuestioneer();
         controller.setSwitchActivityClass(StatisticsActivity.class);
 
@@ -41,8 +43,13 @@ public class QuestioneerActivity extends AppCompatActivity{
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            controller.onActivityResult(requestCode, data);
+        if (requestCode == statisticsRequestCode) {
+            if (resultCode == RESULT_OK) {
+                controller.replayResult(data);
+            } else {
+                setResult(RESULT_OK, data);
+                finish();
+            }
         } else {
             finish();
         }

@@ -17,6 +17,7 @@ import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import com.example.murk.kwizgeeq.view.QuestioneerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -39,9 +40,9 @@ public class QuestioneerController implements Observer{
     private int currentQuestion;
     private int quizSize;
     private boolean playingByIndex;
-    private int REPLAY__REQUEST_CODE = 1;
+    private int statisticsRequestCode;
 
-    public QuestioneerController(Activity activity, QuestioneerView view) {
+    public QuestioneerController(Activity activity, QuestioneerView view, int statisticsRequestCode) {
         this.view = view;
         //this.model = KwizGeeQ.getInstance();
         this.currentActivity = activity;
@@ -51,6 +52,7 @@ public class QuestioneerController implements Observer{
         this.questionIndex = 0;
         this.currentQuestion = 1;
         this.playingByIndex = false;
+        this.statisticsRequestCode = statisticsRequestCode;
     }
 
     public void setUpQuestioneer() {
@@ -113,7 +115,7 @@ public class QuestioneerController implements Observer{
             Intent intent = new Intent(currentActivity, switchActivityClass);
             intent.putExtra("quiz", quiz);
             intent.putExtra("allCorrect", outReplayIndexList.isEmpty());
-            currentActivity.startActivityForResult(intent, REPLAY__REQUEST_CODE);
+            currentActivity.startActivityForResult(intent, statisticsRequestCode);
         }
         else {
             currentQuestion++;
@@ -143,15 +145,11 @@ public class QuestioneerController implements Observer{
         setUpQuestioneer();
     }
 
-    public void onActivityResult(int requestCode, Intent data){
-        if(requestCode == REPLAY__REQUEST_CODE){
-            if(data.getBooleanExtra("replayByIndex", false)){
-                replayQuestionsByIndex();
-            } else {
-                replayQuestions();
-            }
+    public void replayResult(Intent data){
+        if(data.getBooleanExtra("replayByIndex", false)){
+            replayQuestionsByIndex();
         } else {
-            view.closeQuestioneer();
+            replayQuestions();
         }
     }
 
