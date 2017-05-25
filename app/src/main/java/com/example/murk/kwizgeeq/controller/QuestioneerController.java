@@ -110,7 +110,7 @@ public class QuestioneerController implements Observer{
             quiz.getCurrentTempStatistics().incQuizCount();
             quiz.updateBestStatistics();
             if(!playingByIndex){
-                model.updateGlobalStatistics(quiz);
+                currentActivity.setResult(currentActivity.RESULT_OK, currentActivity.getIntent());
             }
             Intent intent = new Intent(currentActivity, switchActivityClass);
             intent.putExtra("quiz", quiz);

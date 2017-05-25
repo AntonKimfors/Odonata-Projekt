@@ -59,7 +59,7 @@ public class QuizListController implements Observer{
         AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int quizIndex, long id) {
-                quizListView.startQuestioneer(quizList.get(quizIndex));
+                quizListView.startQuestioneer(quizList.get(quizIndex), quizIndex);
             }
         };
 

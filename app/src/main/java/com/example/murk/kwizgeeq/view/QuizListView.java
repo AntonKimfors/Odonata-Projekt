@@ -177,9 +177,10 @@ public class QuizListView extends Observable {
         currentActivity.startActivityForResult(intent,createQuizRequestCode);
     }
 
-    public void startQuestioneer(UserQuiz quiz) {
+    public void startQuestioneer(UserQuiz quiz, int quizIndex) {
         Intent intent = new Intent(context, questioneerActivityClass);
         intent.putExtra("quiz", quiz);
+        intent.putExtra("quizIndex", quizIndex);
         currentActivity.startActivityForResult(intent, questioneerRequestCode);
     }
 

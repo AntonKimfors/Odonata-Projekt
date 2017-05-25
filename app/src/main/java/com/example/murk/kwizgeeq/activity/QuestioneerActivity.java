@@ -47,7 +47,6 @@ public class QuestioneerActivity extends AppCompatActivity{
             if (resultCode == RESULT_OK) {
                 controller.replayResult(data);
             } else {
-                setResult(RESULT_OK, data);
                 finish();
             }
         } else {
