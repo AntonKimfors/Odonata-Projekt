@@ -116,7 +116,7 @@ public class QuestioneerView extends Observable{
 
         progressNumbers.setText(currentQuestion + " / " + quizSize);
         progressBar.setProgress(currentQuestion);
-        questLabel.setText(question.toString());
+        questLabel.setText(question.getQuestionText());
         if (question.getImagePath() != null){
             try {
                 InputStream is = activity.getContentResolver().openInputStream(Uri.parse(question.getImagePath()));
