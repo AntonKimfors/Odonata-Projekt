@@ -16,10 +16,6 @@ import java.util.ArrayList;
 
 
 
-
-
-
-
 public class EditQuizAdapter extends BaseAdapter {
 
     private UserQuiz userQuiz;
@@ -44,7 +40,7 @@ public class EditQuizAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;  //not using this. Tag items for easy refernece.
+        return 0;  //not using this. Tag items for easy reference.
     }
 
     @Override
