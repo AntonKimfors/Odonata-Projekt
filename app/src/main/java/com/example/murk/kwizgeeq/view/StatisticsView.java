@@ -6,7 +6,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.murk.kwizgeeq.R;
-import com.example.murk.kwizgeeq.model.KwizGeeQ;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
 /**
@@ -14,8 +13,6 @@ import com.example.murk.kwizgeeq.model.UserQuiz;
  */
 
 public class StatisticsView {
-
-    private KwizGeeQ model;
 
     private TextView quizLabel;
     private TextView answersLabel;
@@ -25,7 +22,6 @@ public class StatisticsView {
     private Button doneButton;
 
     public StatisticsView(Activity activity) {
-        //this.model = KwizGeeQ.getInstance();
         this.quizLabel = (TextView) activity.findViewById(R.id.quizLabel);
         this.answersLabel = (TextView) activity.findViewById(R.id.answersLabel);
         this.answersProgressBar = (ProgressBar) activity.findViewById(R.id.answersProgressBar);

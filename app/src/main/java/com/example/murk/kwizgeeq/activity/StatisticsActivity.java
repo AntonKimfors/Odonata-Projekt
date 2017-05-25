@@ -21,7 +21,7 @@ public class StatisticsActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_statistics_view);
 
         view = new StatisticsView(this);
-        controller = new StatisticsController(view, this, QuestioneerActivity.class);
+        controller = new StatisticsController(view, this);
         binding.setController(controller);
     }
 
