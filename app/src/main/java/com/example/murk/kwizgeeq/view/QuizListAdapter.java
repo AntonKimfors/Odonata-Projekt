@@ -55,6 +55,7 @@ public class QuizListAdapter extends BaseAdapter {
 
             holder.quizNameLabel = (TextView) convertView.findViewById(R.id.quizNameLabel);
             holder.quizQuestionAmountLabel = (TextView) convertView.findViewById(R.id.quizQuestionAmountLabel);
+            holder.tvBestResult = (TextView) convertView.findViewById(R.id.tvBestResult);
             holder.relativeLayout = (RelativeLayout) convertView.findViewById(R.id.relative_layout);
 
             convertView.setTag(holder);
@@ -66,6 +67,7 @@ public class QuizListAdapter extends BaseAdapter {
         UserQuiz userQuiz = mUserQuiz.get(position);
         holder.quizNameLabel.setText(userQuiz.getName());
         holder.quizQuestionAmountLabel.setText(userQuiz.getQuestions().size() + " Questions");
+        holder.tvBestResult.setText(userQuiz.getBestStatistics().getBestPercentage() + "%");
         holder.relativeLayout.setBackgroundColor(userQuiz.getListColor());
         
         return convertView;
@@ -74,6 +76,7 @@ public class QuizListAdapter extends BaseAdapter {
 
     private static class ViewHolder {
         TextView quizNameLabel;
+        TextView tvBestResult;
         TextView quizQuestionAmountLabel;
         RelativeLayout relativeLayout;
     }
