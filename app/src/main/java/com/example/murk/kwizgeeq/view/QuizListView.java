@@ -204,8 +204,9 @@ public class QuizListView extends Observable {
         alertDialog.setNeutralButton("Cancel",listener);
     }
 
-    public void updatePickColorBackground() {
+    public void updateColorBackground() {
         mPickColor.setBackgroundColor(mSelectedColor);
+        mCreateQuiz.setBackgroundColor(mSelectedColor);
     }
 
     @Subscribe

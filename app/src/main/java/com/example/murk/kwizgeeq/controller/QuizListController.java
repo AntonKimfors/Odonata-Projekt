@@ -94,7 +94,7 @@ public class QuizListController implements Observer{
             @Override
             public void onColorSelected(int color) {
                 quizListView.setmSelectedColor(color);
-                quizListView.updatePickColorBackground();
+                quizListView.updateColorBackground();
             }
 
         };
