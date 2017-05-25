@@ -22,18 +22,12 @@ public class QuestioneerActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_questioneer);
-
         view = new QuestioneerView(this);
         controller = new QuestioneerController(this, view, statisticsRequestCode);
         controller.setUpQuestioneer();
         controller.setSwitchActivityClass(StatisticsActivity.class);
-
         view.addObserver(controller);
         binding.setController(controller);
-    }
-
-    protected void onDestroy(){
-        super.onDestroy();
     }
 
     @Override

@@ -5,19 +5,11 @@ import android.content.Intent;
 import android.view.View;
 
 import com.example.murk.kwizgeeq.model.Answer;
-import com.example.murk.kwizgeeq.model.KwizGeeQ;
-
-
-
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
-
-
-
 import com.example.murk.kwizgeeq.view.QuestioneerView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -29,7 +21,6 @@ import java.util.Observer;
 public class QuestioneerController implements Observer{
 
     private QuestioneerView view;
-    private KwizGeeQ model;
     private Class<? extends Activity> switchActivityClass;
     private Activity currentActivity;
     private ArrayList<Integer> outReplayIndexList;
@@ -44,7 +35,6 @@ public class QuestioneerController implements Observer{
 
     public QuestioneerController(Activity activity, QuestioneerView view, int statisticsRequestCode) {
         this.view = view;
-        //this.model = KwizGeeQ.getInstance();
         this.currentActivity = activity;
         this.outReplayIndexList = new ArrayList<>();
         this.inReplayIndexList = new ArrayList<>();
@@ -60,7 +50,7 @@ public class QuestioneerController implements Observer{
         updateQuizSize();
         quiz.resetCurrentTempStatistics();
         view.updateQuizRelatedItems(quiz.getName(), quizSize, quiz.getListColor());
-        view.updateQuestioneer((Question) quiz.getQuestion(questionIndex), currentQuestion, quizSize);
+        view.updateQuestioneer(quiz.getQuestion(questionIndex), currentQuestion, quizSize);
         quiz.getCurrentTempStatistics().startTimer();
     }
 
