@@ -91,4 +91,15 @@ public class Statistics implements Serializable{
         return secondsSpent;
     }
 
+    public int getBestPercentage(){
+
+        System.out.println("correct: " + getAnswerCorrectCount() + "incorrect: " + getAnswerIncorrectCount());
+        if (getAnswerIncorrectCount() == 0 && getAnswerCorrectCount()!=0)
+            return 100;
+        else if (getAnswerIncorrectCount() == 0 && getAnswerCorrectCount() == 0)
+            return 0;
+        else
+            return getAnswerCorrectCount()/ getAnswerIncorrectCount();
+    }
+
 }
