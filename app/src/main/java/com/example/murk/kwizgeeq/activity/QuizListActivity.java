@@ -24,8 +24,10 @@ public class QuizListActivity extends ListActivity {
     public KwizGeeQDataSource mKwizGeeQDataSource;
     private QuizListController controller;
     private QuizListView view;
-    private int editQuizRequestCode;
-    private int createQuizRequestCode;
+
+    private int editQuizRequestCode = 1;
+    private int createQuizRequestCode = 2;
+    private int questioneerRequestCode = 3;
 
     //private ArrayList<String> mQuizNames;
 
@@ -39,14 +41,9 @@ public class QuizListActivity extends ListActivity {
 
         //mKwizGeeQDataSource = new KwizGeeQDataSource(QuizListActivity.this);
 
-        editQuizRequestCode = 1;
-
-        createQuizRequestCode = 2;
-
-
         view = new QuizListView(getListView(), this, this, EditQuizActivity.class,
                 QuestioneerActivity.class, (FloatingActionButton) findViewById(R.id.fab),
-                mKwizGeeQDataSource, editQuizRequestCode, createQuizRequestCode);
+                mKwizGeeQDataSource, editQuizRequestCode, createQuizRequestCode, questioneerRequestCode);
         controller = new QuizListController(view, this, this);
 
         binding.setController(controller);
@@ -68,14 +65,17 @@ public class QuizListActivity extends ListActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println(requestCode==createQuizRequestCode);
-        System.out.println(resultCode==RESULT_OK);
         if(requestCode == createQuizRequestCode && resultCode == RESULT_OK){
             controller.addQuiz(data.getSerializableExtra("quiz"));
         }
 
         if(requestCode == editQuizRequestCode && resultCode == RESULT_OK){
             controller.replaceQuiz(data.getSerializableExtra("quiz"), data.getIntExtra("quizIndex",0));
+        }
+
+        if(requestCode == questioneerRequestCode && resultCode == RESULT_OK) {
+            controller.replaceQuiz(data.getSerializableExtra("quiz"), data.getIntExtra("quizIndex",0));
+            controller.updateGlobalStatistics(data.getSerializableExtra("quiz"));
         }
     }
     

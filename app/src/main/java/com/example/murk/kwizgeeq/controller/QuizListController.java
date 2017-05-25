@@ -192,5 +192,11 @@ public class QuizListController implements Observer{
             kwizGeeQ.replaceQuiz(quizIndex,(UserQuiz)quiz);
         }
     }
+
+    public void updateGlobalStatistics(Serializable quiz){
+        if (quiz instanceof UserQuiz){
+            kwizGeeQ.updateGlobalStatistics((UserQuiz)quiz);
+        }
+    }
 }
 

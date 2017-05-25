@@ -53,6 +53,7 @@ public class QuizListView extends Observable {
     private Context context;
     private int editQuizRequestCode;
     private int createQuizRequestCode;
+    private int questioneerRequestCode;
     private AlertDialog creationDialog;
 
 
@@ -60,8 +61,7 @@ public class QuizListView extends Observable {
                         final Activity currentActivity,
                         final Class<? extends Activity> editQuizActivityClass,
                         final Class<? extends Activity> questioneerActivityClass,
-                        FloatingActionButton fab, final KwizGeeQDataSource mKwizGeeQDataSource,
-                        int editQuizRequestCode, int createQuizRequestCode) {
+                        FloatingActionButton fab, final KwizGeeQDataSource mKwizGeeQDataSource, int editQuizRequestCode, int createQuizRequestCode, int questioneerRequestCode) {
 
         this.listView = listView;
         this.context = context;
@@ -69,6 +69,7 @@ public class QuizListView extends Observable {
         this.questioneerActivityClass = questioneerActivityClass;
         this.editQuizRequestCode = editQuizRequestCode;
         this.createQuizRequestCode = createQuizRequestCode;
+        this.questioneerRequestCode = questioneerRequestCode;
         this.currentActivity = currentActivity;
         this.fab = fab;
 
@@ -179,7 +180,7 @@ public class QuizListView extends Observable {
     public void startQuestioneer(UserQuiz quiz) {
         Intent intent = new Intent(context, questioneerActivityClass);
         intent.putExtra("quiz", quiz);
-        currentActivity.startActivity(intent);
+        currentActivity.startActivityForResult(intent, questioneerRequestCode);
     }
 
     public void showAlertDialog(){
