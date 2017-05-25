@@ -59,6 +59,7 @@ public class EditQuizController implements Controller, Observer {
                 editQuizview.setAlertDialogNeutralListener(getDismissListener());
                 editQuizview.showAlertDialog();
 
+
                 return true;
             }
 
@@ -118,6 +119,7 @@ public class EditQuizController implements Controller, Observer {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 quiz.getQuestions().remove(questionIndex);
+                editQuizview.reloadView();
             }
         };
     }
