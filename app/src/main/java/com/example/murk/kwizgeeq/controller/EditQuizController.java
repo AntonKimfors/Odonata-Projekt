@@ -1,5 +1,6 @@
 package com.example.murk.kwizgeeq.controller;
 
+
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.AdapterView;
@@ -7,7 +8,7 @@ import android.widget.AdapterView;
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.EditQuizView;
-import com.wrapper.spotify.models.User;
+
 
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
 
@@ -40,7 +41,7 @@ public class EditQuizController implements Observer {
         }
         this.questions = this.quiz.getQuestions();
         editQuizview.setQuestions((ArrayList<Question>) questions);
-        //Start on item ClickListerner for the List
+        //Start onItemClickListerner for the List
         onItemClickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int questionIndex, long id) {
@@ -49,7 +50,7 @@ public class EditQuizController implements Observer {
         };
         editQuizview.setOnListItemClickedListener(onItemClickListener);
 
-
+        //Start onItemLongClickListerner for the List
         itemLongClickListener = new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int questionIndex, long id) {
@@ -65,7 +66,7 @@ public class EditQuizController implements Observer {
         };
         editQuizview.setOnItemLongClickListener(itemLongClickListener);
 
-
+        //Reacting on a picked color
         colorPickerListener = new ColorPickerSwatch.OnColorSelectedListener() {
             @Override
             public void onColorSelected(int color) {
