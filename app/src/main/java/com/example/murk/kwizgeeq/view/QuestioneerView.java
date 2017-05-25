@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.AnswerType;
-import com.example.murk.kwizgeeq.model.UserQuestion;
+import com.example.murk.kwizgeeq.model.Question;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -111,7 +111,7 @@ public class QuestioneerView extends Observable{
         progressBar.getProgressDrawable().setColorFilter(quizColor, PorterDuff.Mode.SRC_IN);
     }
 
-    public void updateQuestioneer(UserQuestion question, int currentQuestion, int quizSize){
+    public void updateQuestioneer(Question question, int currentQuestion, int quizSize){
         Iterator answerIterator = question.answerIterator(true);
 
         progressNumbers.setText(currentQuestion + " / " + quizSize);

@@ -35,8 +35,8 @@ public class TestQuestionsOnIndexIterator {
 
     }
 
-    private UserQuestion createUserQuestion(int i){
-        UserQuestion userQuestion = new UserQuestion();
+    private Question createUserQuestion(int i){
+        Question userQuestion = new Question();
         userQuestion.setQuestionText("Question " + i);
         userQuestion.setImagePath("ImagePath"+i);
         userQuestion.addAnswer("Correct"+i,true,AnswerType.TEXT);

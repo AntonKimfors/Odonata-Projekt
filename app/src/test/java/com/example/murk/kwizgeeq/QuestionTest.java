@@ -19,7 +19,7 @@ public class QuestionTest {/*
 
     @Test
     public void testAdd() {
-        q = new UserQuestion("What is the capital of Sweden?",null,null,null);
+        q = new Question("What is the capital of Sweden?",null,null,null);
         assertTrue(q.addAnswer(new Answer<String>(true,"Stockholm")));
         assertTrue(q.addAnswer(new Answer<String>(false,"Copenhagen")));
         assertTrue(q.addAnswer(new Answer<String>(false,"Copenhagen")));
@@ -31,7 +31,7 @@ public class QuestionTest {/*
 
     @Test
     public void testRemove(){
-        q = new UserQuestion("What is the capital of Sweden?",null,null,null);
+        q = new Question("What is the capital of Sweden?",null,null,null);
         assertTrue(q.addAnswer(new Answer<String>(true,"Stockholm")));
         assertTrue(q.addAnswer(new Answer<String>(false,"Copenhagen")));
         assertTrue(q.addAnswer(new Answer<String>(false,"Copenhagen")));
@@ -45,7 +45,7 @@ public class QuestionTest {/*
 
     @Test
     public void testEquals(){
-        q = new UserQuestion("What is the capital of Sweden?",null,null,null);
+        q = new Question("What is the capital of Sweden?",null,null,null);
         assertTrue(q.addAnswer(new Answer<String>(true,"Stockholm")));
         assertTrue(q.addAnswer(new Answer<String>(false,"Copenhagen")));
         assertTrue(q.addAnswer(new Answer<String>(false,"Copenhagen")));
@@ -54,7 +54,7 @@ public class QuestionTest {/*
         assertTrue(q.addAnswer(new Answer<String>(false,"Berlin")));
         assertTrue(q.addAnswer(new Answer<String>(true,"Sschtockholm")));
         
-        Question<String> q2 = new UserQuestion("What is the capital of Sweden?",null,null,null);
+        Question<String> q2 = new Question("What is the capital of Sweden?",null,null,null);
         assertTrue(q2.addAnswer(new Answer<String>(true,"Stockholm")));
         assertTrue(q2.addAnswer(new Answer<String>(false,"Copenhagen")));
         assertTrue(q2.addAnswer(new Answer<String>(false,"Copenhagen")));

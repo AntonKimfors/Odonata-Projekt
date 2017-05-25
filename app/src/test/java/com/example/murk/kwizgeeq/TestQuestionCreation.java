@@ -19,7 +19,7 @@ public class TestQuestionCreation {
         UserQuiz userQuiz = new UserQuiz("testQuiz",0);
         userQuizList.add(userQuiz);
 
-        UserQuestion question = new UserQuestion();
+        Question question = new Question();
         userQuiz.addQuestion(question);
         question.setQuestionText("Question 1");
         question.setImagePath("ImagePath 1");
@@ -28,7 +28,7 @@ public class TestQuestionCreation {
         question.addAnswer("wrong2",false,AnswerType.TEXT);
         question.addAnswer("wrong3",false,AnswerType.TEXT);
 
-        UserQuestion question2 = new UserQuestion();
+        Question question2 = new Question();
         userQuiz.addQuestion(question2);
         question2.setQuestionText("Question 1");
         question2.setImagePath("ImagePath 1");

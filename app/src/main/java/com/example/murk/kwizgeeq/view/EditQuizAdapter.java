@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuiz;
-import com.example.murk.kwizgeeq.model.UserQuestion;
 
 import java.util.ArrayList;
 
@@ -67,7 +66,7 @@ public class EditQuizAdapter extends BaseAdapter {
 
         }
 
-        UserQuestion question = (UserQuestion) mQuestions.get(position);
+        Question question = (Question) mQuestions.get(position);
         holder.questionLabel.setText(question.getQuestionText());
 
         holder.relativeLayout.setBackgroundColor(userQuiz.getListColor());

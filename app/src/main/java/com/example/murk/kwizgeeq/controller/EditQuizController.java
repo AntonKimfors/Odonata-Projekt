@@ -1,13 +1,11 @@
 package com.example.murk.kwizgeeq.controller;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuiz;
-import com.example.murk.kwizgeeq.view.EditQuizAdapter;
 import com.example.murk.kwizgeeq.view.EditQuizView;
 
 import org.xdty.preference.colorpicker.ColorPickerSwatch;

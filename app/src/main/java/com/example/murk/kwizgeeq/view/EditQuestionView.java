@@ -24,7 +24,7 @@ import com.google.common.eventbus.Subscribe;
 
 public class EditQuestionView extends Observable {
 
-    private UserQuestion userQuestion;
+    private Question question;
     private final Activity currentActivity;
     private final Class<? extends Activity> editQuestionActivityClass;
     private final Class<? extends Activity> quizListActivityClass;
@@ -98,8 +98,8 @@ public class EditQuestionView extends Observable {
 
     }
 
-    public void setUserQuestion(UserQuestion userQuestion, boolean questionIsEdited){
-        this.userQuestion = userQuestion;
+    public void setUserQuestion(Question question, boolean questionIsEdited){
+        this.question = question;
         if(questionIsEdited){
             setEditButtonTexts();
             setTextFields();
@@ -179,7 +179,7 @@ public class EditQuestionView extends Observable {
     }
 
     private void setThumbnail(){
-        String imagePath = userQuestion.getImagePath();
+        String imagePath = question.getImagePath();
 
         if(imagePath!=null){
             Uri imageUri = Uri.parse(imagePath);
@@ -193,9 +193,9 @@ public class EditQuestionView extends Observable {
     }
 
     private void setTextFields(){
-        setQuestionString(userQuestion.getQuestionText());
+        setQuestionString(question.getQuestionText());
 
-        Iterator<Answer> answerIterator = userQuestion.answerIterator(false);
+        Iterator<Answer> answerIterator = question.answerIterator(false);
 
         while(answerIterator.hasNext()){
             Answer answer = answerIterator.next();
@@ -213,7 +213,7 @@ public class EditQuestionView extends Observable {
     }
 
     private void setAnswerImages() {
-        Iterator<Answer> answerIterator = userQuestion.answerIterator(false);
+        Iterator<Answer> answerIterator = question.answerIterator(false);
         if(answerIterator.hasNext()){
             correctImageView.setImageURI(Uri.parse(answerIterator.next().getData()));
         }
@@ -295,7 +295,7 @@ public class EditQuestionView extends Observable {
 
     @Subscribe
     public void update(Question question){
-        if(question == userQuestion){
+        if(question == this.question){
             setThumbnail();
             setAnswerImages();
         }

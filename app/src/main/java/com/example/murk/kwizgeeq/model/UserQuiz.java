@@ -1,7 +1,6 @@
 package com.example.murk.kwizgeeq.model;
 
 import com.example.murk.kwizgeeq.events.EventBusWrapper;
-import com.google.common.eventbus.EventBus;
 
 import java.io.Serializable;
 import java.util.*;

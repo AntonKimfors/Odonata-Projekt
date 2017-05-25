@@ -13,7 +13,13 @@ import java.util.*;
  * Created by Henrik on 23/04/2017.
  */
 
-public class SpotifyQuestion extends Question implements Serializable {
+/*
+
+This class is and probably will not be implemented.
+
+ */
+
+public class SpotifyQuestion implements Serializable {
     private final Api api;
     User user;
 

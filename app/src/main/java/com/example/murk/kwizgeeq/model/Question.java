@@ -3,21 +3,26 @@ package com.example.murk.kwizgeeq.model;
 import com.example.murk.kwizgeeq.events.EventBusWrapper;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Henrik on 04/04/2017.
  */
 
-public abstract class Question implements Serializable {
+public class Question implements Serializable {
 
     private final List<Answer> answers;
-
     private int wrongAnswerCount;
-
     private int correctAnswerCount;
-
     transient com.google.common.eventbus.EventBus eventBus;
+    private String questionText;
+    private String imagePath;
+    private double xPosition;
+    private double yPosition;
+    private String audioPath;
 
     public Question() {
         eventBus = EventBusWrapper.BUS;
@@ -91,23 +96,10 @@ public abstract class Question implements Serializable {
 
     public ArrayList<Answer> getOrderedList(){
         //Return a array list of the answers with the correct answer at index 0
-         ArrayList<Answer> newOrderedList = new ArrayList<Answer>();
+        ArrayList<Answer> newOrderedList = new ArrayList<Answer>();
         //TODO: put the correct answer at index 0;
 
         return newOrderedList;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if(obj == null)
-            throw new NullPointerException();
-
-        if(obj instanceof Question){
-            Question o = (Question) obj;
-
-            return answers.equals(o.answers);
-        }
-        return false;
     }
 
     @Override
@@ -115,16 +107,87 @@ public abstract class Question implements Serializable {
         return answers.hashCode();
     }
 
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public double getxPosition() {
+        return xPosition;
+    }
+
+    public double getyPosition() {
+        return yPosition;
+    }
+
+    public String getAudioPath() {
+        return audioPath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+        eventBus.post(this);
+    }
+
+    public void setPosition(double xPosition, double yPosition) {
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+        eventBus.post(this);
+    }
+
+    public void setAudioPath(String audioPath) {
+        this.audioPath = audioPath;
+        eventBus.post(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Question && super.equals(obj)){
+            Question o = (Question) obj;
+
+            if(questionText !=null){
+                if(o.getQuestionText()!=null){
+                    if(!questionText.equals(o.getQuestionText()))
+                        return false;
+                } else {
+                    return false;
+                }
+            }
+
+            if(imagePath !=null){
+                if(o.getImagePath()!=null){
+                    if(!imagePath.equals(o.getImagePath()))
+                        return false;
+                } else {
+                    return false;
+                }
+            }
+
+            if(xPosition != o.xPosition){
+                return false;
+            }
+
+            if(yPosition != yPosition){
+                return false;
+            }
+
+            //all variables are equal
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        int i=1;
-        for(Answer a: answers){
-            sb.append("Answer ").append(i).append(": ").append(a.toString()).append(System.lineSeparator());
-            i++;
-        }
-
+        sb.append("Question: ").append(questionText).append(super.toString());
         return sb.toString();
     }
-
 }

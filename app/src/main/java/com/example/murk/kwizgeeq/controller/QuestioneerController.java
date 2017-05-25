@@ -9,7 +9,7 @@ import com.example.murk.kwizgeeq.model.KwizGeeQ;
 
 
 
-import com.example.murk.kwizgeeq.model.UserQuestion;
+import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
 
@@ -58,7 +58,7 @@ public class QuestioneerController implements Observer{
         updateQuizSize();
         quiz.resetCurrentTempStatistics();
         view.updateQuizRelatedItems(quiz.getName(), quizSize, quiz.getListColor());
-        view.updateQuestioneer((UserQuestion) quiz.getQuestion(questionIndex), currentQuestion, quizSize);
+        view.updateQuestioneer((Question) quiz.getQuestion(questionIndex), currentQuestion, quizSize);
         quiz.getCurrentTempStatistics().startTimer();
     }
 
@@ -118,7 +118,7 @@ public class QuestioneerController implements Observer{
         else {
             currentQuestion++;
             updateQuestionIndex();
-            view.updateQuestioneer((UserQuestion) quiz.getQuestion(questionIndex), currentQuestion, quizSize);
+            view.updateQuestioneer((Question) quiz.getQuestion(questionIndex), currentQuestion, quizSize);
         }
     }
 

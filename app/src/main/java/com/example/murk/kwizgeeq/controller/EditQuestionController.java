@@ -19,7 +19,7 @@ import java.util.*;
 public class EditQuestionController implements Observer{
 
     private final EditQuestionView editQuestionView;
-    private UserQuestion userQuestion;
+    private Question question;
     private List<Question> questions;
 
     private Context currentContext;
@@ -71,14 +71,14 @@ public class EditQuestionController implements Observer{
 
     private void setUserQuestion(){
         if(questions.size()<=questionIndex){
-            userQuestion = new UserQuestion();
-            questions.add(userQuestion);
-            editQuestionView.setUserQuestion(userQuestion,false);
+            question = new Question();
+            questions.add(question);
+            editQuestionView.setUserQuestion(question,false);
         } else{
             Question questionFromList = questions.get(questionIndex);
-            if(questionFromList instanceof UserQuestion){
-                userQuestion = (UserQuestion) questionFromList;
-                editQuestionView.setUserQuestion(userQuestion,true);
+            if(questionFromList instanceof Question){
+                question = (Question) questionFromList;
+                editQuestionView.setUserQuestion(question,true);
             }
         }
     }
@@ -125,7 +125,7 @@ public class EditQuestionController implements Observer{
     }
 
     private void removeQuestion(){
-        questions.remove(userQuestion);
+        questions.remove(question);
     }
 
     public void mediaButtonAction(View view){
@@ -167,31 +167,31 @@ public class EditQuestionController implements Observer{
         if(imagePath!=null){
 
             if(imagePath!=null){
-                userQuestion.setImagePath(imagePath);
+                question.setImagePath(imagePath);
             }
 
-            userQuestion.clearAnswers();
+            question.clearAnswers();
 
             if(correctImagePath!=null){
-                userQuestion.addAnswer(correctImagePath,true,AnswerType.IMAGE);
+                question.addAnswer(correctImagePath,true,AnswerType.IMAGE);
             }
 
             if(wrong1ImagePath!=null){
-                userQuestion.addAnswer(wrong1ImagePath,false,AnswerType.IMAGE);
+                question.addAnswer(wrong1ImagePath,false,AnswerType.IMAGE);
             }
 
             if(wrong2ImagePath!=null){
-                userQuestion.addAnswer(wrong2ImagePath,false,AnswerType.IMAGE);
+                question.addAnswer(wrong2ImagePath,false,AnswerType.IMAGE);
             }
 
             if(wrong3ImagePath!=null){
-                userQuestion.addAnswer(wrong3ImagePath,false,AnswerType.IMAGE);
+                question.addAnswer(wrong3ImagePath,false,AnswerType.IMAGE);
             }
         }
     }
 
     private boolean checkImageAnswers(){
-        return userQuestion.checkNumberOfAnswers(4);
+        return question.checkNumberOfAnswers(4);
     }
 
     private boolean checkTextAnswers(){
@@ -210,7 +210,7 @@ public class EditQuestionController implements Observer{
 
     private boolean checkQuestionData(){
         String questionText = editQuestionView.getQuestionString();
-        if(userQuestion.getImagePath()!= null || !questionText.isEmpty()){
+        if(question.getImagePath()!= null || !questionText.isEmpty()){
             return true;
         }
         return false;
@@ -225,7 +225,7 @@ public class EditQuestionController implements Observer{
             String wrong2text = editQuestionView.getWrong2String();
             String wrong3text = editQuestionView.getWrong3String();
 
-            if(questionText.isEmpty() && userQuestion.getImagePath() == null
+            if(questionText.isEmpty() && question.getImagePath() == null
                     && correctText.isEmpty() && wrong1text.isEmpty() &&
                     wrong2text.isEmpty() && wrong3text.isEmpty()){
                 return true;
@@ -233,8 +233,8 @@ public class EditQuestionController implements Observer{
 
             return false;
         } else {
-            if(questionText.isEmpty() && userQuestion.getImagePath() == null &&
-                    userQuestion.checkNumberOfAnswers(0)){
+            if(questionText.isEmpty() && question.getImagePath() == null &&
+                    question.checkNumberOfAnswers(0)){
                 return true;
             }
             return false;
@@ -244,16 +244,16 @@ public class EditQuestionController implements Observer{
     }
 
     private void saveQuestionText(){
-        userQuestion.setQuestionText(editQuestionView.getQuestionString());
+        question.setQuestionText(editQuestionView.getQuestionString());
     }
 
     private void saveTextAnswers(){
-        userQuestion.clearAnswers();
-        userQuestion.addAnswer(editQuestionView.getCorrectString(),true,AnswerType.TEXT);
+        question.clearAnswers();
+        question.addAnswer(editQuestionView.getCorrectString(),true,AnswerType.TEXT);
 
-        userQuestion.addAnswer(editQuestionView.getWrong1String(),false,AnswerType.TEXT);
-        userQuestion.addAnswer(editQuestionView.getWrong2String(),false,AnswerType.TEXT);
-        userQuestion.addAnswer(editQuestionView.getWrong3String(),false,AnswerType.TEXT);
+        question.addAnswer(editQuestionView.getWrong1String(),false,AnswerType.TEXT);
+        question.addAnswer(editQuestionView.getWrong2String(),false,AnswerType.TEXT);
+        question.addAnswer(editQuestionView.getWrong3String(),false,AnswerType.TEXT);
     }
 
     @Override

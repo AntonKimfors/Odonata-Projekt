@@ -1,26 +1,5 @@
 package com.example.murk.kwizgeeq.utils;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.provider.BaseColumns;
-
-
-import com.example.murk.kwizgeeq.model.Answer;
-import com.example.murk.kwizgeeq.model.AnswerType;
-import com.example.murk.kwizgeeq.model.KwizGeeQ;
-
-import com.example.murk.kwizgeeq.model.UserQuestion;
-
-
-import com.example.murk.kwizgeeq.model.UserQuiz;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-
 /**
  * Created by akimfors on 2017-05-16.
  */
@@ -67,7 +46,7 @@ public class KwizGeeQDataSource {
                     ContentValues questionValues = new ContentValues();
 
 
-                    UserQuestion tmpQuestion = (UserQuestion) userQuizArrayList.get(i).getQuestion(y);
+                    Question tmpQuestion = (Question) userQuizArrayList.get(i).getQuestion(y);
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_TITLE, tmpQuestion.getQuestionText());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_CORRECT_ANSWER, tmpQuestion.getOrderedList().get(0).getData());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_INCORRECT_ANSWER_1, tmpQuestion.getOrderedList().get(1).getData());
@@ -159,7 +138,7 @@ public class KwizGeeQDataSource {
         cursor.moveToFirst();
 
         while (cursor.moveToNext()){
-            UserQuestion tmpQuestion = new UserQuestion();
+            Question tmpQuestion = new Question();
             tmpQuestion.setQuestionText(cursor.getString(columnIndexQuestion));
             tmpQuestion.addAnswer(cursor.getString(columnIndexCorrect), true, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_1), false, AnswerType.TEXT);

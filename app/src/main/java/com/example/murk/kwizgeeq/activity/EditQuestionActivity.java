@@ -1,24 +1,20 @@
 package com.example.murk.kwizgeeq.activity;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.*;
 
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.*;
 import com.example.murk.kwizgeeq.databinding.ActivityEditQuestionBinding;
 
 import com.example.murk.kwizgeeq.model.Question;
-import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import com.example.murk.kwizgeeq.view.*;
 
 import java.io.*;
-import java.util.ArrayList;
 
 import java.util.List;
 
