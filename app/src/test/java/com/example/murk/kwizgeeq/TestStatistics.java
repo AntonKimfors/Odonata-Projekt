@@ -58,7 +58,11 @@ public class TestStatistics {
 
     @Test
     public void testStatisticsQuestionIncremention(){
+        int oldQuestionCount = testStatistics.getQuizCount();
 
+        testStatistics.incQuestionCount();
+
+        assertEquals(oldQuestionCount, (testStatistics.getQuestionCount() - 1));
     }
 
     @Test
