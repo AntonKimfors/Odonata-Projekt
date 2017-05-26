@@ -80,12 +80,10 @@ public class TestStatistics {
 
     @Test
     public void testStatisticsTimer(){
-        int oldSecondsSpent = testStatistics.getSecondsSpent();
         StopWatch testStopWatch = new StopWatch();
 
         testStatistics.startTimer();
-        testStopWatch.start();
-        try {
+        testStopWatch.start();try {
             Thread.sleep(5000);
         } catch (InterruptedException e){
             Thread.currentThread().interrupt();
@@ -93,7 +91,7 @@ public class TestStatistics {
         testStatistics.stopTimer();
         testStopWatch.stop();
 
-        assertEquals((testStatistics.getSecondsSpent() - oldSecondsSpent), (int)(testStopWatch.getTime() / 1000));
+        assertEquals((testStatistics.getSecondsSpent()), (int)(testStopWatch.getTime() / 1000));
     }
 
     @Test
