@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 
 import com.example.murk.kwizgeeq.R;
+import com.example.murk.kwizgeeq.controller.DataStorageController;
 import com.example.murk.kwizgeeq.controller.QuizListController;
 import com.example.murk.kwizgeeq.databinding.ActivityQuizListBinding;
 import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
@@ -58,8 +59,9 @@ public class QuizListActivity extends ListActivity {
 
     @Override
     protected void onResume() {
-        super.onResume();
         controller.onResume();
+        super.onResume();
+
     }
 
     @Override

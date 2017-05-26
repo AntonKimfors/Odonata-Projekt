@@ -136,6 +136,7 @@ public class EditQuizController implements Observer {
 
     //TODO: Anpassa när det ska sparas. On button clicks istället?
     public void onPause() {
+        DataStorageController.saveDataToDatabase();
     }
 
     public void onResume() {

@@ -52,7 +52,8 @@ public class QuizListController implements Observer{
         this.context = context;
         this.currentActivity = currentActivity;
         quizList = kwizGeeQ.getUserQuizList();
-        mKwizGeeQDataSource = new KwizGeeQDataSource(context, kwizGeeQ);
+        //mKwizGeeQDataSource = new KwizGeeQDataSource(context, kwizGeeQ);
+        DataStorageController dataStorageController = new DataStorageController(kwizGeeQ,context);
 
         quizListView.setQuestions((ArrayList)quizList);
 
@@ -127,7 +128,6 @@ public class QuizListController implements Observer{
         mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.insertQuizes(tmpQuizList);
         mKwizGeeQDataSource.close();*/
-
         DataStorageController.saveDataToDatabase();
     }
 
@@ -135,7 +135,6 @@ public class QuizListController implements Observer{
         /*mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.updateList();
         mKwizGeeQDataSource.close();*/
-
         DataStorageController.getDataFromDatabase();
     }
 
@@ -177,6 +176,9 @@ public class QuizListController implements Observer{
     }
 
     public void onResume() {
+        if(kwizGeeQ.getUserQuizList().size()>1){
+            kwizGeeQ.getUserQuizList().size();
+        }
         DataStorageController.getDataFromDatabase();
     }
 

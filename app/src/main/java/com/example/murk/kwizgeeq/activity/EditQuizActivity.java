@@ -8,7 +8,6 @@ import android.os.Bundle;
 import com.example.murk.kwizgeeq.controller.EditQuizController;
 
 import com.example.murk.kwizgeeq.databinding.ActivityEditQuizBinding;
-
 import com.example.murk.kwizgeeq.view.*;
 import com.example.murk.kwizgeeq.R;
 
@@ -57,7 +56,7 @@ public class EditQuizActivity extends ListActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        controller.onResume();
+        //controller.onResume();
     }
 
     @Override

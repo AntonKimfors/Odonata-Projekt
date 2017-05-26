@@ -17,6 +17,7 @@ public class DataStorageController {
 
     private static KwizGeeQ kwizGeeQ;
     private static KwizGeeQDataSource mKwizGeeQDataSource;
+    private  Context context;
 
     protected DataStorageController(KwizGeeQ kwizGeeQ, Context context){
         this.kwizGeeQ = kwizGeeQ;
