@@ -47,14 +47,11 @@ public class QuizListController implements Observer{
     //private Activity currentActivity;
 
     public QuizListController(QuizListView view, Context context, Activity currentActivity) {
-        this.kwizGeeQ = new KwizGeeQ();
+        this.kwizGeeQ = new KwizGeeQ(currentActivity);
         this.quizListView = view;
         this.context = context;
         this.currentActivity = currentActivity;
         quizList = kwizGeeQ.getUserQuizList();
-        //mKwizGeeQDataSource = new KwizGeeQDataSource(context, kwizGeeQ);
-        DataStorageController dataStorageController = new DataStorageController(kwizGeeQ,context);
-
         quizListView.setQuestions((ArrayList)quizList);
 
         AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
@@ -122,22 +119,6 @@ public class QuizListController implements Observer{
 
     };
 
-
-    public void saveCurrentData() {
-        /*ArrayList<UserQuiz> tmpQuizList = new ArrayList<>(quizList);
-        mKwizGeeQDataSource.open();
-        mKwizGeeQDataSource.insertQuizes(tmpQuizList);
-        mKwizGeeQDataSource.close();*/
-        DataStorageController.saveDataToDatabase();
-    }
-
-    public void readCurrentData() {
-        /*mKwizGeeQDataSource.open();
-        mKwizGeeQDataSource.updateList();
-        mKwizGeeQDataSource.close();*/
-        DataStorageController.getDataFromDatabase();
-    }
-
     private DialogInterface.OnClickListener getPositiveListener(final int quizIndex){
         return new DialogInterface.OnClickListener() {
             @Override
@@ -170,21 +151,6 @@ public class QuizListController implements Observer{
         this.quizListView.fabPressed();
     }
 
-    //TODO: Spara onClick istället??
-    public void onPause() {
-        DataStorageController.saveDataToDatabase();
-    }
-
-    public void onResume() {
-        if(kwizGeeQ.getUserQuizList().size()>1){
-            kwizGeeQ.getUserQuizList().size();
-        }
-        //DataStorageController.getDataFromDatabase();
-    }
-
-    public void onCreate(){
-        DataStorageController.getDataFromDatabase();
-    }
 
     @Override
     public void update(Observable o, Object arg) {

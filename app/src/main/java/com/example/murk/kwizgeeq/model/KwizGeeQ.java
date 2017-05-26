@@ -1,6 +1,9 @@
 package com.example.murk.kwizgeeq.model;
 
+import android.app.Activity;
+
 import com.example.murk.kwizgeeq.events.EventBusWrapper;
+import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
 
 import java.io.Serializable;
 import java.util.*;
@@ -14,6 +17,7 @@ public class KwizGeeQ implements Serializable{
     private ArrayList<UserQuiz> userQuizList;
     private Statistics globalStatistics;
     private static KwizGeeQ singletonInstance = null;
+    private  KwizGeeQDataSource mKwizGeeQDataSource;
 
     /*
     public static KwizGeeQ getInstance(){
@@ -24,9 +28,11 @@ public class KwizGeeQ implements Serializable{
         return singletonInstance;
     }*/
 
-    public KwizGeeQ(){
+    public KwizGeeQ(Activity mainActivity){
         userQuizList = new ArrayList<UserQuiz>();
         globalStatistics = new Statistics();
+        mKwizGeeQDataSource = new KwizGeeQDataSource(mainActivity.getApplicationContext());
+        getDataFromDatabase();
     }
 
     public ArrayList<UserQuiz> getUserQuizList(){
@@ -48,6 +54,7 @@ public class KwizGeeQ implements Serializable{
     public void removeQuiz(int quizIndex){
         userQuizList.remove(quizIndex);
         EventBusWrapper.BUS.post(this);
+        saveDataToDatabase();
     }
 
     public String getQuizName(int quizIndex){
@@ -61,11 +68,30 @@ public class KwizGeeQ implements Serializable{
     public void addQuiz(UserQuiz quiz) {
         userQuizList.add(quiz);
         EventBusWrapper.BUS.post(this);
+        saveDataToDatabase();
     }
 
     public void replaceQuiz(int quizIndex, UserQuiz quiz) {
         userQuizList.set(quizIndex,quiz);
         EventBusWrapper.BUS.post(this);
+        saveDataToDatabase();
+
+    }
+
+
+
+    public void saveDataToDatabase() {
+        ArrayList<UserQuiz> tmpQuizList = new ArrayList<>(userQuizList);
+        mKwizGeeQDataSource.open();
+        mKwizGeeQDataSource.insertQuizes(tmpQuizList);
+        mKwizGeeQDataSource.close();
+    }
+
+
+    public void getDataFromDatabase() {
+        mKwizGeeQDataSource.open();
+        mKwizGeeQDataSource.updateList(this);
+        mKwizGeeQDataSource.close();
     }
 
     public void updateGlobalStatistics(UserQuiz quiz){

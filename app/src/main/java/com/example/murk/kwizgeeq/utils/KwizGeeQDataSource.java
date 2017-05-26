@@ -32,15 +32,10 @@ public class KwizGeeQDataSource {
     private static Context mContext;
     private static KwizGeeQSQLiteHelper mQuizSqliteHelper;
     private SQLiteDatabase mDatabase;
-    private KwizGeeQ mkwizGeeQ; //TODO: Kolla om detta funkar?
-    //Todo: Kommer det koppla rätt trots att man stänger av appen
-    //TODO: emellan sessione?
 
-    public KwizGeeQDataSource(Context context, KwizGeeQ kwizGeeQ){
+    public KwizGeeQDataSource(Context context){
         mContext = context;
         mQuizSqliteHelper = new KwizGeeQSQLiteHelper(context);
-        mkwizGeeQ = kwizGeeQ;
-
     }
 
     // + open
@@ -134,9 +129,9 @@ public class KwizGeeQDataSource {
     }
 
 
-    public void updateList(){
-        updateCurrentListWithDatabaseQuizzes();
-        updateCurrentListWithDatabaseQuestions();
+    public void updateList(KwizGeeQ mKwizGeeQ){
+        updateCurrentListWithDatabaseQuizzes(mKwizGeeQ);
+        updateCurrentListWithDatabaseQuestions(mKwizGeeQ);
     }
 
       /*+ COLUMN_BEST_STATS_CORRECT + " INTEGER,"
@@ -147,7 +142,7 @@ public class KwizGeeQDataSource {
 
 
 
-    public void updateCurrentListWithDatabaseQuizzes(){
+    public void updateCurrentListWithDatabaseQuizzes(KwizGeeQ mKwizGeeq){
         Cursor cursor = selectAllQuizes();
 
         ArrayList<UserQuiz> tmpQuizList = new ArrayList<>();
@@ -174,12 +169,12 @@ public class KwizGeeQDataSource {
             tmpQuizList.add(tmp);
             cursor.moveToNext();
         }
-        mkwizGeeQ.setUserQuizList(tmpQuizList);
+        mKwizGeeq.setUserQuizList(tmpQuizList);
     };
 
 
 
-    public void updateCurrentListWithDatabaseQuestions(){
+    public void updateCurrentListWithDatabaseQuestions(KwizGeeQ mKwizGeeq){
         Cursor cursor = selectAllQuestions();
         //ArrayList<Answer> tmpAnswerList = new ArrayList<>();
 
@@ -199,7 +194,7 @@ public class KwizGeeQDataSource {
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_1), false, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_2), false, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_3), false, AnswerType.TEXT);
-            mkwizGeeQ.getUserQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).getQuestions().add(tmpQuestion);
+            mKwizGeeq.getUserQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).getQuestions().add(tmpQuestion);
         }
 
     };

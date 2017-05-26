@@ -50,7 +50,7 @@ public class EditQuizActivity extends ListActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        controller.onPause();
+        //controller.onPause();
     }
 
     @Override
