@@ -96,7 +96,23 @@ public class TestStatistics {
 
     @Test
     public void testStatisticsMerging(){
-        
+        int[] oldArr = new int[]{
+                testStatistics.getQuizCount(),
+                testStatistics.getQuestionCount(),
+                testStatistics.getAnswerCorrectCount(),
+                testStatistics.getAnswerIncorrectCount(),
+                testStatistics.getSecondsSpent()
+        };
+        int[] newArr = new int[]{1, 2, 3, 4, 5};
+        Statistics tempTestStatistics = new Statistics(newArr[0], newArr[1], newArr[2], newArr[3], newArr[4]);
+
+        tempTestStatistics.mergeInto(testStatistics);
+
+        assertEquals((newArr[0] + oldArr[0]), testStatistics.getQuizCount());
+        assertEquals((newArr[1] + oldArr[1]), testStatistics.getQuestionCount());
+        assertEquals((newArr[2] + oldArr[2]), testStatistics.getAnswerCorrectCount());
+        assertEquals((newArr[3] + oldArr[3]), testStatistics.getAnswerIncorrectCount());
+        assertEquals((newArr[4] + oldArr[4]), testStatistics.getSecondsSpent());
     }
 
 }
