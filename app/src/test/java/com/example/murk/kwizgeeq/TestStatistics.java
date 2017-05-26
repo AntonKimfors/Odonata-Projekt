@@ -2,6 +2,7 @@ package com.example.murk.kwizgeeq;
 
 import com.example.murk.kwizgeeq.model.Statistics;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -79,12 +80,25 @@ public class TestStatistics {
 
     @Test
     public void testStatisticsTimer(){
-        
+        int oldSecondsSpent = testStatistics.getSecondsSpent();
+        StopWatch testStopWatch = new StopWatch();
+
+        testStatistics.startTimer();
+        testStopWatch.start();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e){
+            Thread.currentThread().interrupt();
+        }
+        testStatistics.stopTimer();
+        testStopWatch.stop();
+
+        assertEquals((testStatistics.getSecondsSpent() - oldSecondsSpent), (int)(testStopWatch.getTime() / 1000));
     }
 
     @Test
     public void testStatisticsMerging(){
-
+        
     }
 
 }
