@@ -103,11 +103,12 @@ public class EditQuizController implements Observer {
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                editQuizview.openEditQuestion(questions,questionIndex);
+                editQuizview.openEditQuestion(questions, questionIndex);
                 editQuizview.dismissAlertDialog();
             }
         };
     }
+
     private DialogInterface.OnClickListener getNegativeListener(final int questionIndex) {
         return new DialogInterface.OnClickListener() {
             @Override
@@ -117,6 +118,7 @@ public class EditQuizController implements Observer {
             }
         };
     }
+
     private DialogInterface.OnClickListener getDismissListener() {
         return new DialogInterface.OnClickListener() {
             @Override
@@ -130,7 +132,8 @@ public class EditQuizController implements Observer {
     public void saveQuizName() {
         quiz.setName(editQuizview.getQuizName().toString());
     }
-    public void saveQuizColor(){
+
+    public void saveQuizColor() {
         quiz.setListColor(editQuizview.getmSelectedColor());
 
     }
