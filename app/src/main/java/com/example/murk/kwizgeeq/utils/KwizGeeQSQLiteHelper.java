@@ -26,12 +26,23 @@ public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_QUIZES = "QUIZES";
     public static final String COLUMN_COLOR = "COLOR";
     public static final String COLUMN_QUIZ_NAME = "QUIZ_NAME";
+    public static final String COLUMN_BEST_STATS_CORRECT = "BEST_CORRECT";
+    public static final String COLUMN_BEST_STATS_INCORRECT = "BEST_INCORRECT";
+    public static final String COLUMN_BEST_STATS_SECONDSSPENT = "BEST_SECONDSSPENT";
+    public static final String COLUMN_BEST_STATS_QUIZCOUNT = "BEST_QUIZCOUNT";
+    public static final String COLUMN_BEST_STATS_QUESTIONCOUNT = "BEST_QUESTIONCOUNT";
+
 
     private static String DB_CREATE =
-                    "CREATE TABLE " + TABLE_QUIZES + " ("
-                     + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                     + COLUMN_QUIZ_NAME + " TEXT,"
-                     + COLUMN_COLOR + " INTEGER" + ")";
+            "CREATE TABLE " + TABLE_QUIZES + " ("
+                    + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + COLUMN_QUIZ_NAME + " TEXT,"
+                    + COLUMN_BEST_STATS_CORRECT + " INTEGER,"
+                    + COLUMN_BEST_STATS_INCORRECT + " INTEGER,"
+                    + COLUMN_BEST_STATS_SECONDSSPENT + " INTEGER,"
+                    + COLUMN_BEST_STATS_QUIZCOUNT + " INTEGER,"
+                    + COLUMN_BEST_STATS_QUESTIONCOUNT + " INTEGER,"
+                    + COLUMN_COLOR + " INTEGER" + ")";
 
 
     //-------------QUESTION Table---------------------
