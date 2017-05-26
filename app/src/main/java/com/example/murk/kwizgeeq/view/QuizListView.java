@@ -61,7 +61,7 @@ public class QuizListView extends Observable {
                         final Activity currentActivity,
                         final Class<? extends Activity> editQuizActivityClass,
                         final Class<? extends Activity> questioneerActivityClass,
-                        FloatingActionButton fab, final KwizGeeQDataSource mKwizGeeQDataSource, int editQuizRequestCode, int createQuizRequestCode, int questioneerRequestCode) {
+                        FloatingActionButton fab, int editQuizRequestCode, int createQuizRequestCode, int questioneerRequestCode) {
 
         this.listView = listView;
         this.context = context;
