@@ -12,9 +12,11 @@ import static org.junit.Assert.*;
 
 public class TestStatistics {
 
+    private static Statistics testStatistics;
+
     @BeforeClass
     public static void beforeClass(){
-        
+        testStatistics = new Statistics();
     }
 
     @Test
@@ -47,7 +49,11 @@ public class TestStatistics {
 
     @Test
     public void testStatisticsQuizIncremention(){
+        int oldQuizCount = testStatistics.getQuizCount();
 
+        testStatistics.incQuizCount();
+
+        assertEquals(oldQuizCount, (testStatistics.getQuizCount() - 1));
     }
 
     @Test
