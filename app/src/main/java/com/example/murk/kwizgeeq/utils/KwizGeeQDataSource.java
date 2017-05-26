@@ -12,8 +12,9 @@ import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.AnswerType;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
 
+import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.Statistics;
-import com.example.murk.kwizgeeq.model.UserQuestion;
+
 
 
 import com.example.murk.kwizgeeq.model.UserQuiz;
@@ -73,7 +74,7 @@ public class KwizGeeQDataSource {
                 for(int y = 0; y < userQuizArrayList.get(i).getQuestions().size(); y++){
 
                     ContentValues questionValues = new ContentValues();
-                    UserQuestion tmpQuestion = (UserQuestion) userQuizArrayList.get(i).getQuestion(y);
+                    Question tmpQuestion = (Question) userQuizArrayList.get(i).getQuestion(y);
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_TITLE, tmpQuestion.getQuestionText());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_CORRECT_ANSWER, tmpQuestion.getOrderedList().get(0).getData());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_INCORRECT_ANSWER_1, tmpQuestion.getOrderedList().get(1).getData());
@@ -187,7 +188,7 @@ public class KwizGeeQDataSource {
         cursor.moveToFirst();
 
         while (cursor.moveToNext()){
-            UserQuestion tmpQuestion = new UserQuestion();
+            Question tmpQuestion = new UserQuestion();
             tmpQuestion.setQuestionText(cursor.getString(columnIndexQuestion));
             tmpQuestion.addAnswer(cursor.getString(columnIndexCorrect), true, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_1), false, AnswerType.TEXT);
