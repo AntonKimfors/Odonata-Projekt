@@ -174,7 +174,7 @@ public class KwizGeeQDataSource {
             tmpQuizList.add(tmp);
             cursor.moveToNext();
         }
-        KwizGeeQ.setUserQuizList(tmpQuizList);
+        mkwizGeeQ.setUserQuizList(tmpQuizList);
     };
 
 
@@ -199,13 +199,10 @@ public class KwizGeeQDataSource {
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_1), false, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_2), false, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_3), false, AnswerType.TEXT);
-            KwizGeeQ.getUserQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).getQuestions().add(tmpQuestion);
+            mkwizGeeQ.getUserQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).getQuestions().add(tmpQuestion);
         }
 
     };
-
-
-
 
     // + delete
     public void deleteAll() {
