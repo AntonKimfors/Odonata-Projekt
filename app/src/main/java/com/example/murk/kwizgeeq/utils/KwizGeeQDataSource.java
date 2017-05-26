@@ -33,7 +33,7 @@ public class KwizGeeQDataSource {
     private static KwizGeeQSQLiteHelper mQuizSqliteHelper;
     private SQLiteDatabase mDatabase;
 
-    public KwizGeeQDataSource(Context context){
+    /*public KwizGeeQDataSource(Context context){
         mContext = context;
         mQuizSqliteHelper = new KwizGeeQSQLiteHelper(context);
     }
@@ -142,7 +142,7 @@ public class KwizGeeQDataSource {
 
 
 
-    public void updateCurrentListWithDatabaseQuizzes(){
+    /*public void updateCurrentListWithDatabaseQuizzes(){
         Cursor cursor = selectAllQuizes();
 
         ArrayList<UserQuiz> tmpQuizList = new ArrayList<>();
@@ -211,5 +211,5 @@ public class KwizGeeQDataSource {
         );
         mDatabase.delete(KwizGeeQSQLiteHelper.TABLE_QUIZES, null, null);
     };
-
+*/
 }
