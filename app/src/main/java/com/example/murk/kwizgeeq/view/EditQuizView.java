@@ -50,23 +50,25 @@ public class EditQuizView extends Observable {
     private int quizIndex;
 
 
-    public EditQuizView(final Class<? extends Activity> editQuestionActivity, final UserQuiz quiz,
+    public EditQuizView(final Class<? extends Activity> editQuestionActivity, final Serializable quiz,
                         final ListView listView, final Context context, final Activity currentActivity,
                         int questionListRequestCode, int quizIndex) {
 
         this.editQuestionActivity = editQuestionActivity;
         this.currentActivity = currentActivity;
         this.context = context;
-        this.quiz = quiz;
+        if(quiz instanceof UserQuiz){
+            this.quiz = (UserQuiz)quiz;
+        }
         this.listView = listView;
         this.editText = (EditText) currentActivity.findViewById(R.id.etQuizLabel);
         this.btnColorPicker = (Button) currentActivity.findViewById(R.id.btnColorPicker);
-        mSelectedColor = quiz.getListColor();
+        mSelectedColor = this.quiz.getListColor();
         this.questionListRequestCode = questionListRequestCode;
         this.quizIndex = quizIndex;
         this.btnColorPicker.setBackgroundColor(mSelectedColor);
-        this.editText.setText(quiz.getName());
-        this.adapter = new EditQuizAdapter(context, quiz.getQuestions(), quiz);
+        this.editText.setText(this.quiz.getName());
+        this.adapter = new EditQuizAdapter(context, this.quiz.getQuestions(), this.quiz);
 
 
         int[] mColors = context.getResources().getIntArray(R.array.default_rainbow);

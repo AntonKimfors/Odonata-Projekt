@@ -10,8 +10,6 @@ import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.*;
 import com.example.murk.kwizgeeq.databinding.ActivityEditQuestionBinding;
 
-import com.example.murk.kwizgeeq.model.Question;
-
 import com.example.murk.kwizgeeq.view.*;
 
 import java.io.*;
@@ -41,7 +39,7 @@ public class EditQuestionActivity extends AppCompatActivity{
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        List<Question> questions = (List)bundle.getSerializable("questions");
+        Serializable questions = bundle.getSerializable("questions");
         int questionIndex = intent.getIntExtra("questionIndex",0);
         System.out.println(questions.toString());
         System.out.println("Question index: " + questionIndex);

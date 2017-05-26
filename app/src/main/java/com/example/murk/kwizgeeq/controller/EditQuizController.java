@@ -7,9 +7,11 @@ import android.widget.AdapterView;
 import com.example.murk.kwizgeeq.model.Question;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.EditQuizView;
+import com.wrapper.spotify.models.User;
 
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -31,13 +33,12 @@ public class EditQuizController implements Observer {
     private List<Question> questions;
 
 
-    public EditQuizController(final EditQuizView editQuizview, final UserQuiz quiz) {
+    public EditQuizController(final EditQuizView editQuizview, final Serializable quiz) {
         this.editQuizview = editQuizview;
-        this.quiz = quiz;
-        this.questions = quiz.getQuestions();
-        if (questions == null) {
-            System.out.println("questions is null");
+        if(quiz instanceof UserQuiz){
+            this.quiz = (UserQuiz)quiz;
         }
+        this.questions = this.quiz.getQuestions();
         editQuizview.setQuestions((ArrayList<Question>) questions);
         //Start on item ClickListerner for the List
         onItemClickListener = new AdapterView.OnItemClickListener() {
@@ -147,8 +148,10 @@ public class EditQuizController implements Observer {
 
     }
 
-    public void setQuestionList(ArrayList<Question> newQuestions) {
-        quiz.replaceQuestions(newQuestions);
+    public void setQuestionList(Serializable newQuestions) {
+        if(newQuestions instanceof  ArrayList){
+            quiz.replaceQuestions((ArrayList<Question>)newQuestions);
+        }
     }
 
     public void onBackPressed() {

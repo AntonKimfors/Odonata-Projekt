@@ -11,7 +11,6 @@ import android.support.design.widget.FloatingActionButton;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.QuizListController;
 import com.example.murk.kwizgeeq.databinding.ActivityQuizListBinding;
-import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
 import com.example.murk.kwizgeeq.view.QuizListView;
 

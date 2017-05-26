@@ -9,11 +9,10 @@ import com.example.murk.kwizgeeq.controller.EditQuizController;
 
 import com.example.murk.kwizgeeq.databinding.ActivityEditQuizBinding;
 
-import com.example.murk.kwizgeeq.model.Question;
-import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.view.*;
 import com.example.murk.kwizgeeq.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class EditQuizActivity extends ListActivity {
@@ -29,7 +28,7 @@ public class EditQuizActivity extends ListActivity {
         //int index = getIntent().getIntExtra("quizIndex", 0);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        UserQuiz quiz = (UserQuiz) bundle.getSerializable("quiz");
+        Serializable quiz = bundle.getSerializable("quiz");
         quizIndex = intent.getIntExtra("quizIndex",0);
 
 
@@ -65,7 +64,7 @@ public class EditQuizActivity extends ListActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == questionListRequestCode && resultCode == RESULT_OK){
             if(data.getSerializableExtra("questions")!=null){
-                ArrayList<Question> questions = (ArrayList)data.getSerializableExtra("questions");
+                Serializable questions = data.getSerializableExtra("questions");
                 controller.setQuestionList(questions);
             }
         }

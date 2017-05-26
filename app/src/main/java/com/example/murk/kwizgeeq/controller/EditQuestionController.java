@@ -10,6 +10,7 @@ import com.example.murk.kwizgeeq.view.EditQuestionView;
 import com.example.murk.kwizgeeq.model.*;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -35,12 +36,14 @@ public class EditQuestionController implements Observer{
     private int questionIndex;
 
     public EditQuestionController(final EditQuestionView editQuestionView, Context currentContext,
-                                  File imageStorageDir, List<Question> questions, int questionIndex){
+                                  File imageStorageDir, Serializable questions, int questionIndex){
         this.editQuestionView = editQuestionView;
         this.currentContext = currentContext;
         this.imageStorageDir = imageStorageDir;
         this.questionIndex = questionIndex;
-        this.questions = questions;
+        if(questions instanceof List){
+            this.questions = (List)questions;
+        }
 
         setUserQuestion();
 
