@@ -30,11 +30,11 @@ public class Statistics implements Serializable{
     }
 
     public Statistics(int quizCount, int questionCount, int answerCorrectCount, int answerIncorrectCount, int secondsSpent){
-        this.quizCount = 0;
-        this.questionCount = 0;
-        this.answerCorrectCount = 0;
-        this.answerIncorrectCount = 0;
-        this.secondsSpent = 0;
+        this.quizCount = quizCount;
+        this.questionCount = questionCount;
+        this.answerCorrectCount = answerCorrectCount;
+        this.answerIncorrectCount = answerIncorrectCount;
+        this.secondsSpent = secondsSpent;
         this.stopWatch = new StopWatch();
     }
 
