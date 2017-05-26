@@ -67,12 +67,19 @@ public class TestStatistics {
 
     @Test
     public void testStatisticsAnswerIncremention(){
+        int oldAnswerCorrectCount = testStatistics.getAnswerCorrectCount();
+        int oldAnswerIncorrectCount = testStatistics.getAnswerIncorrectCount();
 
+        testStatistics.incAnswerCorrectCount();
+        testStatistics.incAnswerIncorrectCount();
+
+        assertEquals(oldAnswerCorrectCount, (testStatistics.getAnswerCorrectCount() - 1));
+        assertEquals(oldAnswerIncorrectCount, (testStatistics.getAnswerIncorrectCount() - 1));
     }
 
     @Test
     public void testStatisticsTimer(){
-
+        
     }
 
     @Test
