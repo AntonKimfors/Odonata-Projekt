@@ -55,11 +55,11 @@ public class QuestioneerController implements Observer{
     }
 
     public void onPause() {
-        QuizListController.saveCurrentData();
+
     }
 
     public void onResume() {
-        QuizListController.readCurrentData();
+
     }
 
     private void updateQuestionIndex(){
@@ -143,5 +143,4 @@ public class QuestioneerController implements Observer{
         }
     }
 
-    //TODO: Behövs read DATA?
 }

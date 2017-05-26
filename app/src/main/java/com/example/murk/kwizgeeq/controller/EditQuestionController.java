@@ -86,7 +86,7 @@ public class EditQuestionController implements Observer{
         }
     }
 
-    //TODO: Anpassa när det ska sparas. On button clicks istället?
+
     public static void onPause() {
     }
 

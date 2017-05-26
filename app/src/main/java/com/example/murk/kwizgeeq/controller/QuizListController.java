@@ -52,7 +52,7 @@ public class QuizListController implements Observer{
         this.context = context;
         this.currentActivity = currentActivity;
         quizList = kwizGeeQ.getUserQuizList();
-        mKwizGeeQDataSource = new KwizGeeQDataSource(context);
+        mKwizGeeQDataSource = new KwizGeeQDataSource(context, kwizGeeQ);
 
         quizListView.setQuestions((ArrayList)quizList);
 
@@ -123,16 +123,20 @@ public class QuizListController implements Observer{
 
 
     public void saveCurrentData() {
-        ArrayList<UserQuiz> tmpQuizList = new ArrayList<>(quizList);
+        /*ArrayList<UserQuiz> tmpQuizList = new ArrayList<>(quizList);
         mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.insertQuizes(tmpQuizList);
-        mKwizGeeQDataSource.close();
+        mKwizGeeQDataSource.close();*/
+
+        DataStorageController.saveDataToDatabase();
     }
 
     public void readCurrentData() {
-        mKwizGeeQDataSource.open();
+        /*mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.updateList();
-        mKwizGeeQDataSource.close();
+        mKwizGeeQDataSource.close();*/
+
+        DataStorageController.getDataFromDatabase();
     }
 
     private DialogInterface.OnClickListener getPositiveListener(final int quizIndex){
@@ -169,11 +173,11 @@ public class QuizListController implements Observer{
 
     //TODO: Spara onClick istället??
     public void onPause() {
-        saveCurrentData();
+        DataStorageController.saveDataToDatabase();
     }
 
     public void onResume() {
-        readCurrentData();
+        DataStorageController.getDataFromDatabase();
     }
 
     @Override
