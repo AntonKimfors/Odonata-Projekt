@@ -29,10 +29,6 @@ public class KwizGeeQ implements Serializable{
         globalStatistics = new Statistics();
     }
 
-    public void updateGlobalStatistics(UserQuiz quiz){
-        quiz.getCurrentTempStatistics().mergeInto(globalStatistics);
-    }
-
     public ArrayList<UserQuiz> getUserQuizList(){
         return userQuizList;
     }
@@ -69,6 +65,11 @@ public class KwizGeeQ implements Serializable{
 
     public void replaceQuiz(int quizIndex, UserQuiz quiz) {
         userQuizList.set(quizIndex,quiz);
+        EventBusWrapper.BUS.post(this);
+    }
+
+    public void updateGlobalStatistics(UserQuiz quiz){
+        quiz.getCurrentTempStatistics().mergeInto(globalStatistics);
         EventBusWrapper.BUS.post(this);
     }
 }
