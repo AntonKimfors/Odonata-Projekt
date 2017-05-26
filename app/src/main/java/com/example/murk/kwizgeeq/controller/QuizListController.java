@@ -179,6 +179,10 @@ public class QuizListController implements Observer{
         if(kwizGeeQ.getUserQuizList().size()>1){
             kwizGeeQ.getUserQuizList().size();
         }
+        //DataStorageController.getDataFromDatabase();
+    }
+
+    public void onCreate(){
         DataStorageController.getDataFromDatabase();
     }
 

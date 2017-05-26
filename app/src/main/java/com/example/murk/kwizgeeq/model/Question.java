@@ -98,6 +98,7 @@ public class Question implements Serializable {
         //Return a array list of the answers with the correct answer at index 0
         ArrayList<Answer> newOrderedList = new ArrayList<Answer>();
         //TODO: put the correct answer at index 0;
+        newOrderedList = new ArrayList<Answer>(this.answers);
 
         return newOrderedList;
     }

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 
 import com.example.murk.kwizgeeq.R;
@@ -62,6 +64,12 @@ public class QuizListActivity extends ListActivity {
         controller.onResume();
         super.onResume();
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+        controller.onCreate();
     }
 
     @Override
