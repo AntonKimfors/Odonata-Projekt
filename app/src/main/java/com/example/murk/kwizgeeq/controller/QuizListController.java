@@ -52,7 +52,7 @@ public class QuizListController implements Observer{
         this.context = context;
         this.currentActivity = currentActivity;
         quizList = kwizGeeQ.getUserQuizList();
-        //mKwizGeeQDataSource = new KwizGeeQDataSource(context);
+        mKwizGeeQDataSource = new KwizGeeQDataSource(context);
 
         quizListView.setQuestions((ArrayList)quizList);
 
@@ -122,17 +122,17 @@ public class QuizListController implements Observer{
     };
 
 
-    public static void saveCurrentData() {
-        /*ArrayList<UserQuiz> tmpQuizList = KwizGeeQ.getInstance().getUserQuizList();
+    public void saveCurrentData() {
+        ArrayList<UserQuiz> tmpQuizList = new ArrayList<>(quizList);
         mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.insertQuizes(tmpQuizList);
-        mKwizGeeQDataSource.close();*/
+        mKwizGeeQDataSource.close();
     }
 
-    public static void readCurrentData() {
-        /*mKwizGeeQDataSource.open();
+    public void readCurrentData() {
+        mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.updateList();
-        mKwizGeeQDataSource.close();*/
+        mKwizGeeQDataSource.close();
     }
 
     private DialogInterface.OnClickListener getPositiveListener(final int quizIndex){

@@ -32,10 +32,15 @@ public class KwizGeeQDataSource {
     private static Context mContext;
     private static KwizGeeQSQLiteHelper mQuizSqliteHelper;
     private SQLiteDatabase mDatabase;
+    private KwizGeeQ mkwizGeeQ; //TODO: Kolla om detta funkar?
+    //Todo: Kommer det koppla rätt trots att man stänger av appen
+    //TODO: emellan sessione?
 
-    /*public KwizGeeQDataSource(Context context){
+    public KwizGeeQDataSource(Context context, KwizGeeQ kwizGeeQ){
         mContext = context;
         mQuizSqliteHelper = new KwizGeeQSQLiteHelper(context);
+        mkwizGeeQ = kwizGeeQ;
+
     }
 
     // + open
@@ -142,7 +147,7 @@ public class KwizGeeQDataSource {
 
 
 
-    /*public void updateCurrentListWithDatabaseQuizzes(){
+    public void updateCurrentListWithDatabaseQuizzes(){
         Cursor cursor = selectAllQuizes();
 
         ArrayList<UserQuiz> tmpQuizList = new ArrayList<>();
@@ -169,7 +174,7 @@ public class KwizGeeQDataSource {
             tmpQuizList.add(tmp);
             cursor.moveToNext();
         }
-        KwizGeeQ.getInstance().setUserQuizList(tmpQuizList);
+        KwizGeeQ.setUserQuizList(tmpQuizList);
     };
 
 
@@ -188,13 +193,13 @@ public class KwizGeeQDataSource {
         cursor.moveToFirst();
 
         while (cursor.moveToNext()){
-            Question tmpQuestion = new UserQuestion();
+            Question tmpQuestion = new Question();
             tmpQuestion.setQuestionText(cursor.getString(columnIndexQuestion));
             tmpQuestion.addAnswer(cursor.getString(columnIndexCorrect), true, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_1), false, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_2), false, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_3), false, AnswerType.TEXT);
-            KwizGeeQ.getInstance().getUserQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).getQuestions().add(tmpQuestion);
+            KwizGeeQ.getUserQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).getQuestions().add(tmpQuestion);
         }
 
     };
@@ -211,5 +216,5 @@ public class KwizGeeQDataSource {
         );
         mDatabase.delete(KwizGeeQSQLiteHelper.TABLE_QUIZES, null, null);
     };
-*/
+
 }

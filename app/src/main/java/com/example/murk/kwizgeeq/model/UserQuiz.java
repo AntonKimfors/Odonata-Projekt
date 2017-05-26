@@ -24,6 +24,14 @@ public class UserQuiz implements Iterable, Serializable{
         currentTempStatistics = new Statistics();
     }
 
+    public UserQuiz(String name, int listColor, Statistics statistics){
+        questions = new ArrayList<>();
+        this.name = name;
+        this.listColor = listColor;
+        bestStatistics = statistics;
+        currentTempStatistics = new Statistics();
+    }
+
     public String getName() {
         return name;
     }
