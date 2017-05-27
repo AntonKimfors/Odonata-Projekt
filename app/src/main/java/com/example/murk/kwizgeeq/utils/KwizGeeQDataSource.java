@@ -159,10 +159,10 @@ public class KwizGeeQDataSource {
         while (!cursor.isAfterLast()){
             int tmpColorInt = Integer.parseInt(cursor.getString(columnIndexColor));
             String tmpName =  cursor.getString(columnIndexName);
-
-            Statistics tmpStats = new Statistics(Integer.parseInt(cursor.getString(columnIndexBestCorrect)), Integer.parseInt(cursor.getString(columnIndexBestIncorrect)),
-                    Integer.parseInt(cursor.getString(columnIndexBestSeconds)), Integer.parseInt(cursor.getString(columnIndexBestQuizCount)),
-                    Integer.parseInt(cursor.getString(columnIndexBestQuestionCount)));
+            //int quizCount, int questionCount, int answerCorrectCount, int answerIncorrectCount, int secondsSpent
+            Statistics tmpStats = new Statistics(Integer.parseInt(cursor.getString(columnIndexBestQuizCount)), Integer.parseInt(cursor.getString(columnIndexBestQuestionCount)),
+                    Integer.parseInt(cursor.getString(columnIndexBestCorrect)), Integer.parseInt(cursor.getString(columnIndexBestIncorrect)),
+                    Integer.parseInt(cursor.getString(columnIndexBestSeconds)));
 
             UserQuiz tmp = new UserQuiz(tmpName,  tmpColorInt, tmpStats);
 
