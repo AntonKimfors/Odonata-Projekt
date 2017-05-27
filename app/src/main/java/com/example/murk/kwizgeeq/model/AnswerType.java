@@ -8,4 +8,15 @@ import java.io.Serializable;
 
 public enum AnswerType implements Serializable {
     TEXT,IMAGE,AUDIO;
+
+
+
+    @Override
+    public String toString() {
+        switch(this) {
+            case TEXT: return "TEXT";
+            case IMAGE: return "IMAGE";
+            default: throw new IllegalArgumentException();
+        }
+    }
 }

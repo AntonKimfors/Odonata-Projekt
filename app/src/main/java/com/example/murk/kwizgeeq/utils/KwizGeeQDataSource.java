@@ -185,15 +185,25 @@ public class KwizGeeQDataSource {
         int columnIndexIncorrect_3 = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_INCORRECT_ANSWER_3);
         int foreignKey = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_FOREIGN_KEY_QUIZ);
 
+        int type = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_ANSWER_TYPE);
+        int questionImage = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_PICTURE);
+
         cursor.moveToFirst();
 
         while (!cursor.isAfterLast()){
             Question tmpQuestion = new Question();
             tmpQuestion.setQuestionText(cursor.getString(columnIndexQuestion));
-            tmpQuestion.addAnswer(cursor.getString(columnIndexCorrect), true, AnswerType.TEXT);
-            tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_1), false, AnswerType.TEXT);
-            tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_2), false, AnswerType.TEXT);
-            tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_3), false, AnswerType.TEXT);
+            tmpQuestion.setImagePath(cursor.getString(questionImage));
+            AnswerType answerType = AnswerType.TEXT;
+            if(cursor.getString(type) == "IMAGE"){
+                answerType = AnswerType.IMAGE;
+            }
+            tmpQuestion.addAnswer(cursor.getString(columnIndexCorrect), true, answerType);
+            tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_1), false, answerType);
+            tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_2), false, answerType);
+            tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_3), false, answerType);
+
+
             mKwizGeeq.getUserQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).getQuestions().add(tmpQuestion);
             cursor.moveToNext();
         }

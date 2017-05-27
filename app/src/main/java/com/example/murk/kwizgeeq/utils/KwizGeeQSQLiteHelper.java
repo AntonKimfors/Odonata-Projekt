@@ -47,21 +47,25 @@ public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
 
     //-------------QUESTION Table---------------------
     public static final String ANNOTATIONS_TABLE = "QUESTIONS";
+    public static final String COLUMN_ANNOTATION_PICTURE = "PICTURE";
     public static final String COLUMN_ANNOTATION_TITLE = "QUESTION";
     public static final String COLUMN_ANNOTATIONS_CORRECT_ANSWER = "CORRECT_ANSWER";
     public static final String COLUMN_ANNOTATIONS_INCORRECT_ANSWER_1 = "INCORRECT_ANSWER_1";
     public static final String COLUMN_ANNOTATIONS_INCORRECT_ANSWER_2 = "INCORRECT_ANSWER_2";
     public static final String COLUMN_ANNOTATIONS_INCORRECT_ANSWER_3 = "INCORRECT_ANSWER_3";
+    public static final String COLUMN_ANNOTATIONS_ANSWER_TYPE = "ANSWER_TYPE";
     public static final String COLUMN_FOREIGN_KEY_QUIZ = "QUIZ_ID";
 
     //TODO: quiZZes i plural
     private static final String CREATE_ANNOTATIONS = "CREATE TABLE " + ANNOTATIONS_TABLE + " (" +
             BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             COLUMN_ANNOTATION_TITLE + " TEXT, " +
+            COLUMN_ANNOTATION_PICTURE + " TEXT, " +
             COLUMN_ANNOTATIONS_CORRECT_ANSWER + " TEXT, " +
             COLUMN_ANNOTATIONS_INCORRECT_ANSWER_1 + " TEXT, " +
             COLUMN_ANNOTATIONS_INCORRECT_ANSWER_2 + " TEXT, " +
             COLUMN_ANNOTATIONS_INCORRECT_ANSWER_3 + " TEXT, " +
+            COLUMN_ANNOTATIONS_ANSWER_TYPE + " TEXT, " +
             COLUMN_FOREIGN_KEY_QUIZ + " INTEGER, " +
             "FOREIGN KEY(" + COLUMN_FOREIGN_KEY_QUIZ + ") REFERENCES QUIZES(_ID))";
 
