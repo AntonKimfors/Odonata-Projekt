@@ -76,6 +76,8 @@ public class KwizGeeQDataSource {
                     ContentValues questionValues = new ContentValues();
                     Question tmpQuestion = (Question) userQuizArrayList.get(i).getQuestion(y);
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_TITLE, tmpQuestion.getQuestionText());
+                    questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_PICTURE, tmpQuestion.getImagePath());
+                    questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_ANSWER_TYPE, tmpQuestion.getOrderedList().get(0).getAnswerTypeAsString());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_CORRECT_ANSWER, tmpQuestion.getOrderedList().get(0).getData());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_INCORRECT_ANSWER_1, tmpQuestion.getOrderedList().get(1).getData());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_INCORRECT_ANSWER_2, tmpQuestion.getOrderedList().get(2).getData());
@@ -133,12 +135,6 @@ public class KwizGeeQDataSource {
         updateCurrentListWithDatabaseQuizzes(mKwizGeeQ);
         updateCurrentListWithDatabaseQuestions(mKwizGeeQ);
     }
-
-      /*+ COLUMN_BEST_STATS_CORRECT + " INTEGER,"
-            + COLUMN_BEST_STATS_INCORRECT + " INTEGER,"
-            + COLUMN_BEST_STATS_SECONDSSPENT + " INTEGER,"
-            + COLUMN_BEST_STATS_QUIZCOUNT + " INTEGER,"
-            + COLUMN_BEST_STATS_QUESTIONCOUNT + " INTEGER,"*/
 
 
 
