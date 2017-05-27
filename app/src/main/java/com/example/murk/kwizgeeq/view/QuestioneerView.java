@@ -35,9 +35,9 @@ public class QuestioneerView extends Observable{
 
     private Window window;
     private TextView quizLabel;
-    private TextView questLabel;
+    private TextView questionLabel;
     private TextView progressNumbers;
-    private ImageView questImage;
+    private ImageView questionImage;
     private ProgressBar progressBar;
     private Button answerButton1;
     private Button answerButton2;
@@ -50,9 +50,9 @@ public class QuestioneerView extends Observable{
         this.activity = activity;
         this.window = activity.getWindow();
         this.quizLabel = (TextView) activity.findViewById(R.id.quizLabel);
-        this.questLabel = (TextView) activity.findViewById(R.id.questLabel);
+        this.questionLabel = (TextView) activity.findViewById(R.id.questLabel);
         this.progressNumbers = (TextView) activity.findViewById(R.id.progressNumbers);
-        this.questImage = (ImageView) activity.findViewById(R.id.imageView);
+        this.questionImage = (ImageView) activity.findViewById(R.id.imageView);
         this.progressBar = (ProgressBar) activity.findViewById(R.id.progressBar);
         this.answerButton1 = (Button) activity.findViewById(R.id.answerButton1);
         this.answerButton2 = (Button) activity.findViewById(R.id.answerButton2);
@@ -112,17 +112,20 @@ public class QuestioneerView extends Observable{
     }
 
     public void updateQuestioneer(Question question, int currentQuestion, int quizSize){
+        resetQuestioneerForUpdate();
+
         Iterator answerIterator = question.answerIterator(true);
 
         progressNumbers.setText(currentQuestion + " / " + quizSize);
         progressBar.setProgress(currentQuestion);
-        questLabel.setText(question.getQuestionText());
+        questionLabel.setText(question.getQuestionText());
         if (question.getImagePath() != null){
             try {
                 InputStream is = activity.getContentResolver().openInputStream(Uri.parse(question.getImagePath()));
-                questImage.setImageDrawable(Drawable.createFromStream(is, question.getImagePath()));
+                questionImage.setImageDrawable(Drawable.createFromStream(is, question.getImagePath()));
+                questionImage.setImageAlpha(255);
             } catch (FileNotFoundException e) {
-                questImage.setImageAlpha(0);
+                questionImage.setImageAlpha(0);
             }
         }
         updateAnswerButtons(answerIterator);
@@ -140,14 +143,10 @@ public class QuestioneerView extends Observable{
 
             if(answer.getAnswerType() == AnswerType.TEXT) {
                 switch (i) {
-                    case 1:
-                        answerButton1.setText(answer.getData());
-                    case 2:
-                        answerButton2.setText(answer.getData());
-                    case 3:
-                        answerButton3.setText(answer.getData());
-                    case 4:
-                        answerButton4.setText(answer.getData());
+                    case 1: answerButton1.setText(answer.getData());
+                    case 2: answerButton2.setText(answer.getData());
+                    case 3: answerButton3.setText(answer.getData());
+                    case 4: answerButton4.setText(answer.getData());
                 }
             } else if (answer.getAnswerType() == AnswerType.IMAGE) {
                 try {
@@ -168,6 +167,18 @@ public class QuestioneerView extends Observable{
                 }
             }
         }
+    }
+
+    private void resetQuestioneerForUpdate(){
+        answerButton1.setText("");
+        answerButton2.setText("");
+        answerButton3.setText("");
+        answerButton4.setText("");
+        answerButton1.setBackgroundColor(activity.getResources().getColor(R.color.colorQuestioneerButton, null));
+        answerButton2.setBackgroundColor(activity.getResources().getColor(R.color.colorQuestioneerButton, null));
+        answerButton3.setBackgroundColor(activity.getResources().getColor(R.color.colorQuestioneerButton, null));
+        answerButton4.setBackgroundColor(activity.getResources().getColor(R.color.colorQuestioneerButton, null));
+        questionImage.setImageAlpha(0);
     }
 
     public void closeQuestioneer(){
