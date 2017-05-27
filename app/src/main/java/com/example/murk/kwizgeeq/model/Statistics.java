@@ -92,14 +92,12 @@ public class Statistics implements Serializable{
     }
 
     public int getBestPercentage(){
-
-        System.out.println("correct: " + getAnswerCorrectCount() + "incorrect: " + getAnswerIncorrectCount());
-        if (getAnswerIncorrectCount() == 0 && getAnswerCorrectCount()!=0)
-            return 100;
-        else if (getAnswerIncorrectCount() == 0 && getAnswerCorrectCount() == 0)
+        if (answerCorrectCount == 0)
             return 0;
+        else if (answerIncorrectCount == 0)
+            return 100;
         else
-            return getAnswerCorrectCount()/ getAnswerIncorrectCount();
+            return (int)((answerCorrectCount * 100.0f) / questionCount);
     }
 
 }
