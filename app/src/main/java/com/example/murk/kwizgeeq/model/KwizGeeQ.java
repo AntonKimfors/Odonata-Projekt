@@ -19,15 +19,6 @@ public class KwizGeeQ implements Serializable{
     private static KwizGeeQ singletonInstance = null;
     private  KwizGeeQDataSource mKwizGeeQDataSource;
 
-    /*
-    public static KwizGeeQ getInstance(){
-        if (singletonInstance == null){
-            singletonInstance = new KwizGeeQ();
-        }
-
-        return singletonInstance;
-    }*/
-
     public KwizGeeQ(Activity mainActivity){
         userQuizList = new ArrayList<UserQuiz>();
         globalStatistics = new Statistics();
