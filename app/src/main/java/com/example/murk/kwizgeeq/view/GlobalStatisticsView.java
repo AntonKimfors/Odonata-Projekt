@@ -1,7 +1,6 @@
 package com.example.murk.kwizgeeq.view;
 
 import android.app.Activity;
-import android.support.annotation.DrawableRes;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -41,12 +40,12 @@ public class GlobalStatisticsView {
         questionCountLabel.setText(statistics.getQuestionCount() + " questions answered");
         answerCorrectCountLabel.setText("Correct: " + statistics.getAnswerCorrectCount());
         answerIncorrectCountLabel.setText("Wrong: " + statistics.getAnswerIncorrectCount());
-        if(statistics.getBestPercentage() == 0){
+        if(statistics.getCorrectAnswerPercentage() == 0){
             percentageLabel.setTextColor(activity.getResources().getColor(R.color.colorIncorrectAnswer));
         } else {
             percentageLabel.setTextColor(activity.getResources().getColor(R.color.colorCorrectAnswer));
         }
-        percentageLabel.setText(statistics.getBestPercentage() + "%");
+        percentageLabel.setText(statistics.getCorrectAnswerPercentage() + "%");
         answersProgressBar.setMax(statistics.getQuestionCount());
         answersProgressBar.setProgress(statistics.getAnswerCorrectCount());
         timeSpentLabel.setText(statistics.getSecondsSpent() + " seconds wasted");

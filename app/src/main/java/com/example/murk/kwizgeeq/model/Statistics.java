@@ -91,7 +91,7 @@ public class Statistics implements Serializable{
         return secondsSpent;
     }
 
-    public int getBestPercentage(){
+    public int getCorrectAnswerPercentage(){
         if (answerCorrectCount == 0)
             return 0;
         else if (answerIncorrectCount == 0)

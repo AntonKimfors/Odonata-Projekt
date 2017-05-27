@@ -67,7 +67,7 @@ public class QuizListAdapter extends BaseAdapter {
         UserQuiz userQuiz = mUserQuiz.get(position);
         holder.quizNameLabel.setText(userQuiz.getName());
         holder.quizQuestionAmountLabel.setText(userQuiz.getQuestions().size() + " Questions");
-        holder.tvBestResult.setText(userQuiz.getBestStatistics().getBestPercentage() + "%");
+        holder.tvBestResult.setText(userQuiz.getBestStatistics().getCorrectAnswerPercentage() + "%");
         holder.relativeLayout.setBackgroundColor(userQuiz.getListColor());
         
         return convertView;

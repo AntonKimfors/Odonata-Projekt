@@ -98,9 +98,9 @@ public class UserQuiz implements Iterable, Serializable{
     }
 
     public void updateBestStatistics() {
-        int oldPercentage = bestStatistics.getBestPercentage();
+        int oldPercentage = bestStatistics.getCorrectAnswerPercentage();
         int oldSeconds = bestStatistics.getSecondsSpent();
-        int newPercentage = currentTempStatistics.getBestPercentage();
+        int newPercentage = currentTempStatistics.getCorrectAnswerPercentage();
         int newSeconds = currentTempStatistics.getSecondsSpent();
 
         if (newPercentage > oldPercentage) {
