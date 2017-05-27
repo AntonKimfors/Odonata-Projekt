@@ -81,7 +81,7 @@ public class KwizGeeQDataSource {
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_INCORRECT_ANSWER_2, tmpQuestion.getOrderedList().get(2).getData());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_INCORRECT_ANSWER_3, tmpQuestion.getOrderedList().get(3).getData());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_FOREIGN_KEY_QUIZ, "" + i);
-                    mDatabase.insert(KwizGeeQSQLiteHelper.TABLE_QUIZES, null, questionValues);
+                    mDatabase.insert(KwizGeeQSQLiteHelper.ANNOTATIONS_TABLE, null, questionValues);
 
                 }
             }
@@ -156,7 +156,7 @@ public class KwizGeeQDataSource {
 
         cursor.moveToFirst();
 
-        while (cursor.moveToNext()){
+        while (!cursor.isAfterLast()){
             int tmpColorInt = Integer.parseInt(cursor.getString(columnIndexColor));
             String tmpName =  cursor.getString(columnIndexName);
 
@@ -187,7 +187,7 @@ public class KwizGeeQDataSource {
 
         cursor.moveToFirst();
 
-        while (cursor.moveToNext()){
+        while (!cursor.isAfterLast()){
             Question tmpQuestion = new Question();
             tmpQuestion.setQuestionText(cursor.getString(columnIndexQuestion));
             tmpQuestion.addAnswer(cursor.getString(columnIndexCorrect), true, AnswerType.TEXT);
@@ -195,6 +195,7 @@ public class KwizGeeQDataSource {
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_2), false, AnswerType.TEXT);
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_3), false, AnswerType.TEXT);
             mKwizGeeq.getUserQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).getQuestions().add(tmpQuestion);
+            cursor.moveToNext();
         }
 
     };
