@@ -98,14 +98,16 @@ public class UserQuiz implements Iterable, Serializable{
     }
 
     public void updateBestStatistics() {
-        int oldCorrectCount = bestStatistics.getAnswerCorrectCount();
-        int newCorrectCount = currentTempStatistics.getAnswerCorrectCount();
+        int oldPercentage = bestStatistics.getBestPercentage();
+        int oldSeconds = bestStatistics.getSecondsSpent();
+        int newPercentage = currentTempStatistics.getBestPercentage();
+        int newSeconds = currentTempStatistics.getSecondsSpent();
 
-        if (newCorrectCount > oldCorrectCount) {
-            currentTempStatistics.mergeInto(bestStatistics);
-        } else if (newCorrectCount == oldCorrectCount) {
-            if (currentTempStatistics.getSecondsSpent() > bestStatistics.getSecondsSpent()) {
-                currentTempStatistics.mergeInto(bestStatistics);
+        if (newPercentage > oldPercentage) {
+            bestStatistics = currentTempStatistics;
+        } else if (newPercentage == oldPercentage) {
+            if (newSeconds < oldSeconds) {
+                bestStatistics = currentTempStatistics;
             }
         }
     }
