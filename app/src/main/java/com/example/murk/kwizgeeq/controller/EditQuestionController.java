@@ -165,30 +165,30 @@ public class EditQuestionController implements Observer{
     }
 
     public void imageCreated(){
-        if(imagePath!=null){
 
             if(imagePath!=null){
                 question.setImagePath(imagePath);
             }
 
-            question.clearAnswers();
+            if(editQuestionView.isSwitchChecked()){
+                question.clearAnswers();
 
-            if(correctImagePath!=null){
-                question.addAnswer(correctImagePath,true,AnswerType.IMAGE);
-            }
+                if(correctImagePath!=null){
+                    question.addAnswer(correctImagePath,true,AnswerType.IMAGE);
+                }
 
-            if(wrong1ImagePath!=null){
-                question.addAnswer(wrong1ImagePath,false,AnswerType.IMAGE);
-            }
+                if(wrong1ImagePath!=null){
+                    question.addAnswer(wrong1ImagePath,false,AnswerType.IMAGE);
+                }
 
-            if(wrong2ImagePath!=null){
-                question.addAnswer(wrong2ImagePath,false,AnswerType.IMAGE);
-            }
+                if(wrong2ImagePath!=null){
+                    question.addAnswer(wrong2ImagePath,false,AnswerType.IMAGE);
+                }
 
-            if(wrong3ImagePath!=null){
-                question.addAnswer(wrong3ImagePath,false,AnswerType.IMAGE);
+                if(wrong3ImagePath!=null){
+                    question.addAnswer(wrong3ImagePath,false,AnswerType.IMAGE);
+                }
             }
-        }
     }
 
     private boolean checkImageAnswers(){
