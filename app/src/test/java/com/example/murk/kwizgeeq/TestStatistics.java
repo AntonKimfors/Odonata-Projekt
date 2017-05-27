@@ -3,6 +3,7 @@ package com.example.murk.kwizgeeq;
 import com.example.murk.kwizgeeq.model.Statistics;
 
 import org.apache.commons.lang.time.StopWatch;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -13,10 +14,10 @@ import static org.junit.Assert.*;
 
 public class TestStatistics {
 
-    private static Statistics testStatistics;
+    private Statistics testStatistics;
 
-    @BeforeClass
-    public static void beforeClass(){
+    @Before
+    public void before(){
         testStatistics = new Statistics();
     }
 
@@ -113,6 +114,37 @@ public class TestStatistics {
         assertEquals((newArr[2] + oldArr[2]), testStatistics.getAnswerCorrectCount());
         assertEquals((newArr[3] + oldArr[3]), testStatistics.getAnswerIncorrectCount());
         assertEquals((newArr[4] + oldArr[4]), testStatistics.getSecondsSpent());
+    }
+
+    @Test
+    public void testStatisticsPercentage(){
+        int testPercentage1 = calcTestPercentage(testStatistics);
+        int statPercentage1 = testStatistics.getCorrectAnswerPercentage();
+
+        testStatistics.incAnswerCorrectCount();
+        testStatistics.incQuestionCount();
+        int testPercentage2 = calcTestPercentage(testStatistics);
+        int statPercentage2 = testStatistics.getCorrectAnswerPercentage();
+
+        testStatistics.incAnswerIncorrectCount();
+        testStatistics.incQuestionCount();
+        int testPercentage3 = calcTestPercentage(testStatistics);
+        int statPercentage3 = testStatistics.getCorrectAnswerPercentage();
+
+
+        assertEquals(testPercentage1, statPercentage1);
+        assertEquals(testPercentage2, statPercentage2);
+        assertEquals(testPercentage3, statPercentage3);
+    }
+
+    private int calcTestPercentage(Statistics statistics){
+        if(statistics.getAnswerCorrectCount() == 0){
+            return 0;
+        } else if(statistics.getAnswerIncorrectCount() == 0){
+            return 100;
+        } else {
+            return (int)((statistics.getAnswerCorrectCount() * 100.0f) / statistics.getQuestionCount());
+        }
     }
 
 }
