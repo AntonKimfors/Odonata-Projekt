@@ -13,26 +13,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.murk.kwizgeeq.QuizList">
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/globalStatisticsButton"
-                android:layout_width="64dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_marginBottom="64dp"
-                android:background="@drawable/global_statistics_button"
-                android:gravity="right|center_vertical"
-                android:paddingRight="8dp"
-                android:text="Stats"
-                android:textColor="@android:color/white"
-                app:layout_anchorGravity="center_vertical|left"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent" />
-        </android.support.constraint.ConstraintLayout>
-
         <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,16 +20,28 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:onClick="@{controller::onClickAction}"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{controller::onClickAction}"
+            app:srcCompat="@android:drawable/ic_menu_add" />
 
-    <include layout="@layout/content_quiz_list"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/globalStatisticsFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:layout_margin="@dimen/fab_margin"
+            android:clickable="true"
+            android:onClick="@{controller::globalStatisticsButtonPressed}"
+            app:backgroundTint="@color/graphite"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/statistics_icon" />
+
+        <include layout="@layout/content_quiz_list"
         android:id="@+id/include" />
 
     </android.support.design.widget.CoordinatorLayout>

@@ -18,6 +18,7 @@ import android.widget.ListView;
 import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.events.EventBusWrapper;
 import com.example.murk.kwizgeeq.model.KwizGeeQ;
+import com.example.murk.kwizgeeq.model.Statistics;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 import com.example.murk.kwizgeeq.utils.KwizGeeQDataSource;
 import com.google.common.eventbus.Subscribe;
@@ -37,6 +38,7 @@ public class QuizListView extends Observable {
     private final Activity currentActivity;
     private final Class<? extends Activity> editQuizActivityClass;
     private final Class<? extends Activity> questioneerActivityClass;
+    private final Class<? extends Activity> globalStatisticsActivityClass;
     private final EditText quizName;
     private final Button mCancel;
     private final Button mCreateQuiz;
@@ -61,12 +63,14 @@ public class QuizListView extends Observable {
                         final Activity currentActivity,
                         final Class<? extends Activity> editQuizActivityClass,
                         final Class<? extends Activity> questioneerActivityClass,
+                        final Class<? extends Activity> globalStatisticsActivityClass,
                         FloatingActionButton fab, int editQuizRequestCode, int createQuizRequestCode, int questioneerRequestCode) {
 
         this.listView = listView;
         this.context = context;
         this.editQuizActivityClass = editQuizActivityClass;
         this.questioneerActivityClass = questioneerActivityClass;
+        this.globalStatisticsActivityClass = globalStatisticsActivityClass;
         this.editQuizRequestCode = editQuizRequestCode;
         this.createQuizRequestCode = createQuizRequestCode;
         this.questioneerRequestCode = questioneerRequestCode;
@@ -182,6 +186,12 @@ public class QuizListView extends Observable {
         intent.putExtra("quiz", quiz);
         intent.putExtra("quizIndex", quizIndex);
         currentActivity.startActivityForResult(intent, questioneerRequestCode);
+    }
+
+    public void openGlobalStatistics(Statistics statistics){
+        Intent intent = new Intent(context, globalStatisticsActivityClass);
+        intent.putExtra("statistics", statistics);
+        currentActivity.startActivity(intent);
     }
 
     public void showAlertDialog(){

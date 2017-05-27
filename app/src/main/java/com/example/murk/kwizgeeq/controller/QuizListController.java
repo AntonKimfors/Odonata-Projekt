@@ -151,6 +151,10 @@ public class QuizListController implements Observer{
         this.quizListView.fabPressed();
     }
 
+    public void globalStatisticsButtonPressed(View view){
+        this.quizListView.openGlobalStatistics(kwizGeeQ.getGlobalStatistics());
+    }
+
 
     @Override
     public void update(Observable o, Object arg) {
