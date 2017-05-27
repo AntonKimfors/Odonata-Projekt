@@ -65,7 +65,7 @@ public class KwizGeeQDataSource {
                 values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_INCORRECT, "" + userQuizArrayList.get(i).getBestStatistics().getAnswerIncorrectCount());
                 values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_SECONDSSPENT,"" + userQuizArrayList.get(i).getBestStatistics().getSecondsSpent());
                 values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_QUIZCOUNT, "" + userQuizArrayList.get(i).getBestStatistics().getQuizCount());
-                values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_QUESTIONCOUNT, "" + userQuizArrayList.get(i).getBestStatistics().getQuizCount());
+                values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_QUESTIONCOUNT, "" + userQuizArrayList.get(i).getBestStatistics().getQuestionCount());
                 values.put(KwizGeeQSQLiteHelper.COLUMN_COLOR, "" + (userQuizArrayList.get(i).getListColor()));
 
                 mDatabase.insert(KwizGeeQSQLiteHelper.TABLE_QUIZES, null, values);
