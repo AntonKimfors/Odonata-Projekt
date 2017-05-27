@@ -2,9 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.murk.kwizgeeq">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -14,11 +16,11 @@
         android:debuggable="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
+        android:persistent="true"
         android:roundIcon="@drawable/roundicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
-        android:persistent="true"
-        tools:ignore="HardcodedDebugMode">    <!--android:icon="@mipmap/ic_launcher"  theF is mipmap -->
+        tools:ignore="HardcodedDebugMode"> <!-- android:icon="@mipmap/ic_launcher"  theF is mipmap -->
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -27,18 +29,17 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <activity
             android:name=".activity.QuizListActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.SplashScreenActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:theme="@android:style/Theme.Black.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,12 +49,12 @@
         <activity android:name=".activity.EditQuestionActivity" />
         <activity
             android:name=".activity.QuestioneerActivity"
-            android:parentActivityName=".activity.QuizListActivity"/>
+            android:parentActivityName=".activity.QuizListActivity" />
         <activity
             android:name=".activity.EditQuizActivity"
-            android:parentActivityName=".activity.QuizListActivity"/>
-
+            android:parentActivityName=".activity.QuizListActivity" />
         <activity android:name=".activity.StatisticsActivity" />
+        <activity android:name=".activity.GlobalStatisticsActivity"></activity>
     </application>
 
 </manifest>
