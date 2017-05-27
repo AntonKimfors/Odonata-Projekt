@@ -6,6 +6,6 @@ package com.example.murk.kwizgeeq.view;
 
 public class GlobalStatisticsView {
 
-    
+
 
 }
