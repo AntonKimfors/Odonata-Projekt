@@ -24,22 +24,22 @@ public class GlobalStatisticsSQLiteHelper extends SQLiteOpenHelper {
 
     //------------- TABLE_STATISTICS ----------------------
     public static final String TABLE_STATISTICS = "STATISTICS";
-    protected static final String COLUMN_BEST_STATS_CORRECT = "BEST_CORRECT";
-    protected static final String COLUMN_BEST_STATS_INCORRECT = "BEST_INCORRECT";
-    protected static final String COLUMN_BEST_STATS_SECONDSSPENT = "BEST_SECONDSSPENT";
-    protected static final String COLUMN_BEST_STATS_QUIZCOUNT = "BEST_QUIZCOUNT";
-    protected static final String COLUMN_BEST_STATS_QUESTIONCOUNT = "BEST_QUESTIONCOUNT";
+    protected static final String COLUMN_GLOBAL_STATS_CORRECT = "BEST_CORRECT";
+    protected static final String COLUMN_GLOBAL_STATS_INCORRECT = "BEST_INCORRECT";
+    protected static final String COLUMN_GLOBAL_STATS_SECONDSSPENT = "BEST_SECONDSSPENT";
+    protected static final String COLUMN_GLOBAL_STATS_QUIZCOUNT = "BEST_QUIZCOUNT";
+    protected static final String COLUMN_GLOBAL_STATS_QUESTIONCOUNT = "BEST_QUESTIONCOUNT";
 
 
 
     private static String DB_CREATE =
             "CREATE TABLE " + TABLE_STATISTICS + " ("
                     + BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + COLUMN_BEST_STATS_CORRECT + " INTEGER,"
-                    + COLUMN_BEST_STATS_INCORRECT + " INTEGER,"
-                    + COLUMN_BEST_STATS_SECONDSSPENT + " INTEGER,"
-                    + COLUMN_BEST_STATS_QUIZCOUNT + " INTEGER,"
-                    + COLUMN_BEST_STATS_QUESTIONCOUNT + " INTEGER" + ")";
+                    + COLUMN_GLOBAL_STATS_CORRECT + " INTEGER,"
+                    + COLUMN_GLOBAL_STATS_INCORRECT + " INTEGER,"
+                    + COLUMN_GLOBAL_STATS_SECONDSSPENT + " INTEGER,"
+                    + COLUMN_GLOBAL_STATS_QUIZCOUNT + " INTEGER,"
+                    + COLUMN_GLOBAL_STATS_QUESTIONCOUNT + " INTEGER" + ")";
 
 
 

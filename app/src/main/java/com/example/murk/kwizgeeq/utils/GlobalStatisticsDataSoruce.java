@@ -20,13 +20,13 @@ import java.util.ArrayList;
 
 public class GlobalStatisticsDataSoruce {
 
-    private static Context mContext;
+    //private static Context mContext;
     private static GlobalStatisticsSQLiteHelper globalStatisticsSQLiteHelper;
     private SQLiteDatabase mDatabase;
 
 
     public GlobalStatisticsDataSoruce(Context context){
-        mContext = context;
+        //mContext = context;
         globalStatisticsSQLiteHelper = new GlobalStatisticsSQLiteHelper(context);
     }
 
@@ -41,15 +41,25 @@ public class GlobalStatisticsDataSoruce {
     }
 
     // + insert
-    public void insertQuizes() {
+    public void insertGlobalStats(Statistics globalStatistics) {
         //deleteAll();
 
         mDatabase.beginTransaction();
-        //try
-        mDatabase.setTransactionSuccessful();
-        //finally
-            mDatabase.endTransaction();
+        deleteAll();
 
+        try {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_CORRECT, "" + globalStatistics.getAnswerCorrectCount());
+            contentValues.put(GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_INCORRECT, "" + globalStatistics.getAnswerIncorrectCount());
+            contentValues.put(GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_QUESTIONCOUNT, "" +globalStatistics.getQuestionCount());
+            contentValues.put(GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_QUIZCOUNT, "" + globalStatistics.getQuizCount());
+            contentValues.put(GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_SECONDSSPENT, "" + globalStatistics.getSecondsSpent());
+            mDatabase.insert(GlobalStatisticsSQLiteHelper.TABLE_STATISTICS, null, contentValues);
+            mDatabase.setTransactionSuccessful();
+        }
+        finally {
+            mDatabase.endTransaction();
+        }
     } // - end insertQuizes
 
 
@@ -57,7 +67,9 @@ public class GlobalStatisticsDataSoruce {
     public Cursor selectAllStatistics(){
         Cursor cursor =  mDatabase.query(
                 GlobalStatisticsSQLiteHelper.TABLE_STATISTICS,
-                new String[] {},  //Column names
+                new String[] {GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_CORRECT, GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_INCORRECT,
+                        GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_QUIZCOUNT, GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_QUESTIONCOUNT,
+                        GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_SECONDSSPENT, },  //Column names
                 null, //where clause
                 null, //where params
                 null, //Grop by
@@ -69,49 +81,55 @@ public class GlobalStatisticsDataSoruce {
     }
     // + update
 
-
-    public Cursor selectAllQuestions(){
-        Cursor cursor =  mDatabase.query(
-                KwizGeeQSQLiteHelper.ANNOTATIONS_TABLE,
-                new String[] {KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_TITLE, BaseColumns._ID, KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_CORRECT_ANSWER,
-                        KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_INCORRECT_ANSWER_1, KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_INCORRECT_ANSWER_2,
-                        KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_INCORRECT_ANSWER_3, KwizGeeQSQLiteHelper.COLUMN_FOREIGN_KEY_QUIZ, KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_ANSWER_TYPE, KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_PICTURE},  //Column names
-                null, //where clause
-                null, //where params
-                null, //Grop by
-                null, //having
-                null //orderBy
-        );
-        return cursor;
-
-    }
-
-
-    public void updateList(KwizGeeQ mKwizGeeQ){
-        updateCurrentStatsWithDatabaseStats(mKwizGeeQ);
-
+    public Statistics updateList(){
+        return updateCurrentStatsWithDatabaseStats();
     }
 
 
 
-    public void updateCurrentStatsWithDatabaseStats(KwizGeeQ mKwizGeeq){
+    public Statistics updateCurrentStatsWithDatabaseStats() {
         Cursor cursor = selectAllStatistics();
+
+        int statsCorrect = cursor.getColumnIndex(GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_CORRECT);
+        int statsIncorrect = cursor.getColumnIndex(GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_INCORRECT);
+        int statsQuestionCount = cursor.getColumnIndex(GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_QUESTIONCOUNT);
+        int statsQuizCount = cursor.getColumnIndex(GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_QUIZCOUNT);
+        int statsSecondsSpent = cursor.getColumnIndex(GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_SECONDSSPENT);
 
 
         cursor.moveToFirst();
+        //Statistics tmp = new Statistics();
 
-        while (!cursor.isAfterLast()){
+        try {
+            while (!cursor.isAfterLast()) {
 
-            cursor.moveToNext();
-        }
 
+                int tmpCorrectAnswer = Integer.parseInt(cursor.getString(statsCorrect));
+                int tmpInCorrectAnswer = Integer.parseInt(cursor.getString(statsIncorrect));
+                int tmpQuestionCount = Integer.parseInt(cursor.getString(statsQuestionCount));
+                int tmpQuizCount = Integer.parseInt(cursor.getString(statsQuizCount));
+                int tmpSecondsSpent = Integer.parseInt(cursor.getString(statsSecondsSpent));
+
+                Statistics tmp = new Statistics(tmpQuizCount, tmpQuestionCount, tmpCorrectAnswer, tmpInCorrectAnswer, tmpSecondsSpent);
+
+                cursor.moveToNext();
+                return tmp;
+
+            }
+        } catch (Exception e) {;
+    }
+        return new Statistics();
     }
 
 
 
 // + delete
     public void deleteAll() {
-
+        mDatabase.delete(
+                GlobalStatisticsSQLiteHelper.TABLE_STATISTICS,
+                null, //where clause
+                null //where params
+        );
     }
 }
 

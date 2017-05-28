@@ -29,12 +29,12 @@ import java.util.ArrayList;
 
 public class KwizGeeQDataSource {
 
-    private static Context mContext;
+    //private static Context mContext;
     private static KwizGeeQSQLiteHelper mQuizSqliteHelper;
     private SQLiteDatabase mDatabase;
 
     public KwizGeeQDataSource(Context context){
-        mContext = context;
+        //mContext = context;
         mQuizSqliteHelper = new KwizGeeQSQLiteHelper(context);
     }
 
