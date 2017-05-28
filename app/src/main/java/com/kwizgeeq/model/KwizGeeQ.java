@@ -3,8 +3,8 @@ package com.kwizgeeq.model;
 import android.app.Activity;
 
 import com.kwizgeeq.events.EventBusWrapper;
-import com.kwizgeeq.utils.GlobalStatisticsDataSoruce;
-import com.kwizgeeq.utils.KwizGeeQDataSource;
+import com.kwizgeeq.storageUtilities.GlobalStatisticsDataSoruce;
+import com.kwizgeeq.storageUtilities.KwizGeeQDataSource;
 
 import java.io.Serializable;
 import java.util.*;

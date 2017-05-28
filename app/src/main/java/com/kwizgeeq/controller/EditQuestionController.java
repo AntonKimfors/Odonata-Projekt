@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.view.View;
 import android.widget.CompoundButton;
 
-import com.kwizgeeq.utils.ImageFileHandler;
+import com.kwizgeeq.storageUtilities.ImageFileHandler;
 import com.kwizgeeq.view.EditQuestionView;
 import com.kwizgeeq.model.*;
 

@@ -11,7 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import com.kwizgeeq.R;
 import com.kwizgeeq.controller.QuizListController;
 import com.kwizgeeq.databinding.ActivityQuizListBinding;
-import com.kwizgeeq.utils.KwizGeeQDataSource;
+import com.kwizgeeq.storageUtilities.KwizGeeQDataSource;
 import com.kwizgeeq.view.QuizListView;
 
 /**

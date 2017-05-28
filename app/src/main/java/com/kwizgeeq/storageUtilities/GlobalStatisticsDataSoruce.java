@@ -1,18 +1,12 @@
-package com.kwizgeeq.utils;
+package com.kwizgeeq.storageUtilities;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.BaseColumns;
 
-import com.kwizgeeq.model.KwizGeeQ;
-import com.kwizgeeq.model.Question;
 import com.kwizgeeq.model.Statistics;
-import com.kwizgeeq.model.UserQuiz;
-
-import java.util.ArrayList;
 
 /**
  * Created by akimfors on 2017-05-28.

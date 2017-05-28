@@ -1,4 +1,4 @@
-package com.kwizgeeq.utils;
+package com.kwizgeeq.storageUtilities;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

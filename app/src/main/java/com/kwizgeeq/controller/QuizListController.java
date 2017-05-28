@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import com.kwizgeeq.model.KwizGeeQ;
 import com.kwizgeeq.model.UserQuiz;
 
-import com.kwizgeeq.utils.KwizGeeQDataSource;
+import com.kwizgeeq.storageUtilities.KwizGeeQDataSource;
 
 import com.kwizgeeq.view.QuizListView;
 

@@ -1,4 +1,4 @@
-package com.kwizgeeq.utils;
+package com.kwizgeeq.storageUtilities;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
 
-import com.kwizgeeq.model.Answer;
 import com.kwizgeeq.model.AnswerType;
 import com.kwizgeeq.model.KwizGeeQ;
 
@@ -18,8 +17,6 @@ import com.kwizgeeq.model.Statistics;
 
 
 import com.kwizgeeq.model.UserQuiz;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

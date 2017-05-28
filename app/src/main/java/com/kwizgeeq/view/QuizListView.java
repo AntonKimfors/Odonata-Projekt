@@ -20,14 +20,12 @@ import com.kwizgeeq.events.EventBusWrapper;
 import com.kwizgeeq.model.KwizGeeQ;
 import com.kwizgeeq.model.Statistics;
 import com.kwizgeeq.model.UserQuiz;
-import com.kwizgeeq.utils.KwizGeeQDataSource;
 import com.google.common.eventbus.Subscribe;
 
 import org.xdty.preference.colorpicker.ColorPickerDialog;
 import org.xdty.preference.colorpicker.ColorPickerSwatch;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 
 /**
