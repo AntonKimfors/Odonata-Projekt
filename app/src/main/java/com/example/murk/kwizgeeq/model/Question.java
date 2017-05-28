@@ -17,15 +17,10 @@ public class Question implements Serializable {
     private final List<Answer> answers;
     private int wrongAnswerCount;
     private int correctAnswerCount;
-    transient com.google.common.eventbus.EventBus eventBus;
     private String questionText;
     private String imagePath;
-    private double xPosition;
-    private double yPosition;
-    private String audioPath;
 
     public Question() {
-        eventBus = EventBusWrapper.BUS;
         answers = new ArrayList<>();
 
         wrongAnswerCount = 0;
@@ -56,7 +51,7 @@ public class Question implements Serializable {
         }
 
         if(answerType == AnswerType.IMAGE){
-            eventBus.post(this);
+            EventBusWrapper.BUS.post(this);
         }
     }
 
@@ -120,32 +115,9 @@ public class Question implements Serializable {
         return imagePath;
     }
 
-    public double getxPosition() {
-        return xPosition;
-    }
-
-    public double getyPosition() {
-        return yPosition;
-    }
-
-    public String getAudioPath() {
-        return audioPath;
-    }
-
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
-        eventBus.post(this);
-    }
-
-    public void setPosition(double xPosition, double yPosition) {
-        this.xPosition = xPosition;
-        this.yPosition = yPosition;
-        eventBus.post(this);
-    }
-
-    public void setAudioPath(String audioPath) {
-        this.audioPath = audioPath;
-        eventBus.post(this);
+        EventBusWrapper.BUS.post(this);
     }
 
     @Override
@@ -169,14 +141,6 @@ public class Question implements Serializable {
                 } else {
                     return false;
                 }
-            }
-
-            if(xPosition != o.xPosition){
-                return false;
-            }
-
-            if(yPosition != yPosition){
-                return false;
             }
 
             //all variables are equal
