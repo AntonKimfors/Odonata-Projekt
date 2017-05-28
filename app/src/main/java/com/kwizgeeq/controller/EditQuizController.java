@@ -141,8 +141,6 @@ public class EditQuizController implements Observer {
 
     }
 
-    //TODO: Anpassa när det ska sparas. On button clicks istället?
-
     @Override
     public void update(Observable o, Object arg) {
 

@@ -3,7 +3,6 @@
 package com.kwizgeeq.controller;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,8 +10,6 @@ import android.widget.AdapterView;
 
 import com.kwizgeeq.model.KwizGeeQ;
 import com.kwizgeeq.model.UserQuiz;
-
-import com.kwizgeeq.storageUtilities.KwizGeeQDataSource;
 
 import com.kwizgeeq.view.QuizListView;
 
@@ -43,17 +40,11 @@ public class QuizListController implements Observer{
 
     private QuizListView quizListView;
     private KwizGeeQ kwizGeeQ;
-    private Context context;
-    private Activity currentActivity;
     private List<UserQuiz> quizList;
-    public static KwizGeeQDataSource mKwizGeeQDataSource;
-    //private Activity currentActivity;
 
-    public QuizListController(QuizListView view, Context context, Activity currentActivity) {
+    public QuizListController(QuizListView view, Activity currentActivity) {
         this.kwizGeeQ = new KwizGeeQ(currentActivity);
         this.quizListView = view;
-        this.context = context;
-        this.currentActivity = currentActivity;
         quizList = kwizGeeQ.getUserQuizList();
         quizListView.setQuestions((ArrayList)quizList);
 

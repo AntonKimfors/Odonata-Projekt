@@ -69,10 +69,8 @@ public class EditQuestionController implements Observer{
             }
         };
 
-
         editQuestionView.addOnFocusChangeListener(onFocusChangeListener);
         editQuestionView.setOnCheckedChangeListener(onCheckedChangeListener);
-
     }
 
     private void setUserQuestion(){
@@ -87,13 +85,6 @@ public class EditQuestionController implements Observer{
                 editQuestionView.setUserQuestion(question,true);
             }
         }
-    }
-
-
-    public static void onPause() {
-    }
-
-    public static void onResume() {
     }
 
     public void nextButtonAction(View view){
@@ -125,7 +116,6 @@ public class EditQuestionController implements Observer{
             }
             editQuestionView.killEditQuestionActivity(questions);
         }
-
     }
 
     private void removeQuestion(){
@@ -168,30 +158,29 @@ public class EditQuestionController implements Observer{
     }
 
     public void imageCreated(){
+        if(imagePath!=null){
+            question.setImagePath(imagePath);
+        }
 
-            if(imagePath!=null){
-                question.setImagePath(imagePath);
+        if(editQuestionView.isSwitchChecked()){
+            question.clearAnswers();
+
+            if(correctImagePath!=null){
+                question.addAnswer(correctImagePath,true,AnswerType.IMAGE);
             }
 
-            if(editQuestionView.isSwitchChecked()){
-                question.clearAnswers();
-
-                if(correctImagePath!=null){
-                    question.addAnswer(correctImagePath,true,AnswerType.IMAGE);
-                }
-
-                if(wrong1ImagePath!=null){
-                    question.addAnswer(wrong1ImagePath,false,AnswerType.IMAGE);
-                }
-
-                if(wrong2ImagePath!=null){
-                    question.addAnswer(wrong2ImagePath,false,AnswerType.IMAGE);
-                }
-
-                if(wrong3ImagePath!=null){
-                    question.addAnswer(wrong3ImagePath,false,AnswerType.IMAGE);
-                }
+            if(wrong1ImagePath!=null){
+                question.addAnswer(wrong1ImagePath,false,AnswerType.IMAGE);
             }
+
+            if(wrong2ImagePath!=null){
+                question.addAnswer(wrong2ImagePath,false,AnswerType.IMAGE);
+            }
+
+            if(wrong3ImagePath!=null){
+                question.addAnswer(wrong3ImagePath,false,AnswerType.IMAGE);
+            }
+        }
     }
 
     private boolean checkImageAnswers(){

@@ -39,7 +39,7 @@ public class QuizListActivity extends ListActivity {
         view = new QuizListView(getListView(), this, this, EditQuizActivity.class,
                 QuestioneerActivity.class, GlobalStatisticsActivity.class, (FloatingActionButton) findViewById(R.id.fab),
                 editQuizRequestCode, createQuizRequestCode, questioneerRequestCode);
-        controller = new QuizListController(view, this, this);
+        controller = new QuizListController(view, this);
 
         binding.setController(controller);
         view.addObserver(controller);

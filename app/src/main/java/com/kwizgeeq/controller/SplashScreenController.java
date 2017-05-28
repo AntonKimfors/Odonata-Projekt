@@ -1,8 +1,5 @@
 package com.kwizgeeq.controller;
 
-import android.content.Intent;
-import android.view.View;
-
 import com.kwizgeeq.view.SplashScreenView;
 
 import java.util.Observable;

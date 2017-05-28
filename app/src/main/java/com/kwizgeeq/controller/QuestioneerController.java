@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.View;
 
 import com.kwizgeeq.model.Answer;
-import com.kwizgeeq.model.Question;
 import com.kwizgeeq.model.Statistics;
 import com.kwizgeeq.model.UserQuiz;
 
