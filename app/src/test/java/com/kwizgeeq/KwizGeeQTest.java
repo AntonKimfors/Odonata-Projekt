@@ -21,6 +21,7 @@ public class KwizGeeQTest {
     Activity activity;
     Quiz quiz = new Quiz("PartyQuiz!", Color.CYAN);
     Answer answer1 = new Answer(true, "Smurfen", AnswerType.TEXT);
+    Answer picAnswer = new Answer(true, "location", AnswerType.IMAGE);
     Answer answer2 = new Answer(false, "Trump", AnswerType.TEXT);
     Answer answer3 = new Answer(false, "en Sten", AnswerType.TEXT);
     Answer answer4 = new Answer(false, "Anders Svensson Lindberg", AnswerType.TEXT);
@@ -43,6 +44,9 @@ public class KwizGeeQTest {
         question.addAnswer(answer2.getData(), answer2.isCorrect(), answer2.getAnswerType());
         question.addAnswer(answer3.getData(), answer3.isCorrect(), answer3.getAnswerType());
         question.addAnswer(answer4.getData(), answer4.isCorrect(), answer4.getAnswerType());
+
+        assertEquals(answer1.getAnswerType().toString(),"TEXT");
+        assertEquals(picAnswer.getAnswerType().toString(),"IMAGE");
 
 
 
