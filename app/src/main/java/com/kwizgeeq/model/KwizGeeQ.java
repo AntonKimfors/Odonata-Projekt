@@ -20,7 +20,6 @@ public class KwizGeeQ implements Serializable{
 
     private ArrayList<UserQuiz> userQuizList;
     private Statistics globalStatistics;
-    private static KwizGeeQ singletonInstance = null;
     private  KwizGeeQDataSource mKwizGeeQDataSource;
     private GlobalStatisticsDataSoruce mGlobalStatisticsDataSoruce;
 
@@ -40,22 +39,10 @@ public class KwizGeeQ implements Serializable{
         this.userQuizList = userQuizList;
     }
 
-    public UserQuiz getQuiz(int quizIndex){
-        if(quizIndex< userQuizList.size()){
-            return userQuizList.get(quizIndex);
-        }
-
-        throw new IndexOutOfBoundsException("UserQuiz on index "+ quizIndex +" does not exist.");
-    }
-
     public void removeQuiz(int quizIndex){
         userQuizList.remove(quizIndex);
         EventBusWrapper.BUS.post(this);
         saveQuizDataToDatabase();
-    }
-
-    public String getQuizName(int quizIndex){
-        return userQuizList.get(quizIndex).getName();
     }
 
     public Statistics getGlobalStatistics() {
@@ -75,17 +62,11 @@ public class KwizGeeQ implements Serializable{
 
     }
 
-
-
     private void saveQuizDataToDatabase() {
         ArrayList<UserQuiz> tmpQuizList = new ArrayList<>(userQuizList);
         mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.insertQuizes(tmpQuizList);
         mKwizGeeQDataSource.close();
-
-        /*mGlobalStatisticsDataSoruce.open();
-        mGlobalStatisticsDataSoruce.insertGlobalStats(globalStatistics);
-        mGlobalStatisticsDataSoruce.close();*/
     }
 
     private void saveStatisticsDataToDatabase() {
@@ -93,9 +74,6 @@ public class KwizGeeQ implements Serializable{
         mGlobalStatisticsDataSoruce.insertGlobalStats(globalStatistics);
         mGlobalStatisticsDataSoruce.close();
     }
-
-
-
 
     private void getDataFromDatabase() {
         mKwizGeeQDataSource.open();
@@ -111,6 +89,6 @@ public class KwizGeeQ implements Serializable{
         quiz.getCurrentTempStatistics().mergeInto(globalStatistics);
         quiz.resetCurrentTempStatistics();
         EventBusWrapper.BUS.post(this);
-        saveStatisticsDataToDatabase();  //Bör bytas ut mot saveStatisticsDataToDatabase
+        saveStatisticsDataToDatabase();
     }
 }

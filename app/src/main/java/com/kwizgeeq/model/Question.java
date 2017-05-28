@@ -40,7 +40,6 @@ public class Question implements Serializable {
         return answerList.iterator();
     }
 
-
     public void addAnswer(String data, boolean isCorrect, AnswerType answerType){
         Answer answer = new Answer(isCorrect,data,answerType);
 
@@ -56,34 +55,10 @@ public class Question implements Serializable {
         }
     }
 
-    public void removeAnswer(Answer answer){
-        if(answer == null)
-            throw new NullPointerException();
-
-        if(answers.remove(answer)){
-            if(answer.isCorrect())
-                correctAnswerCount--;
-            else
-                wrongAnswerCount--;
-
-        }
-
-        throw new IllegalArgumentException("Element not in list");
-    }
-
-
     public void clearAnswers(){
         correctAnswerCount = 0;
         wrongAnswerCount = 0;
         answers.clear();
-    }
-
-    public boolean checkNumberOfCorrect(int excepted){
-        return excepted == correctAnswerCount;
-    }
-
-    public boolean checkNumberOfWrong(int expected){
-        return expected == wrongAnswerCount;
     }
 
     public boolean checkNumberOfAnswers(int excepted){

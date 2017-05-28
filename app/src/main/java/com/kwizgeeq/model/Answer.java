@@ -26,7 +26,6 @@ public class Answer implements Serializable {
         return answerType;
     }
 
-
     public Answer(boolean isCorrect, String data, AnswerType answerType) {
         this.isCorrect = isCorrect;
         this.data = data;

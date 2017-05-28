@@ -12,8 +12,6 @@ import java.io.Serializable;
 public enum AnswerType implements Serializable {
     TEXT,IMAGE;
 
-
-
     @Override
     public String toString() {
         switch(this) {

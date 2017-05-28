@@ -64,28 +64,12 @@ public class UserQuiz implements Iterable, Serializable{
         EventBusWrapper.BUS.post(this);
     }
 
-    public void removeQuestion(Question question){
-        questions.remove(question);
-    }
-
     public int getSize(){
         return questions.size();
     }
 
     public Question getQuestion(int questionIndex){
         return questions.get(questionIndex);
-    }
-
-    public Iterator<Question> questionsOnIndexIterator(List<Integer> indexes){
-        Collections.sort(indexes);
-        Iterator<Integer> indexIterator = indexes.iterator();
-        List<Question> questionToReturn = new ArrayList<>();
-
-        while(indexIterator.hasNext()){
-            questionToReturn.add(questions.get(indexIterator.next()));
-        }
-
-        return questionToReturn.iterator();
     }
 
     public Statistics getBestStatistics() {
