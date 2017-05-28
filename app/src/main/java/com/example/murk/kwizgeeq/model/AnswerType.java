@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 
 public enum AnswerType implements Serializable {
-    TEXT,IMAGE,AUDIO;
+    TEXT,IMAGE;
 
 
 
