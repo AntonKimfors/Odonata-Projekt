@@ -56,14 +56,6 @@ public class QuestioneerController implements Observer{
         }
     }
 
-    public void onPause() {
-
-    }
-
-    public void onResume() {
-
-    }
-
     private void updateQuestionIndex(){
         if(!playingByIndex) {
             questionIndex = currentQuestion-1;

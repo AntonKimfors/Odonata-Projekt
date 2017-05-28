@@ -48,16 +48,4 @@ public class QuestioneerActivity extends AppCompatActivity{
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        controller.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        controller.onResume();
-    }
-
 }

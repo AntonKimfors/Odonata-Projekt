@@ -25,8 +25,4 @@ public class StatisticsActivity extends AppCompatActivity {
         binding.setController(controller);
     }
 
-    protected void onDestroy(){
-        super.onDestroy();
-    }
-
 }
