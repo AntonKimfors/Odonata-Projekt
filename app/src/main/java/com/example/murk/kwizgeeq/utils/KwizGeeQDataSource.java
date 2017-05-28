@@ -34,7 +34,6 @@ public class KwizGeeQDataSource {
     private SQLiteDatabase mDatabase;
 
     public KwizGeeQDataSource(Context context){
-        //mContext = context;
         mQuizSqliteHelper = new KwizGeeQSQLiteHelper(context);
     }
 
@@ -50,7 +49,6 @@ public class KwizGeeQDataSource {
 
     // + insert
     public void insertQuizes(ArrayList<UserQuiz> userQuizArrayList) {
-        //deleteAll();
 
         mDatabase.beginTransaction();
         deleteAll();
@@ -168,11 +166,11 @@ public class KwizGeeQDataSource {
         mKwizGeeq.setUserQuizList(tmpQuizList);
     };
 
-
+    //Borde istället för KwizGeeQ inte ta in något och istället retunera en lista med frågorna och svaren.
+    // Som GlobalStatisticsDataSource gör med en Statistics
 
     private void updateCurrentListWithDatabaseQuestions(KwizGeeQ mKwizGeeq){
         Cursor cursor = selectAllQuestions();
-        //ArrayList<Answer> tmpAnswerList = new ArrayList<>();
 
         int columnIndexQuestion = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_TITLE);
         int columnIndexCorrect = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_CORRECT_ANSWER);
@@ -189,15 +187,13 @@ public class KwizGeeQDataSource {
         while (!cursor.isAfterLast()){
             Question tmpQuestion = new Question();
             tmpQuestion.setQuestionText(cursor.getString(columnIndexQuestion));
+
             try {
                 tmpQuestion.setImagePath(cursor.getString(questionImage));
             } catch (Exception e){System.out.println(e);}
 
             AnswerType answerType = AnswerType.TEXT;
-            //String newString = cursor.getString(type);
-            /*if(newString == "IMAGE"){
-                answerType = AnswerType.IMAGE;
-            }*/
+
             if(cursor.getString(type).equals("IMAGE")){
                 answerType = AnswerType.IMAGE;
             }

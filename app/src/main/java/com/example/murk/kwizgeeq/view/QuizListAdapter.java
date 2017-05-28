@@ -23,7 +23,7 @@ public class QuizListAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<UserQuiz> mUserQuiz;
 
-    public QuizListAdapter(Context context, ArrayList<UserQuiz> userQuizs){
+    protected QuizListAdapter(Context context, ArrayList<UserQuiz> userQuizs){
         mContext = context;
         mUserQuiz = userQuizs;
     }

@@ -69,7 +69,7 @@ public class GlobalStatisticsDataSoruce {
                 GlobalStatisticsSQLiteHelper.TABLE_STATISTICS,
                 new String[] {GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_CORRECT, GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_INCORRECT,
                         GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_QUIZCOUNT, GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_QUESTIONCOUNT,
-                        GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_SECONDSSPENT, },  //Column names
+                        GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_SECONDSSPENT },  //Column names
                 null, //where clause
                 null, //where params
                 null, //Grop by
@@ -111,7 +111,8 @@ public class GlobalStatisticsDataSoruce {
                 return tmp;
 
             }
-        } catch (Exception e) {;
+        } catch (Exception e) {
+            System.out.println(e);
     }
         return new Statistics();
     }
