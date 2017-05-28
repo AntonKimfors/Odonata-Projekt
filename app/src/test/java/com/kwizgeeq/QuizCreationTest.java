@@ -169,7 +169,7 @@ public class QuizCreationTest {
     public void testGetCurrentTempStatistics() {
         Statistics statistics = new Statistics();
         UserQuiz statisticsQuiz = new UserQuiz("statistics Quiz",Color.CYAN,statistics);
-        Statistics testStats = statisticsQuiz.getCurrentTempStatistics();
+        Statistics testStats = statisticsQuiz.getBestStatistics();
 
 
         assertTrue(statistics.getQuizCount() == 0);
