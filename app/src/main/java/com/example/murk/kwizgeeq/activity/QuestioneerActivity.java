@@ -32,7 +32,7 @@ public class QuestioneerActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed(){
-        view.showCloseQuizDialog();
+        controller.onBackPressed();
     }
 
     @Override

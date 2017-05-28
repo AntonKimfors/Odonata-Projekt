@@ -143,4 +143,8 @@ public class QuestioneerController implements Observer{
         }
     }
 
+    public void onBackPressed(){
+        view.showCloseQuizDialog(quiz.getName());
+    }
+
 }

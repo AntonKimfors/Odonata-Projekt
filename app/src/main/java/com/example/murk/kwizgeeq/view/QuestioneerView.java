@@ -185,11 +185,11 @@ public class QuestioneerView extends Observable{
         activity.finish();
     }
 
-    public void showCloseQuizDialog(){
+    public void showCloseQuizDialog(String quizName){
         new AlertDialog.Builder(activity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Closing UserQuiz")
-                .setMessage("Are you sure you want to quit?")
+                .setTitle("Closing quiz: " + quizName)
+                .setMessage("Are you sure you want to exit this quiz? \n (Your progress will not be saved.)")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
