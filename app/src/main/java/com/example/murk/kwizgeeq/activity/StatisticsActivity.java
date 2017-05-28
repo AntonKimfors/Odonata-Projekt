@@ -9,6 +9,11 @@ import com.example.murk.kwizgeeq.controller.StatisticsController;
 import com.example.murk.kwizgeeq.databinding.ActivityStatisticsViewBinding;
 import com.example.murk.kwizgeeq.view.StatisticsView;
 
+/*
+* @author Are Ehnberg
+* revised by Marcus Olsson Lindvärn, Anton Kimfors, Henrik Håkansson
+*/
+
 public class StatisticsActivity extends AppCompatActivity {
 
     private StatisticsController controller;

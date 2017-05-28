@@ -10,6 +10,11 @@ import com.example.murk.kwizgeeq.controller.QuestioneerController;
 import com.example.murk.kwizgeeq.databinding.ActivityQuestioneerBinding;
 import com.example.murk.kwizgeeq.view.QuestioneerView;
 
+/*
+* @author Are Ehnberg
+* revised by Marcus Olsson Lindvärn, Anton Kimfors, Henrik Håkansson
+* */
+
 public class QuestioneerActivity extends AppCompatActivity{
 
     private QuestioneerController controller;

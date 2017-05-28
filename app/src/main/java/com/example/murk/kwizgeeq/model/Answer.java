@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 /**
  * Created by Henrik on 04/04/2017.
+ *
+ * * @author Henrik Håkansson
+ * revised by Are Ehnberg, Marcus Olsson Lindvärn and Anton Kimfors
  */
 
 public class Answer implements Serializable {

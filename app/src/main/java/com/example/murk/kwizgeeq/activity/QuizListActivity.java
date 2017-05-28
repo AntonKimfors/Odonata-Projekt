@@ -16,6 +16,9 @@ import com.example.murk.kwizgeeq.view.QuizListView;
 
 /**
  * Created by akimfors on 2017-05-05.
+ *
+ * @author Anton Kimfors
+ * revised by Henrik Håkansson, Are Ehnberg and Marcus Olsson Lindvärn
  */
 
 public class QuizListActivity extends ListActivity {

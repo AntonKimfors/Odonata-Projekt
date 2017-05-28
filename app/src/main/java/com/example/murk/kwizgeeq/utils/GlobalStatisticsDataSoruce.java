@@ -16,6 +16,9 @@ import java.util.ArrayList;
 
 /**
  * Created by akimfors on 2017-05-28.
+ *
+ * @author Anton Kimfors
+  * revised by Henrik Håkansson, Are Ehnberg and Marcus Olsson Lindvärn
  */
 
 public class GlobalStatisticsDataSoruce {

@@ -10,6 +10,10 @@ import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.SplashScreenController;
 import com.example.murk.kwizgeeq.view.SplashScreenView;
 
+/*
+* @author Marcus Olsson Lindvärn
+* revised by Anton Kimfors, Henrik Håkansson and Are Ehnberg
+*/
 
 public class SplashScreenActivity extends Activity {
 

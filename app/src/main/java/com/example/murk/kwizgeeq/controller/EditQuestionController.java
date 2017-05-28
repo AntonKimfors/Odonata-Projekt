@@ -15,6 +15,9 @@ import java.util.*;
 
 /**
  * Created by Henrik on 02/05/2017.
+ *
+ * * @author Henrik Håkansson
+ * revised by Are Ehnberg, Marcus Olsson Lindvärn and Anton Kimfors
  */
 
 public class EditQuestionController implements Observer{

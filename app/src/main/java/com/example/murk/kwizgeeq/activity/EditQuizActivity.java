@@ -14,6 +14,11 @@ import com.example.murk.kwizgeeq.R;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/*
+ *  @author Marcus Olsson Lindvärn
+ * revised by Anton Kimfors, Henrik Håkansson and Are Ehnberg
+ */
+
 public class EditQuizActivity extends ListActivity {
     private EditQuizController controller;
     private EditQuizView view;

@@ -15,6 +15,11 @@ import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import java.util.ArrayList;
 
+/*
+ * @author Marcus Olsson Lindvärn
+ * revised by Anton Kimfors, Henrik Håkansson and Are Ehnberg
+ */
+
 
 
 public class EditQuizAdapter extends BaseAdapter {

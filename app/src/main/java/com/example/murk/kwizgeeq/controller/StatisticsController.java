@@ -12,6 +12,9 @@ import java.util.Observer;
 
 /**
  * Created by Are on 09/05/2017.
+ *
+ * * @author Are Ehnberg
+ * revised by Marcus Olsson Lindvärn, Anton Kimfors, Henrik Håkansson
  */
 
 public class StatisticsController implements Observer {

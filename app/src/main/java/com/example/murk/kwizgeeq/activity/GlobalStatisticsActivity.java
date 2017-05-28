@@ -7,6 +7,11 @@ import com.example.murk.kwizgeeq.R;
 import com.example.murk.kwizgeeq.controller.GlobalStatisticsController;
 import com.example.murk.kwizgeeq.view.GlobalStatisticsView;
 
+/*
+* @author Are Ehnberg
+* revised by Marcus Olsson Lindvärn, Anton Kimfors, Henrik Håkansson
+*/
+
 public class GlobalStatisticsActivity extends AppCompatActivity {
 
     private GlobalStatisticsController controller;

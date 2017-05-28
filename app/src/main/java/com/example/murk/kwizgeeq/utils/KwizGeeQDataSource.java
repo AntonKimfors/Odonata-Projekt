@@ -25,6 +25,26 @@ import java.util.ArrayList;
 
 /**
  * Created by akimfors on 2017-05-16.
+ * @author Anton Kimfors
+ * revised by Henrik Håkansson, Are Ehnberg and Marcus Olsson Lindvärn
+ */
+
+/**
+ * Created by akimfors on 2017-05-16.
+ * @author Henrik Håkansson
+ * revised by Are Ehnberg, Marcus Olsson Lindvärn and Anton Kimfors
+ */
+
+/**
+ * Created by akimfors on 2017-05-16.
+ * @author Are Ehnberg
+ * revised by Marcus Olsson Lindvärn, Anton Kimfors, Henrik Håkansson
+ */
+
+/**
+ * Created by akimfors on 2017-05-16.
+ * @author Marcus Olsson Lindvärn
+ * revised by Anton Kimfors, Henrik Håkansson and Are Ehnberg
  */
 
 public class KwizGeeQDataSource {

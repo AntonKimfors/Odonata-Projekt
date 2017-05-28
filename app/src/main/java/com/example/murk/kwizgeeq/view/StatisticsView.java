@@ -10,6 +10,9 @@ import com.example.murk.kwizgeeq.model.Statistics;
 
 /**
  * Created by Are on 09/05/2017.
+ *
+ * * @author Are Ehnberg
+ * revised by Marcus Olsson Lindvärn, Anton Kimfors, Henrik Håkansson
  */
 
 public class StatisticsView {

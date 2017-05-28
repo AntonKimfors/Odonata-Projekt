@@ -11,6 +11,9 @@ import java.util.*;
 
 /**
  * Created by akimfors on 2017-04-05.
+ *
+ * @author Anton Kimfors
+ * revised by Henrik Håkansson, Are Ehnberg and Marcus Olsson Lindvärn
  */
 
 public class KwizGeeQ implements Serializable{

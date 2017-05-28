@@ -6,6 +6,9 @@ import java.io.Serializable;
 
 /**
  * Created by Are on 12/05/2017.
+ *
+ * * @author Are Ehnberg
+ * revised by Marcus Olsson Lindvärn, Anton Kimfors, Henrik Håkansson
  */
 
 //TODO possibly add separate SpotifyStatistics which extends this when SpotifyQuiz is implemented.

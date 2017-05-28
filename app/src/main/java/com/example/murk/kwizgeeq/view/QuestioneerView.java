@@ -29,6 +29,9 @@ import java.util.Observable;
 
 /**
  * Created by Are on 04/05/2017.
+ *
+ * * @author Are Ehnberg
+ * revised by Marcus Olsson Lindvärn, Anton Kimfors, Henrik Håkansson
  */
 
 public class QuestioneerView extends Observable{

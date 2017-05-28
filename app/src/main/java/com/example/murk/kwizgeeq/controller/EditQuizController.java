@@ -20,6 +20,9 @@ import java.util.Observer;
 
 /**
  * Created by Murk on 2017-05-06.
+ *
+ *  * @author Marcus Olsson Lindvärn
+ * revised by Anton Kimfors, Henrik Håkansson and Are Ehnberg
  */
 
 public class EditQuizController implements Observer {

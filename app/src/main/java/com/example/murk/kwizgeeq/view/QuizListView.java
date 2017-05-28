@@ -32,6 +32,11 @@ import java.util.Observable;
 
 /**
  * Created by akimfors on 2017-05-05.
+ *
+ *
+ * @author Anton Kimfors
+ * revised by Henrik Håkansson, Are Ehnberg and Marcus Olsson Lindvärn
+ *
  */
 
 public class QuizListView extends Observable {

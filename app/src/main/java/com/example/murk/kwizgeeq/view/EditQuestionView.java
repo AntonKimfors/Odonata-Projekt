@@ -22,6 +22,11 @@ import com.example.murk.kwizgeeq.model.*;
 import com.example.murk.kwizgeeq.events.EventBusWrapper;
 import com.google.common.eventbus.Subscribe;
 
+/*
+* @author Henrik Håkansson
+* revised by Are Ehnberg, Marcus Olsson Lindvärn and Anton Kimfors
+*/
+
 public class EditQuestionView extends Observable {
 
     private Question question;

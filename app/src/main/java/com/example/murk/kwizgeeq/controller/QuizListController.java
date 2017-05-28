@@ -28,6 +28,9 @@ import java.util.Observer;
 
 /**
  * Created by akimfors on 2017-05-05.
+ *
+ * @author Anton Kimfors
+ * revised by Henrik Håkansson, Are Ehnberg and Marcus Olsson Lindvärn
  */
 
 public class QuizListController implements Observer{

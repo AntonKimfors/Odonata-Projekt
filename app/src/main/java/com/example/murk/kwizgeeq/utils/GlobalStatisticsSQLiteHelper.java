@@ -7,6 +7,9 @@ import android.provider.BaseColumns;
 
 /**
  * Created by akimfors on 2017-05-16.
+ *
+ * @author Anton Kimfors
+ * revised by Henrik Håkansson, Are Ehnberg and Marcus Olsson Lindvärn
  */
 
 public class GlobalStatisticsSQLiteHelper extends SQLiteOpenHelper {
