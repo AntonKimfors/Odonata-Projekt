@@ -17,14 +17,6 @@ public class GlobalStatisticsSQLiteHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "statisticsData.db";
     private static final int DB_VERSION = 1;
 
-
-    //TODO: Add columns for Color and Assets(maybe) ---- CHECK ----
-    //TODO: Assets should be for questions. Each question has title and maybe image. ---- CHECK ----
-    //TODO: Also 4 answers. 4 text answers. Each Questions ---- CHECK ----
-    //TODO: should also have an id to identify what quiz it belongs to. ---CHECK--
-
-    //TODO: HUR SPARAS BIULDER??
-
     //------------- TABLE_STATISTICS ----------------------
     protected static final String TABLE_STATISTICS = "STATISTICS";
     protected static final String COLUMN_GLOBAL_STATS_CORRECT = "BEST_CORRECT";

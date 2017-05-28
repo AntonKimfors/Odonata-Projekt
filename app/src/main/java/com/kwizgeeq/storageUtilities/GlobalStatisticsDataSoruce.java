@@ -88,9 +88,7 @@ public class GlobalStatisticsDataSoruce {
         int statsQuizCount = cursor.getColumnIndex(GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_QUIZCOUNT);
         int statsSecondsSpent = cursor.getColumnIndex(GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_SECONDSSPENT);
 
-
         cursor.moveToFirst();
-        //Statistics tmp = new Statistics();
 
         try {
             while (!cursor.isAfterLast()) {

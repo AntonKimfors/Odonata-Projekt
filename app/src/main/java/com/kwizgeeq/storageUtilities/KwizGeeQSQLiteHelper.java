@@ -17,14 +17,6 @@ public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "data.db";
     private static final int DB_VERSION = 1;
 
-
-    //TODO: Add columns for Color and Assets(maybe) ---- CHECK ----
-    //TODO: Assets should be for questions. Each question has title and maybe image. ---- CHECK ----
-    //TODO: Also 4 answers. 4 text answers. Each Questions ---- CHECK ----
-    //TODO: should also have an id to identify what quiz it belongs to. ---CHECK--
-
-    //TODO: HUR SPARAS BIULDER??
-
     //-------------QUIZ Table ----------------------
     protected static final String TABLE_QUIZES = "QUIZES";
     protected static final String COLUMN_COLOR = "COLOR";
@@ -59,7 +51,6 @@ public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
     protected static final String COLUMN_ANNOTATIONS_ANSWER_TYPE = "ANSWER_TYPE";
     protected static final String COLUMN_FOREIGN_KEY_QUIZ = "QUIZ_ID";
 
-    //TODO: quiZZes i plural
     private static final String CREATE_ANNOTATIONS = "CREATE TABLE " + ANNOTATIONS_TABLE + " (" +
             BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             COLUMN_ANNOTATION_TITLE + " TEXT, " +

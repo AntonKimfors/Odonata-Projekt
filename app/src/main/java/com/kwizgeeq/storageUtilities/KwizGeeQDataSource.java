@@ -58,7 +58,6 @@ public class KwizGeeQDataSource {
                 ContentValues values = new ContentValues();
 
                 values.put(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, userQuizArrayList.get(i).getName());
-                //TODO: parseToString? eller ok med "" + ?
                 values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_CORRECT, "" + userQuizArrayList.get(i).getBestStatistics().getAnswerCorrectCount());
                 values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_INCORRECT, "" + userQuizArrayList.get(i).getBestStatistics().getAnswerIncorrectCount());
                 values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_SECONDSSPENT,"" + userQuizArrayList.get(i).getBestStatistics().getSecondsSpent());
@@ -164,10 +163,7 @@ public class KwizGeeQDataSource {
             cursor.moveToNext();
         }
         mKwizGeeq.setUserQuizList(tmpQuizList);
-    };
-
-    //Borde istället för KwizGeeQ inte ta in något och istället retunera en lista med frågorna och svaren.
-    // Som GlobalStatisticsDataSource gör med en Statistics
+    }
 
     private void updateCurrentListWithDatabaseQuestions(KwizGeeQ mKwizGeeq){
         Cursor cursor = selectAllQuestions();
