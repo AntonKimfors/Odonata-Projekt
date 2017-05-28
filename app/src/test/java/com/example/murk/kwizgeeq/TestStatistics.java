@@ -50,6 +50,20 @@ public class TestStatistics {
     }
 
     @Test
+    public void testStatisticsCopying(){
+        int[] testArr = new int[]{1, 2, 3, 4, 5};
+        Statistics tempTestStatistics = new Statistics(testArr[0], testArr[1], testArr[2], testArr[3], testArr[4]);
+
+        testStatistics.copy(tempTestStatistics);
+
+        assertEquals(testArr[0], testStatistics.getQuizCount());
+        assertEquals(testArr[1], testStatistics.getQuestionCount());
+        assertEquals(testArr[2], testStatistics.getAnswerCorrectCount());
+        assertEquals(testArr[3], testStatistics.getAnswerIncorrectCount());
+        assertEquals(testArr[4], testStatistics.getSecondsSpent());
+    }
+
+    @Test
     public void testStatisticsQuizIncremention(){
         int oldQuizCount = testStatistics.getQuizCount();
 
