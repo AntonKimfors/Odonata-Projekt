@@ -104,10 +104,10 @@ public class UserQuiz implements Iterable, Serializable{
         int newSeconds = currentTempStatistics.getSecondsSpent();
 
         if (newPercentage > oldPercentage) {
-            bestStatistics = currentTempStatistics;
+            bestStatistics.copy(currentTempStatistics);
         } else if (newPercentage == oldPercentage) {
             if (newSeconds < oldSeconds) {
-                bestStatistics = currentTempStatistics;
+                bestStatistics.copy(currentTempStatistics);
             }
         }
     }

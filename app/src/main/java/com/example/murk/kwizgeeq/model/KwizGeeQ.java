@@ -106,6 +106,7 @@ public class KwizGeeQ implements Serializable{
 
     public void updateGlobalStatistics(UserQuiz quiz){
         quiz.getCurrentTempStatistics().mergeInto(globalStatistics);
+        quiz.resetCurrentTempStatistics();
         EventBusWrapper.BUS.post(this);
         saveQuizDataToDatabase(); //Bör bytas ut mot saveStatisticsDataToDatabase
     }
