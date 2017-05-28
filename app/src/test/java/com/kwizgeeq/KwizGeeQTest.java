@@ -2,17 +2,14 @@ package com.kwizgeeq;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.net.Uri;
 
 import com.kwizgeeq.model.Answer;
 import com.kwizgeeq.model.AnswerType;
 import com.kwizgeeq.model.Question;
+import com.kwizgeeq.model.Quiz;
 import com.kwizgeeq.model.Statistics;
-import com.kwizgeeq.model.UserQuiz;
 
 import org.junit.Test;
-
-import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +19,7 @@ import static org.junit.Assert.*;
 
 public class KwizGeeQTest {
     Activity activity;
-    UserQuiz quiz = new UserQuiz("PartyQuiz!", Color.CYAN);
+    Quiz quiz = new Quiz("PartyQuiz!", Color.CYAN);
     Answer answer1 = new Answer(true, "Smurfen", AnswerType.TEXT);
     Answer answer2 = new Answer(false, "Trump", AnswerType.TEXT);
     Answer answer3 = new Answer(false, "en Sten", AnswerType.TEXT);

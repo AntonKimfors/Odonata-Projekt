@@ -5,10 +5,9 @@ import android.graphics.Color;
 import com.kwizgeeq.model.Answer;
 import com.kwizgeeq.model.AnswerType;
 import com.kwizgeeq.model.Question;
+import com.kwizgeeq.model.Quiz;
 import com.kwizgeeq.model.Statistics;
-import com.kwizgeeq.model.UserQuiz;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  */
 
 public class QuizTest {
-    UserQuiz quiz = new UserQuiz("PartyQuiz!",Color.CYAN);
+    Quiz quiz = new Quiz("PartyQuiz!",Color.CYAN);
     ArrayList<Question> qList = new ArrayList<>();
     Question question1 = new Question();
     Question question2 = new Question();
@@ -161,7 +160,7 @@ public class QuizTest {
         assertTrue(newStatistics.getSecondsSpent() == 100);
         Statistics betterStatics = new Statistics(3,100,30,70,99);
 
-        UserQuiz statisticsQuiz = new UserQuiz("statistics Quiz",Color.CYAN,statistics);
+        Quiz statisticsQuiz = new Quiz("statistics Quiz",Color.CYAN,statistics);
 
         Statistics testStats = statisticsQuiz.getCurrentTempStatistics();
         assertTrue(testStats.getAnswerIncorrectCount() == 0);
@@ -170,7 +169,7 @@ public class QuizTest {
     @Test
     public void testGetCurrentTempStatistics() {
         Statistics statistics = new Statistics();
-        UserQuiz statisticsQuiz = new UserQuiz("statistics Quiz",Color.CYAN,statistics);
+        Quiz statisticsQuiz = new Quiz("statistics Quiz",Color.CYAN,statistics);
         Statistics testStats = statisticsQuiz.getBestStatistics();
 
 
@@ -192,7 +191,7 @@ public class QuizTest {
     public void testStatisticsManagement() {
 
         Statistics betterStatics = new Statistics(3,100,30,70,99);
-        UserQuiz statisticsQuiz = new UserQuiz("statistics Quiz",Color.CYAN, betterStatics);
+        Quiz statisticsQuiz = new Quiz("statistics Quiz",Color.CYAN, betterStatics);
         Statistics testStats =  statisticsQuiz.getBestStatistics();
 
         assertTrue(testStats.getQuizCount() == 3);

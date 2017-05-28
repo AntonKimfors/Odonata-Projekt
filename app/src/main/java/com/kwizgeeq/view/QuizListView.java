@@ -18,8 +18,8 @@ import android.widget.ListView;
 import com.kwizgeeq.R;
 import com.kwizgeeq.events.EventBusWrapper;
 import com.kwizgeeq.model.KwizGeeQ;
+import com.kwizgeeq.model.Quiz;
 import com.kwizgeeq.model.Statistics;
-import com.kwizgeeq.model.UserQuiz;
 import com.google.common.eventbus.Subscribe;
 
 import org.xdty.preference.colorpicker.ColorPickerDialog;
@@ -101,7 +101,7 @@ public class QuizListView extends Observable {
 
         alertDialog = new AlertDialog.Builder(currentActivity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Edit UserQuiz?")
+                .setTitle("Edit Quiz?")
                 .setMessage("Do you want to Edit or Delete the quiz?");
 
         mBuilder = new AlertDialog.Builder(context);
@@ -114,7 +114,7 @@ public class QuizListView extends Observable {
 
     }
 
-    public void setQuestions(ArrayList<UserQuiz> quizList){
+    public void setQuestions(ArrayList<Quiz> quizList){
         this.adapter = new QuizListAdapter(context, quizList);
         listView.setAdapter(adapter);
     }
@@ -168,7 +168,7 @@ public class QuizListView extends Observable {
         return mSelectedColor;
     }
 
-    public void editQuiz(UserQuiz quiz){
+    public void editQuiz(Quiz quiz){
         Intent intent = new Intent(context, editQuizActivityClass);
         Bundle bundle = new Bundle();
         bundle.putSerializable("quiz",quiz);
@@ -176,7 +176,7 @@ public class QuizListView extends Observable {
         currentActivity.startActivityForResult(intent, editQuizRequestCode);
     }
 
-    public void createNewQuiz(UserQuiz quiz){
+    public void createNewQuiz(Quiz quiz){
         Intent intent = new Intent(context, editQuizActivityClass);
         Bundle bundle = new Bundle();
         bundle.putSerializable("quiz",quiz);
@@ -184,7 +184,7 @@ public class QuizListView extends Observable {
         currentActivity.startActivityForResult(intent,createQuizRequestCode);
     }
 
-    public void startQuestioneer(UserQuiz quiz, int quizIndex) {
+    public void startQuestioneer(Quiz quiz, int quizIndex) {
         Intent intent = new Intent(context, questioneerActivityClass);
         intent.putExtra("quiz", quiz);
         intent.putExtra("quizIndex", quizIndex);

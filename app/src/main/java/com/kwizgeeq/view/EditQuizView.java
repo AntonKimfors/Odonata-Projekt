@@ -16,7 +16,7 @@ import android.widget.ListView;
 import com.kwizgeeq.R;
 import com.kwizgeeq.events.EventBusWrapper;
 import com.kwizgeeq.model.Question;
-import com.kwizgeeq.model.UserQuiz;
+import com.kwizgeeq.model.Quiz;
 import com.google.common.eventbus.Subscribe;
 
 import org.xdty.preference.colorpicker.ColorPickerDialog;
@@ -44,7 +44,7 @@ public class EditQuizView extends Observable {
     private final AlertDialog.Builder alertDialog;
     private final ColorPickerDialog dialog;
     private final AlertDialog ad;
-    private UserQuiz quiz;
+    private Quiz quiz;
     private Context context;
     private ListView listView;
     private EditText editText;
@@ -59,8 +59,8 @@ public class EditQuizView extends Observable {
         this.editQuestionActivity = editQuestionActivity;
         this.currentActivity = currentActivity;
         this.context = context;
-        if(quiz instanceof UserQuiz){
-            this.quiz = (UserQuiz)quiz;
+        if(quiz instanceof Quiz){
+            this.quiz = (Quiz)quiz;
         }
         this.listView = listView;
         this.editText = (EditText) currentActivity.findViewById(R.id.etQuizLabel);
@@ -86,7 +86,7 @@ public class EditQuizView extends Observable {
         //Creaton of Alert Dialog
         alertDialog = new AlertDialog.Builder(currentActivity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Edit UserQuiz?")
+                .setTitle("Edit Quiz?")
                 .setMessage("do you want to edit or delete the Quiz");
 
 
@@ -191,9 +191,9 @@ public class EditQuizView extends Observable {
 
 
     @Subscribe
-    public void update(UserQuiz userQuiz) {
+    public void update(Quiz quiz) {
         System.out.println("notified");
-        if (this.quiz == userQuiz) {
+        if (this.quiz == quiz) {
             adapter.notifyDataSetChanged();
         }
     }

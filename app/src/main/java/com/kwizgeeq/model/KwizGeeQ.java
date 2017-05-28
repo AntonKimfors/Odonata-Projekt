@@ -18,29 +18,29 @@ import java.util.*;
 
 public class KwizGeeQ implements Serializable{
 
-    private ArrayList<UserQuiz> userQuizList;
+    private ArrayList<Quiz> quizList;
     private Statistics globalStatistics;
     private  KwizGeeQDataSource mKwizGeeQDataSource;
     private GlobalStatisticsDataSoruce mGlobalStatisticsDataSoruce;
 
     public KwizGeeQ(Activity mainActivity){
-        userQuizList = new ArrayList<UserQuiz>();
+        quizList = new ArrayList<Quiz>();
         globalStatistics = new Statistics();
         mKwizGeeQDataSource = new KwizGeeQDataSource(mainActivity.getApplicationContext());
         mGlobalStatisticsDataSoruce = new GlobalStatisticsDataSoruce(mainActivity.getApplicationContext());
         getDataFromDatabase();
     }
 
-    public ArrayList<UserQuiz> getUserQuizList(){
-        return userQuizList;
+    public ArrayList<Quiz> getQuizList(){
+        return quizList;
     }
 
-    public void setUserQuizList(ArrayList<UserQuiz> userQuizList){
-        this.userQuizList = userQuizList;
+    public void setQuizList(ArrayList<Quiz> quizList){
+        this.quizList = quizList;
     }
 
     public void removeQuiz(int quizIndex){
-        userQuizList.remove(quizIndex);
+        quizList.remove(quizIndex);
         EventBusWrapper.BUS.post(this);
         saveQuizDataToDatabase();
     }
@@ -49,21 +49,21 @@ public class KwizGeeQ implements Serializable{
         return globalStatistics;
     }
 
-    public void addQuiz(UserQuiz quiz) {
-        userQuizList.add(quiz);
+    public void addQuiz(Quiz quiz) {
+        quizList.add(quiz);
         EventBusWrapper.BUS.post(this);
         saveQuizDataToDatabase();
     }
 
-    public void replaceQuiz(int quizIndex, UserQuiz quiz) {
-        userQuizList.set(quizIndex,quiz);
+    public void replaceQuiz(int quizIndex, Quiz quiz) {
+        quizList.set(quizIndex,quiz);
         EventBusWrapper.BUS.post(this);
         saveQuizDataToDatabase();
 
     }
 
     private void saveQuizDataToDatabase() {
-        ArrayList<UserQuiz> tmpQuizList = new ArrayList<>(userQuizList);
+        ArrayList<Quiz> tmpQuizList = new ArrayList<>(quizList);
         mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.insertQuizes(tmpQuizList);
         mKwizGeeQDataSource.close();
@@ -85,7 +85,7 @@ public class KwizGeeQ implements Serializable{
         mGlobalStatisticsDataSoruce.close();
     }
 
-    public void updateGlobalStatistics(UserQuiz quiz){
+    public void updateGlobalStatistics(Quiz quiz){
         quiz.getCurrentTempStatistics().mergeInto(globalStatistics);
         quiz.resetCurrentTempStatistics();
         EventBusWrapper.BUS.post(this);

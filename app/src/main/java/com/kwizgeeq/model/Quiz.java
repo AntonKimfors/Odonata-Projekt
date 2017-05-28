@@ -12,14 +12,14 @@ import java.util.*;
  * revised by Are Ehnberg, Marcus Olsson Lindvärn and Anton Kimfors
  */
 
-public class UserQuiz implements Iterable, Serializable{
+public class Quiz implements Iterable, Serializable{
     protected ArrayList<Question> questions;
     private int listColor;
     private String name;
     private Statistics bestStatistics;
     private Statistics currentTempStatistics;
 
-    public UserQuiz(String name, int listColor) {
+    public Quiz(String name, int listColor) {
         questions = new ArrayList<>();
         this.name = name;
         this.listColor = listColor;
@@ -27,7 +27,7 @@ public class UserQuiz implements Iterable, Serializable{
         currentTempStatistics = new Statistics();
     }
 
-    public UserQuiz(String name, int listColor, Statistics statistics){
+    public Quiz(String name, int listColor, Statistics statistics){
         questions = new ArrayList<>();
         this.name = name;
         this.listColor = listColor;
@@ -107,7 +107,7 @@ public class UserQuiz implements Iterable, Serializable{
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("UserQuiz name: ").append(name).append(System.lineSeparator());
+        sb.append("Quiz name: ").append(name).append(System.lineSeparator());
         sb.append("Color: ").append(listColor).append(System.lineSeparator());
         for(Question q:questions){
             sb.append(q.toString());

@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.kwizgeeq.model.Question;
-import com.kwizgeeq.model.UserQuiz;
+import com.kwizgeeq.model.Quiz;
 import com.kwizgeeq.view.EditQuizView;
 
 
@@ -33,14 +33,14 @@ public class EditQuizController implements Observer {
     private final View.OnClickListener mPickColorListener;
 
     private EditQuizView editQuizview;
-    private UserQuiz quiz;
+    private Quiz quiz;
     private List<Question> questions;
 
 
     public EditQuizController(final EditQuizView editQuizview, final Serializable quiz) {
         this.editQuizview = editQuizview;
-        if(quiz instanceof UserQuiz){
-            this.quiz = (UserQuiz)quiz;
+        if(quiz instanceof Quiz){
+            this.quiz = (Quiz)quiz;
         }
         this.questions = this.quiz.getQuestions();
         editQuizview.setQuestions((ArrayList<Question>) questions);

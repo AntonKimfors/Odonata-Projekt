@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.view.View;
 
 import com.kwizgeeq.model.Answer;
+import com.kwizgeeq.model.Quiz;
 import com.kwizgeeq.model.Statistics;
-import com.kwizgeeq.model.UserQuiz;
 
 import com.kwizgeeq.view.QuestioneerView;
 
@@ -27,7 +27,7 @@ public class QuestioneerController implements Observer{
     private ArrayList<Integer> inReplayIndexList;
 
     private Statistics currentTempPlayedStatistics;
-    private UserQuiz quiz;
+    private Quiz quiz;
     private int questionIndex;
     private int currentQuestion;
     private int quizSize;
@@ -40,7 +40,7 @@ public class QuestioneerController implements Observer{
         this.currentActivity = activity;
         this.outReplayIndexList = new ArrayList<>();
         this.inReplayIndexList = new ArrayList<>();
-        this.quiz = (UserQuiz) activity.getIntent().getSerializableExtra("quiz");
+        this.quiz = (Quiz) activity.getIntent().getSerializableExtra("quiz");
         this.questionIndex = 0;
         this.currentQuestion = 1;
         this.playingByIndex = false;

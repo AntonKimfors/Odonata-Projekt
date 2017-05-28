@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kwizgeeq.R;
-import com.kwizgeeq.model.UserQuiz;
+import com.kwizgeeq.model.Quiz;
 
 import java.util.ArrayList;
 
@@ -24,21 +24,21 @@ import java.util.ArrayList;
 public class QuizListAdapter extends BaseAdapter {
 
     private Context mContext;
-    private ArrayList<UserQuiz> mUserQuiz;
+    private ArrayList<Quiz> mQuiz;
 
-    protected QuizListAdapter(Context context, ArrayList<UserQuiz> userQuizs){
+    protected QuizListAdapter(Context context, ArrayList<Quiz> quizs){
         mContext = context;
-        mUserQuiz = userQuizs;
+        mQuiz = quizs;
     }
 
     @Override
     public int getCount() {
-        return mUserQuiz.size();
+        return mQuiz.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mUserQuiz.get(position);
+        return mQuiz.get(position);
     }
 
     @Override
@@ -67,11 +67,11 @@ public class QuizListAdapter extends BaseAdapter {
 
         }
 
-        UserQuiz userQuiz = mUserQuiz.get(position);
-        holder.quizNameLabel.setText(userQuiz.getName());
-        holder.quizQuestionAmountLabel.setText(userQuiz.getQuestions().size() + " Questions");
-        holder.tvBestResult.setText(userQuiz.getBestStatistics().getCorrectAnswerPercentage() + "%");
-        holder.relativeLayout.setBackgroundColor(userQuiz.getListColor());
+        Quiz quiz = mQuiz.get(position);
+        holder.quizNameLabel.setText(quiz.getName());
+        holder.quizQuestionAmountLabel.setText(quiz.getQuestions().size() + " Questions");
+        holder.tvBestResult.setText(quiz.getBestStatistics().getCorrectAnswerPercentage() + "%");
+        holder.relativeLayout.setBackgroundColor(quiz.getListColor());
         
         return convertView;
     }

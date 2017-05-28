@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 
 
 import com.kwizgeeq.model.KwizGeeQ;
-import com.kwizgeeq.model.UserQuiz;
+import com.kwizgeeq.model.Quiz;
 
 import com.kwizgeeq.view.QuizListView;
 
@@ -40,12 +40,12 @@ public class QuizListController implements Observer{
 
     private QuizListView quizListView;
     private KwizGeeQ kwizGeeQ;
-    private List<UserQuiz> quizList;
+    private List<Quiz> quizList;
 
     public QuizListController(QuizListView view, Activity currentActivity) {
         this.kwizGeeQ = new KwizGeeQ(currentActivity);
         this.quizListView = view;
-        quizList = kwizGeeQ.getUserQuizList();
+        quizList = kwizGeeQ.getQuizList();
         quizListView.setQuestions((ArrayList)quizList);
 
         AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
@@ -81,7 +81,7 @@ public class QuizListController implements Observer{
             public void onClick(View view) {
                 String quizTitle = quizListView.getQuizName();
                 int color = quizListView.getmSelectedColor();
-                UserQuiz newQuiz = new UserQuiz(quizTitle, color);
+                Quiz newQuiz = new Quiz(quizTitle, color);
                 quizListView.createNewQuiz(newQuiz);
                 quizListView.dismissCreationDialog();
             }
@@ -161,21 +161,21 @@ public class QuizListController implements Observer{
     }
 
     public void addQuiz(Serializable quiz) {
-        if(quiz instanceof UserQuiz){
-            kwizGeeQ.addQuiz((UserQuiz)quiz);
+        if(quiz instanceof Quiz){
+            kwizGeeQ.addQuiz((Quiz)quiz);
         }
     }
 
     public void replaceQuiz(Serializable quiz, int quizIndex) {
-        if(quiz instanceof UserQuiz){
-            kwizGeeQ.replaceQuiz(quizIndex,(UserQuiz)quiz);
+        if(quiz instanceof Quiz){
+            kwizGeeQ.replaceQuiz(quizIndex,(Quiz)quiz);
         }
     }
 
     public void updateStatistics(Serializable quiz){
-        if (quiz instanceof UserQuiz){
-            ((UserQuiz)quiz).updateBestStatistics();
-            kwizGeeQ.updateGlobalStatistics((UserQuiz)quiz);
+        if (quiz instanceof Quiz){
+            ((Quiz)quiz).updateBestStatistics();
+            kwizGeeQ.updateGlobalStatistics((Quiz)quiz);
         }
     }
 }

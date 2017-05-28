@@ -12,11 +12,9 @@ import com.kwizgeeq.model.AnswerType;
 import com.kwizgeeq.model.KwizGeeQ;
 
 import com.kwizgeeq.model.Question;
+import com.kwizgeeq.model.Quiz;
 import com.kwizgeeq.model.Statistics;
 
-
-
-import com.kwizgeeq.model.UserQuiz;
 
 import java.util.ArrayList;
 
@@ -48,30 +46,30 @@ public class KwizGeeQDataSource {
     }
 
     // + insert
-    public void insertQuizes(ArrayList<UserQuiz> userQuizArrayList) {
+    public void insertQuizes(ArrayList<Quiz> quizArrayList) {
 
         mDatabase.beginTransaction();
         deleteAll();
 
         try {
-            for (int i = 0; i < userQuizArrayList.size(); i++) {
+            for (int i = 0; i < quizArrayList.size(); i++) {
                 ContentValues values = new ContentValues();
 
-                values.put(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, userQuizArrayList.get(i).getName());
-                values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_CORRECT, "" + userQuizArrayList.get(i).getBestStatistics().getAnswerCorrectCount());
-                values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_INCORRECT, "" + userQuizArrayList.get(i).getBestStatistics().getAnswerIncorrectCount());
-                values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_SECONDSSPENT,"" + userQuizArrayList.get(i).getBestStatistics().getSecondsSpent());
-                values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_QUIZCOUNT, "" + userQuizArrayList.get(i).getBestStatistics().getQuizCount());
-                values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_QUESTIONCOUNT, "" + userQuizArrayList.get(i).getBestStatistics().getQuestionCount());
-                values.put(KwizGeeQSQLiteHelper.COLUMN_COLOR, "" + (userQuizArrayList.get(i).getListColor()));
+                values.put(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, quizArrayList.get(i).getName());
+                values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_CORRECT, "" + quizArrayList.get(i).getBestStatistics().getAnswerCorrectCount());
+                values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_INCORRECT, "" + quizArrayList.get(i).getBestStatistics().getAnswerIncorrectCount());
+                values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_SECONDSSPENT,"" + quizArrayList.get(i).getBestStatistics().getSecondsSpent());
+                values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_QUIZCOUNT, "" + quizArrayList.get(i).getBestStatistics().getQuizCount());
+                values.put(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_QUESTIONCOUNT, "" + quizArrayList.get(i).getBestStatistics().getQuestionCount());
+                values.put(KwizGeeQSQLiteHelper.COLUMN_COLOR, "" + (quizArrayList.get(i).getListColor()));
 
                 mDatabase.insert(KwizGeeQSQLiteHelper.TABLE_QUIZES, null, values);
 
 
-                for(int y = 0; y < userQuizArrayList.get(i).getQuestions().size(); y++){
+                for(int y = 0; y < quizArrayList.get(i).getQuestions().size(); y++){
 
                     ContentValues questionValues = new ContentValues();
-                    Question tmpQuestion = (Question) userQuizArrayList.get(i).getQuestion(y);
+                    Question tmpQuestion = (Question) quizArrayList.get(i).getQuestion(y);
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_TITLE, tmpQuestion.getQuestionText());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_PICTURE, tmpQuestion.getImagePath());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_ANSWER_TYPE, "" + tmpQuestion.getOrderedList().get(0).getAnswerType());
@@ -138,7 +136,7 @@ public class KwizGeeQDataSource {
     private void updateCurrentListWithDatabaseQuizzes(KwizGeeQ mKwizGeeq){
         Cursor cursor = selectAllQuizes();
 
-        ArrayList<UserQuiz> tmpQuizList = new ArrayList<>();
+        ArrayList<Quiz> tmpQuizList = new ArrayList<>();
         int columnIndexName = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME);
         int columnIndexColor = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_COLOR);
         int columnIndexBestCorrect = cursor.getColumnIndex(KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_CORRECT);
@@ -157,12 +155,12 @@ public class KwizGeeQDataSource {
                     Integer.parseInt(cursor.getString(columnIndexBestCorrect)), Integer.parseInt(cursor.getString(columnIndexBestIncorrect)),
                     Integer.parseInt(cursor.getString(columnIndexBestSeconds)));
 
-            UserQuiz tmp = new UserQuiz(tmpName,  tmpColorInt, tmpStats);
+            Quiz tmp = new Quiz(tmpName,  tmpColorInt, tmpStats);
 
             tmpQuizList.add(tmp);
             cursor.moveToNext();
         }
-        mKwizGeeq.setUserQuizList(tmpQuizList);
+        mKwizGeeq.setQuizList(tmpQuizList);
     }
 
     private void updateCurrentListWithDatabaseQuestions(KwizGeeQ mKwizGeeq){
@@ -199,7 +197,7 @@ public class KwizGeeQDataSource {
             tmpQuestion.addAnswer(cursor.getString(columnIndexIncorrect_3), false, answerType);
 
 
-            mKwizGeeq.getUserQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).getQuestions().add(tmpQuestion);
+            mKwizGeeq.getQuizList().get(Integer.parseInt(cursor.getString(foreignKey))).getQuestions().add(tmpQuestion);
             cursor.moveToNext();
         }
 
