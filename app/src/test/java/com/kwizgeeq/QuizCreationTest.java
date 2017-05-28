@@ -58,6 +58,11 @@ public class QuizCreationTest {
 
     @Test
     public void testQuestionManagement() {
+        question1.setQuestionText("Meningen med Livet?");
+        question1.addAnswer("42", true, AnswerType.TEXT);
+        question1.addAnswer("Muffins", false, AnswerType.TEXT);
+        question1.addAnswer("Choklad", false, AnswerType.TEXT);
+        question1.addAnswer("Palsternacka", false, AnswerType.TEXT);
 
         question2.setQuestionText("Är potatis en grönsak?");
         question2.addAnswer("Bara på Torsdagar", false, AnswerType.TEXT);
@@ -87,9 +92,6 @@ public class QuizCreationTest {
         qList.add(question2);
         qList.add(question1);
         qList.add(question4);
-
-
-        assertTrue(quiz.getQuestion(0) == question1);
         assertTrue(quiz.getQuestions().size() == quiz.getSize());
 
         quiz.replaceQuestions(qList);
