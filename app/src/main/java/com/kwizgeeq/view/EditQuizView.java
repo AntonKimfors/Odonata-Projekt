@@ -50,12 +50,11 @@ public class EditQuizView extends Observable {
     private EditText editText;
     private EditQuizAdapter adapter;
     private int mSelectedColor;
-    private int quizIndex;
 
 
     public EditQuizView(final Class<? extends Activity> editQuestionActivity, final Serializable quiz,
                         final ListView listView, final Context context, final Activity currentActivity,
-                        int questionListRequestCode, int quizIndex) {
+                        int questionListRequestCode) {
 
         this.editQuestionActivity = editQuestionActivity;
         this.currentActivity = currentActivity;
@@ -68,10 +67,9 @@ public class EditQuizView extends Observable {
         this.btnColorPicker = (Button) currentActivity.findViewById(R.id.btnColorPicker);
         mSelectedColor = this.quiz.getListColor();
         this.questionListRequestCode = questionListRequestCode;
-        this.quizIndex = quizIndex;
         this.btnColorPicker.setBackgroundColor(mSelectedColor);
         this.editText.setText(this.quiz.getName());
-        this.adapter = new EditQuizAdapter(context, this.quiz.getQuestions(), this.quiz);
+        this.adapter = new EditQuizAdapter(context, this.quiz.getQuestions());
 
         //Creation of ColorPicker Dialog
         int[] mColors = context.getResources().getIntArray(R.array.default_rainbow);
@@ -176,7 +174,7 @@ public class EditQuizView extends Observable {
         Bundle bundle = new Bundle();
         bundle.putSerializable("questions", (Serializable) questions);
         intent.putExtras(bundle);
-        intent.putExtra("questionIndex", questionIndex);// TODO: change this to work with serializable
+        intent.putExtra("questionIndex", questionIndex);
 
         currentActivity.startActivityForResult(intent, questionListRequestCode);
     }
@@ -187,7 +185,7 @@ public class EditQuizView extends Observable {
     }
 
     public void setQuestions(ArrayList<Question> questions) {
-        this.adapter = new EditQuizAdapter(context, questions, quiz);
+        this.adapter = new EditQuizAdapter(context, questions);
         listView.setAdapter(adapter);
     }
 

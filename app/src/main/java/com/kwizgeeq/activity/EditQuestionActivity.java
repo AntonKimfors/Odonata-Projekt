@@ -44,8 +44,7 @@ public class EditQuestionActivity extends AppCompatActivity{
         System.out.println(questions.toString());
         System.out.println("Question index: " + questionIndex);
 
-        editQuestionView = new EditQuestionView(this, EditQuestionActivity.class,
-                QuizListActivity.class, captureImageRequestCode,questionEditingRequestCode);
+        editQuestionView = new EditQuestionView(this, EditQuestionActivity.class, captureImageRequestCode,questionEditingRequestCode);
 
         editQuestionController = new EditQuestionController(editQuestionView,
                 this, imageStorageDir, questions, questionIndex);

@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.kwizgeeq.R;
 import com.kwizgeeq.model.Question;
-import com.kwizgeeq.model.UserQuiz;
 
 import java.util.ArrayList;
 
@@ -24,14 +23,12 @@ import java.util.ArrayList;
 
 public class EditQuizAdapter extends BaseAdapter {
 
-    private UserQuiz userQuiz;
     private Context mContext;
     private ArrayList<Question> mQuestions;
 
-    public EditQuizAdapter(Context context, ArrayList<Question> questions, UserQuiz inUserQuiz){
+    public EditQuizAdapter(Context context, ArrayList<Question> questions){
         mContext = context;
         mQuestions = questions;
-        userQuiz = inUserQuiz;
     }
 
     @Override
@@ -68,11 +65,10 @@ public class EditQuizAdapter extends BaseAdapter {
 
         }
 
-        Question question = (Question) mQuestions.get(position);
+        Question question = mQuestions.get(position);
         holder.questionLabel.setText(question.getQuestionText());
 
         holder.relativeLayout.setBackgroundColor(Color.parseColor("#ffd6d7d7"));
-        //"?attr/colorButtonNormal => @color/button_material_light => #ffd6d7d7"
 
         return convertView;
     }

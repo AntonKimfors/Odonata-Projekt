@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 public class QuizListAdapter extends BaseAdapter {
 
-
     private Context mContext;
     private ArrayList<UserQuiz> mUserQuiz;
 

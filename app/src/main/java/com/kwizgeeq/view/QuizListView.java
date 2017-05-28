@@ -168,7 +168,7 @@ public class QuizListView extends Observable {
         return mSelectedColor;
     }
 
-    public void editQuiz(UserQuiz quiz,int quizIndex){
+    public void editQuiz(UserQuiz quiz){
         Intent intent = new Intent(context, editQuizActivityClass);
         Bundle bundle = new Bundle();
         bundle.putSerializable("quiz",quiz);

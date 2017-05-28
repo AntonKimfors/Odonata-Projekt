@@ -37,7 +37,7 @@ public class EditQuizActivity extends ListActivity {
         ActivityEditQuizBinding binding;
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_quiz);
         view = new EditQuizView(EditQuestionActivity.class, quiz, getListView(), this, this,
-                questionListRequestCode, quizIndex);
+                questionListRequestCode);
 
 
         controller = new EditQuizController(view, quiz);

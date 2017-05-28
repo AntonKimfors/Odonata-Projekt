@@ -32,7 +32,6 @@ public class EditQuestionView extends Observable {
     private Question question;
     private final Activity currentActivity;
     private final Class<? extends Activity> editQuestionActivityClass;
-    private final Class<? extends Activity> quizListActivityClass;
 
     private final com.google.common.eventbus.EventBus eventBus;
 
@@ -64,12 +63,10 @@ public class EditQuestionView extends Observable {
 
     public EditQuestionView(Activity currentActivity,
                             Class<? extends Activity> editQuestionActivityClass,
-                            Class<? extends Activity> quizListActivityClass,
                             int captureImageRequestCode, int questionEditingRequestCode) {
 
         this.currentActivity = currentActivity;
         this.editQuestionActivityClass = editQuestionActivityClass;
-        this.quizListActivityClass = quizListActivityClass;
 
         this.packageManager = currentActivity.getPackageManager();
         this.captureImageRequestCode = captureImageRequestCode;
