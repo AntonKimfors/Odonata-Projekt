@@ -33,7 +33,7 @@ public class ImageFileHandler {
         }
         // Continue only if the File was successfully created
         if (photoFile != null) {
-            photoURI = FileProvider.getUriForFile(context,"com.example.murk.fileprovider",
+            photoURI = FileProvider.getUriForFile(context,"com.fileprovider",
                     photoFile);
             /*photoURI = Uri.fromFile(photoFile);*/
 
