@@ -23,7 +23,7 @@ public class GlobalStatisticsSQLiteHelper extends SQLiteOpenHelper {
     //TODO: HUR SPARAS BIULDER??
 
     //------------- TABLE_STATISTICS ----------------------
-    public static final String TABLE_STATISTICS = "STATISTICS";
+    protected static final String TABLE_STATISTICS = "STATISTICS";
     protected static final String COLUMN_GLOBAL_STATS_CORRECT = "BEST_CORRECT";
     protected static final String COLUMN_GLOBAL_STATS_INCORRECT = "BEST_INCORRECT";
     protected static final String COLUMN_GLOBAL_STATS_SECONDSSPENT = "BEST_SECONDSSPENT";

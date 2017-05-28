@@ -74,27 +74,27 @@ public class KwizGeeQ implements Serializable{
 
 
 
-    public void saveQuizDataToDatabase() {
+    private void saveQuizDataToDatabase() {
         ArrayList<UserQuiz> tmpQuizList = new ArrayList<>(userQuizList);
         mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.insertQuizes(tmpQuizList);
         mKwizGeeQDataSource.close();
 
+        /*mGlobalStatisticsDataSoruce.open();
+        mGlobalStatisticsDataSoruce.insertGlobalStats(globalStatistics);
+        mGlobalStatisticsDataSoruce.close();*/
+    }
+
+    private void saveStatisticsDataToDatabase() {
         mGlobalStatisticsDataSoruce.open();
         mGlobalStatisticsDataSoruce.insertGlobalStats(globalStatistics);
         mGlobalStatisticsDataSoruce.close();
     }
 
-    /*public void saveStatisticsDataToDatabase() {
-        mGlobalStatisticsDataSoruce.open();
-        mGlobalStatisticsDataSoruce.insertGlobalStats(globalStatistics);
-        mGlobalStatisticsDataSoruce.close();
-    }*/
 
 
 
-
-    public void getDataFromDatabase() {
+    private void getDataFromDatabase() {
         mKwizGeeQDataSource.open();
         mKwizGeeQDataSource.updateList(this);
         mKwizGeeQDataSource.close();
@@ -104,10 +104,10 @@ public class KwizGeeQ implements Serializable{
         mGlobalStatisticsDataSoruce.close();
     }
 
-    public void updateGlobalStatistics(UserQuiz quiz){
+    private void updateGlobalStatistics(UserQuiz quiz){
         quiz.getCurrentTempStatistics().mergeInto(globalStatistics);
         quiz.resetCurrentTempStatistics();
         EventBusWrapper.BUS.post(this);
-        saveQuizDataToDatabase(); //Bör bytas ut mot saveStatisticsDataToDatabase
+        saveStatisticsDataToDatabase();  //Bör bytas ut mot saveStatisticsDataToDatabase
     }
 }
