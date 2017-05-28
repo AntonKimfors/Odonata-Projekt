@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relative_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:background="#ffaa00"
-    android:paddingTop="10dp"
-    android:paddingBottom="12dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:layout_marginTop="8dp"
+    android:paddingBottom="12dp"
+    android:paddingTop="10dp"
+    tools:background="@color/colorQuestioneerButton"
 
-                >
+    >
 
     <TextView
         android:id="@+id/questionLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
-        tools:text="quizName"
+        android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/graphite"
+        android:textSize="24sp"
+        tools:text="quizName" />
 
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.murk.kwizgeeq.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +66,8 @@ public class EditQuizAdapter extends BaseAdapter {
         Question question = (Question) mQuestions.get(position);
         holder.questionLabel.setText(question.getQuestionText());
 
-        holder.relativeLayout.setBackgroundColor(userQuiz.getListColor());
-
+        holder.relativeLayout.setBackgroundColor(Color.parseColor("#ffd6d7d7"));
+        //"?attr/colorButtonNormal => @color/button_material_light => #ffd6d7d7"
 
         return convertView;
     }

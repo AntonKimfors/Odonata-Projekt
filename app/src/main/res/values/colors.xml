@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ff4081</color>
     <color name="colorCorrectAnswer">#50f050</color>
-    <color name="colorIncorrectAnswer">#F05050</color>
+    <color name="colorIncorrectAnswer">#f05050</color>
     <color name="colorQuestioneerButton">#d6d7d7</color>
 
     <array name="rainbow">
