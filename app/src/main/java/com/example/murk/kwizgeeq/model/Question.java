@@ -40,8 +40,6 @@ public class Question implements Serializable {
 
     public void addAnswer(String data, boolean isCorrect, AnswerType answerType){
         Answer answer = new Answer(isCorrect,data,answerType);
-        if(answer == null)
-            throw new NullPointerException();
 
         if(answers.add(answer)){
             if(answer.isCorrect())

@@ -104,7 +104,7 @@ public class KwizGeeQ implements Serializable{
         mGlobalStatisticsDataSoruce.close();
     }
 
-    private void updateGlobalStatistics(UserQuiz quiz){
+    public void updateGlobalStatistics(UserQuiz quiz){
         quiz.getCurrentTempStatistics().mergeInto(globalStatistics);
         quiz.resetCurrentTempStatistics();
         EventBusWrapper.BUS.post(this);
