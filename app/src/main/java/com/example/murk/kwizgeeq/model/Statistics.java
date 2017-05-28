@@ -55,6 +55,14 @@ public class Statistics implements Serializable{
         otherStat.secondsSpent += this.secondsSpent;
     }
 
+    public void copy(Statistics copyStatistics){
+        this.quizCount = copyStatistics.getQuizCount();
+        this.questionCount = copyStatistics.getQuestionCount();
+        this.answerCorrectCount = copyStatistics.getAnswerCorrectCount();
+        this.answerIncorrectCount = copyStatistics.getAnswerIncorrectCount();
+        this.secondsSpent = copyStatistics.getSecondsSpent();
+    }
+
     public void incQuizCount(){
         quizCount++;
     }

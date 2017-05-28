@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 
-import com.example.murk.kwizgeeq.model.UserQuiz;
+import com.example.murk.kwizgeeq.model.Statistics;
 import com.example.murk.kwizgeeq.view.StatisticsView;
 
 import java.util.Observable;
@@ -19,16 +19,15 @@ public class StatisticsController implements Observer {
     private StatisticsView view;
     private Activity currentActivity;
 
-    private UserQuiz quiz;
-
     public StatisticsController(StatisticsView view, Activity currentActivity) {
         this.view = view;
         this.currentActivity = currentActivity;
-        this.quiz = (UserQuiz) currentActivity.getIntent().getSerializableExtra("quiz");
+        String quizName = currentActivity.getIntent().getStringExtra("quizName");
+        Statistics statistics = (Statistics) currentActivity.getIntent().getSerializableExtra("statistics");
         if (currentActivity.getIntent().getBooleanExtra("allCorrect", false)) {
             view.disableReplayByIndexButton();
         }
-        view.updateStatistics(quiz);
+        view.updateStatistics(quizName, statistics);
     }
 
     public void backSelected(View view){

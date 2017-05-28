@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.example.murk.kwizgeeq.model.Answer;
 import com.example.murk.kwizgeeq.model.Question;
+import com.example.murk.kwizgeeq.model.Statistics;
 import com.example.murk.kwizgeeq.model.UserQuiz;
 
 import com.example.murk.kwizgeeq.view.QuestioneerView;
@@ -26,11 +27,13 @@ public class QuestioneerController implements Observer{
     private ArrayList<Integer> outReplayIndexList;
     private ArrayList<Integer> inReplayIndexList;
 
+    private Statistics currentTempPlayedStatistics;
     private UserQuiz quiz;
     private int questionIndex;
     private int currentQuestion;
     private int quizSize;
     private boolean playingByIndex;
+    public boolean everPlayedByIndex;
     private int statisticsRequestCode;
 
     public QuestioneerController(Activity activity, QuestioneerView view, int statisticsRequestCode) {
@@ -42,6 +45,7 @@ public class QuestioneerController implements Observer{
         this.questionIndex = 0;
         this.currentQuestion = 1;
         this.playingByIndex = false;
+        this.everPlayedByIndex = false;
         this.statisticsRequestCode = statisticsRequestCode;
     }
 
@@ -50,10 +54,8 @@ public class QuestioneerController implements Observer{
         updateQuizSize();
         view.updateQuizRelatedItems(quiz.getName(), quizSize, quiz.getListColor());
         view.updateQuestioneer(quiz.getQuestion(questionIndex), currentQuestion, quizSize);
-        if(!playingByIndex) {
-            quiz.resetCurrentTempStatistics();
-            quiz.getCurrentTempStatistics().startTimer();
-        }
+        currentTempPlayedStatistics = new Statistics();
+        currentTempPlayedStatistics.startTimer();
     }
 
     private void updateQuestionIndex(){
@@ -77,36 +79,35 @@ public class QuestioneerController implements Observer{
     }
 
     public void answerSelected(View view){
-        if(!playingByIndex)
-            quiz.getCurrentTempStatistics().incQuestionCount();
+        currentTempPlayedStatistics.incQuestionCount();
         if(((Answer)view.getTag()).isCorrect()){
-            if(!playingByIndex)
-                quiz.getCurrentTempStatistics().incAnswerCorrectCount();
+            currentTempPlayedStatistics.incAnswerCorrectCount();
             this.view.flashCorrectAnswer(view);
         } else{
             outReplayIndexList.add(questionIndex);
-            if(!playingByIndex)
-                quiz.getCurrentTempStatistics().incAnswerIncorrectCount();
+            currentTempPlayedStatistics.incAnswerIncorrectCount();
             this.view.flashIncorrectAnswer(view);
         }
     }
 
     public void finishQuestion(){
         if(currentQuestion == quizSize) {
-            if(!playingByIndex) {
-                quiz.getCurrentTempStatistics().stopTimer();
-                quiz.getCurrentTempStatistics().incQuizCount();
+            currentTempPlayedStatistics.stopTimer();
+            currentTempPlayedStatistics.incQuizCount();
+            if(!everPlayedByIndex){
+                quiz.getCurrentTempStatistics().copy(currentTempPlayedStatistics);
                 currentActivity.setResult(currentActivity.RESULT_OK, currentActivity.getIntent());
             }
             Intent intent = new Intent(currentActivity, switchActivityClass);
-            intent.putExtra("quiz", quiz);
+            intent.putExtra("quizName", quiz.getName());
+            intent.putExtra("statistics", currentTempPlayedStatistics);
             intent.putExtra("allCorrect", outReplayIndexList.isEmpty());
             currentActivity.startActivityForResult(intent, statisticsRequestCode);
         }
         else {
             currentQuestion++;
             updateQuestionIndex();
-            view.updateQuestioneer((Question) quiz.getQuestion(questionIndex), currentQuestion, quizSize);
+            view.updateQuestioneer(quiz.getQuestion(questionIndex), currentQuestion, quizSize);
         }
     }
 
@@ -125,6 +126,7 @@ public class QuestioneerController implements Observer{
 
     private void replayQuestionsByIndex(){
         playingByIndex = true;
+        everPlayedByIndex = true;
         currentQuestion = 1;
         inReplayIndexList = (ArrayList)outReplayIndexList.clone();
         outReplayIndexList.clear();
