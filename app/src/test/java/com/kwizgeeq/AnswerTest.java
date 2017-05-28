@@ -2,11 +2,8 @@ package com.kwizgeeq;
 
 import com.kwizgeeq.model.Answer;
 import com.kwizgeeq.model.AnswerType;
-import com.kwizgeeq.model.Question;
 
 import org.junit.Test;
-
-import java.util.Iterator;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -54,7 +51,12 @@ public class AnswerTest {
     @Test
     public void testEquals() {
         Answer testAnswer = answer1;
+        Answer testAnswer2 = answer2;
+        Object testAnswer3 = new Object();
         assertTrue(answer1.equals(testAnswer));
+        assertFalse(answer1.equals(testAnswer2));
+        assertFalse(answer1.equals(testAnswer3));
+
     }
 
     @Test
