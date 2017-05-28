@@ -23,14 +23,14 @@ public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
     //TODO: HUR SPARAS BIULDER??
 
     //-------------QUIZ Table ----------------------
-    public static final String TABLE_QUIZES = "QUIZES";
-    public static final String COLUMN_COLOR = "COLOR";
-    public static final String COLUMN_QUIZ_NAME = "QUIZ_NAME";
-    public static final String COLUMN_BEST_STATS_CORRECT = "BEST_CORRECT";
-    public static final String COLUMN_BEST_STATS_INCORRECT = "BEST_INCORRECT";
-    public static final String COLUMN_BEST_STATS_SECONDSSPENT = "BEST_SECONDSSPENT";
-    public static final String COLUMN_BEST_STATS_QUIZCOUNT = "BEST_QUIZCOUNT";
-    public static final String COLUMN_BEST_STATS_QUESTIONCOUNT = "BEST_QUESTIONCOUNT";
+    protected static final String TABLE_QUIZES = "QUIZES";
+    protected static final String COLUMN_COLOR = "COLOR";
+    protected static final String COLUMN_QUIZ_NAME = "QUIZ_NAME";
+    protected static final String COLUMN_BEST_STATS_CORRECT = "BEST_CORRECT";
+    protected static final String COLUMN_BEST_STATS_INCORRECT = "BEST_INCORRECT";
+    protected static final String COLUMN_BEST_STATS_SECONDSSPENT = "BEST_SECONDSSPENT";
+    protected static final String COLUMN_BEST_STATS_QUIZCOUNT = "BEST_QUIZCOUNT";
+    protected static final String COLUMN_BEST_STATS_QUESTIONCOUNT = "BEST_QUESTIONCOUNT";
 
 
     private static String DB_CREATE =
@@ -46,15 +46,15 @@ public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
 
 
     //-------------QUESTION Table---------------------
-    public static final String ANNOTATIONS_TABLE = "QUESTIONS";
-    public static final String COLUMN_ANNOTATION_PICTURE = "PICTURE";
-    public static final String COLUMN_ANNOTATION_TITLE = "QUESTION";
-    public static final String COLUMN_ANNOTATIONS_CORRECT_ANSWER = "CORRECT_ANSWER";
-    public static final String COLUMN_ANNOTATIONS_INCORRECT_ANSWER_1 = "INCORRECT_ANSWER_1";
-    public static final String COLUMN_ANNOTATIONS_INCORRECT_ANSWER_2 = "INCORRECT_ANSWER_2";
-    public static final String COLUMN_ANNOTATIONS_INCORRECT_ANSWER_3 = "INCORRECT_ANSWER_3";
-    public static final String COLUMN_ANNOTATIONS_ANSWER_TYPE = "ANSWER_TYPE";
-    public static final String COLUMN_FOREIGN_KEY_QUIZ = "QUIZ_ID";
+    protected static final String ANNOTATIONS_TABLE = "QUESTIONS";
+    protected static final String COLUMN_ANNOTATION_PICTURE = "PICTURE";
+    protected static final String COLUMN_ANNOTATION_TITLE = "QUESTION";
+    protected static final String COLUMN_ANNOTATIONS_CORRECT_ANSWER = "CORRECT_ANSWER";
+    protected static final String COLUMN_ANNOTATIONS_INCORRECT_ANSWER_1 = "INCORRECT_ANSWER_1";
+    protected static final String COLUMN_ANNOTATIONS_INCORRECT_ANSWER_2 = "INCORRECT_ANSWER_2";
+    protected static final String COLUMN_ANNOTATIONS_INCORRECT_ANSWER_3 = "INCORRECT_ANSWER_3";
+    protected static final String COLUMN_ANNOTATIONS_ANSWER_TYPE = "ANSWER_TYPE";
+    protected static final String COLUMN_FOREIGN_KEY_QUIZ = "QUIZ_ID";
 
     //TODO: quiZZes i plural
     private static final String CREATE_ANNOTATIONS = "CREATE TABLE " + ANNOTATIONS_TABLE + " (" +
@@ -71,7 +71,7 @@ public class KwizGeeQSQLiteHelper extends SQLiteOpenHelper {
 
 
 
-    public KwizGeeQSQLiteHelper(Context context){
+    protected KwizGeeQSQLiteHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
     }
 

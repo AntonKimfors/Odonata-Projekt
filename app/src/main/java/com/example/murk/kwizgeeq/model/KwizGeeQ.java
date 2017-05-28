@@ -100,7 +100,7 @@ public class KwizGeeQ implements Serializable{
         mKwizGeeQDataSource.close();
 
         mGlobalStatisticsDataSoruce.open();
-        this.globalStatistics = mGlobalStatisticsDataSoruce.updateList();
+        this.globalStatistics = mGlobalStatisticsDataSoruce.updateCurrentStatsWithDatabaseStats();
         mGlobalStatisticsDataSoruce.close();
     }
 

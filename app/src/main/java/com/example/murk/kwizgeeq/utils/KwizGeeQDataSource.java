@@ -96,7 +96,7 @@ public class KwizGeeQDataSource {
 
 
     // + select
-    public Cursor selectAllQuizes(){
+    private Cursor selectAllQuizes(){
         Cursor cursor =  mDatabase.query(
                 KwizGeeQSQLiteHelper.TABLE_QUIZES,
                 new String[] {KwizGeeQSQLiteHelper.COLUMN_QUIZ_NAME, KwizGeeQSQLiteHelper.COLUMN_COLOR, KwizGeeQSQLiteHelper.COLUMN_BEST_STATS_CORRECT,
@@ -114,7 +114,7 @@ public class KwizGeeQDataSource {
     // + update
 
 
-    public Cursor selectAllQuestions(){
+    private Cursor selectAllQuestions(){
         Cursor cursor =  mDatabase.query(
                 KwizGeeQSQLiteHelper.ANNOTATIONS_TABLE,
                 new String[] {KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_TITLE, BaseColumns._ID, KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_CORRECT_ANSWER,
@@ -138,7 +138,7 @@ public class KwizGeeQDataSource {
 
 
 
-    public void updateCurrentListWithDatabaseQuizzes(KwizGeeQ mKwizGeeq){
+    private void updateCurrentListWithDatabaseQuizzes(KwizGeeQ mKwizGeeq){
         Cursor cursor = selectAllQuizes();
 
         ArrayList<UserQuiz> tmpQuizList = new ArrayList<>();
@@ -170,7 +170,7 @@ public class KwizGeeQDataSource {
 
 
 
-    public void updateCurrentListWithDatabaseQuestions(KwizGeeQ mKwizGeeq){
+    private void updateCurrentListWithDatabaseQuestions(KwizGeeQ mKwizGeeq){
         Cursor cursor = selectAllQuestions();
         //ArrayList<Answer> tmpAnswerList = new ArrayList<>();
 
@@ -214,7 +214,7 @@ public class KwizGeeQDataSource {
     };
 
     // + delete
-    public void deleteAll() {
+    private void deleteAll() {
         mDatabase.delete(
                 KwizGeeQSQLiteHelper.ANNOTATIONS_TABLE,
                 null, //where clause

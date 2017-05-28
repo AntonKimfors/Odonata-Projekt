@@ -64,7 +64,7 @@ public class GlobalStatisticsDataSoruce {
 
 
     // + select
-    public Cursor selectAllStatistics(){
+    private Cursor selectAllStatistics(){
         Cursor cursor =  mDatabase.query(
                 GlobalStatisticsSQLiteHelper.TABLE_STATISTICS,
                 new String[] {GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_CORRECT, GlobalStatisticsSQLiteHelper.COLUMN_GLOBAL_STATS_INCORRECT,
@@ -80,11 +80,6 @@ public class GlobalStatisticsDataSoruce {
         return cursor;
     }
     // + update
-
-    public Statistics updateList(){
-        return updateCurrentStatsWithDatabaseStats();
-    }
-
 
 
     public Statistics updateCurrentStatsWithDatabaseStats() {
@@ -124,7 +119,7 @@ public class GlobalStatisticsDataSoruce {
 
 
 // + delete
-    public void deleteAll() {
+    private void deleteAll() {
         mDatabase.delete(
                 GlobalStatisticsSQLiteHelper.TABLE_STATISTICS,
                 null, //where clause
