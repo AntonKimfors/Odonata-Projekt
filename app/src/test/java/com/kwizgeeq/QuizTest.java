@@ -8,13 +8,15 @@ import com.kwizgeeq.model.Question;
 import com.kwizgeeq.model.Quiz;
 import com.kwizgeeq.model.Statistics;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -22,190 +24,160 @@ import static org.junit.Assert.assertTrue;
  */
 
 public class QuizTest {
-    Quiz quiz = new Quiz("PartyQuiz!",Color.CYAN);
-    ArrayList<Question> qList = new ArrayList<>();
-    Question question1 = new Question();
-    Question question2 = new Question();
-    Question question3 = new Question();
-    Question question4 = new Question();
-    ArrayList<Answer> aList2;
+
+    Quiz quiz;
+    ArrayList<Question> questionList;
+    Question question1;
+    Question question2;
+    Question question3;
+
+    @Before
+    public void before(){
+        quiz = new Quiz("Quiz Name", Color.CYAN);
+        questionList = new ArrayList<>();
+        question1 = new Question();
+        question2 = new Question();
+        question3 = new Question();
+        questionList.add(question1);
+        questionList.add(question2);
+        questionList.add(question3);
+    }
+
+    @Test
+    public void testCreation(){
+        Quiz testQuiz1 = new Quiz("Quiz Name 1", Color.CYAN);
+        Statistics testStatistics = new Statistics();
+        Quiz testQuiz2 = new Quiz("Quiz Name 2", Color.BLUE, testStatistics);
+
+        assertEquals(testQuiz1.getName(), "Quiz Name 1");
+        assertEquals(testQuiz1.getListColor(), Color.CYAN);
+        assertNotNull(testQuiz1.getQuestions());
+        assertNotNull(testQuiz1.getBestStatistics());
+        assertNotNull(testQuiz1.getCurrentTempStatistics());
+
+        assertEquals(testQuiz2.getName(), "Quiz Name 2");
+        assertEquals(testQuiz2.getListColor(), Color.BLUE);
+        assertNotNull(testQuiz2.getQuestions());
+        assertEquals(testQuiz2.getBestStatistics(), testStatistics);
+        assertNotNull(testQuiz2.getCurrentTempStatistics());
+    }
 
     @Test
     public void testName() {
-        assertTrue(quiz.getName()== "PartyQuiz!");
-        quiz.setName("PartyQuiz 2.0 !");
-        assertFalse(quiz.getName()== "PartyQuiz");
-        assertTrue(quiz.getName()== "PartyQuiz 2.0 !");
+        quiz.setName("Test Name");
 
+        assertEquals(quiz.getName(), "Test Name");
     }
 
     @Test
     public void testColor() {
-        assertTrue(quiz.getListColor()== Color.CYAN);
         quiz.setListColor(Color.BLACK);
-        assertFalse(quiz.getListColor() == Color.CYAN);
-        assertTrue(quiz.getListColor() == Color.BLACK);
 
+        assertEquals(quiz.getListColor(), Color.BLACK);
     }
 
     @Test
-    public void testToString() {
-        Question question = new Question();
-        question.setQuestionText("Meningen med Livet?");
-        assertEquals(question.toString(),"Question: Meningen med Livet?com.kwizgeeq.model.Question@1");  //TODO fixa efter paket
+    public void testAnswerIteratorText() {
+        question1.addAnswer("1", true, AnswerType.TEXT);
+        question1.addAnswer("2", false, AnswerType.TEXT);
+        question1.addAnswer("3", false, AnswerType.TEXT);
+        question1.addAnswer("4", false, AnswerType.TEXT);
+
+        Iterator<Answer> answerIterator = question1.answerIterator(false);
+
+        assertEquals(answerIterator.next().getData(), "1");
+        assertEquals(answerIterator.next().getData(), "2");
+        assertEquals(answerIterator.next().getData(), "3");
+        assertEquals(answerIterator.next().getData(), "4");
     }
 
-    @Test
-    public void testQuestionManagement() {
-        question1.setQuestionText("Meningen med Livet?");
-        question1.addAnswer("42", true, AnswerType.TEXT);
-        question1.addAnswer("Muffins", false, AnswerType.TEXT);
-        question1.addAnswer("Choklad", false, AnswerType.TEXT);
-        question1.addAnswer("Palsternacka", false, AnswerType.TEXT);
+    /*@Test
+    public void testAnswerIteratorImage() {
+        question1.addAnswer("Image 1", true, AnswerType.IMAGE);
+        question1.addAnswer("Image 2", false, AnswerType.IMAGE);
+        question1.addAnswer("Image 3", false, AnswerType.IMAGE);
+        question1.addAnswer("Image 4", false, AnswerType.IMAGE);
 
-        question2.setQuestionText("Är potatis en grönsak?");
-        question2.addAnswer("Bara på Torsdagar", false, AnswerType.TEXT);
-        question2.addAnswer("Ibland", false, AnswerType.TEXT);
-        question2.addAnswer("Ja", false, AnswerType.TEXT);
-        question2.addAnswer("Nej", true, AnswerType.TEXT);
+        Iterator<Answer> answerIterator = question1.answerIterator(false);
 
-        question3.setQuestionText("är Blåbärsmuffins en transportmetod?");
-        question3.addAnswer("If you are Brave Enough", false, AnswerType.TEXT);
-        question3.addAnswer("Ibland", false, AnswerType.TEXT);
-        question3.addAnswer("Ja", false, AnswerType.TEXT);
-        question3.addAnswer("Nej", true, AnswerType.TEXT);
+        assertEquals(answerIterator.next().getData(), "Image 1");
+        assertEquals(answerIterator.next().getData(), "Image 2");
+        assertEquals(answerIterator.next().getData(), "Image 3");
+        assertEquals(answerIterator.next().getData(), "Image 4");
+    }*/
 
-        question4.setQuestionText("Om Gurkor var Djur, hur många ben skulle de ha ?");
-        question4.addAnswer("2", false, AnswerType.TEXT);
-        question4.addAnswer("3", false, AnswerType.TEXT);
-        question4.addAnswer("6", false, AnswerType.TEXT);
-        question4.addAnswer("8", true, AnswerType.TEXT);
-
-
-        assertTrue(question1.getQuestionText() == "Meningen med Livet?");
-        assertTrue(question2.getQuestionText() == "Är potatis en grönsak?");
-        assertTrue(question3.getQuestionText() == "är Blåbärsmuffins en transportmetod?");
-        assertTrue(question4.getQuestionText() == "Om Gurkor var Djur, hur många ben skulle de ha ?");
-
-        qList.add(question3);
-        qList.add(question2);
-        qList.add(question1);
-        qList.add(question4);
-        assertTrue(quiz.getQuestions().size() == quiz.getSize());
-
-        quiz.replaceQuestions(qList);
-        assertTrue(quiz.getQuestion(0) == question3);
-
-
-
-        //TODO Testa   updateBestStatistics(), getBestStatistics(), getCurrentTempStatistics(), questionsOnIndexIterator()
-
-    }
-
-
-    @Test
-    public void testOrderedList(){
-        question1.setQuestionText("Meningen med Livet?");
-        question1.addAnswer("42", true, AnswerType.TEXT);
-        aList2 = question1.getOrderedList();
-        assertEquals(aList2.get(0).getData(), "42");
-
-    }
-    @Test
-    public void testImagePath(){
-        question1.setImagePath("DCIM/SecretPhotos");
-        assertTrue(question1.getImagePath() == "DCIM/SecretPhotos");
-    }
-
-    @Test
-    public void testAnswerIterator() {
-        question1.addAnswer("42", true, AnswerType.TEXT);
-        question1.addAnswer("Muffins", false, AnswerType.TEXT);
-        question1.addAnswer("Choklad", false, AnswerType.TEXT);
-        question1.addAnswer("Palsternacka", false, AnswerType.TEXT);
-
-        Iterator<Answer> answerIterator= question1.answerIterator(false);
-
-        assertTrue(answerIterator.next().getData() == "42");
-        assertTrue(answerIterator.next().getData() == "Muffins");
-        assertTrue(answerIterator.next().getData() == "Choklad");
-        assertTrue(answerIterator.next().getData() == "Palsternacka");
-    }
     @Test
     public void testGetSize() {
-        assertTrue(quiz.getSize() == 0);
+        quiz.getQuestions().clear();
         quiz.getQuestions().add(question1);
         quiz.getQuestions().add(question2);
         quiz.getQuestions().add(question3);
-        quiz.getQuestions().add(question4);
-        assertTrue(quiz.getSize() == 4);
-    }
 
+        assertEquals(quiz.getSize(), 3);
+    }
 
     @Test
-    public void testStatistics(){
-        Statistics statistics = new Statistics();
-        assertTrue(statistics.getQuizCount() == 0);
-        assertTrue(statistics.getQuestionCount() == 0);
-        assertTrue(statistics.getAnswerCorrectCount() == 0);
-        assertTrue(statistics.getAnswerIncorrectCount() == 0);
-        assertTrue(statistics.getSecondsSpent() == 0);
+    public void testQuestionAdding(){
+        quiz.getQuestions().clear();
+        quiz.getQuestions().add(question1);
 
-        // (int quizCount, int questionCount, int answerCorrectCount, int answerIncorrectCount, int secondsSpent)
-        Statistics newStatistics = new Statistics(3,100,30,70,100);
-        assertTrue(newStatistics.getQuizCount() == 3);
-        assertTrue(newStatistics.getQuestionCount() == 100);
-        assertTrue(newStatistics.getAnswerCorrectCount() == 30);
-        assertTrue(newStatistics.getAnswerIncorrectCount() == 70);
-        assertTrue(newStatistics.getSecondsSpent() == 100);
-        Statistics betterStatics = new Statistics(3,100,30,70,99);
-
-        Quiz statisticsQuiz = new Quiz("statistics Quiz",Color.CYAN,statistics);
-
-        Statistics testStats = statisticsQuiz.getCurrentTempStatistics();
-        assertTrue(testStats.getAnswerIncorrectCount() == 0);
-
+        assertEquals(quiz.getQuestion(0), question1);
     }
+
     @Test
-    public void testGetCurrentTempStatistics() {
-        Statistics statistics = new Statistics();
-        Quiz statisticsQuiz = new Quiz("statistics Quiz",Color.CYAN,statistics);
-        Statistics testStats = statisticsQuiz.getBestStatistics();
+    public void testQuestionReplace(){
+        ArrayList<Question> tempTestQuestionList = new ArrayList<>();
+        ArrayList<Question> currentQuestionList = quiz.getQuestions();
 
+        tempTestQuestionList.add(question1);
+        tempTestQuestionList.add(question3);
+        quiz.replaceQuestions(tempTestQuestionList);
 
-        assertTrue(statistics.getQuizCount() == 0);
-        assertTrue(statistics.getQuestionCount() == 0);
-        assertTrue(statistics.getAnswerCorrectCount() == 0);
-        assertTrue(statistics.getAnswerIncorrectCount() == 0);
-        assertTrue(statistics.getSecondsSpent() == 0);
-
-
-        assertTrue(testStats.getQuizCount() == 0);
-        assertTrue(testStats.getQuestionCount() == 0);
-        assertTrue(testStats.getAnswerCorrectCount() == 0);
-        assertTrue(testStats.getAnswerIncorrectCount() == 0);
-        assertTrue(testStats.getSecondsSpent() == 0);
-
+        for (Question question : currentQuestionList) {
+            assertEquals(question, tempTestQuestionList.get(currentQuestionList.indexOf(question)));
+        }
     }
+
     @Test
-    public void testStatisticsManagement() {
+    public void testTempStatistics(){
+        Statistics testTempStatistics = quiz.getCurrentTempStatistics();
 
-        Statistics betterStatics = new Statistics(3,100,30,70,99);
-        Quiz statisticsQuiz = new Quiz("statistics Quiz",Color.CYAN, betterStatics);
-        Statistics testStats =  statisticsQuiz.getBestStatistics();
+        quiz.resetCurrentTempStatistics();
 
-        assertTrue(testStats.getQuizCount() == 3);
-        assertTrue(testStats.getQuestionCount() == 100);
-        assertTrue(testStats.getAnswerCorrectCount() == 30);
-        assertTrue(testStats.getAnswerIncorrectCount() == 70);
-        assertTrue(testStats.getSecondsSpent() == 99);
+        assertNotEquals(testTempStatistics, quiz.getCurrentTempStatistics());
+    }
 
+    @Test
+    public void testBestStatistics(){
+        Statistics oldBestStatistics = quiz.getBestStatistics();
+        Statistics currentTempStatistics = quiz.getCurrentTempStatistics();
 
+        oldBestStatistics.incQuestionCount();
+        oldBestStatistics.incQuestionCount();
+        oldBestStatistics.incQuestionCount();
+        oldBestStatistics.incAnswerCorrectCount();
+        oldBestStatistics.incAnswerCorrectCount();
+        oldBestStatistics.incAnswerIncorrectCount();
+        quiz.updateBestStatistics();
 
+        assertNotEquals(oldBestStatistics, currentTempStatistics);
+
+        currentTempStatistics.startTimer();
+        currentTempStatistics.incQuestionCount();
+        currentTempStatistics.incQuestionCount();
+        currentTempStatistics.incQuestionCount();
+        currentTempStatistics.incAnswerCorrectCount();
+        currentTempStatistics.incAnswerCorrectCount();
+        currentTempStatistics.incAnswerIncorrectCount();
+
+        assertNotEquals(oldBestStatistics, currentTempStatistics);
 
     }
 
+    @Test //TODO move to questiontest
+    public void testImagePath(){
+        question1.setImagePath("path/image");
 
-
-
+        assertEquals(question1.getImagePath(), "path/image");
+    }
 }
