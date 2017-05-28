@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  * Created by Murk on 2017-05-28.
  */
 
-public class QuizCreationTest {
+public class QuizTest {
     UserQuiz quiz = new UserQuiz("PartyQuiz!",Color.CYAN);
     ArrayList<Question> qList = new ArrayList<>();
     Question question1 = new Question();

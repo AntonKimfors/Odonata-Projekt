@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * Created by Are on 26/05/2017.
  */
 
-public class TestStatistics {
+public class StatisticsTest {
 
     private Statistics testStatistics;
 

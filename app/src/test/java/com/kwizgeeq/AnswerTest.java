@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
  * Created by Murk on 2017-05-28.
  */
 
-public class AnswerCreationTest {
+public class AnswerTest {
 
 
     Answer answer1 = new Answer(true, "42", AnswerType.TEXT);
