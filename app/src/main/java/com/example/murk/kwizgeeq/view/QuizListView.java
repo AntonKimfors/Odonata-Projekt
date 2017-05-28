@@ -219,6 +219,15 @@ public class QuizListView extends Observable {
         mCreateQuiz.setBackgroundColor(mSelectedColor);
     }
 
+    public void showObligatoryCloseQuizDialog(String message){
+        new AlertDialog.Builder(currentActivity)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Error occured")
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
+    }
+
     @Subscribe
     public void update(KwizGeeQ kwizGeeQ){
         System.out.println("Update!");

@@ -57,7 +57,12 @@ public class QuizListController implements Observer{
         AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int quizIndex, long id) {
-                quizListView.startQuestioneer(quizList.get(quizIndex), quizIndex);
+                try {
+                    quizList.get(quizIndex).getQuestion(0);
+                    quizListView.startQuestioneer(quizList.get(quizIndex), quizIndex);
+                } catch (IndexOutOfBoundsException e){
+                    quizListView.showObligatoryCloseQuizDialog("Cannot play an empty quiz.");
+                }
             }
         };
 
