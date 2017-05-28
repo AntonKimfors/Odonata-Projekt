@@ -12,7 +12,6 @@ import com.kwizgeeq.view.*;
 import com.kwizgeeq.R;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /*
  *  @author Marcus Olsson Lindvärn
@@ -29,7 +28,6 @@ public class EditQuizActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_NoActionBar);
-        //int index = getIntent().getIntExtra("quizIndex", 0);
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         Serializable quiz = bundle.getSerializable("quiz");
@@ -53,18 +51,6 @@ public class EditQuizActivity extends ListActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        //controller.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //controller.onResume();
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == questionListRequestCode && resultCode == RESULT_OK){
             if(data.getSerializableExtra("questions")!=null){
@@ -73,6 +59,5 @@ public class EditQuizActivity extends ListActivity {
             }
         }
     }
-
 
 }

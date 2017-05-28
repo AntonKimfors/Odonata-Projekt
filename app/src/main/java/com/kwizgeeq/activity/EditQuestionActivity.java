@@ -14,9 +14,6 @@ import com.kwizgeeq.view.*;
 
 import java.io.*;
 
-import java.util.List;
-
-
 /**
  * Created by Henrik on 05/05/2017.
  *

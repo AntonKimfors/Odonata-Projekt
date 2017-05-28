@@ -11,7 +11,6 @@ import android.support.design.widget.FloatingActionButton;
 import com.kwizgeeq.R;
 import com.kwizgeeq.controller.QuizListController;
 import com.kwizgeeq.databinding.ActivityQuizListBinding;
-import com.kwizgeeq.storageUtilities.KwizGeeQDataSource;
 import com.kwizgeeq.view.QuizListView;
 
 /**
@@ -23,15 +22,12 @@ import com.kwizgeeq.view.QuizListView;
 
 public class QuizListActivity extends ListActivity {
 
-    public KwizGeeQDataSource mKwizGeeQDataSource;
     private QuizListController controller;
     private QuizListView view;
 
     private int editQuizRequestCode = 1;
     private int createQuizRequestCode = 2;
     private int questioneerRequestCode = 3;
-
-    //private ArrayList<String> mQuizNames;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +36,6 @@ public class QuizListActivity extends ListActivity {
         ActivityQuizListBinding binding;
         binding = DataBindingUtil.setContentView(this,R.layout.activity_quiz_list);
 
-
-        //mKwizGeeQDataSource = new KwizGeeQDataSource(QuizListActivity.this);
-
         view = new QuizListView(getListView(), this, this, EditQuizActivity.class,
                 QuestioneerActivity.class, GlobalStatisticsActivity.class, (FloatingActionButton) findViewById(R.id.fab),
                 editQuizRequestCode, createQuizRequestCode, questioneerRequestCode);
@@ -50,17 +43,6 @@ public class QuizListActivity extends ListActivity {
 
         binding.setController(controller);
         view.addObserver(controller);
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     @Override
