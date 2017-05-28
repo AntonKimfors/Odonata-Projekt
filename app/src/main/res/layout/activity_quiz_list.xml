@@ -5,13 +5,13 @@
     <data>
         <variable
             name="controller"
-            type="com.example.murk.kwizgeeq.controller.QuizListController" />
+            type="com.kwizgeeq.controller.QuizListController" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.murk.kwizgeeq.QuizList">
+    tools:context="com.kwizgeeq.QuizList">
 
         <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

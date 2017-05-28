@@ -3,14 +3,14 @@
     <data>
         <variable
             name="controller"
-            type="com.example.murk.kwizgeeq.controller.StatisticsController"/>
+            type="com.kwizgeeq.controller.StatisticsController"/>
     </data>
     <android.support.constraint.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.murk.kwizgeeq.activity.StatisticsActivity">
+        tools:context="com.kwizgeeq.activity.StatisticsActivity">
 
         <TextView
             android:id="@+id/quizLabel"

@@ -5,12 +5,12 @@
     <data>
         <variable
             name="controller"
-            type="com.example.murk.kwizgeeq.controller.QuestioneerController"/>
+            type="com.kwizgeeq.controller.QuestioneerController"/>
     </data>
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.murk.kwizgeeq.activity.QuestioneerActivity">
+        tools:context="com.kwizgeeq.activity.QuestioneerActivity">
 
         <ProgressBar
             android:id="@+id/progressBar"
