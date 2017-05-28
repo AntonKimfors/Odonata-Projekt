@@ -77,7 +77,7 @@ public class KwizGeeQDataSource {
                     Question tmpQuestion = (Question) userQuizArrayList.get(i).getQuestion(y);
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_TITLE, tmpQuestion.getQuestionText());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATION_PICTURE, tmpQuestion.getImagePath());
-                    questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_ANSWER_TYPE, tmpQuestion.getOrderedList().get(0).getAnswerTypeAsString());
+                    questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_ANSWER_TYPE, "" + tmpQuestion.getOrderedList().get(0).getAnswerType());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_CORRECT_ANSWER, tmpQuestion.getOrderedList().get(0).getData());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_INCORRECT_ANSWER_1, tmpQuestion.getOrderedList().get(1).getData());
                     questionValues.put(KwizGeeQSQLiteHelper.COLUMN_ANNOTATIONS_INCORRECT_ANSWER_2, tmpQuestion.getOrderedList().get(2).getData());
@@ -192,10 +192,13 @@ public class KwizGeeQDataSource {
             try {
                 tmpQuestion.setImagePath(cursor.getString(questionImage));
             } catch (Exception e){System.out.println(e);}
-            AnswerType answerType = AnswerType.TEXT;
 
-            String newString = cursor.getString(type);
-            if(newString == "IMAGE"){
+            AnswerType answerType = AnswerType.TEXT;
+            //String newString = cursor.getString(type);
+            /*if(newString == "IMAGE"){
+                answerType = AnswerType.IMAGE;
+            }*/
+            if(cursor.getString(type).equals("IMAGE")){
                 answerType = AnswerType.IMAGE;
             }
             tmpQuestion.addAnswer(cursor.getString(columnIndexCorrect), true, answerType);

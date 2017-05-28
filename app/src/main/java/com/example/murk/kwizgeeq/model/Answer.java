@@ -23,9 +23,6 @@ public class Answer implements Serializable {
         return answerType;
     }
 
-    public String getAnswerTypeAsString() {
-        return answerType.toString();
-    }
 
     public Answer(boolean isCorrect, String data, AnswerType answerType) {
         this.isCorrect = isCorrect;
