@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 
 import com.example.murk.kwizgeeq.R;
@@ -74,7 +72,7 @@ public class QuizListActivity extends ListActivity {
 
         if(requestCode == questioneerRequestCode && resultCode == RESULT_OK) {
             controller.replaceQuiz(data.getSerializableExtra("quiz"), data.getIntExtra("quizIndex",0));
-            controller.updateGlobalStatistics(data.getSerializableExtra("quiz"));
+            controller.updateStatistics(data.getSerializableExtra("quiz"));
         }
     }
     

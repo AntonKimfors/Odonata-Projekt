@@ -48,10 +48,12 @@ public class QuestioneerController implements Observer{
     public void setUpQuestioneer() {
         updateQuestionIndex();
         updateQuizSize();
-        quiz.resetCurrentTempStatistics();
         view.updateQuizRelatedItems(quiz.getName(), quizSize, quiz.getListColor());
         view.updateQuestioneer(quiz.getQuestion(questionIndex), currentQuestion, quizSize);
-        quiz.getCurrentTempStatistics().startTimer();
+        if(!playingByIndex) {
+            quiz.resetCurrentTempStatistics();
+            quiz.getCurrentTempStatistics().startTimer();
+        }
     }
 
     public void onPause() {
@@ -83,23 +85,25 @@ public class QuestioneerController implements Observer{
     }
 
     public void answerSelected(View view){
-        quiz.getCurrentTempStatistics().incQuestionCount();
+        if(!playingByIndex)
+            quiz.getCurrentTempStatistics().incQuestionCount();
         if(((Answer)view.getTag()).isCorrect()){
-            quiz.getCurrentTempStatistics().incAnswerCorrectCount();
+            if(!playingByIndex)
+                quiz.getCurrentTempStatistics().incAnswerCorrectCount();
             this.view.flashCorrectAnswer(view);
         } else{
             outReplayIndexList.add(questionIndex);
-            quiz.getCurrentTempStatistics().incAnswerIncorrectCount();
+            if(!playingByIndex)
+                quiz.getCurrentTempStatistics().incAnswerIncorrectCount();
             this.view.flashIncorrectAnswer(view);
         }
     }
 
     public void finishQuestion(){
         if(currentQuestion == quizSize) {
-            quiz.getCurrentTempStatistics().stopTimer();
-            quiz.getCurrentTempStatistics().incQuizCount();
-            quiz.updateBestStatistics();
-            if(!playingByIndex){
+            if(!playingByIndex) {
+                quiz.getCurrentTempStatistics().stopTimer();
+                quiz.getCurrentTempStatistics().incQuizCount();
                 currentActivity.setResult(currentActivity.RESULT_OK, currentActivity.getIntent());
             }
             Intent intent = new Intent(currentActivity, switchActivityClass);
