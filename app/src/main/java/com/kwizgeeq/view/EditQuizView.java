@@ -88,8 +88,8 @@ public class EditQuizView extends Observable {
         //Creaton of Alert Dialog
         alertDialog = new AlertDialog.Builder(currentActivity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Edit Quiz?")
-                .setMessage("do you want to edit or delete the Quiz");
+                .setTitle("Edit Question?")
+                .setMessage("Do you want to edit or delete the Quiz");
 
 
         ad = alertDialog.create();
