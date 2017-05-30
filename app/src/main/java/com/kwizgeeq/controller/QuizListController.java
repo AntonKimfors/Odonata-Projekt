@@ -122,7 +122,7 @@ public class QuizListController implements Observer{
         return new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                quizListView.editQuiz(quizList.get(quizIndex));
+                quizListView.editQuiz(quizList.get(quizIndex),quizIndex);
                 quizListView.dismissAlertDialog();
             }
         };

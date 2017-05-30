@@ -168,10 +168,11 @@ public class QuizListView extends Observable {
         return mSelectedColor;
     }
 
-    public void editQuiz(Quiz quiz){
+    public void editQuiz(Quiz quiz, int quizIndex){
         Intent intent = new Intent(context, editQuizActivityClass);
         Bundle bundle = new Bundle();
         bundle.putSerializable("quiz",quiz);
+        intent.putExtra("quizIndex", quizIndex);
         intent.putExtras(bundle);
         currentActivity.startActivityForResult(intent, editQuizRequestCode);
     }

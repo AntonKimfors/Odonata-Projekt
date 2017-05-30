@@ -46,6 +46,7 @@ public class EditQuizView extends Observable {
     private final AlertDialog ad;
     private Quiz quiz;
     private Context context;
+    private final int quizIndex;
     private ListView listView;
     private EditText editText;
     private EditQuizAdapter adapter;
@@ -54,11 +55,12 @@ public class EditQuizView extends Observable {
 
     public EditQuizView(final Class<? extends Activity> editQuestionActivity, final Serializable quiz,
                         final ListView listView, final Context context, final Activity currentActivity,
-                        int questionListRequestCode) {
+                        int questionListRequestCode, int quizIndex) {
 
         this.editQuestionActivity = editQuestionActivity;
         this.currentActivity = currentActivity;
         this.context = context;
+        this.quizIndex = quizIndex;
         if(quiz instanceof Quiz){
             this.quiz = (Quiz)quiz;
         }
@@ -102,6 +104,7 @@ public class EditQuizView extends Observable {
         Bundle bundle = new Bundle();
         bundle.putSerializable("questions", (Serializable) questions);
         intent.putExtras(bundle);
+        intent.putExtra("questionIndex", questions.size());
         currentActivity.startActivityForResult(intent, questionListRequestCode);
     }
 
@@ -202,6 +205,7 @@ public class EditQuizView extends Observable {
         Intent intent = currentActivity.getIntent();
         Bundle bundle = intent.getExtras();
         bundle.putSerializable("quiz", quiz);
+        intent.putExtra("quizIndex",quizIndex);
         intent.putExtras(bundle);
         currentActivity.setResult(Activity.RESULT_OK, intent);
         currentActivity.finish();
